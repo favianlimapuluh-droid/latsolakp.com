@@ -20,6 +20,13 @@
       "desc": "Contoh mata pelajaran ketiga. Kustomisasi sesuai kebutuhan.",
       "icon": "🧮",
       "color": "#f5b942"
+    },
+    {
+      "id": "mp32o14iyr79",
+      "name": "kewarganegaraan",
+      "desc": "Soal UTS",
+      "icon": "🧮",
+      "color": "#f5b942"
     }
   ],
   "questions": {
@@ -130,6 +137,541 @@
         "ans": 0,
         "tag": "",
         "exp": ""
+      }
+    ],
+    "mp32o14iyr79": [
+      {
+        "id": "mp32oa5d0hs5",
+        "q": "Apakah tujuan utama dari Pendidikan Kewarganegaraan?",
+        "opts": [
+          "Membentuk warga negara yang cerdas, terampil, dan berkarakter",
+          "Menghafalkan pasal-pasal dalam UUD 1945",
+          "Menciptakan ahli hukum yang handal",
+          "Mempersiapkan mahasiswa untuk wajib militer"
+        ],
+        "ans": 0,
+        "tag": "Import PDF",
+        "exp": "Pendidikan Kewarganegaraan adalah upaya untuk membentuk warga negara yang cerdas, terampil, dan berkarakter."
+      },
+      {
+        "id": "mp32oa5dho2u",
+        "q": "Landasan hukum (yuridis) pelaksanaan Pendidikan Kewarganegaraan di Indonesia diatur dalam...",
+        "opts": [
+          "Sumpah Pemuda 1928",
+          "UUD 1945 Pasal 27, 30, dan 31 serta UU No. 20 Tahun 2003",
+          "Dekrit Presiden 5 Juli 1959",
+          "Piagam Jakarta"
+        ],
+        "ans": 1,
+        "tag": "Import PDF",
+        "exp": "Landasan Yuridis PKn berdasarkan aturan negara seperti UUD 1945 (Pasal 27, 30, dan 31) serta UU No. 20 Tahun 2003 tentang Sistem Pendidikan Nasional."
+      },
+      {
+        "id": "mp32oa5d85hd",
+        "q": "Alasan bahwa membangun semangat kebangsaan itu tidak instan dan butuh pendidikan khusus agar rasa cinta tanah air tetap terjaga merupakan pengertian dari landasan...",
+        "opts": [
+          "Historis",
+          "Sosiologis",
+          "Filosofis",
+          "Yuridis"
+        ],
+        "ans": 2,
+        "tag": "Import PDF",
+        "exp": "Landasan Filosofis menyatakan bahwa membangun semangat kebangsaan itu tidak instan, jadi butuh pendidikan khusus agar rasa cinta tanah air tetap terjaga."
+      },
+      {
+        "id": "mp32oa5dw6ed",
+        "q": "Mengapa kurikulum PKn perlu terus diperbarui terkait dengan krisis ideologi di masa lalu?",
+        "opts": [
+          "Karena ideologi selalu berubah setiap tahun",
+          "Karena sempat terjadi manipulasi Pancasila untuk kepentingan golongan tertentu",
+          "Karena ideologi bangsa Indonesia sudah tidak relevan",
+          "Karena adanya desakan dari organisasi internasional"
+        ],
+        "ans": 1,
+        "tag": "Import PDF",
+        "exp": "Kurikulum diperbarui karena sempat terjadi manipulasi Pancasila untuk kepentingan golongan tertentu, sehingga PKn hadir untuk mengembalikan Pancasila ke fungsi aslinya."
+      },
+      {
+        "id": "mp32oa5d6aw7",
+        "q": "Di tingkat universitas, mahasiswa diharapkan tidak lagi hanya menghafal pasal, tetapi...",
+        "opts": [
+          "Mampu mengubah isi konstitusi",
+          "Menjadi anggota parlemen",
+          "Diajak untuk berpikir kritis, seperti menerapkan nilai Pancasila di tengah gempuran teknologi",
+          "Mampu menghafal seluruh undang-undang"
+        ],
+        "ans": 2,
+        "tag": "Import PDF",
+        "exp": "Di tingkat universitas, kamu tidak lagi hanya menghafal pasal, tapi diajak untuk berpikir kritis, misalnya menerapkan nilai Pancasila di tengah gempuran teknologi."
+      },
+      {
+        "id": "mp32oa5dnmcm",
+        "q": "Di luar negeri, Pendidikan Kewarganegaraan dikenal dengan istilah...",
+        "opts": [
+          "State Education",
+          "National Education",
+          "Civic Education",
+          "Moral Education"
+        ],
+        "ans": 2,
+        "tag": "Import PDF",
+        "exp": "Di luar negeri dikenal dengan istilah Civic Education (Pendidikan Kewargaan)."
+      },
+      {
+        "id": "mp32oa5d1yzb",
+        "q": "Apa yang terjadi jika orang ahli ilmu kedokteran atau teknik tidak memiliki rasa integritas bangsa yang diajarkan dalam PKn?",
+        "opts": [
+          "Mereka akan menjadi pemimpin negara",
+          "Mereka bisa saja menggunakan kepintarannya untuk merusak negara sendiri",
+          "Mereka akan kesulitan mendapatkan pekerjaan",
+          "Negara akan menjadi lebih kaya"
+        ],
+        "ans": 1,
+        "tag": "Import PDF",
+        "exp": "Orang mungkin hebat dalam ilmu, tapi kalau tidak punya rasa \"Indonesianya\", mereka bisa saja menggunakan kepintarannya untuk merusak negara sendiri."
+      },
+      {
+        "id": "mp32oa5dkrm1",
+        "q": "Identitas nasional yang meliputi UUD 1945, Bahasa Indonesia, Lambang Negara, Bendera Merah Putih, dan Lagu Indonesia Raya dikelompokkan sebagai...",
+        "opts": [
+          "Identitas Alamiah",
+          "Identitas Fundamental",
+          "Identitas Instrumental",
+          "Identitas Geografis"
+        ],
+        "ans": 2,
+        "tag": "Import PDF",
+        "exp": "Identitas Instrumental adalah alat atau sarana yang meliputi UUD 1945, Bahasa Indonesia, Lambang Negara, Bendera Merah Putih, dan Lagu Indonesia Raya."
+      },
+      {
+        "id": "mp32oa5dl0hp",
+        "q": "Pancasila sebagai falsafah, dasar negara, dan ideologi termasuk dalam identitas...",
+        "opts": [
+          "Fundamental",
+          "Instrumental",
+          "Alamiah",
+          "Historis"
+        ],
+        "ans": 0,
+        "tag": "Import PDF",
+        "exp": "Identitas Fundamental: Pancasila (sebagai falsafah, dasar negara, dan ideologi)."
+      },
+      {
+        "id": "mp32oa5dguk9",
+        "q": "Keberagaman (pluralisme) suku, budaya, serta agama dan letak sebagai negara kepulauan merupakan bentuk identitas...",
+        "opts": [
+          "Fundamental",
+          "Instrumental",
+          "Alamiah",
+          "Struktural"
+        ],
+        "ans": 2,
+        "tag": "Import PDF",
+        "exp": "Identitas Alamiah: Hal-hal yang sudah ada secara alami, yaitu Indonesia sebagai negara kepulauan (Archipelago) dan keberagaman (pluralisme) suku, budaya, serta agama."
+      },
+      {
+        "id": "mp32oa5d6c8q",
+        "q": "Hakikat identitas kita sebagai bangsa Indonesia adalah...",
+        "opts": [
+          "Konstitusi",
+          "UUD 1945",
+          "Pancasila",
+          "Semboyan negara"
+        ],
+        "ans": 2,
+        "tag": "Import PDF",
+        "exp": "Hakikat identitas kita sebagai bangsa Indonesia adalah Pancasila."
+      },
+      {
+        "id": "mp32oa5dd9nw",
+        "q": "Salah satu faktor pendukung (obyektif) identitas nasional Indonesia adalah...",
+        "opts": [
+          "Sejarah perjuangan yang sama",
+          "Kondisi ekologi (alam) sebagai negara kepulauan",
+          "Sosial-politik dan kebudayaan",
+          "Rasa senasib sepenanggungan"
+        ],
+        "ans": 1,
+        "tag": "Import PDF",
+        "exp": "Faktor obyektif meliputi letak geografis Indonesia yang strategis dan kondisi ekologi (alam) kita sebagai negara kepulauan."
+      },
+      {
+        "id": "mp32oa5dpd7e",
+        "q": "Sikap merasa suku sendiri paling hebat sehingga meremehkan suku lain disebut...",
+        "opts": [
+          "Etnosentrisme",
+          "Pluralisme",
+          "Patriotisme",
+          "Nasionalisme"
+        ],
+        "ans": 0,
+        "tag": "Import PDF",
+        "exp": "Etnosentrisme adalah merasa suku sendiri paling hebat sehingga meremehkan suku lain."
+      },
+      {
+        "id": "mp32oa5d0l8j",
+        "q": "Pembangunan yang tidak merata yang dapat membuat identitas nasional melemah merupakan faktor penghambat berup",
+        "opts": [
+          ".. A. Lunturnya nilai",
+          "Arus globalisasi",
+          "Kesenjangan",
+          "Separatisme"
+        ],
+        "ans": 2,
+        "tag": "Import PDF",
+        "exp": "Kesenjangan: Pembangunan yang tidak merata bisa membuat warga di daerah lain merasa kurang diperhatikan dan identitas nasionalnya melemah."
+      },
+      {
+        "id": "mp32oa5doe1m",
+        "q": "Orang yang memang tinggal atau menetap di suatu wilayah negara disebut...",
+        "opts": [
+          "Penduduk",
+          "Warga Negara",
+          "Orang Asing",
+          "Bukan Penduduk"
+        ],
+        "ans": 0,
+        "tag": "Import PDF",
+        "exp": "Penduduk adalah orang yang memang tinggal atau menetap di suatu wilayah negara."
+      },
+      {
+        "id": "mp32oa5djcgq",
+        "q": "Orang yang secara hukum sah menjadi anggota dari suatu negara disebut...",
+        "opts": [
+          "Penduduk",
+          "Warga Negara",
+          "Turis",
+          "Ekspatriat"
+        ],
+        "ans": 1,
+        "tag": "Import PDF",
+        "exp": "Warga Negara adalah orang yang secara hukum sah menjadi anggota dari suatu negara."
+      },
+      {
+        "id": "mp32oa5dlp6b",
+        "q": "Turis mancanegara yang sedang berlibur di Bali dikategorikan sebagai...",
+        "opts": [
+          "Penduduk",
+          "Warga Negara",
+          "Bukan Penduduk",
+          "Warga Negara Ganda"
+        ],
+        "ans": 2,
+        "tag": "Import PDF",
+        "exp": "Bukan Penduduk adalah orang yang ada di suatu negara tapi tidak berniat menetap (misal: turis)."
+      },
+      {
+        "id": "mp32oa5dplqu",
+        "q": "Asas kewarganegaraan yang ditentukan berdasarkan tempat lahir disebut...",
+        "opts": [
+          "Ius Sanguinis",
+          "Apatride",
+          "Ius Soli",
+          "Bipatride"
+        ],
+        "ans": 2,
+        "tag": "Import PDF",
+        "exp": "Ius Soli (Tempat Lahir): Statusmu ditentukan berdasarkan di mana kamu lahir."
+      },
+      {
+        "id": "mp32oa5du2j7",
+        "q": "Jika status kewarganegaraan seseorang ditentukan berdasarkan darah atau keturunan orang tua, maka negara tersebut menganut asas...",
+        "opts": [
+          "Ius Sanguinis",
+          "Ius Soli",
+          "Naturalisasi",
+          "Hak Repudiasi"
+        ],
+        "ans": 0,
+        "tag": "Import PDF",
+        "exp": "Ius Sanguinis (Keturunan): Statusmu ditentukan berdasarkan darah atau keturunan orang tua."
+      },
+      {
+        "id": "mp32oa5dfl51",
+        "q": "Kondisi di mana aturan dua negara saling tarik-menarik sehingga seseorang punya dua status warga negara sekaligus disebut...",
+        "opts": [
+          "Apatride",
+          "Bipatride",
+          "Kewarganegaraan Tunggal",
+          "Naturalisasi"
+        ],
+        "ans": 1,
+        "tag": "Import PDF",
+        "exp": "Bipatride (Kewarganegaraan Ganda): Terjadi jika aturan dua negara saling tarik-menarik sehingga seseorang punya dua status warga negara sekaligus."
+      },
+      {
+        "id": "mp32oa5dpqxi",
+        "q": "Sesuatu yang wajib kita lakukan sebagai anggota negara disebut...",
+        "opts": [
+          "Hak",
+          "Kewajiban",
+          "Konvensi",
+          "Konstitusi"
+        ],
+        "ans": 1,
+        "tag": "Import PDF",
+        "exp": "Kewajiban adalah sesuatu yang wajib kita lakukan sebagai anggota negara."
+      },
+      {
+        "id": "mp32oa5db677",
+        "q": "Hak untuk hidup dijamin dalam UUD 1945 pada pasal...",
+        "opts": [
+          "Pasal 27 ayat 1",
+          "Pasal 27 ayat 2",
+          "Pasal 28A",
+          "Pasal 28E ayat 3"
+        ],
+        "ans": 2,
+        "tag": "Import PDF",
+        "exp": "Hak untuk Hidup: (Pasal 28A)."
+      },
+      {
+        "id": "mp32oa5d9lid",
+        "q": "Hak kebebasan berpendapat diatur dalam UUD 1945 pasal...",
+        "opts": [
+          "Pasal 28E ayat 3",
+          "Pasal 28A",
+          "Pasal 27 ayat 3",
+          "Pasal 27 ayat 1"
+        ],
+        "ans": 0,
+        "tag": "Import PDF",
+        "exp": "Kebebasan Berpendapat: (Pasal 28E ayat 3)."
+      },
+      {
+        "id": "mp32oa5dvjcg",
+        "q": "Mengapa kita harus ikut serta dalam bela negara?",
+        "opts": [
+          "Hanya untuk mendapatkan gaji dari negara",
+          "Agar bisa ikut pelatihan dasar militer",
+          "Untuk mempertahankan negara dari ancaman dan melindungi keselamatan warga negara",
+          "Untuk mendapat kebebasan berpendapat"
+        ],
+        "ans": 2,
+        "tag": "Import PDF",
+        "exp": "Kita harus bela negara untuk mempertahankan negara dari ancaman, menjaga keutuhan wilayah, dan melindungi keselamatan seluruh warga negara."
+      },
+      {
+        "id": "mp32oa5d424o",
+        "q": "Bekerja dengan jujur dan hebat di bidang masing-masing (pengabdian sesuai profesi) merupakan salah satu bentuk...",
+        "opts": [
+          "Bela Negara",
+          "Korupsi",
+          "Etnosentrisme",
+          "Hak warga negara"
+        ],
+        "ans": 0,
+        "tag": "Import PDF",
+        "exp": "Pengabdian sesuai profesi (bekerja dengan jujur dan hebat di bidangmu masing-masing) merupakan cara ikut serta bela negara menurut UU No. 3 Tahun 2002."
+      },
+      {
+        "id": "mp32oa5d20o4",
+        "q": "Aturan main atau hukum dasar yang menjadi pegangan dalam menjalankan suatu negara disebut...",
+        "opts": [
+          "Dekrit",
+          "Konstitusi",
+          "Otonomi",
+          "Apatride"
+        ],
+        "ans": 1,
+        "tag": "Import PDF",
+        "exp": "Konstitusi adalah hukum dasar yang menjadi pegangan dalam menjalankan suatu negara."
+      },
+      {
+        "id": "mp32oa5deoil",
+        "q": "Salah satu fungsi utama dari konstitusi adalah...",
+        "opts": [
+          "Memberikan kekuasaan tanpa batas kepada presiden",
+          "Membagi dan membatasi kekuasaan agar pemerintah tidak bertindak sewenang-wenang",
+          "Mengurangi hak asasi warga negara",
+          "Membentuk negara yang kuat secara militer"
+        ],
+        "ans": 1,
+        "tag": "Import PDF",
+        "exp": "Fungsi Konstitusi adalah membagi dan membatasi kekuasaan agar pemerintah tidak bertindak sewenang-wenang."
+      },
+      {
+        "id": "mp32oa5d2mvv",
+        "q": "Hukum dasar tidak tertulis di Indonesia, seperti pidato kenegaraan Presiden setiap tanggal 16 Agustus, disebut...",
+        "opts": [
+          "UUD 1945",
+          "Undang-Undang",
+          "Konvensi",
+          "Traktat"
+        ],
+        "ans": 2,
+        "tag": "Import PDF",
+        "exp": "Konstitusi tidak tertulis disebut Konvensi (seperti pidato kenegaraan Presiden setiap tanggal 16 Agustus)."
+      },
+      {
+        "id": "mp32oa5d9nv9",
+        "q": "Indonesia adalah negara hukum, yang dalam bahasa Belanda disebut...",
+        "opts": [
+          "Machtstaat",
+          "Rechtstaat",
+          "Good Governance",
+          "Archipelago"
+        ],
+        "ans": 1,
+        "tag": "Import PDF",
+        "exp": "Indonesia adalah negara hukum (Rechtstaat)."
+      },
+      {
+        "id": "mp32oa5du383",
+        "q": "Ciri negara hukum di mana pemerintah hanya bisa bertindak jika ada dasar hukumnya disebut...",
+        "opts": [
+          "Supremasi Hukum",
+          "Persamaan di Depan Hukum",
+          "Asas Legalitas",
+          "Peradilan yang Bebas"
+        ],
+        "ans": 2,
+        "tag": "Import PDF",
+        "exp": "Asas Legalitas berarti pemerintah hanya bisa bertindak jika ada dasar hukumnya."
+      },
+      {
+        "id": "mp32oa5disdk",
+        "q": "Tata kelola pemerintahan yang baik, di mana pemerintah mengelola sumber daya dan kekuasaan secara bertanggung jawab disebut...",
+        "opts": [
+          "Otonomi Daerah",
+          "Demokrasi Parlementer",
+          "Good Governance",
+          "Rechtstaat"
+        ],
+        "ans": 2,
+        "tag": "Import PDF",
+        "exp": "Good Governance atau Tata Kelola Pemerintahan yang Baik adalah cara pemerintah mengelola sumber daya dan kekuasaan secara bertanggung jawab."
+      },
+      {
+        "id": "mp32oa5dumms",
+        "q": "Prinsip Good Governance di mana pemerintah harus bisa mempertanggungjawabkan kinerjanya kepada rakyat disebut...",
+        "opts": [
+          "Akuntabilitas",
+          "Transparansi",
+          "Partisipasi",
+          "Responsif"
+        ],
+        "ans": 0,
+        "tag": "Import PDF",
+        "exp": "Akuntabilitas berarti pemerintah harus bisa mempertanggungjawabkan kinerjanya kepada rakyat."
+      },
+      {
+        "id": "mp32oa5dfkug",
+        "q": "Prinsip di mana informasi harus terbuka agar rakyat tahu apa yang sedang dilakukan pemerintah disebut...",
+        "opts": [
+          "Transparansi",
+          "Partisipasi",
+          "Responsif",
+          "Penegakan Hukum"
+        ],
+        "ans": 0,
+        "tag": "Import PDF",
+        "exp": "Transparansi berarti informasi harus terbuka agar rakyat tahu apa yang sedang dilakukan pemerintah."
+      },
+      {
+        "id": "mp32oa5dqpk3",
+        "q": "Sistem di mana kekuasaan tertinggi ada di tangan rakyat disebut...",
+        "opts": [
+          "Otonomi",
+          "Demokrasi",
+          "Desentralisasi",
+          "Sentralisasi"
+        ],
+        "ans": 1,
+        "tag": "Import PDF",
+        "exp": "Demokrasi adalah sistem di mana kekuasaan tertinggi ada di tangan rakyat."
+      },
+      {
+        "id": "mp32oa5ds9pi",
+        "q": "Tonggak sejarah awal di Inggris (1215) di mana kekuasaan Raja mulai dibatasi oleh hukum disebut...",
+        "opts": [
+          "Reformasi",
+          "Magna Charta",
+          "Demokrasi Pancasila",
+          "Konvensi"
+        ],
+        "ans": 1,
+        "tag": "Import PDF",
+        "exp": "Magna Charta (1215): Di Inggris, ini adalah tonggak sejarah awal di mana kekuasaan Raja mulai dibatasi oleh hukum."
+      },
+      {
+        "id": "mp32oa5dae83",
+        "q": "Era demokrasi di Indonesia pada 1959-1965 di mana kekuasaan berpusat pada Presiden Soekarno disebut...",
+        "opts": [
+          "Demokrasi Parlementer",
+          "Demokrasi Pancasila",
+          "Demokrasi Terpimpin",
+          "Era Reformasi"
+        ],
+        "ans": 2,
+        "tag": "Import PDF",
+        "exp": "Demokrasi Terpimpin (1959-1965): Kekuasaan berpusat pada Presiden Soekarno."
+      },
+      {
+        "id": "mp32oa5dtrez",
+        "q": "Hak daerah untuk mengatur dan mengurus kepentingan masyarakatnya sendiri sesuai peraturan disebut...",
+        "opts": [
+          "Otonomi daerah",
+          "Sentralisasi",
+          "Good Governance",
+          "Demokrasi Terpimpin"
+        ],
+        "ans": 0,
+        "tag": "Import PDF",
+        "exp": "Otonomi daerah adalah hak daerah untuk mengatur dan mengurus kepentingan masyarakatnya sendiri sesuai dengan peraturan yang berlaku."
+      },
+      {
+        "id": "mp32oa5dcrcm",
+        "q": "Sistem pemerintahan di mana semua urusan diatur langsung oleh pusat disebut...",
+        "opts": [
+          "Desentralisasi",
+          "Otonomi Daerah",
+          "Sentralisasi",
+          "Demokrasi"
+        ],
+        "ans": 2,
+        "tag": "Import PDF",
+        "exp": "Dulu Indonesia bersifat sangat Sentralisasi (semua diatur pusat)."
+      },
+      {
+        "id": "mp32oa5dfisk",
+        "q": "Salah satu sisi positif dari penerapan otonomi daerah adalah...",
+        "opts": [
+          "Munculnya raja-raja kecil",
+          "Kesenjangan antar daerah semakin tinggi",
+          "Pelayanan publik menjadi lebih lambat",
+          "Kreativitas daerah berkembang dan ekonomi bisa tumbuh lebih cepat"
+        ],
+        "ans": 3,
+        "tag": "Import PDF",
+        "exp": "Sisi Positif: Kreativitas daerah berkembang, ekonomi daerah bisa tumbuh lebih cepat, dan masyarakat lebih bisa berpartisipasi dalam politik lokal."
+      },
+      {
+        "id": "mp32oa5dvgw2",
+        "q": "Otonomi daerah bisa gagal jika tidak didukung oleh hal berikut, kecuali...",
+        "opts": [
+          "Niat baik dari pemimpin daerah",
+          "Pengawasan dari masyarakat",
+          "Sumber Daya Manusia (SDM) yang kompeten",
+          "Kekuasaan penuh tanpa batas bagi kepala daerah"
+        ],
+        "ans": 3,
+        "tag": "Import PDF",
+        "exp": "Otonomi daerah bisa gagal kalau orang-orang yang memimpin daerah tidak punya kompetensi atau niat baik, sehingga partisipasi masyarakat sangat penting."
+      },
+      {
+        "id": "mp32on310mhp",
+        "q": "-",
+        "opts": [
+          "-",
+          "-",
+          "-",
+          "-"
+        ],
+        "ans": 0,
+        "tag": "-",
+        "exp": "-"
       }
     ]
   }
