@@ -1926,7 +1926,7 @@ buildColorPicker();
 async function initApp() {
   try {
     // Membaca file data.json yang ada di GitHub
-    const response = await fetch('data.json');
+    const response = await fetch('data.json', { cache: 'no-store' });
     const masterData = await response.json();
 
     // Memuat data soal ke memori website
