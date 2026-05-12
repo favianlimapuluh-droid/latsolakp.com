@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Latsolgacorakp.com — Platform Latihan Soal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Latsolgacorakp.com — Platform Latihan Soal</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet"/>
 <style>
 /* ═══════════════════════════════════════════
    TOKENS & RESET
@@ -794,9 +794,6 @@ a{text-decoration:none;color:inherit;}
 </head>
 <body>
 
-<!-- ══════════════════════════════════
-  PAGE: HOME
-══════════════════════════════════ -->
 <div id="page-home" class="page active">
   <nav class="home-nav">
     <div class="nav-logo">Latsolgacorakp.com</div>
@@ -813,8 +810,7 @@ a{text-decoration:none;color:inherit;}
   <section class="subjects-section">
     <div class="section-label">Pilih Mata Pelajaran</div>
     <div class="subjects-grid" id="subjects-grid">
-      <!-- Populated by JS -->
-    </div>
+      </div>
   </section>
 
   <footer class="home-footer">
@@ -823,14 +819,9 @@ a{text-decoration:none;color:inherit;}
   </footer>
 </div>
 
-<!-- ══════════════════════════════════
-  PAGE: QUIZ
-══════════════════════════════════ -->
 <div id="page-quiz" class="page">
-  <!-- Sidebar overlay (mobile) -->
   <div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
 
-  <!-- Header -->
   <header class="quiz-header">
     <button class="hdr-hamburger" id="hamburger-btn" onclick="toggleSidebar()" aria-label="Navigator Soal">
       <span></span><span></span><span></span>
@@ -841,7 +832,6 @@ a{text-decoration:none;color:inherit;}
     <div class="hdr-prog-txt" id="hdr-prog-txt">0 / 0</div>
   </header>
 
-  <!-- Sidebar -->
   <aside class="quiz-sidebar" id="quiz-sidebar">
     <div class="sb-head">
       <div class="sb-head-title">Navigator Soal</div>
@@ -852,8 +842,7 @@ a{text-decoration:none;color:inherit;}
       </div>
     </div>
     <div class="sb-scroll" id="sb-scroll">
-      <!-- Populated by JS -->
-    </div>
+      </div>
     <div class="sb-foot">
       <div class="sb-stats">
         <div class="sb-stat"><div class="sb-stat-n n-done" id="sb-done">0</div><div class="sb-stat-l">Dijawab</div></div>
@@ -864,15 +853,11 @@ a{text-decoration:none;color:inherit;}
     </div>
   </aside>
 
-  <!-- Quiz Main -->
   <main class="quiz-main" id="quiz-main">
     <div id="quiz-questions-container"></div>
   </main>
 </div>
 
-<!-- ══════════════════════════════════
-  PAGE: RESULT
-══════════════════════════════════ -->
 <div id="page-result" class="page">
   <div class="result-wrap">
     <button class="res-back" onclick="goHome()">← Kembali ke Beranda</button>
@@ -914,9 +899,6 @@ a{text-decoration:none;color:inherit;}
   </div>
 </div>
 
-<!-- ══════════════════════════════════
-  PAGE: ADMIN LOGIN
-══════════════════════════════════ -->
 <div id="page-admin-login" class="page">
   <div class="login-card">
     <div class="login-icon">🔐</div>
@@ -934,9 +916,6 @@ a{text-decoration:none;color:inherit;}
   </div>
 </div>
 
-<!-- ══════════════════════════════════
-  PAGE: ADMIN DASHBOARD
-══════════════════════════════════ -->
 <div id="page-admin" class="page">
   <header class="admin-header">
     <div class="admin-logo">ADMIN</div>
@@ -946,7 +925,6 @@ a{text-decoration:none;color:inherit;}
   </header>
 
   <div class="admin-body">
-    <!-- Admin Nav -->
     <nav class="admin-nav">
       <div class="admin-nav-sect">Kelola</div>
       <div class="admin-nav-item active" onclick="showPanel('subjects')" data-panel="subjects">📚 Mata Pelajaran</div>
@@ -957,7 +935,6 @@ a{text-decoration:none;color:inherit;}
 
     <div class="admin-content">
 
-      <!-- ── PANEL: SUBJECTS ── -->
       <div class="admin-panel active" id="panel-subjects">
         <div class="admin-panel-title">Mata Pelajaran</div>
         <div class="admin-panel-desc">Tambah, ubah, atau hapus mata pelajaran yang tersedia di homepage.</div>
@@ -984,9 +961,7 @@ a{text-decoration:none;color:inherit;}
         </div>
         <div class="form-group">
           <label class="f-label">Ikon</label>
-          <div class="icon-picker" id="icon-picker">
-            <!-- Populated by JS -->
-          </div>
+          <div class="icon-picker" id="icon-picker"></div>
         </div>
         <div class="form-group">
           <label class="f-label">Warna Aksen</label>
@@ -998,72 +973,100 @@ a{text-decoration:none;color:inherit;}
         <div class="success-toast" id="subj-toast">✓ Berhasil disimpan!</div>
       </div>
 
-      <!-- ── PANEL: QUESTIONS ── -->
       <div class="admin-panel" id="panel-questions">
         <div class="admin-panel-title">Kelola Soal</div>
         <div class="admin-panel-desc">Tambah atau hapus soal per mata pelajaran.</div>
 
         <div class="form-group">
           <label class="f-label">Pilih Mata Pelajaran</label>
-          <div class="subj-select-row" id="subj-chips">
-            <!-- Populated by JS -->
-          </div>
+          <div class="subj-select-row" id="subj-chips"></div>
         </div>
 
-        <!-- Question list -->
         <div id="q-list-container">
           <div style="color:var(--muted);font-size:13px;padding:20px 0;">Pilih mata pelajaran untuk melihat soal.</div>
         </div>
 
         <div class="divider"></div>
-        <div class="section-title">+ Tambah Soal Baru</div>
-        <div class="info-box">Pilih mata pelajaran di atas terlebih dahulu. Soal akan ditambahkan ke mapel yang dipilih.</div>
+        <div class="section-title">📄 Import Cepat dari PDF</div>
+        <div class="info-box" style="border-color:var(--accent); background:rgba(79,124,255,0.05);">
+          <strong>Penting!</strong> Agar terbaca otomatis, teks di PDF wajib memakai format ini:<br><br>
+          <div style="display:flex; gap:20px; font-family:var(--mono); font-size:11px; margin-top:8px;">
+            <div style="flex:1;">
+              <b style="color:var(--accent)">[PILIHAN GANDA]</b><br>
+              Soal: Apa nama ibukota Indonesia?<br>
+              A. Jakarta<br>
+              B. Bandung<br>
+              C. Surabaya<br>
+              D. Medan<br>
+              Kunci: A<br>
+              Penjelasan: Jakarta adalah ibukota.
+            </div>
+            <div style="flex:1;">
+              <b style="color:var(--accent)">[ESAI]</b><br>
+              Esai: Jelaskan 3 ciri negara hukum!<br>
+              Kata Kunci: supremasi, legalitas, peradilan<br>
+              Bobot: 5<br>
+              Penjelasan: Ini penjelasan opsional.
+            </div>
+          </div>
+        </div>
+        <div class="form-actions" style="margin-bottom: 24px;">
+          <label class="btn-primary" style="display:inline-flex;align-items:center;gap:7px;cursor:pointer;">
+            ⬆ Upload File PDF
+            <input type="file" accept=".pdf" style="display:none" id="pdf-upload" onchange="processPDF(this)"/>
+          </label>
+        </div>
+        <div class="success-toast" id="pdf-toast">✓ Soal dari PDF berhasil ditambahkan!</div>
+        <div class="login-err" id="pdf-err" style="margin-top:10px;"></div>
+        
         <div class="divider"></div>
-<div class="section-title">📄 Import Cepat dari PDF</div>
-<div class="info-box" style="border-color:var(--accent); background:rgba(79,124,255,0.05);">
-  <strong>Penting!</strong> Agar sistem bisa membaca soal, teks di PDF harus menggunakan format baku seperti ini:<br><br>
-  <div style="font-family:var(--mono); font-size:11px; margin-top:8px;">
-    Soal: Apa nama ibukota Indonesia?<br>
-    A. Jakarta<br>
-    B. Bandung<br>
-    C. Surabaya<br>
-    D. Medan<br>
-    Kunci: A<br>
-    Penjelasan: Jakarta adalah ibukota saat ini.
-  </div>
-</div>
-<div class="form-actions" style="margin-bottom: 24px;">
-  <label class="btn-primary" style="display:inline-flex;align-items:center;gap:7px;cursor:pointer;">
-    ⬆ Upload File PDF
-    <input type="file" accept=".pdf" style="display:none" id="pdf-upload" onchange="processPDF(this)"/>
-  </label>
-</div>
-<div class="success-toast" id="pdf-toast">✓ Soal dari PDF berhasil ditambahkan!</div>
-<div class="login-err" id="pdf-err" style="margin-top:10px;"></div>
+        
+        <div class="section-title">+ Tambah Soal Manual</div>
+        <div class="form-group">
+          <label class="f-label">Jenis Soal *</label>
+          <select class="f-select" id="new-q-type" onchange="toggleQType()">
+            <option value="mcq">Pilihan Ganda</option>
+            <option value="essay">Esai (Keyword Matching)</option>
+          </select>
+        </div>
         <div class="form-group">
           <label class="f-label">Teks Pertanyaan *</label>
           <textarea class="f-textarea" id="new-q-text" placeholder="Tulis pertanyaan di sini..."></textarea>
         </div>
-        <div class="form-group">
-          <label class="f-label">Pilihan Jawaban *</label>
-          <div class="opts-grid">
-            <div class="opt-field"><div class="opt-badge">A</div><input class="f-input" id="opt0" placeholder="Pilihan A"/></div>
-            <div class="opt-field"><div class="opt-badge">B</div><input class="f-input" id="opt1" placeholder="Pilihan B"/></div>
-            <div class="opt-field"><div class="opt-badge">C</div><input class="f-input" id="opt2" placeholder="Pilihan C"/></div>
-            <div class="opt-field"><div class="opt-badge">D</div><input class="f-input" id="opt3" placeholder="Pilihan D"/></div>
+
+        <div id="area-mcq">
+          <div class="form-group">
+            <label class="f-label">Pilihan Jawaban *</label>
+            <div class="opts-grid">
+              <div class="opt-field"><div class="opt-badge">A</div><input class="f-input" id="opt0" placeholder="Pilihan A"/></div>
+              <div class="opt-field"><div class="opt-badge">B</div><input class="f-input" id="opt1" placeholder="Pilihan B"/></div>
+              <div class="opt-field"><div class="opt-badge">C</div><input class="f-input" id="opt2" placeholder="Pilihan C"/></div>
+              <div class="opt-field"><div class="opt-badge">D</div><input class="f-input" id="opt3" placeholder="Pilihan D"/></div>
+            </div>
           </div>
-        </div>
-        <div class="form-row">
           <div class="form-group">
             <label class="f-label">Jawaban Benar *</label>
             <select class="f-select" id="new-q-ans">
-              <option value="0">A</option>
-              <option value="1">B</option>
-              <option value="2">C</option>
-              <option value="3">D</option>
+              <option value="0">A</option><option value="1">B</option>
+              <option value="2">C</option><option value="3">D</option>
             </select>
           </div>
+        </div>
+
+        <div id="area-essay" style="display:none; background:var(--glow); padding:14px; border-radius:8px; border:1px solid var(--accent);">
           <div class="form-group">
+            <label class="f-label">Kata Kunci (Pisahkan dengan koma) *</label>
+            <input class="f-input" id="new-q-keywords" placeholder="cth: anggaran, budgetair, mengatur, regulerend"/>
+            <div style="font-size:11px; color:var(--text2); margin-top:4px;">*Sistem akan mengecek kata-kata ini di jawaban user.</div>
+          </div>
+          <div class="form-group">
+            <label class="f-label">Poin Maksimal (Bobot) *</label>
+            <input class="f-input" type="number" id="new-q-maxscore" value="5" min="1"/>
+          </div>
+        </div>
+
+        <div class="form-row" style="margin-top:14px;">
+          <div class="form-group" style="width:100%">
             <label class="f-label">Tag / Label (opsional)</label>
             <input class="f-input" id="new-q-tag" placeholder="cth: Bab 1"/>
           </div>
@@ -1079,7 +1082,6 @@ a{text-decoration:none;color:inherit;}
         <div class="success-toast" id="q-toast">✓ Soal berhasil ditambahkan!</div>
       </div>
 
-      <!-- ── PANEL: SETTINGS ── -->
       <div class="admin-panel" id="panel-settings">
         <div class="admin-panel-title">Pengaturan</div>
         <div class="admin-panel-desc">Kelola pengaturan website dan keamanan admin.</div>
@@ -1130,7 +1132,6 @@ a{text-decoration:none;color:inherit;}
   </div>
 </div>
 
-<!-- MODAL: Edit Subject -->
 <div class="modal-overlay" id="modal-edit-subj">
   <div class="modal">
     <button class="modal-close" onclick="closeModal('modal-edit-subj')">✕</button>
@@ -1152,25 +1153,28 @@ a{text-decoration:none;color:inherit;}
   </div>
 </div>
 
-<!-- MODAL: Edit Question -->
 <div class="modal-overlay" id="modal-edit-q">
   <div class="modal">
     <button class="modal-close" onclick="closeModal('modal-edit-q')">✕</button>
     <div class="modal-title">Edit Soal</div>
-    <div class="modal-sub">Ubah teks, pilihan, atau jawaban benar.</div>
+    <div class="modal-sub">Ubah teks, pilihan, jawaban benar, atau kata kunci.</div>
+    
     <input type="hidden" id="edit-q-id"/>
     <input type="hidden" id="edit-q-subj"/>
+    <input type="hidden" id="edit-q-type"/>
+
     <div class="form-group">
       <label class="f-label">Pertanyaan</label>
       <textarea class="f-textarea" id="edit-q-text"></textarea>
     </div>
-    <div class="opts-grid" style="margin-bottom:12px">
-      <div class="opt-field"><div class="opt-badge">A</div><input class="f-input" id="eq-opt0"/></div>
-      <div class="opt-field"><div class="opt-badge">B</div><input class="f-input" id="eq-opt1"/></div>
-      <div class="opt-field"><div class="opt-badge">C</div><input class="f-input" id="eq-opt2"/></div>
-      <div class="opt-field"><div class="opt-badge">D</div><input class="f-input" id="eq-opt3"/></div>
-    </div>
-    <div class="form-row">
+
+    <div id="edit-area-mcq">
+      <div class="opts-grid" style="margin-bottom:12px">
+        <div class="opt-field"><div class="opt-badge">A</div><input class="f-input" id="eq-opt0"/></div>
+        <div class="opt-field"><div class="opt-badge">B</div><input class="f-input" id="eq-opt1"/></div>
+        <div class="opt-field"><div class="opt-badge">C</div><input class="f-input" id="eq-opt2"/></div>
+        <div class="opt-field"><div class="opt-badge">D</div><input class="f-input" id="eq-opt3"/></div>
+      </div>
       <div class="form-group">
         <label class="f-label">Jawaban Benar</label>
         <select class="f-select" id="eq-ans">
@@ -1178,10 +1182,22 @@ a{text-decoration:none;color:inherit;}
           <option value="2">C</option><option value="3">D</option>
         </select>
       </div>
+    </div>
+
+    <div id="edit-area-essay" style="display:none; background:var(--glow); padding:14px; border-radius:8px; border:1px solid var(--accent); margin-bottom:14px;">
       <div class="form-group">
-        <label class="f-label">Tag</label>
-        <input class="f-input" id="eq-tag"/>
+        <label class="f-label">Kata Kunci (Pisahkan dengan koma)</label>
+        <input class="f-input" id="eq-keywords" placeholder="cth: anggaran, budgetair"/>
       </div>
+      <div class="form-group" style="margin-bottom:0;">
+        <label class="f-label">Poin Maksimal (Bobot)</label>
+        <input class="f-input" type="number" id="eq-maxscore" min="1"/>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="f-label">Tag</label>
+      <input class="f-input" id="eq-tag"/>
     </div>
     <div class="form-group">
       <label class="f-label">Penjelasan</label>
@@ -1194,100 +1210,7 @@ a{text-decoration:none;color:inherit;}
   </div>
 </div>
 
-<!-- ══════════════════════════════════
-  JAVASCRIPT
-══════════════════════════════════ -->
 <script>
-  // Setup worker untuk PDF.js
-pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
-
-async function processPDF(input) {
-  if (!adminSubjId) {
-    alert('Pilih mata pelajaran di atas terlebih dahulu!');
-    input.value = '';
-    return;
-  }
-
-  const file = input.files[0];
-  if (!file) return;
-
-  const errBox = document.getElementById('pdf-err');
-  errBox.style.display = 'none';
-
-  try {
-    const arrayBuffer = await file.arrayBuffer();
-    const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
-    let fullText = '';
-
-    // Loop untuk mengekstrak teks dari setiap halaman PDF
-    for (let i = 1; i <= pdf.numPages; i++) {
-      const page = await pdf.getPage(i);
-      const textContent = await page.getTextContent();
-      const pageText = textContent.items.map(item => item.str).join(' ');
-      fullText += pageText + ' '; // Gabungkan dengan spasi
-    }
-
-    // Lakukan parsing dari teks mentah ke format soal
-    parseTextToQuestions(fullText);
-
-  } catch (error) {
-    console.error(error);
-    errBox.textContent = 'Gagal membaca PDF. Pastikan file tidak rusak atau dikunci (password).';
-    errBox.style.display = 'block';
-  }
-  
-  // Reset input agar bisa upload file yang sama lagi jika error
-  input.value = '';
-}
-
-function parseTextToQuestions(text) {
-  // Bersihkan spasi ganda atau pemisahan baris yang berantakan dari PDF
-  const cleanText = text.replace(/\s+/g, ' ');
-
-  // Regex untuk menangkap pola teks yang sangat spesifik
-  // Mencari: Soal: [teks] A. [teks] B. [teks] C. [teks] D. [teks] Kunci: [A/B/C/D] Penjelasan: [Opsional]
-  const regex = /Soal:\s*(.*?)\s*A\.\s*(.*?)\s*B\.\s*(.*?)\s*C\.\s*(.*?)\s*D\.\s*(.*?)\s*Kunci:\s*([A-D])(?:\s*Penjelasan:\s*(.*?))?(?=\s*Soal:|$)/gi;
-
-  let match;
-  let count = 0;
-  const qs = getQuestions();
-  if (!qs[adminSubjId]) qs[adminSubjId] = [];
-
-  // Loop mencari semua soal yang cocok dengan format
-  while ((match = regex.exec(cleanText)) !== null) {
-    const qText = match[1].trim();
-    const opts = [match[2].trim(), match[3].trim(), match[4].trim(), match[5].trim()];
-    const ansChar = match[6].toUpperCase();
-    const exp = match[7] ? match[7].trim() : '';
-
-    // Konversi huruf kunci ke index (0, 1, 2, atau 3)
-    const ansIndex = ansChar === 'A' ? 0 : ansChar === 'B' ? 1 : ansChar === 'C' ? 2 : 3;
-
-    qs[adminSubjId].push({
-      id: uid(),
-      q: qText,
-      opts: opts,
-      ans: ansIndex,
-      tag: 'Import PDF',
-      exp: exp
-    });
-    count++;
-  }
-
-  // Cek apakah ada data yang berhasil diekstrak
-  if (count > 0) {
-    setQuestions(qs);
-    renderQList(); // Refresh daftar soal di layar
-    const toast = document.getElementById('pdf-toast');
-    toast.textContent = `✓ ${count} soal dari PDF berhasil ditambahkan!`;
-    toast.style.display = 'block';
-    setTimeout(() => toast.style.display = 'none', 4000);
-  } else {
-    const errBox = document.getElementById('pdf-err');
-    errBox.innerHTML = 'Gagal menemukan soal. Pastikan menggunakan awalan "<b>Soal:</b>", "<b>A.</b>", "<b>B.</b>", "<b>C.</b>", "<b>D.</b>", dan "<b>Kunci:</b>".';
-    errBox.style.display = 'block';
-  }
-}
 // ═══════════════════════════════════
 // CONSTANTS & STATE
 // ═══════════════════════════════════
@@ -1313,6 +1236,112 @@ function getQuestions(){ return JSON.parse(localStorage.getItem(LS_KEY_QS)||'{}'
 function setQuestions(d){ localStorage.setItem(LS_KEY_QS, JSON.stringify(d)); }
 function getPw(){ return localStorage.getItem(LS_KEY_PW)||'admin123'; }
 function uid(){ return Date.now().toString(36)+Math.random().toString(36).slice(2,6); }
+
+// ═══════════════════════════════════
+// PDF.JS SETUP & FUNCTIONS
+// ═══════════════════════════════════
+// Setup worker untuk PDF.js
+if (typeof pdfjsLib !== 'undefined') {
+  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+}
+
+async function processPDF(input) {
+  if (!adminSubjId) {
+    alert('Pilih mata pelajaran di atas terlebih dahulu!');
+    input.value = '';
+    return;
+  }
+
+  const file = input.files[0];
+  if (!file) return;
+
+  const errBox = document.getElementById('pdf-err');
+  errBox.style.display = 'none';
+
+  try {
+    const arrayBuffer = await file.arrayBuffer();
+    const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+    let fullText = '';
+
+    // Loop untuk mengekstrak teks dari setiap halaman PDF
+    for (let i = 1; i <= pdf.numPages; i++) {
+      const page = await pdf.getPage(i);
+      const textContent = await page.getTextContent();
+      const pageText = textContent.items.map(item => item.str).join(' ');
+      fullText += pageText + ' '; 
+    }
+
+    // Lakukan parsing dari teks mentah ke format soal
+    parseTextToQuestions(fullText);
+
+  } catch (error) {
+    console.error(error);
+    errBox.textContent = 'Gagal membaca PDF. Pastikan file tidak rusak atau dikunci (password).';
+    errBox.style.display = 'block';
+  }
+  
+  // Reset input agar bisa upload file yang sama lagi jika error
+  input.value = '';
+}
+
+function parseTextToQuestions(text) {
+  const cleanText = text.replace(/\s+/g, ' ');
+  let count = 0;
+  const qs = getQuestions();
+  if (!qs[adminSubjId]) qs[adminSubjId] = [];
+
+  // 1. REGEX UNTUK MEMBACA SOAL PILIHAN GANDA
+  const regexMCQ = /Soal:\s*(.*?)\s*A\.\s*(.*?)\s*B\.\s*(.*?)\s*C\.\s*(.*?)\s*D\.\s*(.*?)\s*Kunci:\s*([A-D])(?:\s*Penjelasan:\s*(.*?))?(?=\s*Soal:|\s*Esai:|$)/gi;
+  
+  let matchMCQ;
+  while ((matchMCQ = regexMCQ.exec(cleanText)) !== null) {
+    const qText = matchMCQ[1].trim();
+    const opts = [matchMCQ[2].trim(), matchMCQ[3].trim(), matchMCQ[4].trim(), matchMCQ[5].trim()];
+    const ansChar = matchMCQ[6].toUpperCase();
+    const exp = matchMCQ[7] ? matchMCQ[7].trim() : '';
+    const ansIndex = ansChar === 'A' ? 0 : ansChar === 'B' ? 1 : ansChar === 'C' ? 2 : 3;
+
+    qs[adminSubjId].push({
+      id: uid(), type: 'mcq', q: qText, opts: opts, ans: ansIndex, tag: 'Import PDF', exp: exp
+    });
+    count++;
+  }
+
+  // 2. REGEX UNTUK MEMBACA SOAL ESAI
+  const regexEssay = /Esai:\s*(.*?)\s*Kata Kunci:\s*(.*?)\s*Bobot:\s*(\d+)(?:\s*Penjelasan:\s*(.*?))?(?=\s*Soal:|\s*Esai:|$)/gi;
+  
+  let matchEssay;
+  while ((matchEssay = regexEssay.exec(cleanText)) !== null) {
+    const qText = matchEssay[1].trim();
+    const kwInput = matchEssay[2].trim();
+    const score = parseInt(matchEssay[3]);
+    const exp = matchEssay[4] ? matchEssay[4].trim() : '';
+
+    const keywordsArray = kwInput.split(',').map(k => k.trim().toLowerCase()).filter(k => k);
+
+    qs[adminSubjId].push({
+      id: uid(), type: 'essay', q: qText, keywords: keywordsArray, maxScore: score || 5, tag: 'Import PDF', exp: exp
+    });
+    count++;
+  }
+
+  if (count > 0) {
+    setQuestions(qs);
+    renderQList(); 
+    const toast = document.getElementById('pdf-toast');
+    if(toast){
+      toast.textContent = `✓ ${count} soal dari PDF berhasil ditambahkan!`;
+      toast.style.display = 'block';
+      setTimeout(() => toast.style.display = 'none', 4000);
+    } else alert(`Berhasil tambah ${count} soal!`);
+  } else {
+    const errBox = document.getElementById('pdf-err');
+    if(errBox){
+      errBox.innerHTML = 'Gagal menemukan soal. Pastikan format <b>Soal:</b> (untuk PG) atau <b>Esai:</b> (untuk Esai) sudah benar.';
+      errBox.style.display = 'block';
+    } else alert('Gagal menemukan format soal di dalam PDF.');
+  }
+}
 
 // ═══════════════════════════════════
 // PAGE ROUTING
@@ -1393,13 +1422,21 @@ function buildQuiz(qs, subj){
   // Build questions
   const container = document.getElementById('quiz-questions-container');
   container.innerHTML = qs.map((q,i)=>{
-    const letters=['A','B','C','D'];
     const tagHtml = q.tag ? `<span class="q-tag" style="color:${subj.color};border-color:${subj.color};background:${subj.color}18;">${escHtml(q.tag)}</span>` : '';
-    const opts = (q.opts||[]).map((o,j)=>`
-      <div class="opt" id="opt-${i}-${j}" onclick="selectAns(${i},${j})">
-        <div class="opt-l">${letters[j]}</div>
-        <div class="opt-t">${escHtml(o)}</div>
-      </div>`).join('');
+    
+    // --- PENENTUAN TAMPILAN PG ATAU ESAI ---
+    let inputArea = '';
+    if (q.type === 'essay') {
+      inputArea = `<textarea class="f-textarea" id="ans-essay-${i}" placeholder="Ketik jawaban esai kamu di sini..." oninput="answerEssay(${i})" style="min-height:120px; width:100%; margin-top:10px;"></textarea>`;
+    } else {
+      const letters=['A','B','C','D'];
+      inputArea = `<div class="options">` + (q.opts||[]).map((o,j)=>`
+        <div class="opt" id="opt-${i}-${j}" onclick="selectAns(${i},${j})">
+          <div class="opt-l">${letters[j]}</div>
+          <div class="opt-t">${escHtml(o)}</div>
+        </div>`).join('') + `</div>`;
+    }
+
     return `<div class="q-screen" id="q-${i}">
       <div class="q-meta">
         <span class="q-idx">Soal ${i+1} dari ${qs.length}</span>
@@ -1407,7 +1444,7 @@ function buildQuiz(qs, subj){
       </div>
       <div class="q-card">
         <div class="q-text">${escHtml(q.q)}</div>
-        <div class="options">${opts}</div>
+        ${inputArea}
       </div>
       <div class="q-nav">
         <button class="btn-nav" onclick="goQ(${i-1})" ${i===0?'disabled':''}>← Sebelumnya</button>
@@ -1426,6 +1463,14 @@ function buildQuiz(qs, subj){
   ).join('');
 }
 
+// Fungsi menyimpan ketikan user di soal esai
+function answerEssay(qIdx) {
+  const val = document.getElementById(`ans-essay-${qIdx}`).value.trim();
+  userAnswers[qIdx] = val ? val : null;
+  refreshNav();
+  updateProgress();
+}
+
 function showQ(idx){
   const questions = getQuestions();
   const qs = questions[currentSubjId]||[];
@@ -1438,7 +1483,7 @@ function showQ(idx){
   currentQ = idx;
 
   // Restore selection
-  if(userAnswers[idx]!==null){
+  if(userAnswers[idx]!==null && qs[idx].type !== 'essay'){
     document.querySelectorAll(`#q-${idx} .opt`).forEach(o=>o.classList.remove('sel'));
     const sel = document.getElementById(`opt-${idx}-${userAnswers[idx]}`);
     if(sel) sel.classList.add('sel');
@@ -1498,7 +1543,7 @@ function closeSidebar(){
 
 // SUBMIT
 function submitQuiz(){
-  const done = userAnswers.filter(a=>a!==null).length;
+  const done = userAnswers.filter(a=>a!==null && a!=='').length;
   const rem = userAnswers.length - done;
   if(rem>0){
     if(!confirm(`Masih ada ${rem} soal yang belum dijawab. Kumpulkan sekarang?`)) return;
@@ -1506,22 +1551,60 @@ function submitQuiz(){
 
   const questions = getQuestions();
   const qs = questions[currentSubjId]||[];
+  
+  let totalSkorDidapat = 0;
+  let totalSkorMaksimal = 0;
   let correct=0, wrong=0, skipped=0;
-  qs.forEach((q,i)=>{
-    if(userAnswers[i]===null) skipped++;
-    else if(userAnswers[i]===q.ans) correct++;
-    else wrong++;
-  });
-  const total = qs.length;
-  const pct = Math.round((correct/total)*100);
 
-  // Score ring
+  qs.forEach((q,i)=>{
+    let ua = userAnswers[i];
+    
+    // LOGIKA UNTUK SOAL ESAI
+    if (q.type === 'essay') {
+      let skorMaks = q.maxScore || 5;
+      totalSkorMaksimal += skorMaks;
+      
+      if (ua) {
+        let teksUser = ua.toLowerCase();
+        let matchCount = 0;
+        
+        (q.keywords||[]).forEach(kw => {
+          if (teksUser.includes(kw)) matchCount++;
+        });
+        
+        let pctEsai = matchCount / (q.keywords.length || 1);
+        let skorEsai = Math.round(pctEsai * skorMaks);
+        totalSkorDidapat += skorEsai;
+        
+        if(pctEsai >= 0.5) correct++;
+        else wrong++;
+      } else {
+        skipped++;
+      }
+    } 
+    // LOGIKA UNTUK SOAL PILIHAN GANDA
+    else {
+      totalSkorMaksimal += 1;
+      if(ua === null || ua === '') skipped++;
+      else if(ua === q.ans) {
+        correct++;
+        totalSkorDidapat += 1;
+      } else {
+        wrong++;
+      }
+    }
+  });
+
+  const pct = totalSkorMaksimal === 0 ? 0 : Math.round((totalSkorDidapat/totalSkorMaksimal)*100);
+
+  // Animasi Score Ring
   const circ = 326.7;
   const offset = circ - (pct/100)*circ;
   document.getElementById('ring-fg').style.strokeDashoffset = circ;
   document.getElementById('ring-fg').style.stroke = pct>=80?'var(--green)':pct>=60?'var(--yellow)':'var(--red)';
   setTimeout(()=>{ document.getElementById('ring-fg').style.strokeDashoffset = offset; }, 150);
 
+  // Update Teks Statistik
   document.getElementById('score-pct').textContent = pct+'%';
   document.getElementById('rs-c').textContent = correct;
   document.getElementById('rs-w').textContent = wrong;
@@ -1552,26 +1635,54 @@ function buildEval(qs){
 
   qs.forEach((q,i)=>{
     const ua = userAnswers[i];
-    const sk = ua===null;
-    const ok = !sk && ua===q.ans;
-    const status = sk?'sk':ok?'c':'w';
+    const sk = ua===null || ua==='';
+    let ok = false;
+    let status = 'w';
+    
+    if (q.type === 'essay') {
+       if(sk) { status = 'sk'; ok = false; }
+       else {
+         let teksUser = ua.toLowerCase();
+         let matchCount = 0;
+         (q.keywords||[]).forEach(kw => {
+           if (teksUser.includes(kw)) matchCount++;
+         });
+         let pct = matchCount / (q.keywords.length || 1);
+         ok = pct >= 0.5; 
+         status = ok ? 'c' : 'w';
+       }
+    } else {
+       ok = !sk && ua===q.ans;
+       status = sk ? 'sk' : ok ? 'c' : 'w';
+    }
+    
     evalResults.push(status);
 
     const bc = sk?'bsk':ok?'bc':'bw';
     const ic = sk?'esk':ok?'ec':'ew';
     const badge = sk?'—':ok?'✓':'✗';
 
-    let optsHtml = (q.opts||[]).map((o,j)=>{
-      let cls='eo-n';
-      if(j===q.ans) cls='eo-c';
-      else if(!sk && j===ua) cls='eo-w';
-      return `<div class="eval-opt ${cls}">
-        <div class="eval-opt-l">${letters[j]}</div>
-        <span>${escHtml(o)}</span>
-        ${j===q.ans?'<span style="margin-left:auto;font-size:11px;opacity:.7">← Benar</span>':''}
-        ${(!sk&&j===ua&&j!==q.ans)?'<span style="margin-left:auto;font-size:11px;opacity:.7">← Jawabanmu</span>':''}
-      </div>`;
-    }).join('');
+    let optsHtml = '';
+    if(q.type === 'essay') {
+       optsHtml = `<div class="eval-opt" style="flex-direction:column; align-items:flex-start; cursor:default; background:var(--surface);">
+          <div style="font-size:12px;color:var(--text2);margin-bottom:6px;">Jawaban Kamu:</div>
+          <div style="font-weight:600;color:var(--text); line-height:1.5;">${sk ? '<i>(Kosong)</i>' : escHtml(ua)}</div>
+          <div style="font-size:12px;color:var(--text2);margin-top:14px;margin-bottom:6px;">Kata Kunci yang Diharapkan:</div>
+          <div style="font-weight:600;color:var(--accent); line-height:1.5;">${(q.keywords||[]).join(', ')}</div>
+       </div>`;
+    } else {
+       optsHtml = (q.opts||[]).map((o,j)=>{
+        let cls='eo-n';
+        if(j===q.ans) cls='eo-c';
+        else if(!sk && j===ua) cls='eo-w';
+        return `<div class="eval-opt ${cls}">
+          <div class="eval-opt-l">${letters[j]}</div>
+          <span>${escHtml(o)}</span>
+          ${j===q.ans?'<span style="margin-left:auto;font-size:11px;opacity:.7">← Benar</span>':''}
+          ${(!sk&&j===ua&&j!==q.ans)?'<span style="margin-left:auto;font-size:11px;opacity:.7">← Jawabanmu</span>':''}
+        </div>`;
+      }).join('');
+    }
 
     const exp = q.exp?`<div class="eval-exp">💡 ${escHtml(q.exp)}</div>`:'';
     const tag = q.tag?`<span style="font-size:10px;color:var(--muted);font-family:var(--mono);margin-right:6px;">[${escHtml(q.tag)}]</span>`:'';
@@ -1762,20 +1873,43 @@ function renderQList(){
   </div>`).join('');
 }
 
+function toggleQType() {
+  const type = document.getElementById('new-q-type').value;
+  if(type === 'mcq') {
+    document.getElementById('area-mcq').style.display = 'block';
+    document.getElementById('area-essay').style.display = 'none';
+  } else {
+    document.getElementById('area-mcq').style.display = 'none';
+    document.getElementById('area-essay').style.display = 'block';
+  }
+}
+
 function addQuestion(){
   if(!adminSubjId){ alert('Pilih mata pelajaran terlebih dahulu.'); return; }
+  const qType = document.getElementById('new-q-type').value;
   const qText = document.getElementById('new-q-text').value.trim();
-  const opts = [0,1,2,3].map(i=>document.getElementById(`opt${i}`).value.trim());
-  const ans = parseInt(document.getElementById('new-q-ans').value);
   const tag = document.getElementById('new-q-tag').value.trim();
   const exp = document.getElementById('new-q-exp').value.trim();
 
   if(!qText){ alert('Pertanyaan wajib diisi.'); return; }
-  if(opts.some(o=>!o)){ alert('Semua pilihan jawaban wajib diisi.'); return; }
+
+  let newQ = { id: uid(), type: qType, q: qText, tag: tag, exp: exp };
+
+  if(qType === 'mcq') {
+    const opts = [0,1,2,3].map(i=>document.getElementById(`opt${i}`).value.trim());
+    if(opts.some(o=>!o)){ alert('Semua pilihan ganda wajib diisi.'); return; }
+    newQ.opts = opts;
+    newQ.ans = parseInt(document.getElementById('new-q-ans').value);
+  } else {
+    const kwInput = document.getElementById('new-q-keywords').value;
+    if(!kwInput){ alert('Kata kunci esai wajib diisi.'); return; }
+    newQ.keywords = kwInput.split(',').map(k => k.trim().toLowerCase()).filter(k => k);
+    newQ.maxScore = parseInt(document.getElementById('new-q-maxscore').value) || 5;
+  }
 
   const qs = getQuestions();
   if(!qs[adminSubjId]) qs[adminSubjId]=[];
-  qs[adminSubjId].push({ id:uid(), q:qText, opts, ans, tag, exp });
+  qs[adminSubjId].push(newQ);
   setQuestions(qs);
   clearQForm();
   renderQList();
@@ -1786,6 +1920,8 @@ function clearQForm(){
   document.getElementById('new-q-text').value='';
   [0,1,2,3].forEach(i=>document.getElementById(`opt${i}`).value='');
   document.getElementById('new-q-ans').value='0';
+  document.getElementById('new-q-keywords').value='';
+  document.getElementById('new-q-maxscore').value='5';
   document.getElementById('new-q-tag').value='';
   document.getElementById('new-q-exp').value='';
 }
@@ -1802,32 +1938,69 @@ function openEditQ(subjId, qId){
   const qs = getQuestions();
   const q = (qs[subjId]||[]).find(x=>x.id===qId);
   if(!q) return;
+
   document.getElementById('edit-q-id').value = qId;
   document.getElementById('edit-q-subj').value = subjId;
+  document.getElementById('edit-q-type').value = q.type || 'mcq';
   document.getElementById('edit-q-text').value = q.q;
-  (q.opts||[]).forEach((o,i)=>{ document.getElementById(`eq-opt${i}`).value=o; });
-  document.getElementById('eq-ans').value = q.ans;
+
+  if (q.type === 'essay') {
+    document.getElementById('edit-area-mcq').style.display = 'none';
+    document.getElementById('edit-area-essay').style.display = 'block';
+    
+    document.getElementById('eq-keywords').value = (q.keywords||[]).join(', ');
+    document.getElementById('eq-maxscore').value = q.maxScore || 5;
+  } else {
+    document.getElementById('edit-area-mcq').style.display = 'block';
+    document.getElementById('edit-area-essay').style.display = 'none';
+    
+    (q.opts||[]).forEach((o,i)=>{ document.getElementById(`eq-opt${i}`).value=o; });
+    document.getElementById('eq-ans').value = q.ans;
+  }
+
   document.getElementById('eq-tag').value = q.tag||'';
   document.getElementById('eq-exp').value = q.exp||'';
   openModal('modal-edit-q');
 }
+
 function saveEditQ(){
   const qId = document.getElementById('edit-q-id').value;
   const subjId = document.getElementById('edit-q-subj').value;
+  const qType = document.getElementById('edit-q-type').value;
   const qText = document.getElementById('edit-q-text').value.trim();
-  const opts = [0,1,2,3].map(i=>document.getElementById(`eq-opt${i}`).value.trim());
-  if(!qText||opts.some(o=>!o)){ alert('Pertanyaan dan semua pilihan wajib diisi.'); return; }
+
+  if(!qText){ alert('Pertanyaan wajib diisi.'); return; }
+
   const qs = getQuestions();
   const idx = (qs[subjId]||[]).findIndex(q=>q.id===qId);
-  if(idx>-1){
-    qs[subjId][idx] = { ...qs[subjId][idx],
-      q:qText, opts,
-      ans:parseInt(document.getElementById('eq-ans').value),
-      tag:document.getElementById('eq-tag').value.trim(),
-      exp:document.getElementById('eq-exp').value.trim()
+  
+  if(idx > -1){
+    let updatedQ = {
+      ...qs[subjId][idx],
+      type: qType,
+      q: qText,
+      tag: document.getElementById('eq-tag').value.trim(),
+      exp: document.getElementById('eq-exp').value.trim()
     };
+
+    if (qType === 'essay') {
+      const kwInput = document.getElementById('eq-keywords').value;
+      if(!kwInput){ alert('Kata kunci esai wajib diisi.'); return; }
+      
+      updatedQ.keywords = kwInput.split(',').map(k => k.trim().toLowerCase()).filter(k => k);
+      updatedQ.maxScore = parseInt(document.getElementById('eq-maxscore').value) || 5;
+    } else {
+      const opts = [0,1,2,3].map(i=>document.getElementById(`eq-opt${i}`).value.trim());
+      if(opts.some(o=>!o)){ alert('Semua pilihan wajib diisi.'); return; }
+      
+      updatedQ.opts = opts;
+      updatedQ.ans = parseInt(document.getElementById('eq-ans').value);
+    }
+
+    qs[subjId][idx] = updatedQ;
     setQuestions(qs);
   }
+  
   closeModal('modal-edit-q');
   if(adminSubjId===subjId) renderQList();
 }
@@ -1900,7 +2073,6 @@ function clearAllData(){
 // ═══════════════════════════════════
 function openModal(id){ document.getElementById(id).classList.add('open'); }
 function closeModal(id){ document.getElementById(id).classList.remove('open'); }
-// Close on overlay click
 document.querySelectorAll('.modal-overlay').forEach(ov=>{
   ov.addEventListener('click', e=>{ if(e.target===ov) ov.classList.remove('open'); });
 });
@@ -1925,44 +2097,31 @@ buildColorPicker();
 
 async function initApp() {
   try {
-    // Membaca file data.json yang ada di GitHub
-    const response = await fetch('data.json', { cache: 'no-store' });
+    const response = await fetch('https://favianlimapuluh-droid.github.io/latsolakp.com/data.json', { cache: 'no-store' });
     const masterData = await response.json();
 
-    // Memuat data soal ke memori website
     if (masterData.subjects && masterData.questions) {
       setSubjects(masterData.subjects);
       setQuestions(masterData.questions);
     }
   } catch (error) {
-    console.log("Belum ada file data.json, pakai data lokal sementara.");
+    console.log("Gagal mengambil data dari GitHub, menggunakan data lokal cadangan.");
+    
+    if(getSubjects().length === 0) {
+      const s1 = uid(), s2 = uid();
+      setSubjects([
+        { id:s1, name:'Akuntansi Perpajakan', desc:'Latihan soal UTS & UAS', icon:'📚', color:'#4f7cff' },
+        { id:s2, name:'Pendidikan Kewarganegaraan', desc:'Latihan soal esai dan PG', icon:'🏛', color:'#f5b942' }
+      ]);
+      setQuestions({ [s1]:[], [s2]:[] });
+    }
   }
 
-  // Tampilkan desain utama ke layar
   renderHome();
 }
 
-// Menjalankan fungsi saat web dibuka
+// Menjalankan aplikasi
 initApp();
-
-// Default sample data (only if empty)
-(function seedData(){
-  if(getSubjects().length>0) return;
-  const s1 = uid(), s2 = uid(), s3 = uid();
-  setSubjects([
-    { id:s1, name:'Mapel A', desc:'Contoh mata pelajaran pertama. Edit di Admin Panel.', icon:'📚', color:'#4f7cff' },
-    { id:s2, name:'Mapel B', desc:'Contoh mata pelajaran kedua. Tambah soal via Admin.', icon:'🔬', color:'#2dd4a0' },
-    { id:s3, name:'Mapel C', desc:'Contoh mata pelajaran ketiga. Kustomisasi sesuai kebutuhan.', icon:'🧮', color:'#f5b942' },
-  ]);
-  setQuestions({
-    [s1]:[
-      { id:uid(), q:'Ini adalah contoh soal pertama untuk Mapel A. Apa jawaban yang benar?', opts:['Jawaban A','Jawaban B (Benar)','Jawaban C','Jawaban D'], ans:1, tag:'Bab 1', exp:'Ini adalah contoh penjelasan jawaban.' },
-      { id:uid(), q:'Contoh soal kedua untuk Mapel A. Pilih yang paling tepat!', opts:['Opsi Pertama','Opsi Kedua','Opsi Ketiga (Benar)','Opsi Keempat'], ans:2, tag:'Bab 1', exp:'Penjelasan singkat soal ini.' },
-    ],
-    [s2]:[], [s3]:[]
-  });
-  renderHome();
-})();
 </script>
 </body>
 </html>
