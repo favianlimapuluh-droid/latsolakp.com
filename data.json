@@ -1,0 +1,136 @@
+{
+  "subjects": [
+    {
+      "id": "mp30mccmc9u8",
+      "name": "Mapel A",
+      "desc": "Contoh mata pelajaran pertama. Edit di Admin Panel.",
+      "icon": "📚",
+      "color": "#4f7cff"
+    },
+    {
+      "id": "mp30mccmzi1u",
+      "name": "Mapel B",
+      "desc": "Contoh mata pelajaran kedua. Tambah soal via Admin.",
+      "icon": "🔬",
+      "color": "#2dd4a0"
+    },
+    {
+      "id": "mp30mccmnzb0",
+      "name": "Mapel C",
+      "desc": "Contoh mata pelajaran ketiga. Kustomisasi sesuai kebutuhan.",
+      "icon": "🧮",
+      "color": "#f5b942"
+    }
+  ],
+  "questions": {
+    "mp30mccmc9u8": [
+      {
+        "id": "mp30mccmhpy0",
+        "q": "Ini adalah contoh soal pertama untuk Mapel A. Apa jawaban yang benar?",
+        "opts": [
+          "Jawaban A",
+          "Jawaban B (Benar)",
+          "Jawaban C",
+          "Jawaban D"
+        ],
+        "ans": 1,
+        "tag": "Bab 1",
+        "exp": "Ini adalah contoh penjelasan jawaban."
+      },
+      {
+        "id": "mp30mccmsfij",
+        "q": "Contoh soal kedua untuk Mapel A. Pilih yang paling tepat!",
+        "opts": [
+          "Opsi Pertama",
+          "Opsi Kedua",
+          "Opsi Ketiga (Benar)",
+          "Opsi Keempat"
+        ],
+        "ans": 2,
+        "tag": "Bab 1",
+        "exp": "Penjelasan singkat soal ini."
+      }
+    ],
+    "mp30mccmzi1u": [],
+    "mp30mccmnzb0": [
+      {
+        "id": "mp30qu6rfn8z",
+        "q": "Mengapa Pendidikan Kewarganegaraan memiliki landasan sosiologis di Indonesia?",
+        "opts": [
+          "Karena Indonesia memiliki letak geografis yang strategis di dunia",
+          "Karena adanya reformasi 1998 yang mengubah aturan main negara",
+          "Karena Indonesia sangat beragam sehingga butuh pembinaan agar keberagaman tersebut tetap bersatu",
+          "Karena adanya pengalaman bangsa Indonesia dalam mempertahankan kemerdekaan"
+        ],
+        "ans": 2,
+        "tag": "Import PDF",
+        "exp": "Landasan sosiologis PKn adalah kenyataan bahwa Indonesia sangat beragam (suku, agama, ras), sehingga PKn hadir untuk membina keberagaman itu agar tetap bersatu."
+      },
+      {
+        "id": "mp30qu6rpx7h",
+        "q": "Manakah di bawah ini yang termasuk dalam kelompok Identitas Instrumental negara Indonesia?",
+        "opts": [
+          "Pancasila sebagai dasar negara",
+          "UUD 1945, Bahasa Indonesia, dan Lambang Negara",
+          "Keberagaman suku, budaya, serta agama",
+          "Indonesia sebagai negara kepulauan (Archipelago)"
+        ],
+        "ans": 1,
+        "tag": "Import PDF",
+        "exp": "Identitas Instrumental adalah alat atau sarana yang meliputi UUD 1945, Bahasa Indonesia, Lambang Negara, Bendera Merah Putih, dan Lagu Indonesia Raya."
+      },
+      {
+        "id": "mp30qu6rvcih",
+        "q": "Apa sebutan untuk status seseorang yang tidak diakui oleh negara manapun karena aturan hukum yang tidak cocok?",
+        "opts": [
+          "Apatride",
+          "Bipatride",
+          "Ius Soli",
+          "Ius Sanguinis"
+        ],
+        "ans": 0,
+        "tag": "Import PDF",
+        "exp": "Apatride adalah kondisi di mana seseorang tidak memiliki kewarganegaraan sama sekali akibat aturan hukum antarnegara yang tidak cocok."
+      },
+      {
+        "id": "mp30qu6rvukr",
+        "q": "Salah satu ciri dari Negara Hukum (Rechtstaat) adalah \"Asas Legalitas\", yang memiliki arti...",
+        "opts": [
+          "Semua orang tanpa terkecuali harus tunduk pada hukum",
+          "Hakim tidak boleh diintervensi oleh siapa pun",
+          "Pemerintah hanya bisa bertindak jika ada dasar hukumnya",
+          "Masyarakat dilibatkan dalam pengambilan keputusan negara"
+        ],
+        "ans": 2,
+        "tag": "Import PDF",
+        "exp": "Asas legalitas berarti bahwa setiap tindakan atau kebijakan pemerintah hanya bisa dilakukan jika sudah ada dasar hukum yang mengaturnya."
+      },
+      {
+        "id": "mp30qu6rv4v9",
+        "q": "Salah satu tantangan atau sisi negatif dari penerapan sistem Otonomi Daerah di Indonesia adalah...",
+        "opts": [
+          "Pelayanan publik menjadi lebih lambat karena harus menunggu instruksi dari Jakarta",
+          "Munculnya risiko korupsi di tingkat pemerintah daerah atau \"raja-raja kecil\"",
+          "Pusat tidak mungkin tahu semua kebutuhan detail di pelosok daerah",
+          "Potensi wisata daerah tidak bisa dikelola maksimal oleh orang daerah"
+        ],
+        "ans": 1,
+        "tag": "Import PDF",
+        "exp": "Otonomi daerah memberikan kekuasaan bagi daerah untuk mengurus dirinya sendiri, namun hal ini memunculkan tantangan baru seperti potensi penyalahgunaan wewenang dan korupsi di tingkat pemda (raja-raja kecil)."
+      },
+      {
+        "id": "mp30rdfdgviw",
+        "q": "Mengapa Pendidikan Kewarganegaraan memiliki landasan sosiologis di Indonesia?",
+        "opts": [
+          "PPPPP",
+          "PPPPPP",
+          "PPPPPP",
+          "PPPPPPPP"
+        ],
+        "ans": 0,
+        "tag": "",
+        "exp": ""
+      }
+    ]
+  }
+}
