@@ -63,7 +63,6 @@ a{text-decoration:none;color:inherit;}
 ═══════════════════════════════════════════ */
 #page-home{background:var(--bg);}
 
-/* NAV */
 .home-nav{
   position:sticky;top:0;z-index:100;
   height:60px;display:flex;align-items:center;
@@ -90,7 +89,6 @@ a{text-decoration:none;color:inherit;}
 }
 .nav-admin-btn:hover{border-color:var(--accent);color:var(--accent);background:var(--glow);}
 
-/* HERO */
 .home-hero{
   padding:80px 28px 60px;
   text-align:center;
@@ -116,7 +114,6 @@ a{text-decoration:none;color:inherit;}
 }
 .hero-sub{font-size:16px;color:var(--text2);line-height:1.7;font-weight:400;}
 
-/* SUBJECTS GRID */
 .subjects-section{padding:0 28px 80px;max-width:1100px;margin:0 auto;}
 .section-label{
   font-size:11px;font-weight:600;font-family:var(--mono);
@@ -174,7 +171,6 @@ a{text-decoration:none;color:inherit;}
 }
 .card-start:hover{background:var(--accent2);transform:translateX(2px);}
 
-/* EMPTY STATE */
 .empty-subjects{
   text-align:center;padding:60px 20px;
   color:var(--muted);
@@ -182,7 +178,6 @@ a{text-decoration:none;color:inherit;}
 .empty-subjects .e-icon{font-size:40px;margin-bottom:12px;}
 .empty-subjects p{font-size:14px;line-height:1.7;}
 
-/* FOOTER */
 .home-footer{
   text-align:center;padding:24px;
   border-top:1px solid var(--border);
@@ -195,7 +190,6 @@ a{text-decoration:none;color:inherit;}
 #page-quiz{display:none;flex-direction:column;}
 #page-quiz.active{display:flex;flex-direction:column;}
 
-/* QUIZ HEADER */
 .quiz-header{
   position:fixed;top:0;left:0;right:0;z-index:200;
   height:var(--hdr);
@@ -234,7 +228,6 @@ a{text-decoration:none;color:inherit;}
 .hdr-progress-bar{height:100%;width:0%;background:linear-gradient(90deg,var(--accent),var(--green));border-radius:99px;transition:width .4s ease;}
 .hdr-prog-txt{font-size:11px;color:var(--text2);font-family:var(--mono);white-space:nowrap;}
 
-/* SIDEBAR OVERLAY */
 .sidebar-overlay{
   display:none;
   position:fixed;inset:0;z-index:299;
@@ -243,7 +236,6 @@ a{text-decoration:none;color:inherit;}
 }
 .sidebar-overlay.open{display:block;}
 
-/* QUIZ SIDEBAR */
 .quiz-sidebar{
   position:fixed;
   top:var(--hdr);bottom:0;left:0;
@@ -253,12 +245,10 @@ a{text-decoration:none;color:inherit;}
   display:flex;flex-direction:column;
   transition:transform .3s cubic-bezier(.4,0,.2,1);
 }
-/* Desktop: always visible */
 @media(min-width:769px){
   .quiz-sidebar{transform:translateX(0)!important;}
   .hdr-hamburger{display:none;}
 }
-/* Mobile: hidden until open */
 @media(max-width:768px){
   .quiz-sidebar{transform:translateX(-100%);}
   .quiz-sidebar.open{transform:translateX(0);}
@@ -280,6 +270,21 @@ a{text-decoration:none;color:inherit;}
 .ld-done{background:var(--accent);}
 .ld-cur{background:var(--yellow);}
 
+/* ── NEW: Legend for type in sidebar ── */
+.sb-type-legend{display:flex;flex-wrap:wrap;gap:6px 10px;margin-top:8px;padding-top:8px;border-top:1px solid var(--border);}
+.sb-type-pg{
+  font-size:10px;font-weight:700;font-family:var(--mono);
+  color:var(--accent);background:var(--glow);
+  border:1px solid rgba(79,124,255,.3);
+  padding:2px 8px;border-radius:20px;
+}
+.sb-type-esai{
+  font-size:10px;font-weight:700;font-family:var(--mono);
+  color:var(--green);background:var(--green-bg);
+  border:1px solid rgba(45,212,160,.3);
+  padding:2px 8px;border-radius:20px;
+}
+
 .sb-scroll{flex:1;overflow-y:auto;padding:14px;}
 
 .sb-chap-label{
@@ -287,9 +292,39 @@ a{text-decoration:none;color:inherit;}
   color:var(--muted);letter-spacing:.08em;text-transform:uppercase;
   padding:0 2px 8px;
 }
+
+/* ── Sidebar section headers (Essay / PG) ── */
+.sb-section{margin-bottom:16px;}
+.sb-section-hdr{
+  display:flex;align-items:center;gap:6px;
+  padding:6px 8px;border-radius:7px;
+  margin-bottom:8px;
+}
+.sb-section-hdr.sh-essay{
+  background:var(--green-bg);
+  border:1px solid rgba(45,212,160,.25);
+}
+.sb-section-hdr.sh-pg{
+  background:var(--glow);
+  border:1px solid rgba(79,124,255,.2);
+}
+.sb-section-hdr-icon{font-size:12px;}
+.sb-section-hdr-label{
+  font-size:10px;font-weight:700;font-family:var(--mono);
+  text-transform:uppercase;letter-spacing:.08em;
+  flex:1;
+}
+.sh-essay .sb-section-hdr-label{color:var(--green);}
+.sh-pg   .sb-section-hdr-label{color:var(--accent);}
+.sb-section-hdr-count{
+  font-size:10px;font-weight:700;font-family:var(--mono);
+  padding:2px 7px;border-radius:20px;
+}
+.sh-essay .sb-section-hdr-count{color:var(--green);background:rgba(45,212,160,.15);}
+.sh-pg   .sb-section-hdr-count{color:var(--accent);background:rgba(79,124,255,.15);}
+
 .sb-grid{
   display:grid;grid-template-columns:repeat(5,1fr);gap:6px;
-  margin-bottom:16px;
 }
 .sb-num{
   aspect-ratio:1;
@@ -303,6 +338,9 @@ a{text-decoration:none;color:inherit;}
 .sb-num.done{background:var(--accent);border-color:var(--accent);color:#fff;}
 .sb-num.cur{border-color:var(--yellow);color:var(--yellow);background:var(--yellow-bg);}
 .sb-num.done.cur{background:var(--accent);border-color:var(--yellow);box-shadow:0 0 0 2px var(--yellow);}
+/* NEW: essay type indicator on nav button */
+.sb-num.type-essay{border-style:dashed;}
+.sb-num.type-essay.done{border-style:solid;background:var(--green);border-color:var(--green);}
 
 .sb-foot{padding:14px;border-top:1px solid var(--border);}
 .sb-stats{display:flex;justify-content:space-around;margin-bottom:12px;}
@@ -321,7 +359,6 @@ a{text-decoration:none;color:inherit;}
 }
 .btn-submit:hover{opacity:.88;transform:translateY(-1px);box-shadow:0 6px 22px rgba(79,124,255,.35);}
 
-/* QUIZ MAIN */
 .quiz-main{
   margin-top:var(--hdr);
   padding:36px 40px;
@@ -330,12 +367,11 @@ a{text-decoration:none;color:inherit;}
 @media(min-width:769px){.quiz-main{margin-left:var(--sidebar);}}
 @media(max-width:768px){.quiz-main{padding:24px 16px;}}
 
-/* QUESTION SCREEN */
 .q-screen{display:none;}
 .q-screen.active{display:block;animation:fadeUp .3s ease;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
 
-.q-meta{display:flex;align-items:center;gap:10px;margin-bottom:18px;}
+.q-meta{display:flex;align-items:center;gap:10px;margin-bottom:18px;flex-wrap:wrap;}
 .q-idx{font-size:12px;font-family:var(--mono);color:var(--muted);}
 .q-tag{
   font-size:10px;font-weight:700;
@@ -343,6 +379,18 @@ a{text-decoration:none;color:inherit;}
   border:1px solid currentColor;text-transform:uppercase;letter-spacing:.06em;
 }
 
+/* ── NEW: Type badge on question card ── */
+.q-type-badge{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:10px;font-weight:700;font-family:var(--mono);
+  padding:3px 10px;border-radius:20px;
+  border:1px solid currentColor;text-transform:uppercase;letter-spacing:.06em;
+  margin-left:auto;
+}
+.q-type-badge.badge-pg{color:var(--accent);background:var(--glow);border-color:rgba(79,124,255,.4);}
+.q-type-badge.badge-essay{color:var(--green);background:var(--green-bg);border-color:rgba(45,212,160,.4);}
+
+/* ── NEW: Essay card style ── */
 .q-card{
   background:var(--card);
   border:1px solid var(--border);
@@ -351,7 +399,18 @@ a{text-decoration:none;color:inherit;}
   margin-bottom:20px;
   max-width:780px;
 }
+.q-card.essay-card{border-color:rgba(45,212,160,.25);background:linear-gradient(135deg,var(--card) 0%,rgba(45,212,160,.03) 100%);}
 .q-text{font-size:16px;font-weight:600;line-height:1.65;margin-bottom:24px;}
+
+/* ── NEW: Essay hint bar ── */
+.essay-hint{
+  display:flex;align-items:center;gap:8px;
+  padding:8px 12px;
+  background:var(--green-bg);border:1px solid rgba(45,212,160,.25);
+  border-radius:8px;font-size:12px;color:var(--green);
+  margin-bottom:12px;
+}
+
 .options{display:flex;flex-direction:column;gap:10px;}
 .opt{
   display:flex;align-items:center;gap:14px;
@@ -510,6 +569,16 @@ a{text-decoration:none;color:inherit;}
   line-height:1.65;border-left:2px solid var(--border2);
 }
 
+/* ── NEW: Type badge in eval ── */
+.eval-type-tag{
+  font-size:10px;font-weight:700;font-family:var(--mono);
+  padding:2px 8px;border-radius:20px;
+  border:1px solid currentColor;
+  margin-right:6px;
+}
+.eval-type-tag.etpg{color:var(--accent);}
+.eval-type-tag.etes{color:var(--green);}
+
 /* ═══════════════════════════════════════════
    ── ADMIN LOGIN ──
 ═══════════════════════════════════════════ */
@@ -623,7 +692,6 @@ a{text-decoration:none;color:inherit;}
 }
 .admin-panel-desc{font-size:13px;color:var(--text2);margin-bottom:28px;}
 
-/* FORM ELEMENTS */
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
 @media(max-width:520px){.form-row{grid-template-columns:1fr;}}
 .form-group{margin-bottom:14px;}
@@ -638,7 +706,6 @@ a{text-decoration:none;color:inherit;}
 .f-textarea{min-height:70px;resize:vertical;line-height:1.6;}
 .f-select{appearance:none;cursor:pointer;}
 
-/* OPTION FIELDS */
 .opts-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;}
 @media(max-width:520px){.opts-grid{grid-template-columns:1fr;}}
 .opt-field{display:flex;align-items:center;gap:8px;}
@@ -683,7 +750,6 @@ a{text-decoration:none;color:inherit;}
   display:none;margin-top:10px;
 }
 
-/* SUBJECTS TABLE */
 .data-table{width:100%;border-collapse:collapse;}
 .data-table th{
   text-align:left;padding:10px 14px;
@@ -712,7 +778,7 @@ a{text-decoration:none;color:inherit;}
   display:flex;align-items:center;justify-content:center;
   font-size:18px;cursor:pointer;
   background:var(--surface);border:2px solid var(--border);
-  transition:all .16s;
+  transition:all .16px;
 }
 .icon-opt.selected,.icon-opt:hover{border-color:var(--accent);background:var(--glow);}
 .color-picker{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;}
@@ -723,6 +789,7 @@ a{text-decoration:none;color:inherit;}
 }
 .color-opt.selected{border-color:var(--text);}
 
+/* ── NEW: Type pill in q-list-item ── */
 .q-list-item{
   background:var(--card);border:1px solid var(--border);
   border-radius:var(--radius);padding:14px 16px;
@@ -735,8 +802,19 @@ a{text-decoration:none;color:inherit;}
   font-size:11px;font-weight:700;font-family:var(--mono);color:var(--text2);
   flex-shrink:0;
 }
-.q-list-text{flex:1;font-size:13px;line-height:1.5;color:var(--text);}
+.q-list-body{flex:1;min-width:0;}
+.q-list-text{font-size:13px;line-height:1.5;color:var(--text);}
 .q-list-actions{display:flex;gap:6px;flex-shrink:0;}
+/* type chip in list */
+.q-type-chip{
+  display:inline-flex;align-items:center;gap:4px;
+  font-size:10px;font-weight:700;font-family:var(--mono);
+  padding:2px 8px;border-radius:20px;
+  border:1px solid currentColor;text-transform:uppercase;
+  margin-bottom:5px;
+}
+.q-type-chip.chip-pg{color:var(--accent);background:var(--glow);border-color:rgba(79,124,255,.3);}
+.q-type-chip.chip-essay{color:var(--green);background:var(--green-bg);border-color:rgba(45,212,160,.3);}
 
 .divider{height:1px;background:var(--border);margin:24px 0;}
 .section-title{font-size:15px;font-weight:700;margin-bottom:16px;}
@@ -748,7 +826,6 @@ a{text-decoration:none;color:inherit;}
 }
 .info-box strong{color:var(--accent);}
 
-/* Subject selector in admin question form */
 .subj-select-row{display:flex;gap:10px;align-items:center;margin-bottom:18px;flex-wrap:wrap;}
 .subj-chip{
   padding:7px 16px;border-radius:20px;
@@ -759,8 +836,37 @@ a{text-decoration:none;color:inherit;}
 .subj-chip:hover{border-color:var(--border2);color:var(--text);}
 .subj-chip.active{border-color:var(--accent);color:var(--accent);background:var(--glow);}
 
-/* Password change */
 .pw-form{max-width:400px;}
+
+/* ── NEW: Collapsible manual form toggle ── */
+.collapsible-header{
+  display:flex;align-items:center;justify-content:space-between;
+  cursor:pointer;padding:12px 16px;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);margin-bottom:0;
+  transition:all .16s;user-select:none;
+}
+.collapsible-header:hover{border-color:var(--border2);background:var(--card);}
+.collapsible-header.open{
+  border-bottom-left-radius:0;border-bottom-right-radius:0;
+  border-color:var(--accent);background:var(--glow);
+}
+.collapsible-header .ch-title{font-size:14px;font-weight:700;display:flex;align-items:center;gap:8px;}
+.collapsible-header .ch-arrow{
+  font-size:12px;color:var(--text2);
+  transition:transform .25s;
+}
+.collapsible-header.open .ch-arrow{transform:rotate(180deg);color:var(--accent);}
+.collapsible-body{
+  display:none;
+  background:var(--card);
+  border:1px solid var(--accent);
+  border-top:none;
+  border-bottom-left-radius:var(--radius);
+  border-bottom-right-radius:var(--radius);
+  padding:20px 18px 18px;
+}
+.collapsible-body.open{display:block;animation:fadeUp .2s ease;}
 
 /* ═══════════════════════════════════════════
    MODAL
@@ -800,19 +906,15 @@ a{text-decoration:none;color:inherit;}
     <div class="nav-spacer"></div>
     <button class="nav-admin-btn" onclick="goAdminLogin()">⚙ Admin</button>
   </nav>
-
   <section class="home-hero">
     <div class="hero-eyebrow">Platform Latihan Soal</div>
     <h1 class="hero-title">Latihan Soal Untuk UTS dan Uas,<br><span>Akuntansi Perpajakan</span></h1>
     <p class="hero-sub">Pilih mata pelajaran dan mulai berlatih. Evaluasi langsung setelah mengerjakan soal.</p>
   </section>
-
   <section class="subjects-section">
     <div class="section-label">Pilih Mata Pelajaran</div>
-    <div class="subjects-grid" id="subjects-grid">
-      </div>
+    <div class="subjects-grid" id="subjects-grid"></div>
   </section>
-
   <footer class="home-footer">
     Latsolgacorakp &mdash; Latihan soal interaktif &bull;
     <span style="color:var(--muted)">Data tersimpan di browser kamu</span>
@@ -821,7 +923,6 @@ a{text-decoration:none;color:inherit;}
 
 <div id="page-quiz" class="page">
   <div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
-
   <header class="quiz-header">
     <button class="hdr-hamburger" id="hamburger-btn" onclick="toggleSidebar()" aria-label="Navigator Soal">
       <span></span><span></span><span></span>
@@ -840,9 +941,14 @@ a{text-decoration:none;color:inherit;}
         <div class="sb-leg-item"><div class="sb-leg-dot ld-done"></div>Dijawab</div>
         <div class="sb-leg-item"><div class="sb-leg-dot ld-cur"></div>Aktif</div>
       </div>
-    </div>
-    <div class="sb-scroll" id="sb-scroll">
+      <!-- NEW: type legend -->
+      <div class="sb-type-legend">
+        <span class="sb-type-pg">PG</span> Pilihan Ganda
+        &nbsp;&nbsp;
+        <span class="sb-type-esai">ESAI</span> Esai
       </div>
+    </div>
+    <div class="sb-scroll" id="sb-scroll"></div>
     <div class="sb-foot">
       <div class="sb-stats">
         <div class="sb-stat"><div class="sb-stat-n n-done" id="sb-done">0</div><div class="sb-stat-l">Dijawab</div></div>
@@ -861,7 +967,6 @@ a{text-decoration:none;color:inherit;}
 <div id="page-result" class="page">
   <div class="result-wrap">
     <button class="res-back" onclick="goHome()">← Kembali ke Beranda</button>
-
     <div class="res-hero">
       <div class="score-ring">
         <svg viewBox="0 0 120 120">
@@ -882,12 +987,10 @@ a{text-decoration:none;color:inherit;}
         <div class="rs rsk"><div class="rs-n" id="rs-sk">0</div><div class="rs-l">— Dilewati</div></div>
       </div>
     </div>
-
     <div class="retry-row">
       <button class="btn-retry" onclick="retryQuiz()">↺ Kerjakan Ulang</button>
       <button class="btn-home-sm" onclick="goHome()">⌂ Beranda</button>
     </div>
-
     <div class="eval-bar">
       <span class="eval-sec-title" style="flex:1">Evaluasi Jawaban</span>
       <button class="filter-btn active" onclick="filterEval('all',this)">Semua</button>
@@ -923,7 +1026,6 @@ a{text-decoration:none;color:inherit;}
     <button class="btn-admin-home" onclick="goHome()">⌂ Home</button>
     <button class="btn-admin-logout" onclick="doLogout()">Keluar</button>
   </header>
-
   <div class="admin-body">
     <nav class="admin-nav">
       <div class="admin-nav-sect">Kelola</div>
@@ -935,10 +1037,10 @@ a{text-decoration:none;color:inherit;}
 
     <div class="admin-content">
 
+      <!-- PANEL: SUBJECTS -->
       <div class="admin-panel active" id="panel-subjects">
         <div class="admin-panel-title">Mata Pelajaran</div>
         <div class="admin-panel-desc">Tambah, ubah, atau hapus mata pelajaran yang tersedia di homepage.</div>
-
         <div class="table-wrap">
           <table class="data-table" id="subjects-table">
             <thead><tr>
@@ -947,7 +1049,6 @@ a{text-decoration:none;color:inherit;}
             <tbody id="subjects-tbody"></tbody>
           </table>
         </div>
-
         <div class="section-title">+ Tambah Mata Pelajaran</div>
         <div class="form-row">
           <div class="form-group">
@@ -973,6 +1074,7 @@ a{text-decoration:none;color:inherit;}
         <div class="success-toast" id="subj-toast">✓ Berhasil disimpan!</div>
       </div>
 
+      <!-- PANEL: QUESTIONS -->
       <div class="admin-panel" id="panel-questions">
         <div class="admin-panel-title">Kelola Soal</div>
         <div class="admin-panel-desc">Tambah atau hapus soal per mata pelajaran.</div>
@@ -987,6 +1089,8 @@ a{text-decoration:none;color:inherit;}
         </div>
 
         <div class="divider"></div>
+
+        <!-- PDF IMPORT SECTION -->
         <div class="section-title">📄 Import Cepat dari PDF</div>
         <div class="info-box" style="border-color:var(--accent); background:rgba(79,124,255,0.05);">
           <strong>Penting!</strong> Agar terbaca otomatis, teks di PDF wajib memakai format ini:<br><br>
@@ -1010,7 +1114,7 @@ a{text-decoration:none;color:inherit;}
             </div>
           </div>
         </div>
-        <div class="form-actions" style="margin-bottom: 24px;">
+        <div class="form-actions" style="margin-bottom:24px;">
           <label class="btn-primary" style="display:inline-flex;align-items:center;gap:7px;cursor:pointer;">
             ⬆ Upload File PDF
             <input type="file" accept=".pdf" style="display:none" id="pdf-upload" onchange="processPDF(this)"/>
@@ -1018,74 +1122,82 @@ a{text-decoration:none;color:inherit;}
         </div>
         <div class="success-toast" id="pdf-toast">✓ Soal dari PDF berhasil ditambahkan!</div>
         <div class="login-err" id="pdf-err" style="margin-top:10px;"></div>
-        
-        <div class="divider"></div>
-        
-        <div class="section-title">+ Tambah Soal Manual</div>
-        <div class="form-group">
-          <label class="f-label">Jenis Soal *</label>
-          <select class="f-select" id="new-q-type" onchange="toggleQType()">
-            <option value="mcq">Pilihan Ganda</option>
-            <option value="essay">Esai (Keyword Matching)</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label class="f-label">Teks Pertanyaan *</label>
-          <textarea class="f-textarea" id="new-q-text" placeholder="Tulis pertanyaan di sini..."></textarea>
-        </div>
 
-        <div id="area-mcq">
+        <div class="divider"></div>
+
+        <!-- ── NEW: Collapsible manual form ── -->
+        <div class="collapsible-header" id="manual-toggle" onclick="toggleManualForm()">
+          <span class="ch-title">✏️ Tambah Soal Manual <span style="font-size:11px;font-weight:400;color:var(--text2);">(opsional)</span></span>
+          <span class="ch-arrow">▼</span>
+        </div>
+        <div class="collapsible-body" id="manual-form-body">
+          <div class="form-group" style="margin-top:4px;">
+            <label class="f-label">Jenis Soal *</label>
+            <select class="f-select" id="new-q-type" onchange="toggleQType()">
+              <option value="mcq">Pilihan Ganda</option>
+              <option value="essay">Esai (Keyword Matching)</option>
+            </select>
+          </div>
           <div class="form-group">
-            <label class="f-label">Pilihan Jawaban *</label>
-            <div class="opts-grid">
-              <div class="opt-field"><div class="opt-badge">A</div><input class="f-input" id="opt0" placeholder="Pilihan A"/></div>
-              <div class="opt-field"><div class="opt-badge">B</div><input class="f-input" id="opt1" placeholder="Pilihan B"/></div>
-              <div class="opt-field"><div class="opt-badge">C</div><input class="f-input" id="opt2" placeholder="Pilihan C"/></div>
-              <div class="opt-field"><div class="opt-badge">D</div><input class="f-input" id="opt3" placeholder="Pilihan D"/></div>
+            <label class="f-label">Teks Pertanyaan *</label>
+            <textarea class="f-textarea" id="new-q-text" placeholder="Tulis pertanyaan di sini..."></textarea>
+          </div>
+
+          <div id="area-mcq">
+            <div class="form-group">
+              <label class="f-label">Pilihan Jawaban *</label>
+              <div class="opts-grid">
+                <div class="opt-field"><div class="opt-badge">A</div><input class="f-input" id="opt0" placeholder="Pilihan A"/></div>
+                <div class="opt-field"><div class="opt-badge">B</div><input class="f-input" id="opt1" placeholder="Pilihan B"/></div>
+                <div class="opt-field"><div class="opt-badge">C</div><input class="f-input" id="opt2" placeholder="Pilihan C"/></div>
+                <div class="opt-field"><div class="opt-badge">D</div><input class="f-input" id="opt3" placeholder="Pilihan D"/></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="f-label">Jawaban Benar *</label>
+              <select class="f-select" id="new-q-ans">
+                <option value="0">A</option><option value="1">B</option>
+                <option value="2">C</option><option value="3">D</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="area-essay" style="display:none; background:var(--green-bg); padding:14px; border-radius:8px; border:1px solid rgba(45,212,160,.3);">
+            <div class="form-group">
+              <label class="f-label">Kata Kunci (Pisahkan dengan koma) *</label>
+              <input class="f-input" id="new-q-keywords" placeholder="cth: anggaran, budgetair, mengatur, regulerend"/>
+              <div style="font-size:11px; color:var(--text2); margin-top:4px;">*Sistem akan mengecek kata-kata ini di jawaban user.</div>
+            </div>
+            <div class="form-group">
+              <label class="f-label">Poin Maksimal (Bobot) *</label>
+              <input class="f-input" type="number" id="new-q-maxscore" value="5" min="1"/>
+            </div>
+          </div>
+
+          <div class="form-row" style="margin-top:14px;">
+            <div class="form-group" style="width:100%">
+              <label class="f-label">Tag / Label (opsional)</label>
+              <input class="f-input" id="new-q-tag" placeholder="cth: Bab 1"/>
             </div>
           </div>
           <div class="form-group">
-            <label class="f-label">Jawaban Benar *</label>
-            <select class="f-select" id="new-q-ans">
-              <option value="0">A</option><option value="1">B</option>
-              <option value="2">C</option><option value="3">D</option>
-            </select>
+            <label class="f-label">Penjelasan Jawaban (opsional)</label>
+            <textarea class="f-textarea" id="new-q-exp" placeholder="Tulis penjelasan singkat..."></textarea>
           </div>
+          <div class="form-actions">
+            <button class="btn-primary" onclick="addQuestion()">Simpan Soal</button>
+            <button class="btn-secondary" onclick="clearQForm()">Reset</button>
+          </div>
+          <div class="success-toast" id="q-toast">✓ Soal berhasil ditambahkan!</div>
         </div>
+        <!-- end collapsible -->
 
-        <div id="area-essay" style="display:none; background:var(--glow); padding:14px; border-radius:8px; border:1px solid var(--accent);">
-          <div class="form-group">
-            <label class="f-label">Kata Kunci (Pisahkan dengan koma) *</label>
-            <input class="f-input" id="new-q-keywords" placeholder="cth: anggaran, budgetair, mengatur, regulerend"/>
-            <div style="font-size:11px; color:var(--text2); margin-top:4px;">*Sistem akan mengecek kata-kata ini di jawaban user.</div>
-          </div>
-          <div class="form-group">
-            <label class="f-label">Poin Maksimal (Bobot) *</label>
-            <input class="f-input" type="number" id="new-q-maxscore" value="5" min="1"/>
-          </div>
-        </div>
+      </div><!-- end panel-questions -->
 
-        <div class="form-row" style="margin-top:14px;">
-          <div class="form-group" style="width:100%">
-            <label class="f-label">Tag / Label (opsional)</label>
-            <input class="f-input" id="new-q-tag" placeholder="cth: Bab 1"/>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="f-label">Penjelasan Jawaban (opsional)</label>
-          <textarea class="f-textarea" id="new-q-exp" placeholder="Tulis penjelasan singkat..."></textarea>
-        </div>
-        <div class="form-actions">
-          <button class="btn-primary" onclick="addQuestion()">Simpan Soal</button>
-          <button class="btn-secondary" onclick="clearQForm()">Reset</button>
-        </div>
-        <div class="success-toast" id="q-toast">✓ Soal berhasil ditambahkan!</div>
-      </div>
-
+      <!-- PANEL: SETTINGS -->
       <div class="admin-panel" id="panel-settings">
         <div class="admin-panel-title">Pengaturan</div>
         <div class="admin-panel-desc">Kelola pengaturan website dan keamanan admin.</div>
-
         <div class="section-title">Ganti Password Admin</div>
         <div class="pw-form">
           <div class="form-group">
@@ -1106,7 +1218,6 @@ a{text-decoration:none;color:inherit;}
           <div class="success-toast" id="pw-toast">✓ Password berhasil diubah!</div>
           <div class="login-err" id="pw-err" style="margin-top:10px;"></div>
         </div>
-
         <div class="divider"></div>
         <div class="section-title">Export / Import Data</div>
         <div class="info-box">
@@ -1119,7 +1230,6 @@ a{text-decoration:none;color:inherit;}
             <input type="file" accept=".json" style="display:none" onchange="importData(this)"/>
           </label>
         </div>
-
         <div class="divider"></div>
         <div class="section-title" style="color:var(--red);">Zona Berbahaya</div>
         <div class="info-box" style="border-color:rgba(242,104,104,.25);background:var(--red-bg);">
@@ -1132,6 +1242,7 @@ a{text-decoration:none;color:inherit;}
   </div>
 </div>
 
+<!-- MODALS -->
 <div class="modal-overlay" id="modal-edit-subj">
   <div class="modal">
     <button class="modal-close" onclick="closeModal('modal-edit-subj')">✕</button>
@@ -1158,16 +1269,13 @@ a{text-decoration:none;color:inherit;}
     <button class="modal-close" onclick="closeModal('modal-edit-q')">✕</button>
     <div class="modal-title">Edit Soal</div>
     <div class="modal-sub">Ubah teks, pilihan, jawaban benar, atau kata kunci.</div>
-    
     <input type="hidden" id="edit-q-id"/>
     <input type="hidden" id="edit-q-subj"/>
     <input type="hidden" id="edit-q-type"/>
-
     <div class="form-group">
       <label class="f-label">Pertanyaan</label>
       <textarea class="f-textarea" id="edit-q-text"></textarea>
     </div>
-
     <div id="edit-area-mcq">
       <div class="opts-grid" style="margin-bottom:12px">
         <div class="opt-field"><div class="opt-badge">A</div><input class="f-input" id="eq-opt0"/></div>
@@ -1183,8 +1291,7 @@ a{text-decoration:none;color:inherit;}
         </select>
       </div>
     </div>
-
-    <div id="edit-area-essay" style="display:none; background:var(--glow); padding:14px; border-radius:8px; border:1px solid var(--accent); margin-bottom:14px;">
+    <div id="edit-area-essay" style="display:none; background:var(--green-bg); padding:14px; border-radius:8px; border:1px solid rgba(45,212,160,.3); margin-bottom:14px;">
       <div class="form-group">
         <label class="f-label">Kata Kunci (Pisahkan dengan koma)</label>
         <input class="f-input" id="eq-keywords" placeholder="cth: anggaran, budgetair"/>
@@ -1194,7 +1301,6 @@ a{text-decoration:none;color:inherit;}
         <input class="f-input" type="number" id="eq-maxscore" min="1"/>
       </div>
     </div>
-
     <div class="form-group">
       <label class="f-label">Tag</label>
       <input class="f-input" id="eq-tag"/>
@@ -1222,10 +1328,10 @@ const LS_KEY_PW   = 'qs_admin_pw';
 
 let selectedIcon  = '📚';
 let selectedColor = '#4f7cff';
-let currentSubjId = null;  // in quiz
+let currentSubjId = null;
 let userAnswers   = [];
 let currentQ      = 0;
-let adminSubjId   = null;  // in admin question panel
+let adminSubjId   = null;
 
 // ═══════════════════════════════════
 // DATA LAYER
@@ -1238,9 +1344,8 @@ function getPw(){ return localStorage.getItem(LS_KEY_PW)||'admin123'; }
 function uid(){ return Date.now().toString(36)+Math.random().toString(36).slice(2,6); }
 
 // ═══════════════════════════════════
-// PDF.JS SETUP & FUNCTIONS
+// PDF.JS
 // ═══════════════════════════════════
-// Setup worker untuk PDF.js
 if (typeof pdfjsLib !== 'undefined') {
   pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
 }
@@ -1251,36 +1356,26 @@ async function processPDF(input) {
     input.value = '';
     return;
   }
-
   const file = input.files[0];
   if (!file) return;
-
   const errBox = document.getElementById('pdf-err');
   errBox.style.display = 'none';
-
   try {
     const arrayBuffer = await file.arrayBuffer();
     const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
     let fullText = '';
-
-    // Loop untuk mengekstrak teks dari setiap halaman PDF
     for (let i = 1; i <= pdf.numPages; i++) {
       const page = await pdf.getPage(i);
       const textContent = await page.getTextContent();
       const pageText = textContent.items.map(item => item.str).join(' ');
-      fullText += pageText + ' '; 
+      fullText += pageText + ' ';
     }
-
-    // Lakukan parsing dari teks mentah ke format soal
     parseTextToQuestions(fullText);
-
   } catch (error) {
     console.error(error);
     errBox.textContent = 'Gagal membaca PDF. Pastikan file tidak rusak atau dikunci (password).';
     errBox.style.display = 'block';
   }
-  
-  // Reset input agar bisa upload file yang sama lagi jika error
   input.value = '';
 }
 
@@ -1290,57 +1385,54 @@ function parseTextToQuestions(text) {
   const qs = getQuestions();
   if (!qs[adminSubjId]) qs[adminSubjId] = [];
 
-  // 1. REGEX UNTUK MEMBACA SOAL PILIHAN GANDA
   const regexMCQ = /Soal:\s*(.*?)\s*A\.\s*(.*?)\s*B\.\s*(.*?)\s*C\.\s*(.*?)\s*D\.\s*(.*?)\s*Kunci:\s*([A-D])(?:\s*Penjelasan:\s*(.*?))?(?=\s*Soal:|\s*Esai:|$)/gi;
-  
   let matchMCQ;
   while ((matchMCQ = regexMCQ.exec(cleanText)) !== null) {
-    const qText = matchMCQ[1].trim();
-    const opts = [matchMCQ[2].trim(), matchMCQ[3].trim(), matchMCQ[4].trim(), matchMCQ[5].trim()];
     const ansChar = matchMCQ[6].toUpperCase();
-    const exp = matchMCQ[7] ? matchMCQ[7].trim() : '';
     const ansIndex = ansChar === 'A' ? 0 : ansChar === 'B' ? 1 : ansChar === 'C' ? 2 : 3;
-
     qs[adminSubjId].push({
-      id: uid(), type: 'mcq', q: qText, opts: opts, ans: ansIndex, tag: 'Import PDF', exp: exp
+      id: uid(), type: 'mcq', q: matchMCQ[1].trim(),
+      opts: [matchMCQ[2].trim(), matchMCQ[3].trim(), matchMCQ[4].trim(), matchMCQ[5].trim()],
+      ans: ansIndex, tag: 'Import PDF', exp: matchMCQ[7] ? matchMCQ[7].trim() : ''
     });
     count++;
   }
 
-  // 2. REGEX UNTUK MEMBACA SOAL ESAI
   const regexEssay = /Esai:\s*(.*?)\s*Kata Kunci:\s*(.*?)\s*Bobot:\s*(\d+)(?:\s*Penjelasan:\s*(.*?))?(?=\s*Soal:|\s*Esai:|$)/gi;
-  
   let matchEssay;
   while ((matchEssay = regexEssay.exec(cleanText)) !== null) {
-    const qText = matchEssay[1].trim();
-    const kwInput = matchEssay[2].trim();
-    const score = parseInt(matchEssay[3]);
-    const exp = matchEssay[4] ? matchEssay[4].trim() : '';
-
-    const keywordsArray = kwInput.split(',').map(k => k.trim().toLowerCase()).filter(k => k);
-
+    const keywordsArray = matchEssay[2].trim().split(',').map(k => k.trim().toLowerCase()).filter(k => k);
     qs[adminSubjId].push({
-      id: uid(), type: 'essay', q: qText, keywords: keywordsArray, maxScore: score || 5, tag: 'Import PDF', exp: exp
+      id: uid(), type: 'essay', q: matchEssay[1].trim(),
+      keywords: keywordsArray, maxScore: parseInt(matchEssay[3]) || 5,
+      tag: 'Import PDF', exp: matchEssay[4] ? matchEssay[4].trim() : ''
     });
     count++;
   }
 
   if (count > 0) {
     setQuestions(qs);
-    renderQList(); 
+    renderQList();
     const toast = document.getElementById('pdf-toast');
-    if(toast){
-      toast.textContent = `✓ ${count} soal dari PDF berhasil ditambahkan!`;
-      toast.style.display = 'block';
-      setTimeout(() => toast.style.display = 'none', 4000);
-    } else alert(`Berhasil tambah ${count} soal!`);
+    toast.textContent = `✓ ${count} soal dari PDF berhasil ditambahkan!`;
+    toast.style.display = 'block';
+    setTimeout(() => toast.style.display = 'none', 4000);
   } else {
     const errBox = document.getElementById('pdf-err');
-    if(errBox){
-      errBox.innerHTML = 'Gagal menemukan soal. Pastikan format <b>Soal:</b> (untuk PG) atau <b>Esai:</b> (untuk Esai) sudah benar.';
-      errBox.style.display = 'block';
-    } else alert('Gagal menemukan format soal di dalam PDF.');
+    errBox.innerHTML = 'Gagal menemukan soal. Pastikan format <b>Soal:</b> (untuk PG) atau <b>Esai:</b> (untuk Esai) sudah benar.';
+    errBox.style.display = 'block';
   }
+}
+
+// ═══════════════════════════════════
+// COLLAPSIBLE MANUAL FORM (NEW)
+// ═══════════════════════════════════
+function toggleManualForm() {
+  const header = document.getElementById('manual-toggle');
+  const body = document.getElementById('manual-form-body');
+  const isOpen = body.classList.contains('open');
+  header.classList.toggle('open', !isOpen);
+  body.classList.toggle('open', !isOpen);
 }
 
 // ═══════════════════════════════════
@@ -1349,13 +1441,12 @@ function parseTextToQuestions(text) {
 function showPage(id){
   document.querySelectorAll('.page').forEach(p=>{
     p.classList.remove('active');
-    p.style.display = '';
+    p.style.display='';
   });
   const pg = document.getElementById(id);
   pg.classList.add('active');
   window.scrollTo(0,0);
 }
-
 function goHome(){ renderHome(); showPage('page-home'); }
 function goAdminLogin(){ showPage('page-admin-login'); document.getElementById('admin-pw-input').value=''; document.getElementById('login-err').style.display='none'; }
 
@@ -1366,23 +1457,27 @@ function renderHome(){
   const subjects = getSubjects();
   const questions = getQuestions();
   const grid = document.getElementById('subjects-grid');
-
   if(subjects.length===0){
-    grid.innerHTML = `<div class="empty-subjects" style="grid-column:1/-1">
+    grid.innerHTML=`<div class="empty-subjects" style="grid-column:1/-1">
       <div class="e-icon">📭</div>
       <p>Belum ada mata pelajaran.<br>Login ke <strong>Admin Panel</strong> untuk menambahkan.</p>
     </div>`;
     return;
   }
-
   grid.innerHTML = subjects.map(s=>{
-    const qs = (questions[s.id]||[]).length;
+    const qs = (questions[s.id]||[]);
+    const total = qs.length;
+    const pgCount  = qs.filter(q => q.type !== 'essay').length;
+    const esaiCount = qs.filter(q => q.type === 'essay').length;
+    const countDetail = total > 0
+      ? `${pgCount > 0 ? `<span style="color:var(--accent)">${pgCount} PG</span>` : ''}${pgCount > 0 && esaiCount > 0 ? ' · ' : ''}${esaiCount > 0 ? `<span style="color:var(--green)">${esaiCount} Esai</span>` : ''}`
+      : '0 soal';
     return `<div class="subject-card" onclick="startQuiz('${s.id}')">
       <div class="card-icon" style="background:${s.color}22;border:1px solid ${s.color}44;">${s.icon}</div>
       <div class="card-title">${escHtml(s.name)}</div>
       <div class="card-desc">${escHtml(s.desc||'Klik untuk mulai latihan soal.')}</div>
       <div class="card-meta">
-        <span class="card-count">${qs} soal</span>
+        <span class="card-count">${total} soal${total > 0 ? ' (' + countDetail + ')' : ''}</span>
         <button class="card-start" style="background:${s.color};" onclick="event.stopPropagation();startQuiz('${s.id}')">Mulai →</button>
       </div>
     </div>`;
@@ -1397,14 +1492,11 @@ function startQuiz(subjId){
   const questions = getQuestions();
   const subj = subjects.find(s=>s.id===subjId);
   const qs = questions[subjId]||[];
-
   if(!subj){ alert('Mata pelajaran tidak ditemukan.'); return; }
   if(qs.length===0){ alert('Belum ada soal untuk mata pelajaran ini. Tambahkan soal di Admin Panel.'); return; }
-
   currentSubjId = subjId;
   userAnswers = new Array(qs.length).fill(null);
   currentQ = 0;
-
   document.getElementById('hdr-subject-name').textContent = subj.name;
   buildQuiz(qs, subj);
   showPage('page-quiz');
@@ -1413,21 +1505,62 @@ function startQuiz(subjId){
 }
 
 function buildQuiz(qs, subj){
-  // Build sidebar
   const sb = document.getElementById('sb-scroll');
-  sb.innerHTML = `<div class="sb-chap-label">${escHtml(subj.name)}</div>
-    <div class="sb-grid" id="sb-grid"></div>`;
+
+  // Pisahkan index essay dan PG — tetap simpan index asli agar goQ(i) tetap benar
+  const essayItems = qs.map((q,i)=>({q,i})).filter(x=>x.q.type==='essay');
+  const pgItems    = qs.map((q,i)=>({q,i})).filter(x=>x.q.type!=='essay');
+
+  const buildGrid = (items, idPrefix) => items.map(({q,i})=>
+    `<div class="sb-num${q.type==='essay'?' type-essay':''}" id="nav-${i}" onclick="goQ(${i})" title="${q.type==='essay'?'Esai':'Pilihan Ganda'}">${i+1}</div>`
+  ).join('');
+
+  let sidebarHTML = `<div class="sb-chap-label">${escHtml(subj.name)}</div>`;
+
+  // Bagian Esai — tampil hanya jika ada
+  if(essayItems.length > 0){
+    sidebarHTML += `
+      <div class="sb-section" id="sb-section-essay">
+        <div class="sb-section-hdr sh-essay">
+          <span class="sb-section-hdr-icon">✍</span>
+          <span class="sb-section-hdr-label">Esai</span>
+          <span class="sb-section-hdr-count">${essayItems.length}</span>
+        </div>
+        <div class="sb-grid">${buildGrid(essayItems)}</div>
+      </div>`;
+  }
+
+  // Bagian Pilihan Ganda — tampil hanya jika ada
+  if(pgItems.length > 0){
+    sidebarHTML += `
+      <div class="sb-section" id="sb-section-pg">
+        <div class="sb-section-hdr sh-pg">
+          <span class="sb-section-hdr-icon">📝</span>
+          <span class="sb-section-hdr-label">Pilihan Ganda</span>
+          <span class="sb-section-hdr-count">${pgItems.length}</span>
+        </div>
+        <div class="sb-grid">${buildGrid(pgItems)}</div>
+      </div>`;
+  }
+
+  sb.innerHTML = sidebarHTML;
   document.getElementById('sb-total').textContent = qs.length;
 
-  // Build questions
   const container = document.getElementById('quiz-questions-container');
   container.innerHTML = qs.map((q,i)=>{
     const tagHtml = q.tag ? `<span class="q-tag" style="color:${subj.color};border-color:${subj.color};background:${subj.color}18;">${escHtml(q.tag)}</span>` : '';
-    
-    // --- PENENTUAN TAMPILAN PG ATAU ESAI ---
+
+    // ── NEW: type badge ──
+    const isEssay = q.type === 'essay';
+    const typeBadge = isEssay
+      ? `<span class="q-type-badge badge-essay">✍ Esai</span>`
+      : `<span class="q-type-badge badge-pg">📝 Pilgan</span>`;
+
     let inputArea = '';
-    if (q.type === 'essay') {
-      inputArea = `<textarea class="f-textarea" id="ans-essay-${i}" placeholder="Ketik jawaban esai kamu di sini..." oninput="answerEssay(${i})" style="min-height:120px; width:100%; margin-top:10px;"></textarea>`;
+    if (isEssay) {
+      inputArea = `
+        <div class="essay-hint">✍ Ketik jawaban kamu di bawah. Jawab sesuai kata kunci yang relevan.</div>
+        <textarea class="f-textarea" id="ans-essay-${i}" placeholder="Ketik jawaban esai kamu di sini..." oninput="answerEssay(${i})" style="min-height:140px; width:100%;"></textarea>`;
     } else {
       const letters=['A','B','C','D'];
       inputArea = `<div class="options">` + (q.opts||[]).map((o,j)=>`
@@ -1441,8 +1574,9 @@ function buildQuiz(qs, subj){
       <div class="q-meta">
         <span class="q-idx">Soal ${i+1} dari ${qs.length}</span>
         ${tagHtml}
+        ${typeBadge}
       </div>
-      <div class="q-card">
+      <div class="q-card${isEssay ? ' essay-card' : ''}">
         <div class="q-text">${escHtml(q.q)}</div>
         ${inputArea}
       </div>
@@ -1456,14 +1590,8 @@ function buildQuiz(qs, subj){
     </div>`;
   }).join('');
 
-  // Build nav grid
-  const grid = document.getElementById('sb-grid');
-  if(grid) grid.innerHTML = qs.map((_,i)=>
-    `<div class="sb-num" id="nav-${i}" onclick="goQ(${i})">${i+1}</div>`
-  ).join('');
 }
 
-// Fungsi menyimpan ketikan user di soal esai
 function answerEssay(qIdx) {
   const val = document.getElementById(`ans-essay-${qIdx}`).value.trim();
   userAnswers[qIdx] = val ? val : null;
@@ -1475,22 +1603,21 @@ function showQ(idx){
   const questions = getQuestions();
   const qs = questions[currentSubjId]||[];
   if(idx<0||idx>=qs.length) return;
-
   document.querySelectorAll('.q-screen').forEach(s=>s.classList.remove('active'));
   const el = document.getElementById(`q-${idx}`);
   if(el) el.classList.add('active');
-
   currentQ = idx;
-
-  // Restore selection
   if(userAnswers[idx]!==null && qs[idx].type !== 'essay'){
     document.querySelectorAll(`#q-${idx} .opt`).forEach(o=>o.classList.remove('sel'));
     const sel = document.getElementById(`opt-${idx}-${userAnswers[idx]}`);
     if(sel) sel.classList.add('sel');
   }
-
+  // Restore essay text
+  if(userAnswers[idx]!==null && qs[idx].type === 'essay'){
+    const ta = document.getElementById(`ans-essay-${idx}`);
+    if(ta && !ta.value) ta.value = userAnswers[idx];
+  }
   refreshNav();
-  // Close sidebar on mobile
   const sb = document.getElementById('quiz-sidebar');
   if(window.innerWidth<=768 && sb.classList.contains('open')) closeSidebar();
   document.getElementById('quiz-main').scrollTop = 0;
@@ -1509,10 +1636,13 @@ function selectAns(qIdx, optIdx){
 
 function refreshNav(){
   const n = userAnswers.length;
+  const questions = getQuestions();
+  const qs = questions[currentSubjId]||[];
   for(let i=0;i<n;i++){
     const el = document.getElementById(`nav-${i}`);
     if(!el) continue;
     el.className = 'sb-num';
+    if(qs[i] && qs[i].type === 'essay') el.classList.add('type-essay');
     if(userAnswers[i]!==null) el.classList.add('done');
     if(i===currentQ) el.classList.add('cur');
   }
@@ -1529,7 +1659,6 @@ function updateProgress(){
   document.getElementById('hdr-prog-txt').textContent = `${done} / ${n}`;
 }
 
-// SIDEBAR TOGGLE (mobile)
 function toggleSidebar(){
   const sb = document.getElementById('quiz-sidebar');
   const ov = document.getElementById('sidebar-overlay');
@@ -1541,70 +1670,44 @@ function closeSidebar(){
   document.getElementById('sidebar-overlay').classList.remove('open');
 }
 
-// SUBMIT
 function submitQuiz(){
   const done = userAnswers.filter(a=>a!==null && a!=='').length;
   const rem = userAnswers.length - done;
   if(rem>0){
     if(!confirm(`Masih ada ${rem} soal yang belum dijawab. Kumpulkan sekarang?`)) return;
   }
-
   const questions = getQuestions();
   const qs = questions[currentSubjId]||[];
-  
-  let totalSkorDidapat = 0;
-  let totalSkorMaksimal = 0;
+  let totalSkorDidapat=0, totalSkorMaksimal=0;
   let correct=0, wrong=0, skipped=0;
 
   qs.forEach((q,i)=>{
     let ua = userAnswers[i];
-    
-    // LOGIKA UNTUK SOAL ESAI
     if (q.type === 'essay') {
       let skorMaks = q.maxScore || 5;
       totalSkorMaksimal += skorMaks;
-      
       if (ua) {
         let teksUser = ua.toLowerCase();
         let matchCount = 0;
-        
-        (q.keywords||[]).forEach(kw => {
-          if (teksUser.includes(kw)) matchCount++;
-        });
-        
+        (q.keywords||[]).forEach(kw => { if (teksUser.includes(kw)) matchCount++; });
         let pctEsai = matchCount / (q.keywords.length || 1);
-        let skorEsai = Math.round(pctEsai * skorMaks);
-        totalSkorDidapat += skorEsai;
-        
-        if(pctEsai >= 0.5) correct++;
-        else wrong++;
-      } else {
-        skipped++;
-      }
-    } 
-    // LOGIKA UNTUK SOAL PILIHAN GANDA
-    else {
+        totalSkorDidapat += Math.round(pctEsai * skorMaks);
+        if(pctEsai >= 0.5) correct++; else wrong++;
+      } else { skipped++; }
+    } else {
       totalSkorMaksimal += 1;
-      if(ua === null || ua === '') skipped++;
-      else if(ua === q.ans) {
-        correct++;
-        totalSkorDidapat += 1;
-      } else {
-        wrong++;
-      }
+      if(ua===null||ua==='') skipped++;
+      else if(ua===q.ans){ correct++; totalSkorDidapat+=1; }
+      else wrong++;
     }
   });
 
-  const pct = totalSkorMaksimal === 0 ? 0 : Math.round((totalSkorDidapat/totalSkorMaksimal)*100);
-
-  // Animasi Score Ring
+  const pct = totalSkorMaksimal===0 ? 0 : Math.round((totalSkorDidapat/totalSkorMaksimal)*100);
   const circ = 326.7;
   const offset = circ - (pct/100)*circ;
   document.getElementById('ring-fg').style.strokeDashoffset = circ;
   document.getElementById('ring-fg').style.stroke = pct>=80?'var(--green)':pct>=60?'var(--yellow)':'var(--red)';
   setTimeout(()=>{ document.getElementById('ring-fg').style.strokeDashoffset = offset; }, 150);
-
-  // Update Teks Statistik
   document.getElementById('score-pct').textContent = pct+'%';
   document.getElementById('rs-c').textContent = correct;
   document.getElementById('rs-w').textContent = wrong;
@@ -1616,7 +1719,6 @@ function submitQuiz(){
                    :['Perlu Belajar Lagi 📚','Jangan menyerah, review materinya ya!'];
   document.getElementById('res-title').textContent = t[0];
   document.getElementById('res-desc').textContent = t[1];
-
   buildEval(qs);
   showPage('page-result');
 }
@@ -1635,46 +1737,47 @@ function buildEval(qs){
 
   qs.forEach((q,i)=>{
     const ua = userAnswers[i];
-    const sk = ua===null || ua==='';
-    let ok = false;
-    let status = 'w';
-    
+    const sk = ua===null||ua==='';
+    let ok=false, status='w';
+
     if (q.type === 'essay') {
-       if(sk) { status = 'sk'; ok = false; }
-       else {
-         let teksUser = ua.toLowerCase();
-         let matchCount = 0;
-         (q.keywords||[]).forEach(kw => {
-           if (teksUser.includes(kw)) matchCount++;
-         });
-         let pct = matchCount / (q.keywords.length || 1);
-         ok = pct >= 0.5; 
-         status = ok ? 'c' : 'w';
-       }
+      if(sk){ status='sk'; }
+      else {
+        let teksUser = ua.toLowerCase();
+        let matchCount=0;
+        (q.keywords||[]).forEach(kw=>{ if(teksUser.includes(kw)) matchCount++; });
+        ok = (matchCount/(q.keywords.length||1)) >= 0.5;
+        status = ok ? 'c' : 'w';
+      }
     } else {
-       ok = !sk && ua===q.ans;
-       status = sk ? 'sk' : ok ? 'c' : 'w';
+      ok = !sk && ua===q.ans;
+      status = sk?'sk':ok?'c':'w';
     }
-    
     evalResults.push(status);
 
     const bc = sk?'bsk':ok?'bc':'bw';
     const ic = sk?'esk':ok?'ec':'ew';
     const badge = sk?'—':ok?'✓':'✗';
 
+    // ── NEW: type tag in eval ──
+    const isEssay = q.type === 'essay';
+    const typeTag = isEssay
+      ? `<span class="eval-type-tag etes">ESAI</span>`
+      : `<span class="eval-type-tag etpg">PG</span>`;
+
     let optsHtml = '';
-    if(q.type === 'essay') {
-       optsHtml = `<div class="eval-opt" style="flex-direction:column; align-items:flex-start; cursor:default; background:var(--surface);">
-          <div style="font-size:12px;color:var(--text2);margin-bottom:6px;">Jawaban Kamu:</div>
-          <div style="font-weight:600;color:var(--text); line-height:1.5;">${sk ? '<i>(Kosong)</i>' : escHtml(ua)}</div>
-          <div style="font-size:12px;color:var(--text2);margin-top:14px;margin-bottom:6px;">Kata Kunci yang Diharapkan:</div>
-          <div style="font-weight:600;color:var(--accent); line-height:1.5;">${(q.keywords||[]).join(', ')}</div>
-       </div>`;
+    if(isEssay){
+      optsHtml = `<div class="eval-opt" style="flex-direction:column;align-items:flex-start;cursor:default;background:var(--surface);">
+        <div style="font-size:12px;color:var(--text2);margin-bottom:6px;">Jawaban Kamu:</div>
+        <div style="font-weight:600;color:var(--text);line-height:1.5;">${sk?'<i style="color:var(--muted)">(Kosong / Tidak dijawab)</i>':escHtml(ua)}</div>
+        <div style="font-size:12px;color:var(--text2);margin-top:14px;margin-bottom:6px;">Kata Kunci yang Diharapkan:</div>
+        <div style="font-weight:600;color:var(--green);line-height:1.5;">${(q.keywords||[]).join(', ')}</div>
+      </div>`;
     } else {
-       optsHtml = (q.opts||[]).map((o,j)=>{
+      optsHtml = (q.opts||[]).map((o,j)=>{
         let cls='eo-n';
         if(j===q.ans) cls='eo-c';
-        else if(!sk && j===ua) cls='eo-w';
+        else if(!sk&&j===ua) cls='eo-w';
         return `<div class="eval-opt ${cls}">
           <div class="eval-opt-l">${letters[j]}</div>
           <span>${escHtml(o)}</span>
@@ -1685,15 +1788,15 @@ function buildEval(qs){
     }
 
     const exp = q.exp?`<div class="eval-exp">💡 ${escHtml(q.exp)}</div>`:'';
-    const tag = q.tag?`<span style="font-size:10px;color:var(--muted);font-family:var(--mono);margin-right:6px;">[${escHtml(q.tag)}]</span>`:'';
 
     list.innerHTML += `<div class="eval-item ${ic}" data-status="${status}">
       <div class="eval-hdr">
         <div class="eval-badge ${bc}">${badge}</div>
         <div>
-          <div style="margin-bottom:5px;display:flex;align-items:center;">
-            <span style="font-size:11px;font-family:var(--mono);color:var(--muted);margin-right:8px;">Soal ${i+1}</span>
-            ${tag}
+          <div style="margin-bottom:5px;display:flex;align-items:center;flex-wrap:wrap;gap:4px;">
+            <span style="font-size:11px;font-family:var(--mono);color:var(--muted);">Soal ${i+1}</span>
+            ${typeTag}
+            ${q.tag?`<span style="font-size:10px;color:var(--muted);font-family:var(--mono);">[${escHtml(q.tag)}]</span>`:''}
           </div>
           <div class="eval-q-text">${escHtml(q.q)}</div>
         </div>
@@ -1708,7 +1811,7 @@ function filterEval(type, btn){
   document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
   document.querySelectorAll('#eval-list .eval-item').forEach(el=>{
-    el.style.display = (type==='all'||el.dataset.status===type)?'block':'none';
+    el.style.display=(type==='all'||el.dataset.status===type)?'block':'none';
   });
 }
 
@@ -1724,14 +1827,12 @@ function doLogin(){
     document.getElementById('admin-pw-input').focus();
   }
 }
-
 function showAdmin(){
   renderAdminSubjects();
   renderSubjChips();
   showPage('page-admin');
   showPanel('subjects');
 }
-
 function doLogout(){ goHome(); }
 
 // ═══════════════════════════════════
@@ -1757,8 +1858,7 @@ function buildIconPicker(){
 function buildColorPicker(){
   const wrap = document.getElementById('color-picker');
   wrap.innerHTML = COLORS.map(c=>
-    `<div class="color-opt${c===selectedColor?' selected':''}"
-      style="background:${c};" onclick="pickColor('${c}')"></div>`
+    `<div class="color-opt${c===selectedColor?' selected':''}" style="background:${c};" onclick="pickColor('${c}')"></div>`
   ).join('');
 }
 function pickIcon(ic){ selectedIcon=ic; buildIconPicker(); }
@@ -1773,12 +1873,19 @@ function renderAdminSubjects(){
     return;
   }
   tbody.innerHTML = subjects.map(s=>{
-    const qc = (questions[s.id]||[]).length;
+    const qs = questions[s.id]||[];
+    const total = qs.length;
+    const pgCount  = qs.filter(q=>q.type!=='essay').length;
+    const esaiCount= qs.filter(q=>q.type==='essay').length;
     return `<tr>
       <td><span style="font-size:20px">${s.icon}</span></td>
       <td><strong>${escHtml(s.name)}</strong></td>
       <td style="color:var(--text2)">${escHtml(s.desc||'—')}</td>
-      <td><span class="tag-pill" style="color:${s.color};border-color:${s.color}44;background:${s.color}15;">${qc} soal</span></td>
+      <td>
+        <span class="tag-pill" style="color:${s.color};border-color:${s.color}44;background:${s.color}15;">${total} soal</span>
+        ${pgCount>0?`<span class="tag-pill" style="margin-left:4px;color:var(--accent);border-color:rgba(79,124,255,.3);background:var(--glow);">${pgCount} PG</span>`:''}
+        ${esaiCount>0?`<span class="tag-pill" style="margin-left:4px;color:var(--green);border-color:rgba(45,212,160,.3);background:var(--green-bg);">${esaiCount} Esai</span>`:''}
+      </td>
       <td>
         <div style="display:flex;gap:6px;">
           <button class="btn-edit" onclick="openEditSubj('${s.id}')">Edit</button>
@@ -1793,7 +1900,6 @@ function addSubject(){
   const name = document.getElementById('new-subj-name').value.trim();
   const desc = document.getElementById('new-subj-desc').value.trim();
   if(!name){ alert('Nama mata pelajaran wajib diisi.'); return; }
-
   const subjects = getSubjects();
   subjects.push({ id:uid(), name, desc, icon:selectedIcon, color:selectedColor });
   setSubjects(subjects);
@@ -1824,18 +1930,19 @@ function saveEditSubj(){
   renderAdminSubjects();
   renderSubjChips();
 }
-
 function deleteSubject(id){
   if(!confirm('Hapus mata pelajaran ini beserta semua soalnya?')) return;
-  let subjects = getSubjects();
-  subjects = subjects.filter(s=>s.id!==id);
+  let subjects = getSubjects().filter(s=>s.id!==id);
   setSubjects(subjects);
   const qs = getQuestions();
   delete qs[id];
   setQuestions(qs);
   renderAdminSubjects();
   renderSubjChips();
-  if(adminSubjId===id){ adminSubjId=null; document.getElementById('q-list-container').innerHTML='<div style="color:var(--muted);font-size:13px;padding:20px 0;">Pilih mata pelajaran untuk melihat soal.</div>'; }
+  if(adminSubjId===id){
+    adminSubjId=null;
+    document.getElementById('q-list-container').innerHTML='<div style="color:var(--muted);font-size:13px;padding:20px 0;">Pilih mata pelajaran untuk melihat soal.</div>';
+  }
 }
 
 // ═══════════════════════════════════
@@ -1861,50 +1968,61 @@ function renderQList(){
   const qs = questions[adminSubjId]||[];
   const container = document.getElementById('q-list-container');
   if(!adminSubjId){ container.innerHTML='<div style="color:var(--muted);font-size:13px;padding:20px 0;">Pilih mata pelajaran.</div>'; return; }
-  if(qs.length===0){ container.innerHTML='<div style="color:var(--muted);font-size:13px;padding:20px 0;">Belum ada soal. Tambahkan di bawah.</div>'; return; }
-  container.innerHTML = `<div style="font-size:11px;font-weight:700;font-family:var(--mono);color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;">${qs.length} soal</div>`+
-  qs.map((q,i)=>`<div class="q-list-item">
-    <div class="q-list-num">${i+1}</div>
-    <div class="q-list-text">${escHtml(q.q)}</div>
-    <div class="q-list-actions">
-      <button class="btn-edit" onclick="openEditQ('${adminSubjId}','${q.id}')">Edit</button>
-      <button class="btn-danger" onclick="deleteQ('${adminSubjId}','${q.id}')">✕</button>
-    </div>
-  </div>`).join('');
+  if(qs.length===0){ container.innerHTML='<div style="color:var(--muted);font-size:13px;padding:20px 0;">Belum ada soal. Tambahkan via PDF atau form manual di bawah.</div>'; return; }
+
+  const pgCount   = qs.filter(q=>q.type!=='essay').length;
+  const esaiCount = qs.filter(q=>q.type==='essay').length;
+
+  container.innerHTML = `
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap;">
+      <span style="font-size:11px;font-weight:700;font-family:var(--mono);color:var(--muted);text-transform:uppercase;letter-spacing:.08em;">${qs.length} soal</span>
+      ${pgCount>0?`<span class="q-type-chip chip-pg">📝 ${pgCount} Pilgan</span>`:''}
+      ${esaiCount>0?`<span class="q-type-chip chip-essay">✍ ${esaiCount} Esai</span>`:''}
+    </div>`+
+  qs.map((q,i)=>{
+    const isEssay = q.type === 'essay';
+    const chip = isEssay
+      ? `<span class="q-type-chip chip-essay">Esai</span>`
+      : `<span class="q-type-chip chip-pg">PG</span>`;
+    return `<div class="q-list-item">
+      <div class="q-list-num">${i+1}</div>
+      <div class="q-list-body">
+        ${chip}
+        <div class="q-list-text">${escHtml(q.q)}</div>
+      </div>
+      <div class="q-list-actions">
+        <button class="btn-edit" onclick="openEditQ('${adminSubjId}','${q.id}')">Edit</button>
+        <button class="btn-danger" onclick="deleteQ('${adminSubjId}','${q.id}')">✕</button>
+      </div>
+    </div>`;
+  }).join('');
 }
 
 function toggleQType() {
   const type = document.getElementById('new-q-type').value;
-  if(type === 'mcq') {
-    document.getElementById('area-mcq').style.display = 'block';
-    document.getElementById('area-essay').style.display = 'none';
-  } else {
-    document.getElementById('area-mcq').style.display = 'none';
-    document.getElementById('area-essay').style.display = 'block';
-  }
+  document.getElementById('area-mcq').style.display = type==='mcq' ? 'block' : 'none';
+  document.getElementById('area-essay').style.display = type==='essay' ? 'block' : 'none';
 }
 
 function addQuestion(){
   if(!adminSubjId){ alert('Pilih mata pelajaran terlebih dahulu.'); return; }
   const qType = document.getElementById('new-q-type').value;
   const qText = document.getElementById('new-q-text').value.trim();
-  const tag = document.getElementById('new-q-tag').value.trim();
-  const exp = document.getElementById('new-q-exp').value.trim();
-
+  const tag   = document.getElementById('new-q-tag').value.trim();
+  const exp   = document.getElementById('new-q-exp').value.trim();
   if(!qText){ alert('Pertanyaan wajib diisi.'); return; }
 
-  let newQ = { id: uid(), type: qType, q: qText, tag: tag, exp: exp };
-
-  if(qType === 'mcq') {
+  let newQ = { id:uid(), type:qType, q:qText, tag, exp };
+  if(qType==='mcq'){
     const opts = [0,1,2,3].map(i=>document.getElementById(`opt${i}`).value.trim());
     if(opts.some(o=>!o)){ alert('Semua pilihan ganda wajib diisi.'); return; }
     newQ.opts = opts;
-    newQ.ans = parseInt(document.getElementById('new-q-ans').value);
+    newQ.ans  = parseInt(document.getElementById('new-q-ans').value);
   } else {
     const kwInput = document.getElementById('new-q-keywords').value;
     if(!kwInput){ alert('Kata kunci esai wajib diisi.'); return; }
-    newQ.keywords = kwInput.split(',').map(k => k.trim().toLowerCase()).filter(k => k);
-    newQ.maxScore = parseInt(document.getElementById('new-q-maxscore').value) || 5;
+    newQ.keywords = kwInput.split(',').map(k=>k.trim().toLowerCase()).filter(k=>k);
+    newQ.maxScore = parseInt(document.getElementById('new-q-maxscore').value)||5;
   }
 
   const qs = getQuestions();
@@ -1938,69 +2056,54 @@ function openEditQ(subjId, qId){
   const qs = getQuestions();
   const q = (qs[subjId]||[]).find(x=>x.id===qId);
   if(!q) return;
-
   document.getElementById('edit-q-id').value = qId;
   document.getElementById('edit-q-subj').value = subjId;
-  document.getElementById('edit-q-type').value = q.type || 'mcq';
+  document.getElementById('edit-q-type').value = q.type||'mcq';
   document.getElementById('edit-q-text').value = q.q;
-
-  if (q.type === 'essay') {
-    document.getElementById('edit-area-mcq').style.display = 'none';
-    document.getElementById('edit-area-essay').style.display = 'block';
-    
+  if(q.type==='essay'){
+    document.getElementById('edit-area-mcq').style.display='none';
+    document.getElementById('edit-area-essay').style.display='block';
     document.getElementById('eq-keywords').value = (q.keywords||[]).join(', ');
-    document.getElementById('eq-maxscore').value = q.maxScore || 5;
+    document.getElementById('eq-maxscore').value = q.maxScore||5;
   } else {
-    document.getElementById('edit-area-mcq').style.display = 'block';
-    document.getElementById('edit-area-essay').style.display = 'none';
-    
+    document.getElementById('edit-area-mcq').style.display='block';
+    document.getElementById('edit-area-essay').style.display='none';
     (q.opts||[]).forEach((o,i)=>{ document.getElementById(`eq-opt${i}`).value=o; });
     document.getElementById('eq-ans').value = q.ans;
   }
-
   document.getElementById('eq-tag').value = q.tag||'';
   document.getElementById('eq-exp').value = q.exp||'';
   openModal('modal-edit-q');
 }
 
 function saveEditQ(){
-  const qId = document.getElementById('edit-q-id').value;
-  const subjId = document.getElementById('edit-q-subj').value;
+  const qId   = document.getElementById('edit-q-id').value;
+  const subjId= document.getElementById('edit-q-subj').value;
   const qType = document.getElementById('edit-q-type').value;
   const qText = document.getElementById('edit-q-text').value.trim();
-
   if(!qText){ alert('Pertanyaan wajib diisi.'); return; }
 
   const qs = getQuestions();
   const idx = (qs[subjId]||[]).findIndex(q=>q.id===qId);
-  
-  if(idx > -1){
-    let updatedQ = {
-      ...qs[subjId][idx],
-      type: qType,
-      q: qText,
+  if(idx>-1){
+    let updatedQ = { ...qs[subjId][idx], type:qType, q:qText,
       tag: document.getElementById('eq-tag').value.trim(),
       exp: document.getElementById('eq-exp').value.trim()
     };
-
-    if (qType === 'essay') {
+    if(qType==='essay'){
       const kwInput = document.getElementById('eq-keywords').value;
       if(!kwInput){ alert('Kata kunci esai wajib diisi.'); return; }
-      
-      updatedQ.keywords = kwInput.split(',').map(k => k.trim().toLowerCase()).filter(k => k);
-      updatedQ.maxScore = parseInt(document.getElementById('eq-maxscore').value) || 5;
+      updatedQ.keywords = kwInput.split(',').map(k=>k.trim().toLowerCase()).filter(k=>k);
+      updatedQ.maxScore = parseInt(document.getElementById('eq-maxscore').value)||5;
     } else {
       const opts = [0,1,2,3].map(i=>document.getElementById(`eq-opt${i}`).value.trim());
       if(opts.some(o=>!o)){ alert('Semua pilihan wajib diisi.'); return; }
-      
       updatedQ.opts = opts;
-      updatedQ.ans = parseInt(document.getElementById('eq-ans').value);
+      updatedQ.ans  = parseInt(document.getElementById('eq-ans').value);
     }
-
     qs[subjId][idx] = updatedQ;
     setQuestions(qs);
   }
-  
   closeModal('modal-edit-q');
   if(adminSubjId===subjId) renderQList();
 }
@@ -2009,16 +2112,14 @@ function saveEditQ(){
 // ADMIN: SETTINGS
 // ═══════════════════════════════════
 function changePw(){
-  const old = document.getElementById('pw-old').value;
-  const nw  = document.getElementById('pw-new').value;
-  const nw2 = document.getElementById('pw-new2').value;
-  const err = document.getElementById('pw-err');
+  const old  = document.getElementById('pw-old').value;
+  const nw   = document.getElementById('pw-new').value;
+  const nw2  = document.getElementById('pw-new2').value;
+  const err  = document.getElementById('pw-err');
   err.style.display='none';
-
   if(old!==getPw()){ err.textContent='Password lama salah.'; err.style.display='block'; return; }
   if(nw.length<6){ err.textContent='Password baru minimal 6 karakter.'; err.style.display='block'; return; }
   if(nw!==nw2){ err.textContent='Konfirmasi password tidak sama.'; err.style.display='block'; return; }
-
   localStorage.setItem(LS_KEY_PW, nw);
   document.getElementById('pw-old').value='';
   document.getElementById('pw-new').value='';
@@ -2027,7 +2128,7 @@ function changePw(){
 }
 
 function exportData(){
-  const data = { subjects: getSubjects(), questions: getQuestions() };
+  const data = { subjects:getSubjects(), questions:getQuestions() };
   const blob = new Blob([JSON.stringify(data,null,2)], {type:'application/json'});
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
@@ -2061,7 +2162,7 @@ function clearAllData(){
   if(!confirm('Konfirmasi sekali lagi: hapus semua data?')) return;
   setSubjects([]);
   setQuestions({});
-  adminSubjId = null;
+  adminSubjId=null;
   renderAdminSubjects();
   renderSubjChips();
   document.getElementById('q-list-container').innerHTML='<div style="color:var(--muted);font-size:13px;padding:20px 0;">Pilih mata pelajaran untuk melihat soal.</div>';
@@ -2086,29 +2187,27 @@ function escHtml(str=''){
 function showToast(id){
   const el = document.getElementById(id);
   el.style.display='block';
-  setTimeout(()=>{ el.style.display='none'; }, 3000);
+  setTimeout(()=>{ el.style.display='none'; },3000);
 }
 
 // ═══════════════════════════════════
-// INIT (Auto-Load dari GitHub)
+// INIT
 // ═══════════════════════════════════
 buildIconPicker();
 buildColorPicker();
 
 async function initApp() {
   try {
-    const response = await fetch('https://favianlimapuluh-droid.github.io/latsolakp.com/data.json', { cache: 'no-store' });
+    const response = await fetch('https://favianlimapuluh-droid.github.io/latsolakp.com/data.json', { cache:'no-store' });
     const masterData = await response.json();
-
-    if (masterData.subjects && masterData.questions) {
+    if(masterData.subjects && masterData.questions){
       setSubjects(masterData.subjects);
       setQuestions(masterData.questions);
     }
   } catch (error) {
     console.log("Gagal mengambil data dari GitHub, menggunakan data lokal cadangan.");
-    
-    if(getSubjects().length === 0) {
-      const s1 = uid(), s2 = uid();
+    if(getSubjects().length===0){
+      const s1=uid(), s2=uid();
       setSubjects([
         { id:s1, name:'Akuntansi Perpajakan', desc:'Latihan soal UTS & UAS', icon:'📚', color:'#4f7cff' },
         { id:s2, name:'Pendidikan Kewarganegaraan', desc:'Latihan soal esai dan PG', icon:'🏛', color:'#f5b942' }
@@ -2116,11 +2215,9 @@ async function initApp() {
       setQuestions({ [s1]:[], [s2]:[] });
     }
   }
-
   renderHome();
 }
 
-// Menjalankan aplikasi
 initApp();
 </script>
 </body>
