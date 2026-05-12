@@ -1918,11 +1918,32 @@ function showToast(id){
 }
 
 // ═══════════════════════════════════
-// INIT
+// INIT (Auto-Load dari GitHub)
 // ═══════════════════════════════════
 buildIconPicker();
 buildColorPicker();
-renderHome();
+
+async function initApp() {
+  try {
+    // Membaca file data.json yang ada di GitHub
+    const response = await fetch('data.json');
+    const masterData = await response.json();
+
+    // Memuat data soal ke memori website
+    if (masterData.subjects && masterData.questions) {
+      setSubjects(masterData.subjects);
+      setQuestions(masterData.questions);
+    }
+  } catch (error) {
+    console.log("Belum ada file data.json, pakai data lokal sementara.");
+  }
+
+  // Tampilkan desain utama ke layar
+  renderHome();
+}
+
+// Menjalankan fungsi saat web dibuka
+initApp();
 
 // Default sample data (only if empty)
 (function seedData(){
