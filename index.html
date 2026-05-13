@@ -696,6 +696,71 @@ a{text-decoration:none;color:inherit;}
 .mai-meta{font-size:11px;color:var(--text2);}
 
 /* =========================================
+   FIX QUIZ LAYOUT + TAB
+========================================= */
+
+/* Desktop */
+@media(min-width:769px){
+
+  .quiz-sidebar{
+    width:272px;
+    left:0;
+    top:60px;
+    bottom:0;
+    z-index:300;
+  }
+
+  .quiz-main{
+    margin-left:272px !important;
+    width:calc(100% - 272px);
+    padding:32px 40px;
+  }
+
+  .quiz-header{
+    padding-left:20px;
+    padding-right:20px;
+  }
+
+  #quiz-questions-container{
+    width:100%;
+  }
+
+  .q-card{
+    width:100%;
+    max-width:900px;
+  }
+}
+
+
+/* Mobile */
+@media(max-width:768px){
+
+  .quiz-main{
+    margin-left:0 !important;
+    width:100%;
+    padding:20px 14px 40px;
+  }
+
+  .quiz-sidebar{
+    width:260px;
+    z-index:999;
+  }
+
+  .quiz-header{
+    width:100%;
+    left:0;
+  }
+
+  .hdr-subject{
+    max-width:140px;
+  }
+
+  .q-card{
+    max-width:100%;
+  }
+}
+
+/* =========================================
    RESPONSIVE FIX — MOBILE & TABLET
 ========================================= */
 
