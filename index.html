@@ -8,6 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
 <style>
+
 /* ══════════════════════════════════════════
    TOKENS
 ══════════════════════════════════════════ */
@@ -693,9 +694,321 @@ a{text-decoration:none;color:inherit;}
 .mai-info{flex:1;font-size:13px;}
 .mai-name{font-weight:600;margin-bottom:2px;}
 .mai-meta{font-size:11px;color:var(--text2);}
+
+/* =========================================
+   RESPONSIVE FIX — MOBILE & TABLET
+========================================= */
+
+@media (max-width: 1024px){
+  .home-nav{
+    padding: 0 18px;
+  }
+
+  .hero-content{
+    max-width: 100%;
+  }
+
+  .quiz-main{
+    padding: 24px 20px;
+  }
+
+  .admin-content{
+    padding: 24px 18px;
+  }
+}
+
+@media (max-width: 768px){
+
+  /* NAVBAR */
+  .home-nav{
+    height: auto;
+    min-height: 64px;
+    padding: 12px 16px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .nav-logo{
+    width: 100%;
+    font-size: 16px;
+    text-align: center;
+  }
+
+  .nav-logo span{
+    display: inline-block;
+    margin-top: 6px;
+    margin-left: 0;
+  }
+
+  .nav-spacer{
+    display: none;
+  }
+
+  .nav-links{
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .nav-link,
+  .nav-admin-btn{
+    flex: 1;
+    min-width: 120px;
+    text-align: center;
+  }
+
+
+  /* HERO */
+  .home-hero{
+    padding: 140px 16px 60px;
+    min-height: auto;
+  }
+
+  .hero-title{
+    font-size: clamp(30px, 10vw, 48px);
+    line-height: 1.2;
+  }
+
+  .hero-sub{
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 30px;
+  }
+
+  .hero-cta-grid{
+    grid-template-columns: 1fr;
+  }
+
+  .hero-cta-card{
+    padding: 22px 18px;
+  }
+
+  .hero-stats{
+    gap: 14px;
+  }
+
+  .h-stat{
+    min-width: 100px;
+  }
+
+
+  /* SELECTOR PAGE */
+  .sel-page-nav{
+    padding: 14px 16px;
+    flex-wrap: wrap;
+  }
+
+  .sel-breadcrumb{
+    width: 100%;
+    font-size: 13px;
+  }
+
+  .sel-section-title{
+    font-size: 24px;
+  }
+
+  .sem-grid{
+    grid-template-columns: 1fr;
+  }
+
+  .matkul-card{
+    padding: 16px;
+    align-items: flex-start;
+  }
+
+  .matkul-name{
+    font-size: 14px;
+  }
+
+
+  /* QUIZ */
+  .quiz-header{
+    padding: 0 12px;
+    gap: 10px;
+  }
+
+  .hdr-subject{
+    font-size: 12px;
+  }
+
+  .quiz-main{
+    padding: 18px 12px 40px;
+  }
+
+  .q-card{
+    padding: 20px 16px;
+  }
+
+  .q-text{
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .opt{
+    align-items: flex-start;
+    padding: 12px;
+  }
+
+  .opt-t{
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .q-nav{
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .btn-nav{
+    flex: 1;
+    justify-content: center;
+  }
+
+
+  /* RESULT */
+  .result-wrap{
+    padding: 24px 14px 60px;
+  }
+
+  .res-hero{
+    padding: 24px 16px;
+  }
+
+  .res-stats{
+    grid-template-columns: 1fr;
+  }
+
+  .retry-row{
+    flex-direction: column;
+  }
+
+  .btn-retry,
+  .btn-home-sm{
+    width: 100%;
+    justify-content: center;
+  }
+
+
+  /* ADMIN */
+  .admin-header{
+    padding: 0 12px;
+    gap: 8px;
+    flex-wrap: wrap;
+    height: auto;
+    min-height: 60px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .admin-title{
+    width: 100%;
+    font-size: 14px;
+  }
+
+  .admin-content{
+    padding: 18px 12px;
+  }
+
+  .table-wrap{
+    overflow-x: auto;
+  }
+
+  .data-table{
+    min-width: 700px;
+  }
+
+  .q-list-item{
+    flex-direction: column;
+  }
+
+  .q-list-actions{
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+
+  /* MODAL */
+  .modal{
+    padding: 22px 16px;
+    max-width: 100%;
+  }
+
+
+  /* MATERI VIEWER */
+  .mv-header{
+    padding: 0 12px;
+  }
+
+  .mv-body{
+    padding: 20px 12px 60px;
+  }
+
+  .materi-file-item{
+    padding: 14px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .mfi-btn{
+    width: 100%;
+  }
+}
+
+
+@media (max-width: 480px){
+
+  .hero-title{
+    font-size: 28px;
+  }
+
+  .hero-badge{
+    font-size: 10px;
+    padding: 6px 12px;
+  }
+
+  .cta-title{
+    font-size: 16px;
+  }
+
+  .cta-desc{
+    font-size: 12px;
+  }
+
+  .score-ring{
+    width: 100px;
+    height: 100px;
+  }
+
+  .score-pct{
+    font-size: 22px;
+  }
+
+  .res-title{
+    font-size: 18px;
+  }
+
+  .q-text{
+    font-size: 14px;
+  }
+
+  .opt-l{
+    width: 26px;
+    height: 26px;
+    min-width: 26px;
+  }
+
+  .btn-nav{
+    padding: 10px 12px;
+    font-size: 12px;
+  }
+}
+```
+
 </style>
 </head>
 <body>
+
 
 <!-- ══════════════════════════════════
      HOME PAGE
