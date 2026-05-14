@@ -5,8 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Belajar AKP — Platform Materi</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://latihansoalakp-default-rtdb.asia-southeast1.firebasedatabase.app"/>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js" defer></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 <style>
@@ -99,12 +100,18 @@ a{text-decoration:none;color:inherit;}
 @media(max-width:480px){.stat-divider{display:none;}.hero-stats{gap:20px;}}
 
 /* SELECTOR PAGES */
+.sel-page-bg{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
+.sel-page-bg .bg-orb{position:absolute;border-radius:50%;filter:blur(100px);opacity:.5;}
+.sel-page-bg .bg-orb1{width:600px;height:600px;background:radial-gradient(circle,rgba(124,92,252,.3) 0%,transparent 70%);top:-100px;left:-100px;animation:orbFloat1 10s ease-in-out infinite;}
+.sel-page-bg .bg-orb2{width:500px;height:500px;background:radial-gradient(circle,rgba(45,212,160,.18) 0%,transparent 70%);bottom:-100px;right:-100px;animation:orbFloat2 12s ease-in-out infinite;}
+.sel-page-bg .bg-orb3{width:350px;height:350px;background:radial-gradient(circle,rgba(56,189,248,.15) 0%,transparent 70%);top:40%;left:60%;animation:orbFloat3 9s ease-in-out infinite;}
+.sel-page-bg .bg-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(124,92,252,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(124,92,252,.03) 1px,transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse at center,rgba(0,0,0,.4) 0%,transparent 70%);}
 .sel-page-nav{position:sticky;top:0;z-index:50;padding:16px 32px;background:rgba(0,0,0,.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:14px;}
 .sel-back{display:flex;align-items:center;gap:7px;padding:8px 16px;background:var(--card);border:1px solid var(--border);border-radius:10px;color:var(--text2);font-size:13px;transition:all .16s;}
 .sel-back:hover{border-color:var(--border2);color:var(--text);}
 .sel-breadcrumb{font-size:14px;font-weight:600;color:var(--text2);}
 .sel-breadcrumb strong{color:var(--text);}
-.sel-page-content{max-width:1000px;margin:0 auto;padding:40px 32px 80px;}
+.sel-page-content{max-width:1000px;margin:0 auto;padding:40px 32px 80px;position:relative;z-index:1;}
 @media(max-width:600px){.sel-page-content{padding:24px 16px 60px;}}
 .sel-section-title{font-size:28px;font-weight:800;letter-spacing:-.03em;margin-bottom:6px;}
 .sel-section-sub{font-size:14px;color:var(--text2);margin-bottom:36px;}
@@ -160,7 +167,7 @@ a{text-decoration:none;color:inherit;}
 .mv-back{padding:8px 14px;background:var(--card);border:1px solid var(--border);border-radius:9px;color:var(--text2);font-size:13px;transition:all .16s;}
 .mv-back:hover{border-color:var(--border2);color:var(--text);}
 .mv-title{font-size:15px;font-weight:700;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.mv-body{max-width:860px;margin:0 auto;padding:40px 24px 80px;}
+.mv-body{max-width:860px;margin:0 auto;padding:40px 24px 80px;position:relative;z-index:1;}
 .materi-file-list{display:flex;flex-direction:column;gap:10px;margin-top:20px;}
 .materi-content-box{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px;font-size:15px;line-height:1.8;color:var(--text2);white-space:pre-wrap;}
 .mfi-btn{padding:7px 14px;background:var(--accent);border:none;border-radius:8px;color:#fff;font-size:12px;font-weight:600;transition:all .16s;}
@@ -344,6 +351,9 @@ a{text-decoration:none;color:inherit;}
 
 /* ADMIN DASHBOARD */
 #page-admin{min-height:100vh;}
+.admin-loading{display:flex;align-items:center;justify-content:center;gap:12px;padding:40px;color:var(--text2);font-size:14px;}
+.admin-loading .spinner{width:20px;height:20px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .6s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
 .admin-header{height:60px;display:flex;align-items:center;padding:0 24px;gap:12px;background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;}
 .admin-logo{font-size:13px;font-weight:700;color:var(--accent);font-family:var(--mono);}
 .admin-title{font-size:15px;font-weight:700;flex:1;}
@@ -511,6 +521,7 @@ a{text-decoration:none;color:inherit;}
 
 <!-- MATERI: SEMESTER -->
 <div id="page-materi-sem" class="page">
+  <div class="sel-page-bg"><div class="bg-orb bg-orb1"></div><div class="bg-orb bg-orb2"></div><div class="bg-orb bg-orb3"></div><div class="bg-grid"></div></div>
   <div class="sel-page-nav">
     <button class="sel-back" onclick="goHome()">← Beranda</button>
     <div class="sel-breadcrumb"><strong>Materi</strong> — Pilih Semester</div>
@@ -524,6 +535,7 @@ a{text-decoration:none;color:inherit;}
 
 <!-- MATERI: MATKUL -->
 <div id="page-materi-matkul" class="page">
+  <div class="sel-page-bg"><div class="bg-orb bg-orb1"></div><div class="bg-orb bg-orb2"></div><div class="bg-orb bg-orb3"></div><div class="bg-grid"></div></div>
   <div class="sel-page-nav">
     <button class="sel-back" onclick="goMateriSelector()">← Semester</button>
     <div class="sel-breadcrumb" id="materi-matkul-breadcrumb">Materi — <strong>Semester ?</strong></div>
@@ -537,6 +549,7 @@ a{text-decoration:none;color:inherit;}
 
 <!-- MATERI: VIEWER -->
 <div id="page-materi-viewer" class="page">
+  <div class="sel-page-bg"><div class="bg-orb bg-orb1"></div><div class="bg-orb bg-orb2"></div><div class="bg-orb bg-orb3"></div><div class="bg-grid"></div></div>
   <div class="mv-header">
     <button class="mv-back" onclick="backFromViewer()">← Kembali</button>
     <div class="mv-title" id="mv-title">Materi</div>
@@ -548,6 +561,7 @@ a{text-decoration:none;color:inherit;}
 
 <!-- LATSOAL: SEMESTER -->
 <div id="page-latsoal-sem" class="page">
+  <div class="sel-page-bg"><div class="bg-orb bg-orb1"></div><div class="bg-orb bg-orb2"></div><div class="bg-orb bg-orb3"></div><div class="bg-grid"></div></div>
   <div class="sel-page-nav">
     <button class="sel-back" onclick="goHome()">← Beranda</button>
     <div class="sel-breadcrumb"><strong>Latihan Soal</strong> — Pilih Semester</div>
@@ -561,6 +575,7 @@ a{text-decoration:none;color:inherit;}
 
 <!-- LATSOAL: MATKUL -->
 <div id="page-latsoal-matkul" class="page">
+  <div class="sel-page-bg"><div class="bg-orb bg-orb1"></div><div class="bg-orb bg-orb2"></div><div class="bg-orb bg-orb3"></div><div class="bg-grid"></div></div>
   <div class="sel-page-nav">
     <button class="sel-back" onclick="goLatsoalSelector()">← Semester</button>
     <div class="sel-breadcrumb" id="latsoal-matkul-breadcrumb">Latihan Soal — <strong>Semester ?</strong></div>
@@ -574,6 +589,7 @@ a{text-decoration:none;color:inherit;}
 
 <!-- LATSOAL: OPTIONS (PILIH SET SOAL) — NEW -->
 <div id="page-latsoal-options" class="page">
+  <div class="sel-page-bg"><div class="bg-orb bg-orb1"></div><div class="bg-orb bg-orb2"></div><div class="bg-orb bg-orb3"></div><div class="bg-grid"></div></div>
   <div class="sel-page-nav">
     <button class="sel-back" id="latsoal-opt-back" onclick="openLatsoalSem(currentSemId)">← Kembali</button>
     <div class="sel-breadcrumb" id="latsoal-opt-breadcrumb">Pilih Set Soal</div>
@@ -1978,8 +1994,14 @@ function handleQImage(input){
 // ════════════════════════════════
 function doLogin(){
   if(document.getElementById('admin-pw-input').value===getPw()){
-    populateAdminSelects();renderSemTable();renderMatkulList();
-    showPage('page-admin');showPanel('semesters');
+    showPage('page-admin');
+    // Defer heavy admin rendering to next frame for snappy transition
+    requestAnimationFrame(()=>{
+      populateAdminSelects();
+      renderSemTable();
+      renderMatkulList();
+      showPanel('semesters');
+    });
   } else {
     document.getElementById('login-err').style.display='block';
     document.getElementById('admin-pw-input').value='';
@@ -1995,12 +2017,16 @@ function showPanel(name){
   document.querySelectorAll('.admin-panel').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.admin-nav-item').forEach(el=>el.classList.remove('active'));
   document.getElementById(`panel-${name}`).classList.add('active');
-  document.querySelector(`[data-panel="${name}"]`).classList.add('active');
+  const navItem=document.querySelector(`[data-panel="${name}"]`);
+  if(navItem) navItem.classList.add('active');
   populateAdminSelects();
-  if(name==='semesters'){renderSemTable();renderMatkulList();}
-  if(name==='materi'){updateMateriMatkulSel();renderMateriAdminList();}
-  if(name==='questions'){updateQMatkulSel();onMatkulChanged();}
-  if(name==='analytics'){renderAnalytics();}
+  // Defer heavy panel rendering to avoid blocking the panel switch
+  requestAnimationFrame(()=>{
+    if(name==='semesters'){renderSemTable();renderMatkulList();}
+    if(name==='materi'){updateMateriMatkulSel();renderMateriAdminList();}
+    if(name==='questions'){updateQMatkulSel();onMatkulChanged();}
+    if(name==='analytics'){renderAnalytics();}
+  });
 }
 
 function populateAdminSelects(){
@@ -2581,24 +2607,31 @@ function showToast(id){const el=document.getElementById(id);el.style.display='bl
 // ════════════════════════════════
 // INIT
 // ════════════════════════════════
+let _dataReady = false;
+let _adminDataReady = false;
+
 async function initApp(){
   buildEmojiPanels();
 
-  // Load data from Firebase
+  // Load essential data in parallel (lightweight collections first)
   try {
-    const snapshot = await db.ref('/').once('value');
-    const data = snapshot.val();
-    if(data){
-      _semesters = data.semesters || [];
-      _matkuls = data.matkuls || [];
-      _questions = data.questions || {};
-      _materi = data.materi || {};
-      _categories = data.categories || {};
-      if(data.adminPw) _adminPw = data.adminPw;
-    }
+    const [semSnap, matkulSnap, pwSnap, catSnap] = await Promise.all([
+      db.ref('semesters').once('value'),
+      db.ref('matkuls').once('value'),
+      db.ref('adminPw').once('value'),
+      db.ref('categories').once('value')
+    ]);
+    _semesters = semSnap.val() || [];
+    _matkuls = matkulSnap.val() || [];
+    _categories = catSnap.val() || {};
+    if(pwSnap.val()) _adminPw = pwSnap.val();
+    _dataReady = true;
   } catch(e) {
     console.error('Firebase load error:', e);
   }
+
+  // Load heavy data (questions, materi) in background without blocking UI
+  loadHeavyData();
 
   // Seed default data if empty
   if(_semesters.length===0){
@@ -2620,9 +2653,24 @@ async function initApp(){
   // Listen for realtime updates
   db.ref('semesters').on('value', snap => { _semesters = snap.val() || []; updateHomeStats(); });
   db.ref('matkuls').on('value', snap => { _matkuls = snap.val() || []; });
-  db.ref('questions').on('value', snap => { _questions = snap.val() || {}; });
-  db.ref('materi').on('value', snap => { _materi = snap.val() || {}; });
+  db.ref('questions').on('value', snap => { _questions = snap.val() || {}; _adminDataReady = true; updateHomeStats(); });
+  db.ref('materi').on('value', snap => { _materi = snap.val() || {}; updateHomeStats(); });
   db.ref('categories').on('value', snap => { _categories = snap.val() || {}; });
+}
+
+async function loadHeavyData(){
+  try {
+    const [qSnap, matSnap] = await Promise.all([
+      db.ref('questions').once('value'),
+      db.ref('materi').once('value')
+    ]);
+    _questions = qSnap.val() || {};
+    _materi = matSnap.val() || {};
+    _adminDataReady = true;
+    updateHomeStats();
+  } catch(e) {
+    console.error('Heavy data load error:', e);
+  }
 }
 
 initApp();
