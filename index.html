@@ -1016,6 +1016,34 @@ a{text-decoration:none;color:inherit;}
     <div class="form-actions"><button class="btn-primary" onclick="saveEditKategori()">Simpan</button><button class="btn-secondary" onclick="closeModal('modal-edit-kategori')">Batal</button></div>
   </div>
 </div>
+
+<!-- MODAL: HAPUS KATEGORI -->
+<div class="modal-overlay" id="modal-delete-kategori">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('modal-delete-kategori')">✕</button>
+    <div class="modal-title" style="color:var(--red);">🗑 Hapus Kategori</div>
+    <div class="modal-sub" id="del-kat-modal-sub">Pilih opsi penghapusan kategori.</div>
+    <input type="hidden" id="del-kat-matkulid"/>
+    <input type="hidden" id="del-kat-catid"/>
+    <div style="margin-bottom:16px;padding:14px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);font-size:13px;color:var(--text2);line-height:1.7;">
+      <strong style="color:var(--text);" id="del-kat-name"></strong>
+      <div id="del-kat-info" style="margin-top:6px;"></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <button class="btn-secondary" style="width:100%;padding:14px 18px;text-align:left;border-color:var(--border2);" onclick="confirmDeleteKategori('only')">
+        <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:3px;">📂 Hapus Kategori Saja</div>
+        <div style="font-size:12px;color:var(--text2);">Soal-soal di kategori ini tetap ada, tapi menjadi "Tanpa Kategori".</div>
+      </button>
+      <button class="btn-secondary" style="width:100%;padding:14px 18px;text-align:left;border-color:rgba(242,104,104,.4);background:var(--red-bg);" onclick="confirmDeleteKategori('all')">
+        <div style="font-size:14px;font-weight:700;color:var(--red);margin-bottom:3px;">🗑 Hapus Kategori + Semua Soal</div>
+        <div style="font-size:12px;color:var(--text2);">Kategori dan <strong id="del-kat-count">0</strong> soal di dalamnya akan dihapus permanen.</div>
+      </button>
+    </div>
+    <div style="margin-top:14px;">
+      <button class="btn-secondary" style="width:100%;text-align:center;" onclick="closeModal('modal-delete-kategori')">Batal</button>
+    </div>
+  </div>
+</div>
   <div class="modal">
     <button class="modal-close" onclick="closeModal('modal-edit-matkul')">✕</button>
     <div class="modal-title">Edit Mata Kuliah</div>
@@ -2289,20 +2317,50 @@ function saveEditKategori(){
 function deleteKategori(matkulId,catId){
   const cats=getCategories()[matkulId]||[];
   const cat=cats.find(c=>c.id===catId);
+  if(!cat) return;
   const qs=(getQuestions()[matkulId]||[]).filter(q=>q.category===catId);
-  const msg=qs.length>0
-    ?`Hapus kategori "${cat.name}"? Ada ${qs.length} soal di kategori ini. Soal-soal tersebut akan menjadi "Tanpa Kategori" (tidak dihapus).`
-    :`Hapus kategori "${cat.name}"?`;
-  if(!confirm(msg)) return;
+  // Set modal info
+  document.getElementById('del-kat-matkulid').value=matkulId;
+  document.getElementById('del-kat-catid').value=catId;
+  document.getElementById('del-kat-name').textContent=cat.name;
+  document.getElementById('del-kat-count').textContent=qs.length;
+  if(qs.length>0){
+    document.getElementById('del-kat-info').innerHTML=`Kategori ini memiliki <strong style="color:var(--yellow);">${qs.length} soal</strong>.`;
+    document.getElementById('del-kat-modal-sub').textContent='Kategori ini memiliki soal. Pilih cara penghapusan:';
+  } else {
+    document.getElementById('del-kat-info').innerHTML='Tidak ada soal di kategori ini.';
+    document.getElementById('del-kat-modal-sub').textContent='Hapus kategori ini?';
+  }
+  openModal('modal-delete-kategori');
+}
+
+function confirmDeleteKategori(mode){
+  const matkulId=document.getElementById('del-kat-matkulid').value;
+  const catId=document.getElementById('del-kat-catid').value;
+  const cats=getCategories()[matkulId]||[];
+  const cat=cats.find(c=>c.id===catId);
+  if(!cat) return;
+
+  // Hapus kategori
   const catsData=getCategories();
   catsData[matkulId]=(catsData[matkulId]||[]).filter(c=>c.id!==catId);
   setCategories(catsData);
-  // Remove category reference from questions but keep the questions
-  if(qs.length>0){
-    const qsData=getQuestions();
-    qsData[matkulId]=(qsData[matkulId]||[]).map(q=>q.category===catId?{...q,category:''}:q);
+
+  const qsData=getQuestions();
+  if(mode==='all'){
+    // Hapus semua soal yang ada di kategori ini
+    qsData[matkulId]=(qsData[matkulId]||[]).filter(q=>q.category!==catId);
     setQuestions(qsData);
+  } else {
+    // Hapus kategori saja — soal jadi tanpa kategori
+    const qs=(qsData[matkulId]||[]).filter(q=>q.category===catId);
+    if(qs.length>0){
+      qsData[matkulId]=(qsData[matkulId]||[]).map(q=>q.category===catId?{...q,category:''}:q);
+      setQuestions(qsData);
+    }
   }
+
+  closeModal('modal-delete-kategori');
   renderKategoriList();
   updateKategoriSelects();
   renderQList();
