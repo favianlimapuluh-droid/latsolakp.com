@@ -3,44 +3,22 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Belajar AKP — Platform Materi </title>
+<title>Belajar AKP — Platform Materi</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
 <style>
-
-/* ══════════════════════════════════════════
-   TOKENS
-══════════════════════════════════════════ */
 :root{
-  --bg:       #060611;
-  --bg2:      #0d0d1f;
-  --surface:  #12122a;
-  --card:     #17173a;
-  --card2:    #1e1e45;
-  --border:   #2a2a5a;
-  --border2:  #3a3a6a;
-  --accent:   #7c5cfc;
-  --accent2:  #6044e0;
-  --accent3:  #a78bfa;
-  --glow:     rgba(124,92,252,.18);
-  --glow2:    rgba(124,92,252,.08);
-  --green:    #2dd4a0;
-  --green-bg: rgba(45,212,160,.12);
-  --red:      #f26868;
-  --red-bg:   rgba(242,104,104,.12);
-  --yellow:   #f5b942;
-  --yellow-bg:rgba(245,185,66,.12);
-  --blue:     #38bdf8;
-  --blue-bg:  rgba(56,189,248,.12);
-  --text:     #e8eaf6;
-  --text2:    #9296b8;
-  --muted:    #4a4a7a;
-  --radius:   12px;
-  --radius-lg:20px;
-  --shadow:   0 8px 32px rgba(0,0,0,.6);
-  --font:     'Sora', sans-serif;
-  --mono:     'Space Mono', monospace;
+  --bg:#060611;--bg2:#0d0d1f;--surface:#12122a;--card:#17173a;--card2:#1e1e45;
+  --border:#2a2a5a;--border2:#3a3a6a;--accent:#7c5cfc;--accent2:#6044e0;--accent3:#a78bfa;
+  --glow:rgba(124,92,252,.18);--glow2:rgba(124,92,252,.08);
+  --green:#2dd4a0;--green-bg:rgba(45,212,160,.12);
+  --red:#f26868;--red-bg:rgba(242,104,104,.12);
+  --yellow:#f5b942;--yellow-bg:rgba(245,185,66,.12);
+  --blue:#38bdf8;--blue-bg:rgba(56,189,248,.12);
+  --text:#e8eaf6;--text2:#9296b8;--muted:#4a4a7a;
+  --radius:12px;--radius-lg:20px;--shadow:0 8px 32px rgba(0,0,0,.6);
+  --font:'Sora',sans-serif;--mono:'Space Mono',monospace;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
@@ -52,9 +30,7 @@ a{text-decoration:none;color:inherit;}
 ::-webkit-scrollbar-track{background:transparent;}
 ::-webkit-scrollbar-thumb{background:var(--border2);border-radius:99px;}
 
-/* ══════════════════════════════════════════
-   PAGES
-══════════════════════════════════════════ */
+/* PAGES */
 .page{display:none;min-height:100vh;}
 .page.active{display:block;}
 #page-quiz.active{display:flex;flex-direction:column;}
@@ -62,254 +38,78 @@ a{text-decoration:none;color:inherit;}
 #page-admin.active{display:flex;flex-direction:column;}
 #page-materi-viewer.active{display:flex;flex-direction:column;}
 
-/* ══════════════════════════════════════════
-   HOME NAV
-══════════════════════════════════════════ */
-.home-nav{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  height:64px;display:flex;align-items:center;
-  padding:0 32px;gap:16px;
-  background:rgba(6,6,17,.8);
-  backdrop-filter:blur(20px);
-  border-bottom:1px solid rgba(124,92,252,.15);
-  transition:all .3s;
-}
-.nav-logo{
-  font-size:18px;font-weight:800;letter-spacing:-.03em;
-  background:linear-gradient(135deg,var(--accent3),var(--accent));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-}
-.nav-logo span{
-  font-size:11px;font-weight:600;font-family:var(--mono);
-  background:rgba(124,92,252,.2);border:1px solid rgba(124,92,252,.4);
-  color:var(--accent3);padding:2px 8px;border-radius:20px;
-  -webkit-text-fill-color:var(--accent3);
-  vertical-align:middle;margin-left:8px;letter-spacing:.05em;
-}
+/* HOME NAV */
+.home-nav{position:fixed;top:0;left:0;right:0;z-index:100;height:64px;display:flex;align-items:center;padding:0 32px;gap:16px;background:rgba(6,6,17,.8);backdrop-filter:blur(20px);border-bottom:1px solid rgba(124,92,252,.15);transition:all .3s;}
+.nav-logo{font-size:18px;font-weight:800;letter-spacing:-.03em;background:linear-gradient(135deg,var(--accent3),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.nav-logo span{font-size:11px;font-weight:600;font-family:var(--mono);background:rgba(124,92,252,.2);border:1px solid rgba(124,92,252,.4);color:var(--accent3);padding:2px 8px;border-radius:20px;-webkit-text-fill-color:var(--accent3);vertical-align:middle;margin-left:8px;letter-spacing:.05em;}
 .nav-spacer{flex:1;}
 .nav-links{display:flex;align-items:center;gap:8px;}
-.nav-link{
-  padding:8px 16px;background:transparent;border:none;
-  color:var(--text2);font-size:13px;font-weight:500;
-  border-radius:8px;transition:all .18s;
-}
+.nav-link{padding:8px 16px;background:transparent;border:none;color:var(--text2);font-size:13px;font-weight:500;border-radius:8px;transition:all .18s;}
 .nav-link:hover{color:var(--text);background:rgba(255,255,255,.05);}
-.nav-admin-btn{
-  padding:9px 20px;
-  background:linear-gradient(135deg,var(--accent),var(--accent2));
-  border:none;border-radius:10px;
-  color:#fff;font-size:13px;font-weight:600;
-  transition:all .18s;box-shadow:0 4px 16px rgba(124,92,252,.3);
-}
+.nav-admin-btn{padding:9px 20px;background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;border-radius:10px;color:#fff;font-size:13px;font-weight:600;transition:all .18s;box-shadow:0 4px 16px rgba(124,92,252,.3);}
 .nav-admin-btn:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(124,92,252,.4);}
 
-/* ══════════════════════════════════════════
-   HERO
-══════════════════════════════════════════ */
-.home-hero{
-  position:relative;
-  min-height:100vh;
-  display:flex;align-items:center;justify-content:center;
-  padding:80px 32px 60px;
-  overflow:hidden;
-}
-/* Gradient background orbs */
-.hero-orb{
-  position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;
-}
-.orb1{
-  width:600px;height:600px;
-  background:radial-gradient(circle,rgba(124,92,252,.35) 0%,transparent 70%);
-  top:-100px;left:-100px;
-  animation:orbFloat1 8s ease-in-out infinite;
-}
-.orb2{
-  width:500px;height:500px;
-  background:radial-gradient(circle,rgba(56,189,248,.2) 0%,transparent 70%);
-  bottom:-100px;right:-100px;
-  animation:orbFloat2 10s ease-in-out infinite;
-}
-.orb3{
-  width:300px;height:300px;
-  background:radial-gradient(circle,rgba(45,212,160,.15) 0%,transparent 70%);
-  top:40%;left:60%;
-  animation:orbFloat3 7s ease-in-out infinite;
-}
+/* HERO */
+.home-hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:80px 32px 60px;overflow:hidden;}
+.hero-orb{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;}
+.orb1{width:600px;height:600px;background:radial-gradient(circle,rgba(124,92,252,.35) 0%,transparent 70%);top:-100px;left:-100px;animation:orbFloat1 8s ease-in-out infinite;}
+.orb2{width:500px;height:500px;background:radial-gradient(circle,rgba(56,189,248,.2) 0%,transparent 70%);bottom:-100px;right:-100px;animation:orbFloat2 10s ease-in-out infinite;}
+.orb3{width:300px;height:300px;background:radial-gradient(circle,rgba(45,212,160,.15) 0%,transparent 70%);top:40%;left:60%;animation:orbFloat3 7s ease-in-out infinite;}
 @keyframes orbFloat1{0%,100%{transform:translate(0,0);}50%{transform:translate(40px,30px);}}
 @keyframes orbFloat2{0%,100%{transform:translate(0,0);}50%{transform:translate(-30px,-40px);}}
 @keyframes orbFloat3{0%,100%{transform:translate(0,0);}50%{transform:translate(20px,-25px);}}
-
-/* Grid overlay */
-.hero-grid{
-  position:absolute;inset:0;pointer-events:none;
-  background-image:
-    linear-gradient(rgba(124,92,252,.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(124,92,252,.06) 1px, transparent 1px);
-  background-size:60px 60px;
-  mask-image:radial-gradient(ellipse at center, rgba(0,0,0,.6) 0%, transparent 75%);
-}
-
-.hero-content{
-  position:relative;z-index:1;
-  text-align:center;max-width:800px;
-  animation:heroIn .8s cubic-bezier(.4,0,.2,1) both;
-}
+.hero-grid{position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(124,92,252,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(124,92,252,.06) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse at center,rgba(0,0,0,.6) 0%,transparent 75%);}
+.hero-content{position:relative;z-index:1;text-align:center;max-width:800px;animation:heroIn .8s cubic-bezier(.4,0,.2,1) both;}
 @keyframes heroIn{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
-
-.hero-badge{
-  display:inline-flex;align-items:center;gap:8px;
-  background:rgba(124,92,252,.15);
-  border:1px solid rgba(124,92,252,.35);
-  border-radius:99px;padding:6px 18px;
-  font-size:12px;font-weight:600;font-family:var(--mono);
-  color:var(--accent3);letter-spacing:.08em;text-transform:uppercase;
-  margin-bottom:28px;
-}
-.hero-badge-dot{
-  width:6px;height:6px;border-radius:50%;
-  background:var(--green);
-  box-shadow:0 0 8px var(--green);
-  animation:pulse 2s ease-in-out infinite;
-}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(124,92,252,.15);border:1px solid rgba(124,92,252,.35);border-radius:99px;padding:6px 18px;font-size:12px;font-weight:600;font-family:var(--mono);color:var(--accent3);letter-spacing:.08em;text-transform:uppercase;margin-bottom:28px;}
+.hero-badge-dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);animation:pulse 2s ease-in-out infinite;}
 @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
-
-.hero-title{
-  font-size:clamp(36px,6vw,72px);
-  font-weight:800;letter-spacing:-.04em;
-  line-height:1.1;margin-bottom:12px;
-}
-.hero-title .accent-word{
-  background:linear-gradient(135deg,var(--accent3) 0%,var(--accent) 50%,var(--blue) 100%);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-}
+.hero-title{font-size:clamp(36px,6vw,72px);font-weight:800;letter-spacing:-.04em;line-height:1.1;margin-bottom:12px;}
+.hero-title .accent-word{background:linear-gradient(135deg,var(--accent3) 0%,var(--accent) 50%,var(--blue) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 .hero-title .normal-word{color:var(--text);}
-.hero-sub{
-  font-size:17px;color:var(--text2);line-height:1.7;
-  margin-bottom:44px;max-width:560px;margin-left:auto;margin-right:auto;
-  animation:heroIn .8s .15s cubic-bezier(.4,0,.2,1) both;
-}
-
-/* CTA Cards */
-.hero-cta-grid{
-  display:grid;grid-template-columns:1fr 1fr;gap:16px;
-  max-width:640px;margin:0 auto;
-  animation:heroIn .8s .25s cubic-bezier(.4,0,.2,1) both;
-}
+.hero-sub{font-size:17px;color:var(--text2);line-height:1.7;margin-bottom:44px;max-width:560px;margin-left:auto;margin-right:auto;animation:heroIn .8s .15s cubic-bezier(.4,0,.2,1) both;}
+.hero-cta-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:640px;margin:0 auto;animation:heroIn .8s .25s cubic-bezier(.4,0,.2,1) both;}
 @media(max-width:500px){.hero-cta-grid{grid-template-columns:1fr;}}
-
-.hero-cta-card{
-  position:relative;overflow:hidden;
-  padding:28px 24px;
-  border-radius:var(--radius-lg);
-  cursor:pointer;
-  border:1px solid transparent;
-  transition:all .3s cubic-bezier(.4,0,.2,1);
-  text-align:left;
-}
-.hero-cta-card::before{
-  content:'';position:absolute;inset:0;border-radius:inherit;
-  opacity:0;transition:opacity .3s;
-  background:radial-gradient(circle at 30% 40%,rgba(124,92,252,.2),transparent 60%);
-}
+.hero-cta-card{position:relative;overflow:hidden;padding:28px 24px;border-radius:var(--radius-lg);cursor:pointer;border:1px solid transparent;transition:all .3s cubic-bezier(.4,0,.2,1);text-align:left;}
+.hero-cta-card::before{content:'';position:absolute;inset:0;border-radius:inherit;opacity:0;transition:opacity .3s;background:radial-gradient(circle at 30% 40%,rgba(124,92,252,.2),transparent 60%);}
 .hero-cta-card:hover::before{opacity:1;}
 .hero-cta-card:hover{transform:translateY(-4px);}
-
-.cta-materi{
-  background:linear-gradient(135deg,rgba(124,92,252,.15) 0%,rgba(56,189,248,.08) 100%);
-  border-color:rgba(124,92,252,.35);
-}
+.cta-materi{background:linear-gradient(135deg,rgba(124,92,252,.15) 0%,rgba(56,189,248,.08) 100%);border-color:rgba(124,92,252,.35);}
 .cta-materi:hover{border-color:rgba(124,92,252,.7);box-shadow:0 16px 48px rgba(124,92,252,.2);}
-
-.cta-latsoal{
-  background:linear-gradient(135deg,rgba(45,212,160,.12) 0%,rgba(56,189,248,.08) 100%);
-  border-color:rgba(45,212,160,.3);
-}
+.cta-latsoal{background:linear-gradient(135deg,rgba(45,212,160,.12) 0%,rgba(56,189,248,.08) 100%);border-color:rgba(45,212,160,.3);}
 .cta-latsoal:hover{border-color:rgba(45,212,160,.65);box-shadow:0 16px 48px rgba(45,212,160,.15);}
-
-.cta-icon{
-  width:52px;height:52px;border-radius:14px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:26px;margin-bottom:16px;
-}
+.cta-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:16px;}
 .cta-materi .cta-icon{background:rgba(124,92,252,.2);}
 .cta-latsoal .cta-icon{background:rgba(45,212,160,.18);}
 .cta-title{font-size:18px;font-weight:700;margin-bottom:6px;letter-spacing:-.02em;}
 .cta-desc{font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:16px;}
-.cta-arrow{
-  display:inline-flex;align-items:center;gap:6px;
-  font-size:12px;font-weight:700;font-family:var(--mono);
-  transition:gap .2s;
-}
+.cta-arrow{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;font-family:var(--mono);transition:gap .2s;}
 .cta-materi .cta-arrow{color:var(--accent3);}
 .cta-latsoal .cta-arrow{color:var(--green);}
 .hero-cta-card:hover .cta-arrow{gap:10px;}
-
-/* Stats strip */
-.hero-stats{
-  display:flex;align-items:center;justify-content:center;gap:32px;
-  margin-top:52px;flex-wrap:wrap;
-  animation:heroIn .8s .35s cubic-bezier(.4,0,.2,1) both;
-}
+.hero-stats{display:flex;align-items:center;justify-content:center;gap:32px;margin-top:52px;flex-wrap:wrap;animation:heroIn .8s .35s cubic-bezier(.4,0,.2,1) both;}
 .h-stat{text-align:center;}
-.h-stat-n{font-size:28px;font-weight:800;font-family:var(--mono);
-  background:linear-gradient(135deg,var(--accent3),var(--accent));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.h-stat-n{font-size:28px;font-weight:800;font-family:var(--mono);background:linear-gradient(135deg,var(--accent3),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 .h-stat-l{font-size:12px;color:var(--muted);margin-top:2px;}
 .stat-divider{width:1px;height:36px;background:var(--border);}
 @media(max-width:480px){.stat-divider{display:none;}.hero-stats{gap:20px;}}
 
-/* ══════════════════════════════════════════
-   SEMESTER SELECTOR PAGE (Materi + Latsoal)
-══════════════════════════════════════════ */
-.sel-page-nav{
-  position:sticky;top:0;z-index:50;
-  padding:16px 32px;
-  background:rgba(6,6,17,.88);
-  backdrop-filter:blur(16px);
-  border-bottom:1px solid var(--border);
-  display:flex;align-items:center;gap:14px;
-}
-.sel-back{
-  display:flex;align-items:center;gap:7px;
-  padding:8px 16px;
-  background:var(--card);border:1px solid var(--border);
-  border-radius:10px;color:var(--text2);font-size:13px;
-  transition:all .16s;
-}
+/* SELECTOR PAGES */
+.sel-page-nav{position:sticky;top:0;z-index:50;padding:16px 32px;background:rgba(6,6,17,.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:14px;}
+.sel-back{display:flex;align-items:center;gap:7px;padding:8px 16px;background:var(--card);border:1px solid var(--border);border-radius:10px;color:var(--text2);font-size:13px;transition:all .16s;}
 .sel-back:hover{border-color:var(--border2);color:var(--text);}
-.sel-breadcrumb{
-  font-size:14px;font-weight:600;color:var(--text2);
-}
+.sel-breadcrumb{font-size:14px;font-weight:600;color:var(--text2);}
 .sel-breadcrumb strong{color:var(--text);}
 .sel-page-content{max-width:1000px;margin:0 auto;padding:40px 32px 80px;}
 @media(max-width:600px){.sel-page-content{padding:24px 16px 60px;}}
-.sel-section-title{
-  font-size:28px;font-weight:800;letter-spacing:-.03em;margin-bottom:6px;
-}
+.sel-section-title{font-size:28px;font-weight:800;letter-spacing:-.03em;margin-bottom:6px;}
 .sel-section-sub{font-size:14px;color:var(--text2);margin-bottom:36px;}
-
-.sem-grid{
-  display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
-  gap:14px;
-}
-.sem-card{
-  position:relative;overflow:hidden;
-  background:var(--card);border:1px solid var(--border);
-  border-radius:var(--radius-lg);padding:24px 20px;
-  cursor:pointer;transition:all .25s cubic-bezier(.4,0,.2,1);
-  text-align:left;
-}
-.sem-card::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:3px;
-  border-radius:4px 4px 0 0;
-  background:var(--accent);opacity:0;transition:opacity .25s;
-}
+.sem-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;}
+.sem-card{position:relative;overflow:hidden;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px 20px;cursor:pointer;transition:all .25s cubic-bezier(.4,0,.2,1);text-align:left;}
+.sem-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:4px 4px 0 0;background:var(--accent);opacity:0;transition:opacity .25s;}
 .sem-card:hover{border-color:var(--accent);background:var(--card2);transform:translateY(-3px);box-shadow:0 12px 40px rgba(124,92,252,.15);}
 .sem-card:hover::before{opacity:1;}
-.sem-num{
-  font-size:11px;font-weight:700;font-family:var(--mono);
-  color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px;
-}
+.sem-num{font-size:11px;font-weight:700;font-family:var(--mono);color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px;}
 .sem-title{font-size:18px;font-weight:800;margin-bottom:4px;}
 .sem-count{font-size:12px;color:var(--text2);}
 .sem-icon{font-size:32px;margin-bottom:12px;}
@@ -318,120 +118,65 @@ a{text-decoration:none;color:inherit;}
 .sem-card.has-soal{border-color:rgba(45,212,160,.2);}
 .sem-card.has-soal:hover{border-color:rgba(45,212,160,.6);}
 
-/* Matkul list inside semester */
+/* MATKUL LIST */
 .matkul-list{display:flex;flex-direction:column;gap:10px;}
-.matkul-card{
-  background:var(--card);border:1px solid var(--border);
-  border-radius:var(--radius);padding:18px 20px;
-  cursor:pointer;transition:all .2s;
-  display:flex;align-items:center;gap:16px;
-}
+.matkul-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:16px;}
 .matkul-card:hover{border-color:var(--accent);background:var(--card2);}
-.matkul-icon{
-  width:44px;height:44px;min-width:44px;border-radius:12px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:20px;background:var(--glow2);border:1px solid var(--border);
-}
+.matkul-icon{width:44px;height:44px;min-width:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;background:var(--glow2);border:1px solid var(--border);}
 .matkul-info{flex:1;}
 .matkul-name{font-size:15px;font-weight:700;margin-bottom:3px;}
 .matkul-meta{font-size:12px;color:var(--text2);}
 .matkul-arrow{font-size:18px;color:var(--muted);}
 .matkul-card:hover .matkul-arrow{color:var(--accent);}
-.empty-state{
-  text-align:center;padding:60px 20px;
-  color:var(--muted);
-}
+.empty-state{text-align:center;padding:60px 20px;color:var(--muted);}
 .empty-state .e-icon{font-size:44px;margin-bottom:14px;}
 .empty-state p{font-size:14px;line-height:1.7;}
 
-/* ══════════════════════════════════════════
-   MATERI VIEWER (PDF/content)
-══════════════════════════════════════════ */
+/* QUIZ OPTIONS PAGE */
+.opt-card{position:relative;overflow:hidden;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px 20px;cursor:pointer;transition:all .25s cubic-bezier(.4,0,.2,1);text-align:left;}
+.opt-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:4px 4px 0 0;opacity:0;transition:opacity .25s;}
+.opt-card:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(45,212,160,.15);}
+.opt-card.opt-all{border-color:rgba(124,92,252,.25);background:linear-gradient(135deg,rgba(124,92,252,.1) 0%,var(--card) 100%);}
+.opt-card.opt-all::before{background:var(--accent);}
+.opt-card.opt-all:hover{border-color:rgba(124,92,252,.6);}
+.opt-card.opt-tag{border-color:rgba(45,212,160,.2);background:linear-gradient(135deg,rgba(45,212,160,.08) 0%,var(--card) 100%);}
+.opt-card.opt-tag::before{background:var(--green);}
+.opt-card.opt-tag:hover{border-color:rgba(45,212,160,.55);}
+.opt-card:hover::before{opacity:1;}
+.opt-card-icon{font-size:32px;margin-bottom:12px;}
+.opt-card-label{font-size:11px;font-weight:700;font-family:var(--mono);color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;}
+.opt-card-title{font-size:18px;font-weight:800;margin-bottom:4px;}
+.opt-card-meta{font-size:12px;color:var(--text2);display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.opt-badge-pg{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;font-family:var(--mono);padding:2px 8px;border-radius:20px;border:1px solid rgba(124,92,252,.4);color:var(--accent);background:var(--glow);}
+.opt-badge-es{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;font-family:var(--mono);padding:2px 8px;border-radius:20px;border:1px solid rgba(45,212,160,.4);color:var(--green);background:var(--green-bg);}
+
+/* MATERI VIEWER */
 #page-materi-viewer{background:var(--bg);}
-.mv-header{
-  position:sticky;top:0;z-index:50;
-  height:60px;display:flex;align-items:center;gap:14px;
-  padding:0 24px;
-  background:rgba(6,6,17,.92);backdrop-filter:blur(16px);
-  border-bottom:1px solid var(--border);
-}
-.mv-back{
-  padding:8px 14px;background:var(--card);border:1px solid var(--border);
-  border-radius:9px;color:var(--text2);font-size:13px;transition:all .16s;
-}
+.mv-header{position:sticky;top:0;z-index:50;height:60px;display:flex;align-items:center;gap:14px;padding:0 24px;background:rgba(6,6,17,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
+.mv-back{padding:8px 14px;background:var(--card);border:1px solid var(--border);border-radius:9px;color:var(--text2);font-size:13px;transition:all .16s;}
 .mv-back:hover{border-color:var(--border2);color:var(--text);}
-.mv-title{font-size:15px;font-weight:700;flex:1;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.mv-title{font-size:15px;font-weight:700;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .mv-body{max-width:860px;margin:0 auto;padding:40px 24px 80px;}
 .materi-file-list{display:flex;flex-direction:column;gap:10px;margin-top:20px;}
-.materi-file-item{
-  background:var(--card);border:1px solid var(--border);
-  border-radius:var(--radius);padding:16px 20px;
-  display:flex;align-items:center;gap:14px;
-  transition:all .16s;cursor:pointer;
-}
-.materi-file-item:hover{border-color:var(--accent);background:var(--card2);}
-.mfi-icon{font-size:24px;}
-.mfi-info{flex:1;}
-.mfi-name{font-size:14px;font-weight:600;margin-bottom:2px;}
-.mfi-meta{font-size:11px;color:var(--text2);}
-.mfi-btn{
-  padding:7px 14px;background:var(--accent);border:none;
-  border-radius:8px;color:#fff;font-size:12px;font-weight:600;
-  transition:all .16s;
-}
+.materi-content-box{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px;font-size:15px;line-height:1.8;color:var(--text2);white-space:pre-wrap;}
+.mfi-btn{padding:7px 14px;background:var(--accent);border:none;border-radius:8px;color:#fff;font-size:12px;font-weight:600;transition:all .16s;}
 .mfi-btn:hover{background:var(--accent2);}
-.materi-content-box{
-  background:var(--card);border:1px solid var(--border);
-  border-radius:var(--radius-lg);padding:28px;
-  font-size:15px;line-height:1.8;color:var(--text2);
-  white-space:pre-wrap;
-}
 
-/* ══════════════════════════════════════════
-   QUIZ PAGE (existing, adapted)
-══════════════════════════════════════════ */
---sidebar:272px;
---hdr:60px;
-.quiz-header{
-  position:fixed;top:0;left:0;right:0;z-index:200;
-  height:60px;
-  background:rgba(6,6,17,.92);
-  backdrop-filter:blur(14px);
-  border-bottom:1px solid var(--border);
-  display:flex;align-items:center;
-  padding:0 20px;gap:14px;
-}
-.hdr-hamburger{
-  width:36px;height:36px;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;
-  background:var(--card);border:1px solid var(--border);
-  border-radius:8px;cursor:pointer;transition:all .18s;
-}
+/* QUIZ PAGE */
+.quiz-header{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;background:rgba(6,6,17,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 20px;gap:14px;}
+.hdr-hamburger{width:36px;height:36px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;background:var(--card);border:1px solid var(--border);border-radius:8px;cursor:pointer;transition:all .18s;}
 .hdr-hamburger:hover{border-color:var(--accent);background:var(--glow);}
 .hdr-hamburger span{display:block;width:16px;height:2px;background:var(--text2);border-radius:99px;}
-.hdr-back{
-  width:36px;height:36px;display:flex;align-items:center;justify-content:center;
-  background:var(--card);border:1px solid var(--border);
-  border-radius:8px;cursor:pointer;transition:all .18s;
-  font-size:16px;color:var(--text2);
-}
+.hdr-back{width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:var(--card);border:1px solid var(--border);border-radius:8px;cursor:pointer;transition:all .18s;font-size:16px;color:var(--text2);}
 .hdr-back:hover{border-color:var(--border2);color:var(--text);}
 .hdr-subject{font-size:14px;font-weight:700;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .hdr-progress-wrap{width:160px;height:5px;background:var(--border);border-radius:99px;overflow:hidden;}
 @media(max-width:520px){.hdr-progress-wrap{display:none;}}
 .hdr-progress-bar{height:100%;width:0%;background:linear-gradient(90deg,var(--accent),var(--green));border-radius:99px;transition:width .4s ease;}
 .hdr-prog-txt{font-size:11px;color:var(--text2);font-family:var(--mono);white-space:nowrap;}
-
 .sidebar-overlay{display:none;position:fixed;inset:0;z-index:299;background:rgba(0,0,0,.55);backdrop-filter:blur(2px);}
 .sidebar-overlay.open{display:block;}
-.quiz-sidebar{
-  position:fixed;top:60px;bottom:0;left:0;
-  width:272px;z-index:300;
-  background:var(--surface);border-right:1px solid var(--border);
-  display:flex;flex-direction:column;
-  transition:transform .3s cubic-bezier(.4,0,.2,1);
-}
+.quiz-sidebar{position:fixed;top:60px;bottom:0;left:0;width:272px;z-index:300;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;transition:transform .3s cubic-bezier(.4,0,.2,1);}
 @media(min-width:769px){.quiz-sidebar{transform:translateX(0)!important;}.hdr-hamburger{display:none;}}
 @media(max-width:768px){.quiz-sidebar{transform:translateX(-100%);}.quiz-sidebar.open{transform:translateX(0);}}
 .sb-head{padding:18px 16px 14px;border-bottom:1px solid var(--border);}
@@ -459,12 +204,7 @@ a{text-decoration:none;color:inherit;}
 .sh-essay .sb-section-hdr-count{color:var(--green);background:rgba(45,212,160,.15);}
 .sh-pg .sb-section-hdr-count{color:var(--accent);background:rgba(124,92,252,.15);}
 .sb-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;}
-.sb-num{
-  aspect-ratio:1;display:flex;align-items:center;justify-content:center;
-  font-size:11px;font-weight:600;font-family:var(--mono);
-  border:1.5px solid var(--border);border-radius:7px;
-  cursor:pointer;color:var(--muted);transition:all .16s;
-}
+.sb-num{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;font-family:var(--mono);border:1.5px solid var(--border);border-radius:7px;cursor:pointer;color:var(--muted);transition:all .16s;}
 .sb-num:hover{border-color:var(--accent);color:var(--accent);background:var(--glow);}
 .sb-num.done{background:var(--accent);border-color:var(--accent);color:#fff;}
 .sb-num.cur{border-color:var(--yellow);color:var(--yellow);background:var(--yellow-bg);}
@@ -478,17 +218,26 @@ a{text-decoration:none;color:inherit;}
 .sb-stat-l{font-size:10px;color:var(--muted);margin-top:1px;}
 .n-done{color:var(--accent);}
 .n-un{color:var(--text2);}
-.btn-submit{
-  width:100%;padding:11px;
-  background:linear-gradient(135deg,var(--accent),#8b6fff);
-  border:none;border-radius:var(--radius);
-  color:#fff;font-size:13px;font-weight:700;
-  transition:all .2s;
-}
+.btn-submit{width:100%;padding:11px;background:linear-gradient(135deg,var(--accent),#8b6fff);border:none;border-radius:var(--radius);color:#fff;font-size:13px;font-weight:700;transition:all .2s;}
 .btn-submit:hover{opacity:.88;transform:translateY(-1px);box-shadow:0 6px 22px rgba(124,92,252,.35);}
-.quiz-main{margin-top:60px;padding:36px 40px;flex:1;}
+.quiz-main{margin-top:60px;padding:28px 40px;flex:1;}
 @media(min-width:769px){.quiz-main{margin-left:272px;}}
-@media(max-width:768px){.quiz-main{padding:24px 16px;}}
+@media(max-width:768px){.quiz-main{padding:20px 16px;}}
+
+/* ── QUIZ TAB BAR ── */
+.quiz-tab-bar{display:flex;align-items:center;gap:8px;margin-bottom:24px;flex-wrap:wrap;padding-bottom:20px;border-bottom:1px solid var(--border);}
+.quiz-tab-label{font-size:11px;font-weight:700;font-family:var(--mono);color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-right:4px;}
+.quiz-tab{padding:7px 16px;border-radius:20px;background:transparent;border:1.5px solid var(--border);color:var(--text2);font-size:12px;font-weight:600;font-family:var(--font);cursor:pointer;transition:all .18s;display:flex;align-items:center;gap:6px;}
+.quiz-tab:hover{border-color:var(--border2);color:var(--text);background:var(--card);}
+.quiz-tab.active{background:var(--glow);border-color:var(--accent);color:var(--accent);}
+.quiz-tab.tab-essay.active{background:var(--green-bg);border-color:rgba(45,212,160,.5);color:var(--green);}
+.quiz-tab .tab-cnt{display:inline-flex;align-items:center;justify-content:center;min-width:18px;height:18px;padding:0 5px;border-radius:20px;font-size:10px;font-weight:700;font-family:var(--mono);background:rgba(255,255,255,.08);}
+.quiz-tab.active .tab-cnt{background:rgba(124,92,252,.3);}
+.quiz-tab.tab-essay.active .tab-cnt{background:rgba(45,212,160,.25);}
+.quiz-progress-info{margin-left:auto;display:flex;align-items:center;gap:10px;}
+.qpi-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text2);font-family:var(--mono);}
+.qpi-dot{width:7px;height:7px;border-radius:50%;}
+
 .q-screen{display:none;}
 .q-screen.active{display:block;animation:fadeUp .3s ease;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
@@ -514,9 +263,7 @@ a{text-decoration:none;color:inherit;}
 .btn-nav:hover{border-color:var(--accent);color:var(--accent);background:var(--glow);}
 .btn-nav:disabled{opacity:.3;cursor:not-allowed;}
 
-/* ══════════════════════════════════════════
-   RESULT PAGE
-══════════════════════════════════════════ */
+/* RESULT PAGE */
 #page-result{background:var(--bg);}
 .result-wrap{max-width:820px;margin:0 auto;padding:40px 28px 80px;}
 .res-back{display:inline-flex;align-items:center;gap:8px;padding:9px 18px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);font-size:13px;font-weight:500;color:var(--text2);margin-bottom:28px;transition:all .16s;}
@@ -575,9 +322,7 @@ a{text-decoration:none;color:inherit;}
 .eval-type-tag.etpg{color:var(--accent);}
 .eval-type-tag.etes{color:var(--green);}
 
-/* ══════════════════════════════════════════
-   ADMIN LOGIN
-══════════════════════════════════════════ */
+/* ADMIN LOGIN */
 #page-admin-login{align-items:center;justify-content:center;min-height:100vh;background:var(--bg);padding:24px;}
 .login-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:40px 36px;width:100%;max-width:400px;box-shadow:var(--shadow);}
 .login-icon{font-size:36px;margin-bottom:16px;}
@@ -593,9 +338,7 @@ a{text-decoration:none;color:inherit;}
 .btn-back-home{display:flex;align-items:center;justify-content:center;gap:7px;width:100%;margin-top:14px;padding:10px;background:transparent;border:1px solid var(--border);border-radius:var(--radius);color:var(--text2);font-size:13px;transition:all .16s;}
 .btn-back-home:hover{border-color:var(--border2);color:var(--text);}
 
-/* ══════════════════════════════════════════
-   ADMIN DASHBOARD
-══════════════════════════════════════════ */
+/* ADMIN DASHBOARD */
 #page-admin{min-height:100vh;}
 .admin-header{height:60px;display:flex;align-items:center;padding:0 24px;gap:12px;background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;}
 .admin-logo{font-size:13px;font-weight:700;color:var(--accent);font-family:var(--mono);}
@@ -618,7 +361,7 @@ a{text-decoration:none;color:inherit;}
 .admin-panel-title{font-size:20px;font-weight:800;letter-spacing:-.02em;margin-bottom:6px;}
 .admin-panel-desc{font-size:13px;color:var(--text2);margin-bottom:28px;}
 
-/* Form components */
+/* FORM COMPONENTS */
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
 @media(max-width:520px){.form-row{grid-template-columns:1fr;}}
 .form-group{margin-bottom:14px;}
@@ -647,10 +390,14 @@ a{text-decoration:none;color:inherit;}
 .data-table tr:last-child td{border-bottom:none;}
 .data-table tr:hover td{background:var(--surface);}
 .table-wrap{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:24px;}
-.tag-pill{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;border:1px solid currentColor;}
-.icon-picker{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;}
-.icon-opt{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer;background:var(--surface);border:2px solid var(--border);transition:all .16s;}
-.icon-opt.selected,.icon-opt:hover{border-color:var(--accent);background:var(--glow);}
+.collapsible-header{display:flex;align-items:center;justify-content:space-between;cursor:pointer;padding:12px 16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:0;transition:all .16s;user-select:none;}
+.collapsible-header:hover{border-color:var(--border2);background:var(--card);}
+.collapsible-header.open{border-bottom-left-radius:0;border-bottom-right-radius:0;border-color:var(--accent);background:var(--glow);}
+.collapsible-header .ch-title{font-size:14px;font-weight:700;display:flex;align-items:center;gap:8px;}
+.collapsible-header .ch-arrow{font-size:12px;color:var(--text2);transition:transform .25s;}
+.collapsible-header.open .ch-arrow{transform:rotate(180deg);color:var(--accent);}
+.collapsible-body{display:none;background:var(--card);border:1px solid var(--accent);border-top:none;border-bottom-left-radius:var(--radius);border-bottom-right-radius:var(--radius);padding:20px 18px 18px;}
+.collapsible-body.open{display:block;animation:fadeUp .2s ease;}
 .divider{height:1px;background:var(--border);margin:24px 0;}
 .section-title{font-size:15px;font-weight:700;margin-bottom:16px;}
 .info-box{background:var(--glow);border:1px solid rgba(124,92,252,.25);border-radius:var(--radius);padding:14px 16px;font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:20px;}
@@ -664,14 +411,18 @@ a{text-decoration:none;color:inherit;}
 .q-type-chip.chip-pg{color:var(--accent);background:var(--glow);border-color:rgba(124,92,252,.3);}
 .q-type-chip.chip-essay{color:var(--green);background:var(--green-bg);border-color:rgba(45,212,160,.3);}
 .pw-form{max-width:400px;}
-.collapsible-header{display:flex;align-items:center;justify-content:space-between;cursor:pointer;padding:12px 16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:0;transition:all .16s;user-select:none;}
-.collapsible-header:hover{border-color:var(--border2);background:var(--card);}
-.collapsible-header.open{border-bottom-left-radius:0;border-bottom-right-radius:0;border-color:var(--accent);background:var(--glow);}
-.collapsible-header .ch-title{font-size:14px;font-weight:700;display:flex;align-items:center;gap:8px;}
-.collapsible-header .ch-arrow{font-size:12px;color:var(--text2);transition:transform .25s;}
-.collapsible-header.open .ch-arrow{transform:rotate(180deg);color:var(--accent);}
-.collapsible-body{display:none;background:var(--card);border:1px solid var(--accent);border-top:none;border-bottom-left-radius:var(--radius);border-bottom-right-radius:var(--radius);padding:20px 18px 18px;}
-.collapsible-body.open{display:block;animation:fadeUp .2s ease;}
+
+/* EMOJI PICKER */
+.emoji-picker-wrap{position:relative;display:inline-block;}
+.emoji-pick-btn{padding:8px 12px;background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--text2);font-size:12px;font-weight:600;cursor:pointer;transition:all .16s;white-space:nowrap;}
+.emoji-pick-btn:hover{border-color:var(--accent);color:var(--accent);}
+.emoji-panel{position:absolute;top:calc(100% + 6px);left:0;z-index:400;background:var(--card2);border:1px solid var(--border2);border-radius:var(--radius);padding:12px;display:none;flex-wrap:wrap;gap:4px;width:264px;box-shadow:0 12px 40px rgba(0,0,0,.6);}
+.emoji-panel.open{display:flex;}
+.emoji-opt{width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:18px;border-radius:7px;cursor:pointer;transition:background .12s;border:1px solid transparent;}
+.emoji-opt:hover{background:var(--glow);border-color:var(--border);}
+.icon-input-row{display:flex;align-items:center;gap:8px;}
+.icon-preview{width:40px;height:40px;min-width:40px;border-radius:10px;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:20px;}
+.icon-input-row .f-input{flex:1;}
 
 /* MODAL */
 .modal-overlay{display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:20px;}
@@ -681,406 +432,14 @@ a{text-decoration:none;color:inherit;}
 .modal-sub{font-size:13px;color:var(--text2);margin-bottom:22px;}
 .modal-close{position:absolute;top:18px;right:18px;width:30px;height:30px;border-radius:7px;background:var(--surface);border:1px solid var(--border);color:var(--text2);font-size:16px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .16s;}
 .modal-close:hover{border-color:var(--border2);color:var(--text);}
-
-/* Semester selector row in admin */
-.sem-select-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;}
-.sem-chip{padding:7px 16px;border-radius:20px;background:var(--surface);border:1.5px solid var(--border);font-size:12px;font-weight:600;cursor:pointer;transition:all .16s;color:var(--text2);}
-.sem-chip:hover{border-color:var(--border2);color:var(--text);}
-.sem-chip.active{border-color:var(--accent);color:var(--accent);background:var(--glow);}
-
-/* Materi file list in admin */
-.materi-admin-list{display:flex;flex-direction:column;gap:8px;margin-bottom:16px;}
-.materi-admin-item{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:12px 16px;display:flex;align-items:center;gap:12px;}
-.mai-info{flex:1;font-size:13px;}
-.mai-name{font-weight:600;margin-bottom:2px;}
-.mai-meta{font-size:11px;color:var(--text2);}
-
-/* =========================================
-   FIX QUIZ LAYOUT + TAB
-========================================= */
-
-/* Desktop */
-@media(min-width:769px){
-
-  .quiz-sidebar{
-    width:272px;
-    left:0;
-    top:60px;
-    bottom:0;
-    z-index:300;
-  }
-
-  .quiz-main{
-    margin-left:272px !important;
-    width:calc(100% - 272px);
-    padding:32px 40px;
-  }
-
-  .quiz-header{
-    padding-left:20px;
-    padding-right:20px;
-  }
-
-  #quiz-questions-container{
-    width:100%;
-  }
-
-  .q-card{
-    width:100%;
-    max-width:900px;
-  }
-}
-
-
-/* Mobile */
-@media(max-width:768px){
-
-  .quiz-main{
-    margin-left:0 !important;
-    width:100%;
-    padding:20px 14px 40px;
-  }
-
-  .quiz-sidebar{
-    width:260px;
-    z-index:999;
-  }
-
-  .quiz-header{
-    width:100%;
-    left:0;
-  }
-
-  .hdr-subject{
-    max-width:140px;
-  }
-
-  .q-card{
-    max-width:100%;
-  }
-}
-
-/* =========================================
-   RESPONSIVE FIX — MOBILE & TABLET
-========================================= */
-
-@media (max-width: 1024px){
-  .home-nav{
-    padding: 0 18px;
-  }
-
-  .hero-content{
-    max-width: 100%;
-  }
-
-  .quiz-main{
-    padding: 24px 20px;
-  }
-
-  .admin-content{
-    padding: 24px 18px;
-  }
-}
-
-@media (max-width: 768px){
-
-  /* NAVBAR */
-  .home-nav{
-    height: auto;
-    min-height: 64px;
-    padding: 12px 16px;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-
-  .nav-logo{
-    width: 100%;
-    font-size: 16px;
-    text-align: center;
-  }
-
-  .nav-logo span{
-    display: inline-block;
-    margin-top: 6px;
-    margin-left: 0;
-  }
-
-  .nav-spacer{
-    display: none;
-  }
-
-  .nav-links{
-    width: 100%;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-
-  .nav-link,
-  .nav-admin-btn{
-    flex: 1;
-    min-width: 120px;
-    text-align: center;
-  }
-
-
-  /* HERO */
-  .home-hero{
-    padding: 140px 16px 60px;
-    min-height: auto;
-  }
-
-  .hero-title{
-    font-size: clamp(30px, 10vw, 48px);
-    line-height: 1.2;
-  }
-
-  .hero-sub{
-    font-size: 14px;
-    line-height: 1.7;
-    margin-bottom: 30px;
-  }
-
-  .hero-cta-grid{
-    grid-template-columns: 1fr;
-  }
-
-  .hero-cta-card{
-    padding: 22px 18px;
-  }
-
-  .hero-stats{
-    gap: 14px;
-  }
-
-  .h-stat{
-    min-width: 100px;
-  }
-
-
-  /* SELECTOR PAGE */
-  .sel-page-nav{
-    padding: 14px 16px;
-    flex-wrap: wrap;
-  }
-
-  .sel-breadcrumb{
-    width: 100%;
-    font-size: 13px;
-  }
-
-  .sel-section-title{
-    font-size: 24px;
-  }
-
-  .sem-grid{
-    grid-template-columns: 1fr;
-  }
-
-  .matkul-card{
-    padding: 16px;
-    align-items: flex-start;
-  }
-
-  .matkul-name{
-    font-size: 14px;
-  }
-
-
-  /* QUIZ */
-  .quiz-header{
-    padding: 0 12px;
-    gap: 10px;
-  }
-
-  .hdr-subject{
-    font-size: 12px;
-  }
-
-  .quiz-main{
-    padding: 18px 12px 40px;
-  }
-
-  .q-card{
-    padding: 20px 16px;
-  }
-
-  .q-text{
-    font-size: 15px;
-    line-height: 1.7;
-  }
-
-  .opt{
-    align-items: flex-start;
-    padding: 12px;
-  }
-
-  .opt-t{
-    font-size: 13px;
-    line-height: 1.6;
-  }
-
-  .q-nav{
-    gap: 10px;
-    flex-wrap: wrap;
-  }
-
-  .btn-nav{
-    flex: 1;
-    justify-content: center;
-  }
-
-
-  /* RESULT */
-  .result-wrap{
-    padding: 24px 14px 60px;
-  }
-
-  .res-hero{
-    padding: 24px 16px;
-  }
-
-  .res-stats{
-    grid-template-columns: 1fr;
-  }
-
-  .retry-row{
-    flex-direction: column;
-  }
-
-  .btn-retry,
-  .btn-home-sm{
-    width: 100%;
-    justify-content: center;
-  }
-
-
-  /* ADMIN */
-  .admin-header{
-    padding: 0 12px;
-    gap: 8px;
-    flex-wrap: wrap;
-    height: auto;
-    min-height: 60px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-  }
-
-  .admin-title{
-    width: 100%;
-    font-size: 14px;
-  }
-
-  .admin-content{
-    padding: 18px 12px;
-  }
-
-  .table-wrap{
-    overflow-x: auto;
-  }
-
-  .data-table{
-    min-width: 700px;
-  }
-
-  .q-list-item{
-    flex-direction: column;
-  }
-
-  .q-list-actions{
-    width: 100%;
-    justify-content: flex-end;
-  }
-
-
-  /* MODAL */
-  .modal{
-    padding: 22px 16px;
-    max-width: 100%;
-  }
-
-
-  /* MATERI VIEWER */
-  .mv-header{
-    padding: 0 12px;
-  }
-
-  .mv-body{
-    padding: 20px 12px 60px;
-  }
-
-  .materi-file-item{
-    padding: 14px;
-    align-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  .mfi-btn{
-    width: 100%;
-  }
-}
-
-
-@media (max-width: 480px){
-
-  .hero-title{
-    font-size: 28px;
-  }
-
-  .hero-badge{
-    font-size: 10px;
-    padding: 6px 12px;
-  }
-
-  .cta-title{
-    font-size: 16px;
-  }
-
-  .cta-desc{
-    font-size: 12px;
-  }
-
-  .score-ring{
-    width: 100px;
-    height: 100px;
-  }
-
-  .score-pct{
-    font-size: 22px;
-  }
-
-  .res-title{
-    font-size: 18px;
-  }
-
-  .q-text{
-    font-size: 14px;
-  }
-
-  .opt-l{
-    width: 26px;
-    height: 26px;
-    min-width: 26px;
-  }
-
-  .btn-nav{
-    padding: 10px 12px;
-    font-size: 12px;
-  }
-}
-```
-
 </style>
 </head>
 <body>
 
-
-<!-- ══════════════════════════════════
-     HOME PAGE
-══════════════════════════════════ -->
+<!-- HOME -->
 <div id="page-home" class="page active">
   <nav class="home-nav">
-    <div class="nav-logo">Latihan Soal <span>Auntansi Perpajakan</span></div>
+    <div class="nav-logo">Latihan Soal <span>Akuntansi Perpajakan</span></div>
     <div class="nav-spacer"></div>
     <div class="nav-links">
       <button class="nav-link" onclick="goMateriSelector()">📖 Materi</button>
@@ -1088,24 +447,18 @@ a{text-decoration:none;color:inherit;}
       <button class="nav-admin-btn" onclick="goAdminLogin()">⚙ Admin</button>
     </div>
   </nav>
-
   <section class="home-hero">
     <div class="orb1 hero-orb"></div>
     <div class="orb2 hero-orb"></div>
     <div class="orb3 hero-orb"></div>
     <div class="hero-grid"></div>
-
     <div class="hero-content">
-      <div class="hero-badge">
-        <div class="hero-badge-dot"></div>
-        Platform Untuk Belajar Akuntansi Perpajakan
-      </div>
+      <div class="hero-badge"><div class="hero-badge-dot"></div>Platform Untuk Belajar Akuntansi Perpajakan</div>
       <h1 class="hero-title">
         <span class="normal-word">Raih IPK Idaman<br>dengan</span>
         <span class="accent-word"> Latihan Cerdas</span>
       </h1>
-      <p class="hero-sub">Akses materi dan latihan soal UTS & UAS Akuntansi Perpajakan. Diorganisir per semester, evaluasi langsung setelah mengerjakan.</p>
-
+      <p class="hero-sub">Akses materi dan latihan soal UTS &amp; UAS Akuntansi Perpajakan. Diorganisir per semester, evaluasi langsung setelah mengerjakan.</p>
       <div class="hero-cta-grid">
         <div class="hero-cta-card cta-materi" onclick="goMateriSelector()">
           <div class="cta-icon">📖</div>
@@ -1116,11 +469,10 @@ a{text-decoration:none;color:inherit;}
         <div class="hero-cta-card cta-latsoal" onclick="goLatsoalSelector()">
           <div class="cta-icon">✏️</div>
           <div class="cta-title">Latihan Soal</div>
-          <div class="cta-desc">Kerjakan soal UTS & UAS dengan penilaian otomatis dan evaluasi detail.</div>
+          <div class="cta-desc">Kerjakan soal UTS &amp; UAS dengan penilaian otomatis dan evaluasi detail.</div>
           <div class="cta-arrow" style="color:var(--green)">Mulai Latihan →</div>
         </div>
       </div>
-
       <div class="hero-stats" id="home-stats">
         <div class="h-stat"><div class="h-stat-n" id="stat-sem">0</div><div class="h-stat-l">Semester</div></div>
         <div class="stat-divider"></div>
@@ -1134,9 +486,7 @@ a{text-decoration:none;color:inherit;}
   </section>
 </div>
 
-<!-- ══════════════════════════════════
-     SEMESTER SELECTOR — MATERI
-══════════════════════════════════ -->
+<!-- MATERI: SEMESTER -->
 <div id="page-materi-sem" class="page">
   <div class="sel-page-nav">
     <button class="sel-back" onclick="goHome()">← Beranda</button>
@@ -1149,9 +499,7 @@ a{text-decoration:none;color:inherit;}
   </div>
 </div>
 
-<!-- ══════════════════════════════════
-     MATKUL SELECTOR — MATERI
-══════════════════════════════════ -->
+<!-- MATERI: MATKUL -->
 <div id="page-materi-matkul" class="page">
   <div class="sel-page-nav">
     <button class="sel-back" onclick="goMateriSelector()">← Semester</button>
@@ -1164,12 +512,10 @@ a{text-decoration:none;color:inherit;}
   </div>
 </div>
 
-<!-- ══════════════════════════════════
-     MATERI VIEWER
-══════════════════════════════════ -->
+<!-- MATERI: VIEWER -->
 <div id="page-materi-viewer" class="page">
   <div class="mv-header">
-    <button class="mv-back" id="mv-back-btn" onclick="backFromViewer()">← Kembali</button>
+    <button class="mv-back" onclick="backFromViewer()">← Kembali</button>
     <div class="mv-title" id="mv-title">Materi</div>
   </div>
   <div class="mv-body">
@@ -1177,9 +523,7 @@ a{text-decoration:none;color:inherit;}
   </div>
 </div>
 
-<!-- ══════════════════════════════════
-     SEMESTER SELECTOR — LATSOAL
-══════════════════════════════════ -->
+<!-- LATSOAL: SEMESTER -->
 <div id="page-latsoal-sem" class="page">
   <div class="sel-page-nav">
     <button class="sel-back" onclick="goHome()">← Beranda</button>
@@ -1192,9 +536,7 @@ a{text-decoration:none;color:inherit;}
   </div>
 </div>
 
-<!-- ══════════════════════════════════
-     MATKUL SELECTOR — LATSOAL
-══════════════════════════════════ -->
+<!-- LATSOAL: MATKUL -->
 <div id="page-latsoal-matkul" class="page">
   <div class="sel-page-nav">
     <button class="sel-back" onclick="goLatsoalSelector()">← Semester</button>
@@ -1202,14 +544,25 @@ a{text-decoration:none;color:inherit;}
   </div>
   <div class="sel-page-content">
     <div class="sel-section-title" id="latsoal-matkul-title">Mata Kuliah</div>
-    <div class="sel-section-sub">Pilih mata kuliah untuk mulai latihan soal.</div>
+    <div class="sel-section-sub">Pilih mata kuliah untuk melihat pilihan soal latihan.</div>
     <div class="matkul-list" id="latsoal-matkul-list"></div>
   </div>
 </div>
 
-<!-- ══════════════════════════════════
-     QUIZ PAGE
-══════════════════════════════════ -->
+<!-- LATSOAL: OPTIONS (PILIH SET SOAL) — NEW -->
+<div id="page-latsoal-options" class="page">
+  <div class="sel-page-nav">
+    <button class="sel-back" id="latsoal-opt-back" onclick="openLatsoalSem(currentSemId)">← Kembali</button>
+    <div class="sel-breadcrumb" id="latsoal-opt-breadcrumb">Pilih Set Soal</div>
+  </div>
+  <div class="sel-page-content">
+    <div class="sel-section-title" id="latsoal-opt-matkul-title">Pilih Set Soal</div>
+    <div class="sel-section-sub" id="latsoal-opt-sub">Pilih kumpulan soal yang ingin kamu kerjakan.</div>
+    <div class="sem-grid" id="latsoal-opt-grid" style="grid-template-columns:repeat(auto-fill,minmax(220px,1fr));"></div>
+  </div>
+</div>
+
+<!-- QUIZ -->
 <div id="page-quiz" class="page">
   <div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
   <header class="quiz-header">
@@ -1227,7 +580,7 @@ a{text-decoration:none;color:inherit;}
         <div class="sb-leg-item"><div class="sb-leg-dot ld-done"></div>Dijawab</div>
         <div class="sb-leg-item"><div class="sb-leg-dot ld-cur"></div>Aktif</div>
       </div>
-      <div class="sb-type-legend"><span class="sb-type-pg">PG</span> Pilihan Ganda &nbsp;&nbsp;<span class="sb-type-esai">ESAI</span> Esai</div>
+      <div class="sb-type-legend"><span class="sb-type-pg">PG</span> Pilihan Ganda &nbsp;<span class="sb-type-esai">ESAI</span> Esai</div>
     </div>
     <div class="sb-scroll" id="sb-scroll"></div>
     <div class="sb-foot">
@@ -1240,13 +593,28 @@ a{text-decoration:none;color:inherit;}
     </div>
   </aside>
   <main class="quiz-main" id="quiz-main">
+    <!-- TAB BAR -->
+    <div class="quiz-tab-bar" id="quiz-tab-bar">
+      <span class="quiz-tab-label">Filter:</span>
+      <button class="quiz-tab active" id="qtab-all" onclick="switchQuizTab('all',this)">
+        📋 Semua <span class="tab-cnt" id="qtab-cnt-all">0</span>
+      </button>
+      <button class="quiz-tab" id="qtab-mcq" onclick="switchQuizTab('mcq',this)">
+        📝 Pilihan Ganda <span class="tab-cnt" id="qtab-cnt-mcq">0</span>
+      </button>
+      <button class="quiz-tab tab-essay" id="qtab-essay" onclick="switchQuizTab('essay',this)">
+        ✍ Esai <span class="tab-cnt" id="qtab-cnt-essay">0</span>
+      </button>
+      <div class="quiz-progress-info" id="quiz-prog-info">
+        <div class="qpi-item"><div class="qpi-dot" style="background:var(--accent)"></div><span id="qpi-done">0 dijawab</span></div>
+        <div class="qpi-item"><div class="qpi-dot" style="background:var(--muted)"></div><span id="qpi-left">0 tersisa</span></div>
+      </div>
+    </div>
     <div id="quiz-questions-container"></div>
   </main>
 </div>
 
-<!-- ══════════════════════════════════
-     RESULT PAGE
-══════════════════════════════════ -->
+<!-- RESULT -->
 <div id="page-result" class="page">
   <div class="result-wrap">
     <button class="res-back" onclick="backFromResult()">← Kembali</button>
@@ -1278,9 +646,7 @@ a{text-decoration:none;color:inherit;}
   </div>
 </div>
 
-<!-- ══════════════════════════════════
-     ADMIN LOGIN
-══════════════════════════════════ -->
+<!-- ADMIN LOGIN -->
 <div id="page-admin-login" class="page">
   <div class="login-card">
     <div class="login-icon">🔐</div>
@@ -1296,9 +662,7 @@ a{text-decoration:none;color:inherit;}
   </div>
 </div>
 
-<!-- ══════════════════════════════════
-     ADMIN DASHBOARD
-══════════════════════════════════ -->
+<!-- ADMIN DASHBOARD -->
 <div id="page-admin" class="page">
   <header class="admin-header">
     <div class="admin-logo">ADMIN</div>
@@ -1309,7 +673,7 @@ a{text-decoration:none;color:inherit;}
   <div class="admin-body">
     <nav class="admin-nav">
       <div class="admin-nav-sect">Kelola</div>
-      <div class="admin-nav-item active" onclick="showPanel('semesters')" data-panel="semesters">🗂 Semester & Matkul</div>
+      <div class="admin-nav-item active" onclick="showPanel('semesters')" data-panel="semesters">🗂 Semester &amp; Matkul</div>
       <div class="admin-nav-item" onclick="showPanel('materi')" data-panel="materi">📖 Upload Materi</div>
       <div class="admin-nav-item" onclick="showPanel('questions')" data-panel="questions">✏️ Soal Latihan</div>
       <div class="admin-nav-sect">Pengaturan</div>
@@ -1317,29 +681,21 @@ a{text-decoration:none;color:inherit;}
     </nav>
     <div class="admin-content">
 
-      <!-- PANEL: SEMESTERS & MATKUL -->
+      <!-- PANEL: SEMESTERS -->
       <div class="admin-panel active" id="panel-semesters">
-        <div class="admin-panel-title">Semester & Mata Kuliah</div>
-        <div class="admin-panel-desc">Kelola daftar semester dan mata kuliah yang tersedia di platform.</div>
-
+        <div class="admin-panel-title">Semester &amp; Mata Kuliah</div>
+        <div class="admin-panel-desc">Kelola daftar semester dan mata kuliah yang tersedia.</div>
         <div class="section-title">Daftar Semester</div>
         <div class="table-wrap">
           <table class="data-table">
-            <thead><tr><th>Semester</th><th>Mata Kuliah</th><th>Soal</th><th>Materi</th><th>Aksi</th></tr></thead>
+            <thead><tr><th>Semester</th><th>Matkul</th><th>Soal</th><th>Materi</th><th>Aksi</th></tr></thead>
             <tbody id="sem-tbody"></tbody>
           </table>
         </div>
-
         <div class="section-title">+ Tambah Semester</div>
         <div class="form-row">
-          <div class="form-group">
-            <label class="f-label">Nomor Semester *</label>
-            <input class="f-input" type="number" id="new-sem-num" placeholder="cth: 1" min="1" max="14"/>
-          </div>
-          <div class="form-group">
-            <label class="f-label">Label (opsional)</label>
-            <input class="f-input" id="new-sem-label" placeholder="cth: Semester Ganjil"/>
-          </div>
+          <div class="form-group"><label class="f-label">Nomor Semester *</label><input class="f-input" type="number" id="new-sem-num" placeholder="cth: 1" min="1" max="14"/></div>
+          <div class="form-group"><label class="f-label">Label (opsional)</label><input class="f-input" id="new-sem-label" placeholder="cth: Semester Ganjil"/></div>
         </div>
         <div class="form-actions"><button class="btn-primary" onclick="addSemester()">Tambah Semester</button></div>
         <div class="success-toast" id="sem-toast">✓ Semester berhasil ditambahkan!</div>
@@ -1347,24 +703,22 @@ a{text-decoration:none;color:inherit;}
         <div class="divider"></div>
         <div class="section-title">+ Tambah Mata Kuliah</div>
         <div class="form-row">
-          <div class="form-group">
-            <label class="f-label">Semester *</label>
-            <select class="f-select" id="new-matkul-sem"></select>
-          </div>
-          <div class="form-group">
-            <label class="f-label">Nama Mata Kuliah *</label>
-            <input class="f-input" id="new-matkul-name" placeholder="cth: Akuntansi Perpajakan"/>
-          </div>
+          <div class="form-group"><label class="f-label">Semester *</label><select class="f-select" id="new-matkul-sem"></select></div>
+          <div class="form-group"><label class="f-label">Nama Mata Kuliah *</label><input class="f-input" id="new-matkul-name" placeholder="cth: Akuntansi Perpajakan"/></div>
         </div>
         <div class="form-row">
           <div class="form-group">
             <label class="f-label">Ikon (emoji)</label>
-            <input class="f-input" id="new-matkul-icon" placeholder="📚" maxlength="4"/>
+            <div class="icon-input-row">
+              <div class="icon-preview" id="new-matkul-icon-preview">📚</div>
+              <input class="f-input" id="new-matkul-icon" placeholder="📚" maxlength="4" oninput="syncIconPreview('new-matkul-icon','new-matkul-icon-preview')"/>
+              <div class="emoji-picker-wrap">
+                <button type="button" class="emoji-pick-btn" onclick="toggleEmojiPicker('ep-new-matkul')">🙂 Pilih</button>
+                <div class="emoji-panel" id="ep-new-matkul"></div>
+              </div>
+            </div>
           </div>
-          <div class="form-group">
-            <label class="f-label">Deskripsi</label>
-            <input class="f-input" id="new-matkul-desc" placeholder="cth: Mata kuliah inti wajib"/>
-          </div>
+          <div class="form-group"><label class="f-label">Deskripsi</label><input class="f-input" id="new-matkul-desc" placeholder="cth: Mata kuliah inti wajib"/></div>
         </div>
         <div class="form-actions"><button class="btn-primary" onclick="addMatkul()">Tambah Mata Kuliah</button></div>
         <div class="success-toast" id="matkul-toast">✓ Mata kuliah berhasil ditambahkan!</div>
@@ -1376,23 +730,11 @@ a{text-decoration:none;color:inherit;}
         <div class="admin-panel-title">Upload Materi</div>
         <div class="admin-panel-desc">Upload file PDF atau tulis materi teks untuk mata kuliah tertentu.</div>
         <div class="form-row">
-          <div class="form-group">
-            <label class="f-label">Semester *</label>
-            <select class="f-select" id="materi-sem-sel" onchange="updateMateriMatkulSel()"></select>
-          </div>
-          <div class="form-group">
-            <label class="f-label">Mata Kuliah *</label>
-            <select class="f-select" id="materi-matkul-sel"></select>
-          </div>
+          <div class="form-group"><label class="f-label">Semester *</label><select class="f-select" id="materi-sem-sel" onchange="updateMateriMatkulSel()"></select></div>
+          <div class="form-group"><label class="f-label">Mata Kuliah *</label><select class="f-select" id="materi-matkul-sel"></select></div>
         </div>
-        <div class="form-group">
-          <label class="f-label">Judul Materi *</label>
-          <input class="f-input" id="materi-title" placeholder="cth: Bab 1 - Pengantar Perpajakan"/>
-        </div>
-        <div class="form-group">
-          <label class="f-label">Konten Materi (teks)</label>
-          <textarea class="f-textarea" id="materi-content" style="min-height:120px;" placeholder="Tulis ringkasan materi di sini..."></textarea>
-        </div>
+        <div class="form-group"><label class="f-label">Judul Materi *</label><input class="f-input" id="materi-title" placeholder="cth: Bab 1 - Pengantar Perpajakan"/></div>
+        <div class="form-group"><label class="f-label">Konten Materi (teks)</label><textarea class="f-textarea" id="materi-content" style="min-height:120px;" placeholder="Tulis ringkasan materi di sini..."></textarea></div>
         <div class="form-group">
           <label class="f-label">Upload File PDF (opsional)</label>
           <label class="btn-primary" style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;padding:10px 20px;">
@@ -1404,7 +746,6 @@ a{text-decoration:none;color:inherit;}
         <div class="form-actions"><button class="btn-primary" onclick="saveMateri()">Simpan Materi</button></div>
         <div class="success-toast" id="materi-toast">✓ Materi berhasil disimpan!</div>
         <div class="login-err" id="materi-err" style="margin-top:10px;"></div>
-
         <div class="divider"></div>
         <div class="section-title">Daftar Materi</div>
         <div id="materi-admin-list-wrap"></div>
@@ -1414,22 +755,11 @@ a{text-decoration:none;color:inherit;}
       <div class="admin-panel" id="panel-questions">
         <div class="admin-panel-title">Soal Latihan</div>
         <div class="admin-panel-desc">Tambah atau hapus soal per semester dan mata kuliah.</div>
-
         <div class="form-row">
-          <div class="form-group">
-            <label class="f-label">Semester *</label>
-            <select class="f-select" id="q-sem-sel" onchange="updateQMatkulSel()"></select>
-          </div>
-          <div class="form-group">
-            <label class="f-label">Mata Kuliah *</label>
-            <select class="f-select" id="q-matkul-sel" onchange="renderQList()"></select>
-          </div>
+          <div class="form-group"><label class="f-label">Semester *</label><select class="f-select" id="q-sem-sel" onchange="updateQMatkulSel()"></select></div>
+          <div class="form-group"><label class="f-label">Mata Kuliah *</label><select class="f-select" id="q-matkul-sel" onchange="renderQList()"></select></div>
         </div>
-
-        <div id="q-list-container">
-          <div style="color:var(--muted);font-size:13px;padding:20px 0;">Pilih semester & mata kuliah untuk melihat soal.</div>
-        </div>
-
+        <div id="q-list-container"><div style="color:var(--muted);font-size:13px;padding:20px 0;">Pilih semester &amp; mata kuliah untuk melihat soal.</div></div>
         <div class="divider"></div>
         <div class="section-title">📄 Import dari PDF</div>
         <div class="info-box" style="border-color:var(--accent);">
@@ -1447,7 +777,6 @@ a{text-decoration:none;color:inherit;}
         </div>
         <div class="success-toast" id="pdf-toast">✓ Soal dari PDF berhasil ditambahkan!</div>
         <div class="login-err" id="pdf-err" style="margin-top:10px;"></div>
-
         <div class="divider"></div>
         <div class="collapsible-header" id="manual-toggle" onclick="toggleManualForm()">
           <span class="ch-title">✏️ Tambah Soal Manual</span>
@@ -1456,15 +785,9 @@ a{text-decoration:none;color:inherit;}
         <div class="collapsible-body" id="manual-form-body">
           <div class="form-group" style="margin-top:4px;">
             <label class="f-label">Jenis Soal *</label>
-            <select class="f-select" id="new-q-type" onchange="toggleQType()">
-              <option value="mcq">Pilihan Ganda</option>
-              <option value="essay">Esai (Keyword Matching)</option>
-            </select>
+            <select class="f-select" id="new-q-type" onchange="toggleQType()"><option value="mcq">Pilihan Ganda</option><option value="essay">Esai (Keyword Matching)</option></select>
           </div>
-          <div class="form-group">
-            <label class="f-label">Teks Pertanyaan *</label>
-            <textarea class="f-textarea" id="new-q-text" placeholder="Tulis pertanyaan di sini..."></textarea>
-          </div>
+          <div class="form-group"><label class="f-label">Teks Pertanyaan *</label><textarea class="f-textarea" id="new-q-text" placeholder="Tulis pertanyaan di sini..."></textarea></div>
           <div id="area-mcq">
             <div class="form-group">
               <label class="f-label">Pilihan Jawaban *</label>
@@ -1475,31 +798,16 @@ a{text-decoration:none;color:inherit;}
                 <div class="opt-field"><div class="opt-badge">D</div><input class="f-input" id="opt3" placeholder="Pilihan D"/></div>
               </div>
             </div>
-            <div class="form-group">
-              <label class="f-label">Jawaban Benar *</label>
-              <select class="f-select" id="new-q-ans"><option value="0">A</option><option value="1">B</option><option value="2">C</option><option value="3">D</option></select>
-            </div>
+            <div class="form-group"><label class="f-label">Jawaban Benar *</label><select class="f-select" id="new-q-ans"><option value="0">A</option><option value="1">B</option><option value="2">C</option><option value="3">D</option></select></div>
           </div>
           <div id="area-essay" style="display:none;background:var(--green-bg);padding:14px;border-radius:8px;border:1px solid rgba(45,212,160,.3);">
-            <div class="form-group">
-              <label class="f-label">Kata Kunci (pisahkan dengan koma) *</label>
-              <input class="f-input" id="new-q-keywords" placeholder="cth: anggaran, budgetair, regulerend"/>
-            </div>
-            <div class="form-group">
-              <label class="f-label">Poin Maksimal (Bobot) *</label>
-              <input class="f-input" type="number" id="new-q-maxscore" value="5" min="1"/>
-            </div>
+            <div class="form-group"><label class="f-label">Kata Kunci (pisahkan koma) *</label><input class="f-input" id="new-q-keywords" placeholder="cth: anggaran, budgetair, regulerend"/></div>
+            <div class="form-group"><label class="f-label">Poin Maksimal (Bobot) *</label><input class="f-input" type="number" id="new-q-maxscore" value="5" min="1"/></div>
           </div>
           <div class="form-row" style="margin-top:14px;">
-            <div class="form-group">
-              <label class="f-label">Tag / Label (opsional)</label>
-              <input class="f-input" id="new-q-tag" placeholder="cth: Bab 1"/>
-            </div>
+            <div class="form-group"><label class="f-label">Tag / Label (opsional)</label><input class="f-input" id="new-q-tag" placeholder="cth: UTS, UAS, Bab 1"/></div>
           </div>
-          <div class="form-group">
-            <label class="f-label">Penjelasan Jawaban (opsional)</label>
-            <textarea class="f-textarea" id="new-q-exp" placeholder="Tulis penjelasan singkat..."></textarea>
-          </div>
+          <div class="form-group"><label class="f-label">Penjelasan Jawaban (opsional)</label><textarea class="f-textarea" id="new-q-exp" placeholder="Tulis penjelasan singkat..."></textarea></div>
           <div class="form-actions">
             <button class="btn-primary" onclick="addQuestion()">Simpan Soal</button>
             <button class="btn-secondary" onclick="clearQForm()">Reset</button>
@@ -1536,19 +844,17 @@ a{text-decoration:none;color:inherit;}
         <div class="info-box" style="border-color:rgba(242,104,104,.25);background:var(--red-bg);">Hapus semua data akan menghapus <strong style="color:var(--red);">semua data</strong> secara permanen.</div>
         <button class="btn-danger" onclick="clearAllData()">🗑 Hapus Semua Data</button>
       </div>
-
     </div>
   </div>
 </div>
 
-<!-- MODALS -->
+<!-- MODAL: EDIT SOAL -->
 <div class="modal-overlay" id="modal-edit-q">
   <div class="modal">
     <button class="modal-close" onclick="closeModal('modal-edit-q')">✕</button>
     <div class="modal-title">Edit Soal</div>
     <div class="modal-sub">Ubah teks, pilihan, jawaban benar, atau kata kunci.</div>
     <input type="hidden" id="edit-q-id"/>
-    <input type="hidden" id="edit-q-semid"/>
     <input type="hidden" id="edit-q-matkulid"/>
     <input type="hidden" id="edit-q-type"/>
     <div class="form-group"><label class="f-label">Pertanyaan</label><textarea class="f-textarea" id="edit-q-text"></textarea></div>
@@ -1562,7 +868,7 @@ a{text-decoration:none;color:inherit;}
       <div class="form-group"><label class="f-label">Jawaban Benar</label><select class="f-select" id="eq-ans"><option value="0">A</option><option value="1">B</option><option value="2">C</option><option value="3">D</option></select></div>
     </div>
     <div id="edit-area-essay" style="display:none;background:var(--green-bg);padding:14px;border-radius:8px;border:1px solid rgba(45,212,160,.3);margin-bottom:14px;">
-      <div class="form-group"><label class="f-label">Kata Kunci (pisahkan dengan koma)</label><input class="f-input" id="eq-keywords"/></div>
+      <div class="form-group"><label class="f-label">Kata Kunci (pisahkan koma)</label><input class="f-input" id="eq-keywords"/></div>
       <div class="form-group" style="margin-bottom:0;"><label class="f-label">Poin Maksimal</label><input class="f-input" type="number" id="eq-maxscore" min="1"/></div>
     </div>
     <div class="form-group"><label class="f-label">Tag</label><input class="f-input" id="eq-tag"/></div>
@@ -1571,43 +877,120 @@ a{text-decoration:none;color:inherit;}
   </div>
 </div>
 
+<!-- MODAL: EDIT MATKUL — NEW -->
+<div class="modal-overlay" id="modal-edit-matkul">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('modal-edit-matkul')">✕</button>
+    <div class="modal-title">Edit Mata Kuliah</div>
+    <div class="modal-sub">Ubah nama, ikon, atau deskripsi mata kuliah.</div>
+    <input type="hidden" id="edit-matkul-id"/>
+    <div class="form-group"><label class="f-label">Nama Mata Kuliah *</label><input class="f-input" id="edit-matkul-name" placeholder="Nama mata kuliah"/></div>
+    <div class="form-group">
+      <label class="f-label">Ikon (emoji)</label>
+      <div class="icon-input-row">
+        <div class="icon-preview" id="edit-matkul-icon-preview">📚</div>
+        <input class="f-input" id="edit-matkul-icon" placeholder="📚" maxlength="4" oninput="syncIconPreview('edit-matkul-icon','edit-matkul-icon-preview')"/>
+        <div class="emoji-picker-wrap">
+          <button type="button" class="emoji-pick-btn" onclick="toggleEmojiPicker('ep-edit-matkul')">🙂 Pilih</button>
+          <div class="emoji-panel" id="ep-edit-matkul"></div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group"><label class="f-label">Deskripsi</label><input class="f-input" id="edit-matkul-desc" placeholder="Deskripsi singkat"/></div>
+    <div class="form-actions"><button class="btn-primary" onclick="saveEditMatkul()">Simpan</button><button class="btn-secondary" onclick="closeModal('modal-edit-matkul')">Batal</button></div>
+    <div class="success-toast" id="edit-matkul-toast">✓ Mata kuliah berhasil diperbarui!</div>
+  </div>
+</div>
+
 <script>
-// ═══════════════════════════════════════
-// DATA KEYS & STATE
-// ═══════════════════════════════════════
-const LS_SEM    = 'akp_semesters';   // [{id, num, label}]
-const LS_MATKUL = 'akp_matkul';      // [{id, semId, name, icon, desc}]
-const LS_QS     = 'akp_questions';   // {matkulId: [{id,type,q,opts,ans,...}]}
-const LS_MATERI = 'akp_materi';      // {matkulId: [{id,title,content,fileName,fileData}]}
-const LS_PW     = 'akp_admin_pw';
+// ════════════════════════════════
+// STORAGE KEYS & STATE
+// ════════════════════════════════
+const LS_SEM='akp_semesters',LS_MATKUL='akp_matkul',LS_QS='akp_questions',LS_MATERI='akp_materi',LS_PW='akp_admin_pw';
 
-let currentMatkulId  = null; // for quiz
-let currentSemId     = null; // nav state
-let userAnswers      = [];
-let currentQ         = 0;
-let pendingMateriPDF = null; // {name, dataUrl}
+let currentMatkulId=null;
+let currentSemId=null;
+let userAnswers=[];
+let currentQ=0;
+let pendingMateriPDF=null;
+let currentQuestionsFiltered=[];
+let currentTagFilter=null;
+let quizTabFilter='all';
 
-if (typeof pdfjsLib !== 'undefined') {
-  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+if(typeof pdfjsLib!=='undefined'){
+  pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
 }
 
-// ═══════════════════════════════════════
+// ════════════════════════════════
 // DATA LAYER
-// ═══════════════════════════════════════
-const getSemesters  = () => JSON.parse(localStorage.getItem(LS_SEM)||'[]');
-const setSemesters  = d  => localStorage.setItem(LS_SEM, JSON.stringify(d));
-const getMatkuls    = () => JSON.parse(localStorage.getItem(LS_MATKUL)||'[]');
-const setMatkuls    = d  => localStorage.setItem(LS_MATKUL, JSON.stringify(d));
-const getQuestions  = () => JSON.parse(localStorage.getItem(LS_QS)||'{}');
-const setQuestions  = d  => localStorage.setItem(LS_QS, JSON.stringify(d));
-const getMateri     = () => JSON.parse(localStorage.getItem(LS_MATERI)||'{}');
-const setMateri     = d  => localStorage.setItem(LS_MATERI, JSON.stringify(d));
-const getPw         = () => localStorage.getItem(LS_PW)||'admin123';
-const uid           = () => Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+// ════════════════════════════════
+const getSemesters=()=>JSON.parse(localStorage.getItem(LS_SEM)||'[]');
+const setSemesters=d=>localStorage.setItem(LS_SEM,JSON.stringify(d));
+const getMatkuls=()=>JSON.parse(localStorage.getItem(LS_MATKUL)||'[]');
+const setMatkuls=d=>localStorage.setItem(LS_MATKUL,JSON.stringify(d));
+const getQuestions=()=>JSON.parse(localStorage.getItem(LS_QS)||'{}');
+const setQuestions=d=>localStorage.setItem(LS_QS,JSON.stringify(d));
+const getMateri=()=>JSON.parse(localStorage.getItem(LS_MATERI)||'{}');
+const setMateri=d=>localStorage.setItem(LS_MATERI,JSON.stringify(d));
+const getPw=()=>localStorage.getItem(LS_PW)||'admin123';
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
 
-// ═══════════════════════════════════════
+// ════════════════════════════════
+// EMOJI PICKER
+// ════════════════════════════════
+const EMOJIS=[
+  '📚','📖','📝','📊','📈','📉','🧮','💰','🏛','🧾',
+  '📋','📌','🔖','💡','🎓','📓','📔','📒','📕','📗',
+  '📘','📙','🗂','📁','📂','✏️','✒️','🔍','💼','⚖️',
+  '💹','🌐','🏢','🧠','💻','📱','🔬','🎯','🏆','🌟',
+  '⭐','🔢','📐','📏','🖊','🖋','📃','📄','🗃','🗄'
+];
+
+function buildEmojiPanels(){
+  const panels=document.querySelectorAll('.emoji-panel');
+  panels.forEach(panel=>{
+    const id=panel.id;
+    // Determine which input this panel targets
+    const targetInput=id==='ep-new-matkul'?'new-matkul-icon':
+                      id==='ep-edit-matkul'?'edit-matkul-icon':'';
+    const previewId=id==='ep-new-matkul'?'new-matkul-icon-preview':
+                    id==='ep-edit-matkul'?'edit-matkul-icon-preview':'';
+    panel.innerHTML=EMOJIS.map(e=>`<div class="emoji-opt" onclick="setEmoji('${targetInput}','${previewId}','${e}','${id}')" title="${e}">${e}</div>`).join('');
+  });
+}
+
+function toggleEmojiPicker(panelId){
+  const panel=document.getElementById(panelId);
+  const isOpen=panel.classList.contains('open');
+  document.querySelectorAll('.emoji-panel.open').forEach(p=>p.classList.remove('open'));
+  if(!isOpen) panel.classList.add('open');
+}
+
+function setEmoji(inputId,previewId,emoji,panelId){
+  if(inputId){
+    const inp=document.getElementById(inputId);
+    if(inp) inp.value=emoji;
+  }
+  if(previewId){
+    const prev=document.getElementById(previewId);
+    if(prev) prev.textContent=emoji;
+  }
+  const panel=document.getElementById(panelId);
+  if(panel) panel.classList.remove('open');
+}
+
+function syncIconPreview(inputId,previewId){
+  const v=document.getElementById(inputId).value;
+  document.getElementById(previewId).textContent=v||'📚';
+}
+
+document.addEventListener('click',function(e){
+  if(!e.target.closest('.emoji-picker-wrap')) document.querySelectorAll('.emoji-panel.open').forEach(p=>p.classList.remove('open'));
+});
+
+// ════════════════════════════════
 // PAGE ROUTING
-// ═══════════════════════════════════════
+// ════════════════════════════════
 function showPage(id){
   document.querySelectorAll('.page').forEach(p=>{p.classList.remove('active');p.style.display='';});
   document.getElementById(id).classList.add('active');
@@ -1617,39 +1000,33 @@ function goHome(){ updateHomeStats(); showPage('page-home'); }
 function goAdminLogin(){ showPage('page-admin-login'); document.getElementById('admin-pw-input').value=''; document.getElementById('login-err').style.display='none'; }
 
 function updateHomeStats(){
-  const sems = getSemesters();
-  const matkuls = getMatkuls();
-  const qs = getQuestions();
-  const mat = getMateri();
-  let totalSoal=0, totalMateri=0;
+  const sems=getSemesters(),matkuls=getMatkuls(),qs=getQuestions(),mat=getMateri();
+  let totalSoal=0,totalMateri=0;
   Object.values(qs).forEach(arr=>totalSoal+=(arr||[]).length);
   Object.values(mat).forEach(arr=>totalMateri+=(arr||[]).length);
-  document.getElementById('stat-sem').textContent    = sems.length;
-  document.getElementById('stat-matkul').textContent = matkuls.length;
-  document.getElementById('stat-soal').textContent   = totalSoal;
-  document.getElementById('stat-materi').textContent = totalMateri;
+  document.getElementById('stat-sem').textContent=sems.length;
+  document.getElementById('stat-matkul').textContent=matkuls.length;
+  document.getElementById('stat-soal').textContent=totalSoal;
+  document.getElementById('stat-materi').textContent=totalMateri;
 }
 
-// ══════════════════════════
+// ════════════════════════════════
 // MATERI FLOW
-// ══════════════════════════
+// ════════════════════════════════
 function goMateriSelector(){
-  const sems = getSemesters();
-  const matkuls = getMatkuls();
-  const materi = getMateri();
-  const grid = document.getElementById('materi-sem-grid');
+  const sems=getSemesters(),matkuls=getMatkuls(),materi=getMateri();
+  const grid=document.getElementById('materi-sem-grid');
   if(sems.length===0){
     grid.innerHTML=`<div class="empty-state" style="grid-column:1/-1"><div class="e-icon">📭</div><p>Belum ada semester.<br>Tambahkan di <strong>Admin Panel</strong>.</p></div>`;
   } else {
-    grid.innerHTML = sems.map(s=>{
-      const matkulsInSem = matkuls.filter(m=>m.semId===s.id);
-      let totalMateri = 0;
-      matkulsInSem.forEach(m=>{ totalMateri+=(materi[m.id]||[]).length; });
+    grid.innerHTML=sems.map(s=>{
+      const mks=matkuls.filter(m=>m.semId===s.id);
+      let tot=0; mks.forEach(m=>{tot+=(materi[m.id]||[]).length;});
       return `<div class="sem-card has-materi" onclick="openMateriSem('${s.id}')">
         <div class="sem-icon">📖</div>
         <div class="sem-num">Semester ${s.num}</div>
         <div class="sem-title">${escHtml(s.label||'Semester '+s.num)}</div>
-        <div class="sem-count">${matkulsInSem.length} matkul · ${totalMateri} materi</div>
+        <div class="sem-count">${mks.length} matkul · ${tot} materi</div>
       </div>`;
     }).join('');
   }
@@ -1657,24 +1034,21 @@ function goMateriSelector(){
 }
 
 function openMateriSem(semId){
-  currentSemId = semId;
-  const sem = getSemesters().find(s=>s.id===semId);
-  const matkuls = getMatkuls().filter(m=>m.semId===semId);
-  const materi = getMateri();
-  document.getElementById('materi-matkul-breadcrumb').innerHTML = `Materi — <strong>Semester ${sem.num}</strong>`;
-  document.getElementById('materi-matkul-title').textContent = `Mata Kuliah — Semester ${sem.num}`;
-  const list = document.getElementById('materi-matkul-list');
+  currentSemId=semId;
+  const sem=getSemesters().find(s=>s.id===semId);
+  const matkuls=getMatkuls().filter(m=>m.semId===semId);
+  const materi=getMateri();
+  document.getElementById('materi-matkul-breadcrumb').innerHTML=`Materi — <strong>Semester ${sem.num}</strong>`;
+  document.getElementById('materi-matkul-title').textContent=`Mata Kuliah — Semester ${sem.num}`;
+  const list=document.getElementById('materi-matkul-list');
   if(matkuls.length===0){
     list.innerHTML=`<div class="empty-state"><div class="e-icon">📭</div><p>Belum ada mata kuliah di semester ini.</p></div>`;
   } else {
-    list.innerHTML = matkuls.map(m=>{
-      const cnt = (materi[m.id]||[]).length;
+    list.innerHTML=matkuls.map(m=>{
+      const cnt=(materi[m.id]||[]).length;
       return `<div class="matkul-card" onclick="openMateriViewer('${m.id}')">
         <div class="matkul-icon">${m.icon||'📚'}</div>
-        <div class="matkul-info">
-          <div class="matkul-name">${escHtml(m.name)}</div>
-          <div class="matkul-meta">${escHtml(m.desc||'')} · ${cnt} materi</div>
-        </div>
+        <div class="matkul-info"><div class="matkul-name">${escHtml(m.name)}</div><div class="matkul-meta">${escHtml(m.desc||'')} · ${cnt} materi</div></div>
         <div class="matkul-arrow">→</div>
       </div>`;
     }).join('');
@@ -1683,22 +1057,19 @@ function openMateriSem(semId){
 }
 
 function openMateriViewer(matkulId){
-  currentMatkulId = matkulId;
-  const matkul = getMatkuls().find(m=>m.id===matkulId);
-  const materi = (getMateri()[matkulId]||[]);
-  document.getElementById('mv-title').textContent = matkul ? matkul.name : 'Materi';
-  const list = document.getElementById('materi-file-list');
+  currentMatkulId=matkulId;
+  const matkul=getMatkuls().find(m=>m.id===matkulId);
+  const materi=getMateri()[matkulId]||[];
+  document.getElementById('mv-title').textContent=matkul?matkul.name:'Materi';
+  const list=document.getElementById('materi-file-list');
   if(materi.length===0){
     list.innerHTML=`<div class="empty-state"><div class="e-icon">📭</div><p>Belum ada materi untuk mata kuliah ini.</p></div>`;
   } else {
-    list.innerHTML = materi.map(m=>`
+    list.innerHTML=materi.map(m=>`
       <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;margin-bottom:12px;">
         <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
           <span style="font-size:24px;">${m.fileName?'📄':'📝'}</span>
-          <div>
-            <div style="font-size:16px;font-weight:700;">${escHtml(m.title)}</div>
-            ${m.fileName?`<div style="font-size:12px;color:var(--text2);">File: ${escHtml(m.fileName)}</div>`:''}
-          </div>
+          <div><div style="font-size:16px;font-weight:700;">${escHtml(m.title)}</div>${m.fileName?`<div style="font-size:12px;color:var(--text2);">File: ${escHtml(m.fileName)}</div>`:''}</div>
           ${m.fileData?`<button class="mfi-btn" style="margin-left:auto;" onclick="downloadMateriPDF('${m.id}','${matkulId}')">⬇ Download PDF</button>`:''}
         </div>
         ${m.content?`<div class="materi-content-box">${escHtml(m.content)}</div>`:''}
@@ -1707,39 +1078,31 @@ function openMateriViewer(matkulId){
   showPage('page-materi-viewer');
 }
 
-function downloadMateriPDF(materiId, matkulId){
-  const mat = (getMateri()[matkulId]||[]).find(m=>m.id===materiId);
+function downloadMateriPDF(materiId,matkulId){
+  const mat=(getMateri()[matkulId]||[]).find(m=>m.id===materiId);
   if(!mat||!mat.fileData) return;
-  const a = document.createElement('a');
-  a.href = mat.fileData;
-  a.download = mat.fileName||'materi.pdf';
-  a.click();
+  const a=document.createElement('a'); a.href=mat.fileData; a.download=mat.fileName||'materi.pdf'; a.click();
 }
 
-function backFromViewer(){
-  openMateriSem(currentSemId);
-}
+function backFromViewer(){ openMateriSem(currentSemId); }
 
-// ══════════════════════════
+// ════════════════════════════════
 // LATSOAL FLOW
-// ══════════════════════════
+// ════════════════════════════════
 function goLatsoalSelector(){
-  const sems = getSemesters();
-  const matkuls = getMatkuls();
-  const qs = getQuestions();
-  const grid = document.getElementById('latsoal-sem-grid');
+  const sems=getSemesters(),matkuls=getMatkuls(),qs=getQuestions();
+  const grid=document.getElementById('latsoal-sem-grid');
   if(sems.length===0){
     grid.innerHTML=`<div class="empty-state" style="grid-column:1/-1"><div class="e-icon">📭</div><p>Belum ada semester.<br>Tambahkan di <strong>Admin Panel</strong>.</p></div>`;
   } else {
-    grid.innerHTML = sems.map(s=>{
-      const matkulsInSem = matkuls.filter(m=>m.semId===s.id);
-      let totalSoal = 0;
-      matkulsInSem.forEach(m=>{ totalSoal+=(qs[m.id]||[]).length; });
+    grid.innerHTML=sems.map(s=>{
+      const mks=matkuls.filter(m=>m.semId===s.id);
+      let tot=0; mks.forEach(m=>{tot+=(qs[m.id]||[]).length;});
       return `<div class="sem-card has-soal" onclick="openLatsoalSem('${s.id}')">
         <div class="sem-icon">✏️</div>
         <div class="sem-num">Semester ${s.num}</div>
         <div class="sem-title">${escHtml(s.label||'Semester '+s.num)}</div>
-        <div class="sem-count">${matkulsInSem.length} matkul · ${totalSoal} soal</div>
+        <div class="sem-count">${mks.length} matkul · ${tot} soal</div>
       </div>`;
     }).join('');
   }
@@ -1747,27 +1110,24 @@ function goLatsoalSelector(){
 }
 
 function openLatsoalSem(semId){
-  currentSemId = semId;
-  const sem = getSemesters().find(s=>s.id===semId);
-  const matkuls = getMatkuls().filter(m=>m.semId===semId);
-  const qs = getQuestions();
-  document.getElementById('latsoal-matkul-breadcrumb').innerHTML = `Latihan Soal — <strong>Semester ${sem.num}</strong>`;
-  document.getElementById('latsoal-matkul-title').textContent = `Mata Kuliah — Semester ${sem.num}`;
-  const list = document.getElementById('latsoal-matkul-list');
+  currentSemId=semId;
+  const sem=getSemesters().find(s=>s.id===semId);
+  const matkuls=getMatkuls().filter(m=>m.semId===semId);
+  const qs=getQuestions();
+  document.getElementById('latsoal-matkul-breadcrumb').innerHTML=`Latihan Soal — <strong>Semester ${sem.num}</strong>`;
+  document.getElementById('latsoal-matkul-title').textContent=`Mata Kuliah — Semester ${sem.num}`;
+  const list=document.getElementById('latsoal-matkul-list');
   if(matkuls.length===0){
     list.innerHTML=`<div class="empty-state"><div class="e-icon">📭</div><p>Belum ada mata kuliah di semester ini.</p></div>`;
   } else {
-    list.innerHTML = matkuls.map(m=>{
-      const qArr = qs[m.id]||[];
-      const pgCnt = qArr.filter(q=>q.type!=='essay').length;
-      const esaiCnt = qArr.filter(q=>q.type==='essay').length;
-      const meta = qArr.length===0 ? '0 soal' : `${pgCnt>0?pgCnt+' PG':''}${pgCnt>0&&esaiCnt>0?' · ':''}${esaiCnt>0?esaiCnt+' Esai':''}`;
-      return `<div class="matkul-card" onclick="startQuiz('${m.id}')">
+    list.innerHTML=matkuls.map(m=>{
+      const qArr=qs[m.id]||[];
+      const pgCnt=qArr.filter(q=>q.type!=='essay').length;
+      const esCnt=qArr.filter(q=>q.type==='essay').length;
+      const meta=qArr.length===0?'0 soal':`${pgCnt>0?pgCnt+' PG':''}${pgCnt>0&&esCnt>0?' · ':''}${esCnt>0?esCnt+' Esai':''}`;
+      return `<div class="matkul-card" onclick="openLatsoalOptions('${m.id}')">
         <div class="matkul-icon">${m.icon||'📚'}</div>
-        <div class="matkul-info">
-          <div class="matkul-name">${escHtml(m.name)}</div>
-          <div class="matkul-meta">${escHtml(m.desc||'')} · ${meta}</div>
-        </div>
+        <div class="matkul-info"><div class="matkul-name">${escHtml(m.name)}</div><div class="matkul-meta">${escHtml(m.desc||'')} · ${meta}</div></div>
         <div class="matkul-arrow">→</div>
       </div>`;
     }).join('');
@@ -1775,94 +1135,231 @@ function openLatsoalSem(semId){
   showPage('page-latsoal-matkul');
 }
 
-// ══════════════════════════
+// ════════════════════════════════
+// LATSOAL OPTIONS (NEW)
+// ════════════════════════════════
+function openLatsoalOptions(matkulId){
+  currentMatkulId=matkulId;
+  const matkul=getMatkuls().find(m=>m.id===matkulId);
+  const allQs=getQuestions()[matkulId]||[];
+
+  document.getElementById('latsoal-opt-breadcrumb').innerHTML=`Latihan Soal — <strong>${escHtml(matkul?matkul.name:'')}</strong>`;
+  document.getElementById('latsoal-opt-matkul-title').textContent=matkul?matkul.name:'Pilih Set Soal';
+  document.getElementById('latsoal-opt-sub').textContent=allQs.length>0?`${allQs.length} soal tersedia. Pilih kumpulan soal yang ingin kamu kerjakan.`:'Belum ada soal untuk mata kuliah ini.';
+
+  const grid=document.getElementById('latsoal-opt-grid');
+
+  if(allQs.length===0){
+    grid.innerHTML=`<div class="empty-state" style="grid-column:1/-1"><div class="e-icon">📭</div><p>Belum ada soal untuk mata kuliah ini.<br>Tambahkan soal melalui <strong>Admin Panel</strong>.</p></div>`;
+    showPage('page-latsoal-options');
+    return;
+  }
+
+  const pgAll=allQs.filter(q=>q.type!=='essay').length;
+  const esAll=allQs.filter(q=>q.type==='essay').length;
+
+  let html=`<div class="opt-card opt-all" onclick="startQuizFiltered('${matkulId}',null)">
+    <div class="opt-card-icon">📋</div>
+    <div class="opt-card-label">Semua Soal</div>
+    <div class="opt-card-title">${allQs.length} Soal</div>
+    <div class="opt-card-meta">
+      ${pgAll>0?`<span class="opt-badge-pg">📝 ${pgAll} PG</span>`:''}
+      ${esAll>0?`<span class="opt-badge-es">✍ ${esAll} Esai</span>`:''}
+    </div>
+  </div>`;
+
+  // Unique tags
+  const tags=[...new Set(allQs.map(q=>q.tag).filter(t=>t&&t.trim()))];
+  tags.forEach(tag=>{
+    const tagQs=allQs.filter(q=>q.tag===tag);
+    const tPg=tagQs.filter(q=>q.type!=='essay').length;
+    const tEs=tagQs.filter(q=>q.type==='essay').length;
+    html+=`<div class="opt-card opt-tag" onclick="startQuizFiltered('${matkulId}','${escHtml(tag).replace(/'/g,'\\x27')}')">
+      <div class="opt-card-icon">🗂</div>
+      <div class="opt-card-label">Set Soal</div>
+      <div class="opt-card-title">${escHtml(tag)}</div>
+      <div class="opt-card-meta">
+        <span style="color:var(--text2);font-size:12px;">${tagQs.length} soal</span>
+        ${tPg>0?`<span class="opt-badge-pg">📝 ${tPg}</span>`:''}
+        ${tEs>0?`<span class="opt-badge-es">✍ ${tEs}</span>`:''}
+      </div>
+    </div>`;
+  });
+
+  grid.innerHTML=html;
+  showPage('page-latsoal-options');
+}
+
+function startQuizFiltered(matkulId,tagFilter){
+  currentTagFilter=tagFilter;
+  const allQs=getQuestions()[matkulId]||[];
+  const filtered=tagFilter===null?allQs:allQs.filter(q=>q.tag===tagFilter);
+  if(filtered.length===0){alert('Tidak ada soal untuk pilihan ini.');return;}
+  currentQuestionsFiltered=[...filtered];
+  startQuizCore(matkulId);
+}
+
+// ════════════════════════════════
 // QUIZ
-// ══════════════════════════
-function startQuiz(matkulId){
-  const matkul = getMatkuls().find(m=>m.id===matkulId);
-  const qs = (getQuestions()[matkulId]||[]);
-  if(!matkul){ alert('Mata kuliah tidak ditemukan.'); return; }
-  if(qs.length===0){ alert('Belum ada soal untuk mata kuliah ini.'); return; }
-  currentMatkulId = matkulId;
-  userAnswers = new Array(qs.length).fill(null);
-  currentQ = 0;
-  document.getElementById('hdr-subject-name').textContent = matkul.name;
-  buildQuiz(qs, matkul);
+// ════════════════════════════════
+function startQuizCore(matkulId){
+  const matkul=getMatkuls().find(m=>m.id===matkulId);
+  const qs=currentQuestionsFiltered;
+  if(!matkul){alert('Mata kuliah tidak ditemukan.');return;}
+  currentMatkulId=matkulId;
+  userAnswers=new Array(qs.length).fill(null);
+  currentQ=0;
+  quizTabFilter='all';
+  document.getElementById('hdr-subject-name').textContent=matkul.name+(currentTagFilter?` — ${currentTagFilter}`:'');
+  buildQuiz(qs,matkul);
   showPage('page-quiz');
   showQ(0);
   updateProgress();
+  updateQuizTabs();
 }
 
-function buildQuiz(qs, matkul){
-  const sb = document.getElementById('sb-scroll');
-  const essayItems = qs.map((q,i)=>({q,i})).filter(x=>x.q.type==='essay');
-  const pgItems    = qs.map((q,i)=>({q,i})).filter(x=>x.q.type!=='essay');
-  const buildGrid = items => items.map(({q,i})=>
-    `<div class="sb-num${q.type==='essay'?' type-essay':''}" id="nav-${i}" onclick="goQ(${i})">${i+1}</div>`
-  ).join('');
-  let sbHTML = `<div class="sb-chap-label">${escHtml(matkul.name)}</div>`;
+function buildQuiz(qs,matkul){
+  const sb=document.getElementById('sb-scroll');
+  const essayItems=qs.map((q,i)=>({q,i})).filter(x=>x.q.type==='essay');
+  const pgItems=qs.map((q,i)=>({q,i})).filter(x=>x.q.type!=='essay');
+  const buildGrid=items=>items.map(({q,i})=>`<div class="sb-num${q.type==='essay'?' type-essay':''}" id="nav-${i}" onclick="goQ(${i})">${i+1}</div>`).join('');
+  let sbHTML=`<div class="sb-chap-label">${escHtml(matkul.name)}</div>`;
   if(essayItems.length>0) sbHTML+=`<div class="sb-section"><div class="sb-section-hdr sh-essay"><span class="sb-section-hdr-icon">✍</span><span class="sb-section-hdr-label">Esai</span><span class="sb-section-hdr-count">${essayItems.length}</span></div><div class="sb-grid">${buildGrid(essayItems)}</div></div>`;
   if(pgItems.length>0) sbHTML+=`<div class="sb-section"><div class="sb-section-hdr sh-pg"><span class="sb-section-hdr-icon">📝</span><span class="sb-section-hdr-label">Pilihan Ganda</span><span class="sb-section-hdr-count">${pgItems.length}</span></div><div class="sb-grid">${buildGrid(pgItems)}</div></div>`;
-  sb.innerHTML = sbHTML;
-  document.getElementById('sb-total').textContent = qs.length;
+  sb.innerHTML=sbHTML;
+  document.getElementById('sb-total').textContent=qs.length;
 
-  const container = document.getElementById('quiz-questions-container');
-  const letters = ['A','B','C','D'];
-  container.innerHTML = qs.map((q,i)=>{
-    const isEssay = q.type==='essay';
-    const typeBadge = isEssay
-      ? `<span class="q-type-badge badge-essay">✍ Esai</span>`
-      : `<span class="q-type-badge badge-pg">📝 Pilgan</span>`;
-    const tagHtml = q.tag?`<span class="q-tag" style="color:var(--accent);border-color:var(--accent);background:var(--glow);">${escHtml(q.tag)}</span>`:'';
-    let inputArea = isEssay
-      ? `<div class="essay-hint">✍ Ketik jawaban sesuai kata kunci yang relevan.</div><textarea class="f-textarea" id="ans-essay-${i}" placeholder="Ketik jawaban esai kamu di sini..." oninput="answerEssay(${i})" style="min-height:140px;width:100%;"></textarea>`
-      : `<div class="options">`+(q.opts||[]).map((o,j)=>`<div class="opt" id="opt-${i}-${j}" onclick="selectAns(${i},${j})"><div class="opt-l">${letters[j]}</div><div class="opt-t">${escHtml(o)}</div></div>`).join('')+`</div>`;
+  const container=document.getElementById('quiz-questions-container');
+  const letters=['A','B','C','D'];
+  container.innerHTML=qs.map((q,i)=>{
+    const isEssay=q.type==='essay';
+    const typeBadge=isEssay?`<span class="q-type-badge badge-essay">✍ Esai</span>`:`<span class="q-type-badge badge-pg">📝 Pilgan</span>`;
+    const tagHtml=q.tag?`<span class="q-tag" style="color:var(--accent);border-color:var(--accent);background:var(--glow);">${escHtml(q.tag)}</span>`:'';
+    let inputArea=isEssay
+      ?`<div class="essay-hint">✍ Ketik jawaban sesuai kata kunci yang relevan.</div><textarea class="f-textarea" id="ans-essay-${i}" placeholder="Ketik jawaban esai kamu di sini..." oninput="answerEssay(${i})" style="min-height:140px;width:100%;"></textarea>`
+      :`<div class="options">`+(q.opts||[]).map((o,j)=>`<div class="opt" id="opt-${i}-${j}" onclick="selectAns(${i},${j})"><div class="opt-l">${letters[j]}</div><div class="opt-t">${escHtml(o)}</div></div>`).join('')+`</div>`;
     return `<div class="q-screen" id="q-${i}">
       <div class="q-meta"><span class="q-idx">Soal ${i+1} dari ${qs.length}</span>${tagHtml}${typeBadge}</div>
-      <div class="q-card${isEssay?' essay-card':''}">
-        <div class="q-text">${escHtml(q.q)}</div>${inputArea}
-      </div>
+      <div class="q-card${isEssay?' essay-card':''}"><div class="q-text">${escHtml(q.q)}</div>${inputArea}</div>
       <div class="q-nav">
-        <button class="btn-nav" onclick="goQ(${i-1})" ${i===0?'disabled':''}>← Sebelumnya</button>
-        ${i<qs.length-1?`<button class="btn-nav" onclick="goQ(${i+1})">Selanjutnya →</button>`:`<button class="btn-nav" onclick="submitQuiz()" style="border-color:var(--green);color:var(--green)">Kumpulkan ✓</button>`}
+        <button class="btn-nav" onclick="prevQ()" ${i===0?'disabled':''}>← Sebelumnya</button>
+        ${i<qs.length-1?`<button class="btn-nav" onclick="nextQ()">Selanjutnya →</button>`:`<button class="btn-nav" onclick="submitQuiz()" style="border-color:var(--green);color:var(--green)">Kumpulkan ✓</button>`}
       </div>
     </div>`;
   }).join('');
 }
 
-function answerEssay(qIdx){
-  const val = document.getElementById(`ans-essay-${qIdx}`).value.trim();
-  userAnswers[qIdx] = val ? val : null;
-  refreshNav(); updateProgress();
+// ── QUIZ TAB FUNCTIONS ──
+function updateQuizTabs(){
+  const qs=currentQuestionsFiltered;
+  const pgCnt=qs.filter(q=>q.type!=='essay').length;
+  const esCnt=qs.filter(q=>q.type==='essay').length;
+  document.getElementById('qtab-cnt-all').textContent=qs.length;
+  document.getElementById('qtab-cnt-mcq').textContent=pgCnt;
+  document.getElementById('qtab-cnt-essay').textContent=esCnt;
+  // Hide essay tab if no essay, hide mcq tab if no mcq
+  document.getElementById('qtab-mcq').style.display=pgCnt===0?'none':'';
+  document.getElementById('qtab-essay').style.display=esCnt===0?'none':'';
 }
+
+function switchQuizTab(filter,btn){
+  quizTabFilter=filter;
+  document.querySelectorAll('.quiz-tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  // Jump to first question of that type
+  const qs=currentQuestionsFiltered;
+  if(filter==='all'){
+    // Stay at current or go to 0
+    return;
+  }
+  const targetType=filter==='essay'?'essay':'mcq';
+  const firstIdx=qs.findIndex(q=>filter==='essay'?(q.type==='essay'):(q.type!=='essay'));
+  if(firstIdx>=0) goQ(firstIdx);
+}
+
+function updateQuizTabHighlight(idx){
+  const qs=currentQuestionsFiltered;
+  if(!qs[idx]) return;
+  const isEssay=qs[idx].type==='essay';
+  document.querySelectorAll('.quiz-tab').forEach(t=>t.classList.remove('active'));
+  if(quizTabFilter==='all'){
+    document.getElementById('qtab-all').classList.add('active');
+  } else if(quizTabFilter==='mcq'&&!isEssay){
+    document.getElementById('qtab-mcq').classList.add('active');
+  } else if(quizTabFilter==='essay'&&isEssay){
+    document.getElementById('qtab-essay').classList.add('active');
+  } else {
+    document.getElementById('qtab-all').classList.add('active');
+    quizTabFilter='all';
+  }
+}
+
+function getFilteredNavIndices(){
+  const qs=currentQuestionsFiltered;
+  if(quizTabFilter==='all') return qs.map((_,i)=>i);
+  if(quizTabFilter==='mcq') return qs.map((q,i)=>q.type!=='essay'?i:-1).filter(i=>i>=0);
+  if(quizTabFilter==='essay') return qs.map((q,i)=>q.type==='essay'?i:-1).filter(i=>i>=0);
+  return qs.map((_,i)=>i);
+}
+
+function prevQ(){
+  const filtered=getFilteredNavIndices();
+  const pos=filtered.indexOf(currentQ);
+  if(pos>0) goQ(filtered[pos-1]);
+  else if(pos<0&&filtered.length>0) goQ(filtered[0]);
+  else if(currentQ>0) goQ(currentQ-1);
+}
+
+function nextQ(){
+  const filtered=getFilteredNavIndices();
+  const pos=filtered.indexOf(currentQ);
+  if(pos>=0&&pos<filtered.length-1) goQ(filtered[pos+1]);
+  else if(pos<0&&filtered.length>0) goQ(filtered[0]);
+  else if(currentQ<currentQuestionsFiltered.length-1) goQ(currentQ+1);
+}
+
+function answerEssay(qIdx){
+  const val=document.getElementById(`ans-essay-${qIdx}`).value.trim();
+  userAnswers[qIdx]=val?val:null;
+  refreshNav();updateProgress();
+}
+
 function showQ(idx){
-  const qs = getQuestions()[currentMatkulId]||[];
+  const qs=currentQuestionsFiltered;
   if(idx<0||idx>=qs.length) return;
   document.querySelectorAll('.q-screen').forEach(s=>s.classList.remove('active'));
   document.getElementById(`q-${idx}`).classList.add('active');
-  currentQ = idx;
-  if(userAnswers[idx]!==null && qs[idx].type!=='essay'){
+  currentQ=idx;
+  if(userAnswers[idx]!==null&&qs[idx].type!=='essay'){
     document.querySelectorAll(`#q-${idx} .opt`).forEach(o=>o.classList.remove('sel'));
     const sel=document.getElementById(`opt-${idx}-${userAnswers[idx]}`);
     if(sel) sel.classList.add('sel');
   }
-  if(userAnswers[idx]!==null && qs[idx].type==='essay'){
+  if(userAnswers[idx]!==null&&qs[idx].type==='essay'){
     const ta=document.getElementById(`ans-essay-${idx}`);
     if(ta&&!ta.value) ta.value=userAnswers[idx];
   }
   refreshNav();
+  updateQuizTabHighlight(idx);
+  // Update progress info in tab bar
+  const done=userAnswers.filter(a=>a!==null).length;
+  document.getElementById('qpi-done').textContent=done+' dijawab';
+  document.getElementById('qpi-left').textContent=(qs.length-done)+' tersisa';
   if(window.innerWidth<=768) closeSidebar();
 }
-function goQ(idx){ showQ(idx); }
+
+function goQ(idx){showQ(idx);}
+
 function selectAns(qIdx,optIdx){
   userAnswers[qIdx]=optIdx;
   document.querySelectorAll(`#q-${qIdx} .opt`).forEach(o=>o.classList.remove('sel'));
   const sel=document.getElementById(`opt-${qIdx}-${optIdx}`);
   if(sel) sel.classList.add('sel');
-  refreshNav(); updateProgress();
+  refreshNav();updateProgress();
 }
+
 function refreshNav(){
-  const qs=getQuestions()[currentMatkulId]||[];
+  const qs=currentQuestionsFiltered;
   for(let i=0;i<userAnswers.length;i++){
     const el=document.getElementById(`nav-${i}`);
     if(!el) continue;
@@ -1875,28 +1372,31 @@ function refreshNav(){
   document.getElementById('sb-done').textContent=done;
   document.getElementById('sb-un').textContent=userAnswers.length-done;
 }
+
 function updateProgress(){
   const done=userAnswers.filter(a=>a!==null).length;
   const n=userAnswers.length;
   document.getElementById('hdr-prog-bar').style.width=(n?(done/n)*100:0)+'%';
   document.getElementById('hdr-prog-txt').textContent=`${done} / ${n}`;
 }
-function toggleSidebar(){ document.getElementById('quiz-sidebar').classList.toggle('open'); document.getElementById('sidebar-overlay').classList.toggle('open'); }
-function closeSidebar(){ document.getElementById('quiz-sidebar').classList.remove('open'); document.getElementById('sidebar-overlay').classList.remove('open'); }
-function backFromQuiz(){ openLatsoalSem(currentSemId); }
-function backFromResult(){ openLatsoalSem(currentSemId); }
+
+function toggleSidebar(){document.getElementById('quiz-sidebar').classList.toggle('open');document.getElementById('sidebar-overlay').classList.toggle('open');}
+function closeSidebar(){document.getElementById('quiz-sidebar').classList.remove('open');document.getElementById('sidebar-overlay').classList.remove('open');}
+
+function backFromQuiz(){ openLatsoalOptions(currentMatkulId); }
+function backFromResult(){ openLatsoalOptions(currentMatkulId); }
 
 function submitQuiz(){
+  const qs=currentQuestionsFiltered;
   const done=userAnswers.filter(a=>a!==null&&a!=='').length;
-  const rem=userAnswers.length-done;
+  const rem=qs.length-done;
   if(rem>0&&!confirm(`Masih ada ${rem} soal belum dijawab. Kumpulkan sekarang?`)) return;
-  const qs=getQuestions()[currentMatkulId]||[];
   let totalDidapat=0,totalMaks=0,correct=0,wrong=0,skipped=0;
   qs.forEach((q,i)=>{
     const ua=userAnswers[i];
     if(q.type==='essay'){
       const maks=q.maxScore||5; totalMaks+=maks;
-      if(ua){ let txt=ua.toLowerCase(),match=0; (q.keywords||[]).forEach(kw=>{if(txt.includes(kw))match++;}); const pct=match/(q.keywords.length||1); totalDidapat+=Math.round(pct*maks); if(pct>=.5)correct++;else wrong++; }else skipped++;
+      if(ua){let txt=ua.toLowerCase(),match=0;(q.keywords||[]).forEach(kw=>{if(txt.includes(kw))match++;});const pct=match/(q.keywords.length||1);totalDidapat+=Math.round(pct*maks);if(pct>=.5)correct++;else wrong++;}else skipped++;
     } else {
       totalMaks+=1;
       if(ua===null||ua==='') skipped++;
@@ -1909,7 +1409,7 @@ function submitQuiz(){
   const rfg=document.getElementById('ring-fg');
   rfg.style.strokeDashoffset=circ;
   rfg.style.stroke=pct>=80?'var(--green)':pct>=60?'var(--yellow)':'var(--red)';
-  setTimeout(()=>{ rfg.style.strokeDashoffset=offset; },150);
+  setTimeout(()=>{rfg.style.strokeDashoffset=offset;},150);
   document.getElementById('score-pct').textContent=pct+'%';
   document.getElementById('rs-c').textContent=correct;
   document.getElementById('rs-w').textContent=wrong;
@@ -1920,7 +1420,8 @@ function submitQuiz(){
   buildEval(qs);
   showPage('page-result');
 }
-function retryQuiz(){ startQuiz(currentMatkulId); }
+
+function retryQuiz(){ startQuizFiltered(currentMatkulId,currentTagFilter); }
 
 function buildEval(qs){
   const letters=['A','B','C','D'];
@@ -1961,22 +1462,22 @@ function buildEval(qs){
     </div>`;
   });
 }
+
 function filterEval(type,btn){
   document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
-  document.querySelectorAll('#eval-list .eval-item').forEach(el=>{ el.style.display=(type==='all'||el.dataset.status===type)?'block':'none'; });
+  document.querySelectorAll('#eval-list .eval-item').forEach(el=>{el.style.display=(type==='all'||el.dataset.status===type)?'block':'none';});
 }
 
-// ═══════════════════════════════════════
+// ════════════════════════════════
 // PDF IMPORT (QUESTIONS)
-// ═══════════════════════════════════════
+// ════════════════════════════════
 async function processPDF(input){
-  const semId = document.getElementById('q-sem-sel').value;
-  const matkulId = document.getElementById('q-matkul-sel').value;
-  if(!semId||!matkulId){ alert('Pilih semester & mata kuliah terlebih dahulu!'); input.value=''; return; }
-  const file=input.files[0]; if(!file) return;
-  const errBox=document.getElementById('pdf-err');
-  errBox.style.display='none';
+  const semId=document.getElementById('q-sem-sel').value;
+  const matkulId=document.getElementById('q-matkul-sel').value;
+  if(!semId||!matkulId){alert('Pilih semester & mata kuliah terlebih dahulu!');input.value='';return;}
+  const file=input.files[0];if(!file) return;
+  const errBox=document.getElementById('pdf-err');errBox.style.display='none';
   try{
     const ab=await file.arrayBuffer();
     const pdf=await pdfjsLib.getDocument({data:ab}).promise;
@@ -1986,15 +1487,12 @@ async function processPDF(input){
       const tc=await page.getTextContent();
       txt+=tc.items.map(it=>it.str).join(' ')+' ';
     }
-    parseTextToQuestions(txt, matkulId);
-  }catch(e){
-    console.error(e);
-    errBox.textContent='Gagal membaca PDF.';errBox.style.display='block';
-  }
+    parseTextToQuestions(txt,matkulId);
+  }catch(e){console.error(e);errBox.textContent='Gagal membaca PDF.';errBox.style.display='block';}
   input.value='';
 }
 
-function parseTextToQuestions(text, matkulId){
+function parseTextToQuestions(text,matkulId){
   const clean=text.replace(/\s+/g,' ');
   let count=0;
   const qsData=getQuestions();
@@ -2014,32 +1512,31 @@ function parseTextToQuestions(text, matkulId){
   if(count>0){
     setQuestions(qsData);renderQList();
     const t=document.getElementById('pdf-toast');
-    t.textContent=`✓ ${count} soal dari PDF berhasil ditambahkan!`;t.style.display='block';
-    setTimeout(()=>t.style.display='none',4000);
+    t.textContent=`✓ ${count} soal dari PDF berhasil ditambahkan!`;t.style.display='block';setTimeout(()=>t.style.display='none',4000);
   } else {
     const e=document.getElementById('pdf-err');
     e.innerHTML='Gagal menemukan soal. Pastikan format <b>Soal:</b> atau <b>Esai:</b> sudah benar.';e.style.display='block';
   }
 }
 
-// ═══════════════════════════════════════
+// ════════════════════════════════
 // ADMIN AUTH
-// ═══════════════════════════════════════
+// ════════════════════════════════
 function doLogin(){
   if(document.getElementById('admin-pw-input').value===getPw()){
-    populateAdminSelects(); renderSemTable(); renderMatkulList();
-    showPage('page-admin'); showPanel('semesters');
+    populateAdminSelects();renderSemTable();renderMatkulList();
+    showPage('page-admin');showPanel('semesters');
   } else {
     document.getElementById('login-err').style.display='block';
     document.getElementById('admin-pw-input').value='';
     document.getElementById('admin-pw-input').focus();
   }
 }
-function doLogout(){ goHome(); }
+function doLogout(){goHome();}
 
-// ═══════════════════════════════════════
+// ════════════════════════════════
 // ADMIN PANELS
-// ═══════════════════════════════════════
+// ════════════════════════════════
 function showPanel(name){
   document.querySelectorAll('.admin-panel').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.admin-nav-item').forEach(el=>el.classList.remove('active'));
@@ -2052,54 +1549,38 @@ function showPanel(name){
 }
 
 function populateAdminSelects(){
-  const sems=getSemesters();
-  const matkuls=getMatkuls();
-  // new-matkul-sem
+  const sems=getSemesters(),matkuls=getMatkuls();
   const nms=document.getElementById('new-matkul-sem');
   if(nms) nms.innerHTML=sems.map(s=>`<option value="${s.id}">Semester ${s.num} — ${s.label||''}</option>`).join('')||'<option value="">— Belum ada semester —</option>';
-  // materi-sem-sel
   const mss=document.getElementById('materi-sem-sel');
-  if(mss){ mss.innerHTML=sems.map(s=>`<option value="${s.id}">Semester ${s.num}</option>`).join('')||'<option value="">— —</option>'; updateMateriMatkulSel(); }
-  // q-sem-sel
+  if(mss){mss.innerHTML=sems.map(s=>`<option value="${s.id}">Semester ${s.num}</option>`).join('')||'<option value="">— —</option>';updateMateriMatkulSel();}
   const qss=document.getElementById('q-sem-sel');
-  if(qss){ qss.innerHTML=sems.map(s=>`<option value="${s.id}">Semester ${s.num}</option>`).join('')||'<option value="">— —</option>'; updateQMatkulSel(); }
+  if(qss){qss.innerHTML=sems.map(s=>`<option value="${s.id}">Semester ${s.num}</option>`).join('')||'<option value="">— —</option>';updateQMatkulSel();}
 }
 
 // SEMESTERS
 function addSemester(){
   const num=parseInt(document.getElementById('new-sem-num').value);
   const label=document.getElementById('new-sem-label').value.trim();
-  if(!num||num<1){ alert('Nomor semester wajib diisi.'); return; }
+  if(!num||num<1){alert('Nomor semester wajib diisi.');return;}
   const sems=getSemesters();
-  if(sems.find(s=>s.num===num)){ alert('Semester '+num+' sudah ada.'); return; }
-  sems.push({id:uid(),num,label});
-  sems.sort((a,b)=>a.num-b.num);
-  setSemesters(sems);
-  document.getElementById('new-sem-num').value='';
-  document.getElementById('new-sem-label').value='';
-  renderSemTable(); populateAdminSelects();
-  showToast('sem-toast');
+  if(sems.find(s=>s.num===num)){alert('Semester '+num+' sudah ada.');return;}
+  sems.push({id:uid(),num,label});sems.sort((a,b)=>a.num-b.num);setSemesters(sems);
+  document.getElementById('new-sem-num').value='';document.getElementById('new-sem-label').value='';
+  renderSemTable();populateAdminSelects();showToast('sem-toast');
 }
 
 function renderSemTable(){
-  const sems=getSemesters();
-  const matkuls=getMatkuls();
-  const qs=getQuestions();
-  const mat=getMateri();
+  const sems=getSemesters(),matkuls=getMatkuls(),qs=getQuestions(),mat=getMateri();
   const tbody=document.getElementById('sem-tbody');
-  if(sems.length===0){
-    tbody.innerHTML='<tr><td colspan="5" style="color:var(--muted);text-align:center;padding:20px;">Belum ada semester.</td></tr>';
-    return;
-  }
+  if(sems.length===0){tbody.innerHTML='<tr><td colspan="5" style="color:var(--muted);text-align:center;padding:20px;">Belum ada semester.</td></tr>';return;}
   tbody.innerHTML=sems.map(s=>{
     const mks=matkuls.filter(m=>m.semId===s.id);
     let totalSoal=0,totalMat=0;
     mks.forEach(m=>{totalSoal+=(qs[m.id]||[]).length;totalMat+=(mat[m.id]||[]).length;});
     return `<tr>
       <td><strong>Semester ${s.num}</strong><br><span style="font-size:11px;color:var(--text2)">${escHtml(s.label||'')}</span></td>
-      <td>${mks.length}</td>
-      <td>${totalSoal}</td>
-      <td>${totalMat}</td>
+      <td>${mks.length}</td><td>${totalSoal}</td><td>${totalMat}</td>
       <td><button class="btn-danger" onclick="deleteSemester('${s.id}')">Hapus</button></td>
     </tr>`;
   }).join('');
@@ -2108,8 +1589,7 @@ function renderSemTable(){
 function deleteSemester(id){
   if(!confirm('Hapus semester ini beserta semua mata kuliah, soal, dan materinya?')) return;
   const mks=getMatkuls().filter(m=>m.semId===id);
-  const qsData=getQuestions();
-  const matData=getMateri();
+  const qsData=getQuestions(),matData=getMateri();
   mks.forEach(m=>{delete qsData[m.id];delete matData[m.id];});
   setQuestions(qsData);setMateri(matData);
   setSemesters(getSemesters().filter(s=>s.id!==id));
@@ -2123,23 +1603,20 @@ function addMatkul(){
   const name=document.getElementById('new-matkul-name').value.trim();
   const icon=document.getElementById('new-matkul-icon').value.trim()||'📚';
   const desc=document.getElementById('new-matkul-desc').value.trim();
-  if(!semId){ alert('Pilih semester.'); return; }
-  if(!name){ alert('Nama mata kuliah wajib diisi.'); return; }
+  if(!semId){alert('Pilih semester.');return;}
+  if(!name){alert('Nama mata kuliah wajib diisi.');return;}
   const matkuls=getMatkuls();
   matkuls.push({id:uid(),semId,name,icon,desc});
   setMatkuls(matkuls);
   document.getElementById('new-matkul-name').value='';
   document.getElementById('new-matkul-icon').value='';
+  document.getElementById('new-matkul-icon-preview').textContent='📚';
   document.getElementById('new-matkul-desc').value='';
-  renderMatkulList();populateAdminSelects();
-  showToast('matkul-toast');
+  renderMatkulList();populateAdminSelects();showToast('matkul-toast');
 }
 
 function renderMatkulList(){
-  const sems=getSemesters();
-  const matkuls=getMatkuls();
-  const qs=getQuestions();
-  const mat=getMateri();
+  const sems=getSemesters(),matkuls=getMatkuls(),qs=getQuestions(),mat=getMateri();
   const wrap=document.getElementById('matkul-list-admin');
   if(matkuls.length===0){wrap.innerHTML='';return;}
   let html='<div class="section-title">Daftar Mata Kuliah</div>';
@@ -2152,9 +1629,12 @@ function renderMatkulList(){
         <div class="matkul-icon" style="width:36px;height:36px;min-width:36px;font-size:18px;">${m.icon||'📚'}</div>
         <div class="q-list-body">
           <div class="q-list-text" style="font-weight:600;">${escHtml(m.name)}</div>
-          <div style="font-size:11px;color:var(--text2);margin-top:2px;">${(qs[m.id]||[]).length} soal · ${(mat[m.id]||[]).length} materi</div>
+          <div style="font-size:11px;color:var(--text2);margin-top:2px;">${(qs[m.id]||[]).length} soal · ${(mat[m.id]||[]).length} materi${m.desc?' · '+escHtml(m.desc):''}</div>
         </div>
-        <div class="q-list-actions"><button class="btn-danger" onclick="deleteMatkul('${m.id}')">Hapus</button></div>
+        <div class="q-list-actions">
+          <button class="btn-edit" onclick="openEditMatkul('${m.id}')">✏ Edit</button>
+          <button class="btn-danger" onclick="deleteMatkul('${m.id}')">Hapus</button>
+        </div>
       </div>`;
     });
     html+='</div>';
@@ -2170,9 +1650,34 @@ function deleteMatkul(id){
   renderMatkulList();populateAdminSelects();
 }
 
-// ═══════════════════════════════════════
+// ── EDIT MATKUL (NEW) ──
+function openEditMatkul(matkulId){
+  const m=getMatkuls().find(x=>x.id===matkulId);
+  if(!m) return;
+  document.getElementById('edit-matkul-id').value=matkulId;
+  document.getElementById('edit-matkul-name').value=m.name;
+  document.getElementById('edit-matkul-icon').value=m.icon||'📚';
+  document.getElementById('edit-matkul-icon-preview').textContent=m.icon||'📚';
+  document.getElementById('edit-matkul-desc').value=m.desc||'';
+  openModal('modal-edit-matkul');
+}
+
+function saveEditMatkul(){
+  const id=document.getElementById('edit-matkul-id').value;
+  const name=document.getElementById('edit-matkul-name').value.trim();
+  if(!name){alert('Nama mata kuliah wajib diisi.');return;}
+  const icon=document.getElementById('edit-matkul-icon').value.trim()||'📚';
+  const desc=document.getElementById('edit-matkul-desc').value.trim();
+  const matkuls=getMatkuls();
+  const idx=matkuls.findIndex(m=>m.id===id);
+  if(idx>-1){matkuls[idx]={...matkuls[idx],name,icon,desc};setMatkuls(matkuls);}
+  showToast('edit-matkul-toast');
+  setTimeout(()=>{closeModal('modal-edit-matkul');renderMatkulList();populateAdminSelects();},1200);
+}
+
+// ════════════════════════════════
 // MATERI ADMIN
-// ═══════════════════════════════════════
+// ════════════════════════════════
 function updateMateriMatkulSel(){
   const semId=document.getElementById('materi-sem-sel').value;
   const mks=getMatkuls().filter(m=>m.semId===semId);
@@ -2182,12 +1687,9 @@ function updateMateriMatkulSel(){
 }
 
 function handleMateriPDF(input){
-  const file=input.files[0]; if(!file) return;
+  const file=input.files[0];if(!file) return;
   const reader=new FileReader();
-  reader.onload=e=>{
-    pendingMateriPDF={name:file.name,dataUrl:e.target.result};
-    document.getElementById('materi-pdf-name').textContent=file.name;
-  };
+  reader.onload=e=>{pendingMateriPDF={name:file.name,dataUrl:e.target.result};document.getElementById('materi-pdf-name').textContent=file.name;};
   reader.readAsDataURL(file);
 }
 
@@ -2196,24 +1698,17 @@ function saveMateri(){
   const matkulId=document.getElementById('materi-matkul-sel').value;
   const title=document.getElementById('materi-title').value.trim();
   const content=document.getElementById('materi-content').value.trim();
-  const errBox=document.getElementById('materi-err');
-  errBox.style.display='none';
+  const errBox=document.getElementById('materi-err');errBox.style.display='none';
   if(!semId||!matkulId){errBox.textContent='Pilih semester & mata kuliah.';errBox.style.display='block';return;}
   if(!title){errBox.textContent='Judul materi wajib diisi.';errBox.style.display='block';return;}
   if(!content&&!pendingMateriPDF){errBox.textContent='Isi konten teks atau upload PDF.';errBox.style.display='block';return;}
-  const matData=getMateri();
-  if(!matData[matkulId]) matData[matkulId]=[];
+  const matData=getMateri();if(!matData[matkulId]) matData[matkulId]=[];
   const newMat={id:uid(),title,content};
   if(pendingMateriPDF){newMat.fileName=pendingMateriPDF.name;newMat.fileData=pendingMateriPDF.dataUrl;}
-  matData[matkulId].push(newMat);
-  setMateri(matData);
-  document.getElementById('materi-title').value='';
-  document.getElementById('materi-content').value='';
-  document.getElementById('materi-pdf-name').textContent='';
-  document.getElementById('materi-pdf-input').value='';
-  pendingMateriPDF=null;
-  renderMateriAdminList();
-  showToast('materi-toast');
+  matData[matkulId].push(newMat);setMateri(matData);
+  document.getElementById('materi-title').value='';document.getElementById('materi-content').value='';
+  document.getElementById('materi-pdf-name').textContent='';document.getElementById('materi-pdf-input').value='';
+  pendingMateriPDF=null;renderMateriAdminList();showToast('materi-toast');
 }
 
 function renderMateriAdminList(){
@@ -2235,14 +1730,12 @@ function renderMateriAdminList(){
 
 function deleteMateri(matId,matkulId){
   if(!confirm('Hapus materi ini?')) return;
-  const matData=getMateri();
-  matData[matkulId]=(matData[matkulId]||[]).filter(m=>m.id!==matId);
-  setMateri(matData);renderMateriAdminList();
+  const matData=getMateri();matData[matkulId]=(matData[matkulId]||[]).filter(m=>m.id!==matId);setMateri(matData);renderMateriAdminList();
 }
 
-// ═══════════════════════════════════════
+// ════════════════════════════════
 // QUESTIONS ADMIN
-// ═══════════════════════════════════════
+// ════════════════════════════════
 function updateQMatkulSel(){
   const semId=document.getElementById('q-sem-sel').value;
   const mks=getMatkuls().filter(m=>m.semId===semId);
@@ -2257,8 +1750,7 @@ function renderQList(){
   const container=document.getElementById('q-list-container');
   if(!matkulId){container.innerHTML='<div style="color:var(--muted);font-size:13px;padding:20px 0;">Pilih semester & mata kuliah.</div>';return;}
   if(qs.length===0){container.innerHTML='<div style="color:var(--muted);font-size:13px;padding:20px 0;">Belum ada soal. Tambahkan via PDF atau form manual di bawah.</div>';return;}
-  const pg=qs.filter(q=>q.type!=='essay').length;
-  const es=qs.filter(q=>q.type==='essay').length;
+  const pg=qs.filter(q=>q.type!=='essay').length,es=qs.filter(q=>q.type==='essay').length;
   container.innerHTML=`<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap;">
     <span style="font-size:11px;font-weight:700;font-family:var(--mono);color:var(--muted);text-transform:uppercase;letter-spacing:.08em;">${qs.length} soal</span>
     ${pg>0?`<span class="q-type-chip chip-pg">📝 ${pg} Pilgan</span>`:''}
@@ -2284,8 +1776,7 @@ function toggleQType(){
   document.getElementById('area-essay').style.display=t==='essay'?'block':'none';
 }
 function toggleManualForm(){
-  const h=document.getElementById('manual-toggle');
-  const b=document.getElementById('manual-form-body');
+  const h=document.getElementById('manual-toggle'),b=document.getElementById('manual-form-body');
   const open=b.classList.contains('open');
   h.classList.toggle('open',!open);b.classList.toggle('open',!open);
 }
@@ -2309,10 +1800,8 @@ function addQuestion(){
     newQ.keywords=kw.split(',').map(k=>k.trim().toLowerCase()).filter(k=>k);
     newQ.maxScore=parseInt(document.getElementById('new-q-maxscore').value)||5;
   }
-  const qsData=getQuestions();
-  if(!qsData[matkulId]) qsData[matkulId]=[];
-  qsData[matkulId].push(newQ);
-  setQuestions(qsData);clearQForm();renderQList();showToast('q-toast');
+  const qsData=getQuestions();if(!qsData[matkulId]) qsData[matkulId]=[];
+  qsData[matkulId].push(newQ);setQuestions(qsData);clearQForm();renderQList();showToast('q-toast');
 }
 
 function clearQForm(){
@@ -2327,9 +1816,7 @@ function clearQForm(){
 
 function deleteQ(matkulId,qId){
   if(!confirm('Hapus soal ini?')) return;
-  const qsData=getQuestions();
-  qsData[matkulId]=(qsData[matkulId]||[]).filter(q=>q.id!==qId);
-  setQuestions(qsData);renderQList();
+  const qsData=getQuestions();qsData[matkulId]=(qsData[matkulId]||[]).filter(q=>q.id!==qId);setQuestions(qsData);renderQList();
 }
 
 function openEditQ(matkulId,qId){
@@ -2380,9 +1867,9 @@ function saveEditQ(){
   closeModal('modal-edit-q');renderQList();
 }
 
-// ═══════════════════════════════════════
+// ════════════════════════════════
 // SETTINGS
-// ═══════════════════════════════════════
+// ════════════════════════════════
 function changePw(){
   const old=document.getElementById('pw-old').value;
   const nw=document.getElementById('pw-new').value;
@@ -2399,10 +1886,7 @@ function changePw(){
 function exportData(){
   const data={semesters:getSemesters(),matkuls:getMatkuls(),questions:getQuestions(),materi:getMateri()};
   const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
-  const a=document.createElement('a');
-  a.href=URL.createObjectURL(blob);
-  a.download='latsol-akp-backup-'+new Date().toISOString().slice(0,10)+'.json';
-  a.click();
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='latsol-akp-backup-'+new Date().toISOString().slice(0,10)+'.json';a.click();
 }
 
 function importData(input){
@@ -2416,8 +1900,7 @@ function importData(input){
       if(data.matkuls) setMatkuls(data.matkuls);
       if(data.questions) setQuestions(data.questions);
       if(data.materi) setMateri(data.materi);
-      renderSemTable();renderMatkulList();populateAdminSelects();
-      alert('Import berhasil!');
+      renderSemTable();renderMatkulList();populateAdminSelects();alert('Import berhasil!');
     }catch{alert('Gagal membaca file.');}
   };
   reader.readAsText(file);input.value='';
@@ -2427,13 +1910,12 @@ function clearAllData(){
   if(!confirm('Hapus semua data secara permanen?')) return;
   if(!confirm('Konfirmasi sekali lagi?')) return;
   setSemesters([]);setMatkuls([]);setQuestions({});setMateri({});
-  renderSemTable();renderMatkulList();populateAdminSelects();
-  alert('Semua data berhasil dihapus.');
+  renderSemTable();renderMatkulList();populateAdminSelects();alert('Semua data berhasil dihapus.');
 }
 
-// ═══════════════════════════════════════
+// ════════════════════════════════
 // MODAL & UTILS
-// ═══════════════════════════════════════
+// ════════════════════════════════
 function openModal(id){document.getElementById(id).classList.add('open');}
 function closeModal(id){document.getElementById(id).classList.remove('open');}
 document.querySelectorAll('.modal-overlay').forEach(ov=>{
@@ -2442,18 +1924,15 @@ document.querySelectorAll('.modal-overlay').forEach(ov=>{
 function escHtml(str=''){return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 function showToast(id){const el=document.getElementById(id);el.style.display='block';setTimeout(()=>el.style.display='none',3000);}
 
-// ═══════════════════════════════════════
-// INIT — seed default data if empty
-// ═══════════════════════════════════════
+// ════════════════════════════════
+// INIT
+// ════════════════════════════════
 function initApp(){
+  buildEmojiPanels();
   if(getSemesters().length===0){
     const s1=uid(),s2=uid(),s3=uid();
     const m1=uid(),m2=uid(),m3=uid(),m4=uid();
-    setSemesters([
-      {id:s1,num:1,label:'Semester Ganjil'},
-      {id:s2,num:2,label:'Semester Genap'},
-      {id:s3,num:3,label:'Semester Ganjil'},
-    ]);
+    setSemesters([{id:s1,num:1,label:'Semester Ganjil'},{id:s2,num:2,label:'Semester Genap'},{id:s3,num:3,label:'Semester Ganjil'}]);
     setMatkuls([
       {id:m1,semId:s1,name:'Pengantar Akuntansi',icon:'📊',desc:'Dasar-dasar akuntansi'},
       {id:m2,semId:s1,name:'Perpajakan Dasar',icon:'🧾',desc:'Konsep dasar pajak'},
