@@ -36,8 +36,7 @@ a{text-decoration:none;color:inherit;}
 .page{display:none;min-height:100vh;}
 .page.active{display:block;}
 #page-quiz.active{display:flex;flex-direction:column;}
-#page-admin-login.active{display:flex;}
-#page-admin.active{display:flex;flex-direction:column;}
+
 #page-materi-viewer.active{display:flex;flex-direction:column;}
 
 /* HOME NAV */
@@ -48,8 +47,7 @@ a{text-decoration:none;color:inherit;}
 .nav-links{display:flex;align-items:center;gap:8px;}
 .nav-link{padding:8px 16px;background:transparent;border:none;color:var(--text2);font-size:13px;font-weight:500;border-radius:8px;transition:all .18s;}
 .nav-link:hover{color:var(--text);background:rgba(255,255,255,.05);}
-.nav-admin-btn{padding:9px 20px;background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;border-radius:10px;color:#fff;font-size:13px;font-weight:600;transition:all .18s;box-shadow:0 4px 16px rgba(124,92,252,.3);}
-.nav-admin-btn:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(124,92,252,.4);}
+
 
 /* HERO */
 .home-hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:80px 32px 60px;overflow:hidden;}
@@ -324,44 +322,6 @@ a{text-decoration:none;color:inherit;}
 .eval-type-tag.etpg{color:var(--accent);}
 .eval-type-tag.etes{color:var(--green);}
 
-/* ADMIN LOGIN */
-#page-admin-login{align-items:center;justify-content:center;min-height:100vh;background:var(--bg);padding:24px;}
-.login-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:40px 36px;width:100%;max-width:400px;box-shadow:var(--shadow);}
-.login-icon{font-size:36px;margin-bottom:16px;}
-.login-title{font-size:22px;font-weight:800;letter-spacing:-.02em;margin-bottom:6px;}
-.login-sub{font-size:13px;color:var(--text2);margin-bottom:28px;}
-.field-label{font-size:12px;font-weight:600;color:var(--text2);margin-bottom:6px;display:block;}
-.field-input{width:100%;padding:11px 14px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-size:14px;outline:none;transition:border-color .16s;}
-.field-input:focus{border-color:var(--accent);}
-.field-group{margin-bottom:18px;}
-.btn-login{width:100%;padding:12px;background:linear-gradient(135deg,var(--accent),#8b6fff);border:none;border-radius:var(--radius);color:#fff;font-size:14px;font-weight:700;transition:all .2s;margin-top:4px;}
-.btn-login:hover{opacity:.88;}
-.login-err{background:var(--red-bg);border:1px solid rgba(242,104,104,.3);border-radius:8px;padding:10px 14px;font-size:13px;color:var(--red);margin-top:14px;display:none;}
-.btn-back-home{display:flex;align-items:center;justify-content:center;gap:7px;width:100%;margin-top:14px;padding:10px;background:transparent;border:1px solid var(--border);border-radius:var(--radius);color:var(--text2);font-size:13px;transition:all .16s;}
-.btn-back-home:hover{border-color:var(--border2);color:var(--text);}
-
-/* ADMIN DASHBOARD */
-#page-admin{min-height:100vh;}
-.admin-header{height:60px;display:flex;align-items:center;padding:0 24px;gap:12px;background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;}
-.admin-logo{font-size:13px;font-weight:700;color:var(--accent);font-family:var(--mono);}
-.admin-title{font-size:15px;font-weight:700;flex:1;}
-.btn-admin-logout{padding:7px 14px;background:transparent;border:1px solid var(--border);border-radius:8px;color:var(--text2);font-size:12px;transition:all .16s;}
-.btn-admin-logout:hover{border-color:var(--red);color:var(--red);}
-.btn-admin-home{padding:7px 14px;background:transparent;border:1px solid var(--border);border-radius:8px;color:var(--text2);font-size:12px;transition:all .16s;}
-.btn-admin-home:hover{border-color:var(--accent);color:var(--accent);}
-.admin-body{display:flex;flex:1;min-height:0;}
-.admin-nav{width:220px;min-width:220px;background:var(--surface);border-right:1px solid var(--border);padding:20px 14px;position:sticky;top:60px;height:calc(100vh - 60px);overflow-y:auto;}
-@media(max-width:640px){.admin-nav{display:none;}.admin-content{max-width:100%!important;}}
-.admin-nav-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;font-size:13px;font-weight:500;color:var(--text2);cursor:pointer;transition:all .16s;margin-bottom:4px;}
-.admin-nav-item:hover{background:var(--card);color:var(--text);}
-.admin-nav-item.active{background:var(--glow);color:var(--accent);border:1px solid rgba(124,92,252,.25);}
-.admin-nav-sect{font-size:10px;font-weight:700;font-family:var(--mono);color:var(--muted);letter-spacing:.1em;text-transform:uppercase;padding:14px 12px 6px;}
-.admin-content{max-width:900px;padding:32px 28px;flex:1;}
-@media(max-width:768px){.admin-content{padding:20px 16px;}}
-.admin-panel{display:none;}
-.admin-panel.active{display:block;}
-.admin-panel-title{font-size:20px;font-weight:800;letter-spacing:-.02em;margin-bottom:6px;}
-.admin-panel-desc{font-size:13px;color:var(--text2);margin-bottom:28px;}
 
 /* FORM COMPONENTS */
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
@@ -414,26 +374,7 @@ a{text-decoration:none;color:inherit;}
 .q-type-chip.chip-essay{color:var(--green);background:var(--green-bg);border-color:rgba(45,212,160,.3);}
 .pw-form{max-width:400px;}
 
-/* EMOJI PICKER */
-.emoji-picker-wrap{position:relative;display:inline-block;}
-.emoji-pick-btn{padding:8px 12px;background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--text2);font-size:12px;font-weight:600;cursor:pointer;transition:all .16s;white-space:nowrap;}
-.emoji-pick-btn:hover{border-color:var(--accent);color:var(--accent);}
-.emoji-panel{position:absolute;top:calc(100% + 6px);left:0;z-index:400;background:var(--card2);border:1px solid var(--border2);border-radius:var(--radius);padding:12px;display:none;flex-wrap:wrap;gap:4px;width:264px;box-shadow:0 12px 40px rgba(0,0,0,.6);}
-.emoji-panel.open{display:flex;}
-.emoji-opt{width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:18px;border-radius:7px;cursor:pointer;transition:background .12s;border:1px solid transparent;}
-.emoji-opt:hover{background:var(--glow);border-color:var(--border);}
-.icon-input-row{display:flex;align-items:center;gap:8px;}
-.icon-preview{width:40px;height:40px;min-width:40px;border-radius:10px;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:20px;}
-.icon-input-row .f-input{flex:1;}
 
-/* MODAL */
-.modal-overlay{display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:20px;}
-.modal-overlay.open{display:flex;}
-.modal{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px 26px;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.6);animation:fadeUp .25s ease;}
-.modal-title{font-size:17px;font-weight:800;margin-bottom:4px;}
-.modal-sub{font-size:13px;color:var(--text2);margin-bottom:22px;}
-.modal-close{position:absolute;top:18px;right:18px;width:30px;height:30px;border-radius:7px;background:var(--surface);border:1px solid var(--border);color:var(--text2);font-size:16px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .16s;}
-.modal-close:hover{border-color:var(--border2);color:var(--text);}
 </style>
 </head>
 <body>
@@ -446,7 +387,6 @@ a{text-decoration:none;color:inherit;}
     <div class="nav-links">
       <button class="nav-link" onclick="goMateriSelector()">📖 Materi</button>
       <button class="nav-link" onclick="goLatsoalSelector()">✏️ Latihan Soal</button>
-      <button class="nav-admin-btn" onclick="goAdminLogin()">⚙ Admin</button>
     </div>
   </nav>
   <section class="home-hero">
@@ -648,261 +588,7 @@ a{text-decoration:none;color:inherit;}
   </div>
 </div>
 
-<!-- ADMIN LOGIN -->
-<div id="page-admin-login" class="page">
-  <div class="login-card">
-    <div class="login-icon">🔐</div>
-    <div class="login-title">Admin Panel</div>
-    <div class="login-sub">Masuk untuk mengelola materi dan soal latihan.</div>
-    <div class="field-group">
-      <label class="field-label">Password</label>
-      <input class="field-input" type="password" id="admin-pw-input" placeholder="Masukkan password admin" onkeydown="if(event.key==='Enter')doLogin()"/>
-    </div>
-    <button class="btn-login" onclick="doLogin()">Masuk →</button>
-    <div class="login-err" id="login-err">Password salah. Coba lagi.</div>
-    <button class="btn-back-home" onclick="goHome()">← Kembali ke Beranda</button>
-  </div>
-</div>
 
-<!-- ADMIN DASHBOARD -->
-<div id="page-admin" class="page">
-  <header class="admin-header">
-    <div class="admin-logo">ADMIN</div>
-    <div class="admin-title">Latsol AKP — Dashboard</div>
-    <button class="btn-admin-home" onclick="goHome()">⌂ Home</button>
-    <button class="btn-admin-logout" onclick="doLogout()">Keluar</button>
-  </header>
-  <div class="admin-body">
-    <nav class="admin-nav">
-      <div class="admin-nav-sect">Kelola</div>
-      <div class="admin-nav-item active" onclick="showPanel('semesters')" data-panel="semesters">🗂 Semester &amp; Matkul</div>
-      <div class="admin-nav-item" onclick="showPanel('materi')" data-panel="materi">📖 Upload Materi</div>
-      <div class="admin-nav-item" onclick="showPanel('questions')" data-panel="questions">✏️ Soal Latihan</div>
-      <div class="admin-nav-sect">Pengaturan</div>
-      <div class="admin-nav-item" onclick="showPanel('settings')" data-panel="settings">⚙ Pengaturan</div>
-    </nav>
-    <div class="admin-content">
-
-      <!-- PANEL: SEMESTERS -->
-      <div class="admin-panel active" id="panel-semesters">
-        <div class="admin-panel-title">Semester &amp; Mata Kuliah</div>
-        <div class="admin-panel-desc">Kelola daftar semester dan mata kuliah yang tersedia.</div>
-        <div class="section-title">Daftar Semester</div>
-        <div class="table-wrap">
-          <table class="data-table">
-            <thead><tr><th>Semester</th><th>Matkul</th><th>Soal</th><th>Materi</th><th>Aksi</th></tr></thead>
-            <tbody id="sem-tbody"></tbody>
-          </table>
-        </div>
-        <div class="section-title">+ Tambah Semester</div>
-        <div class="form-row">
-          <div class="form-group"><label class="f-label">Nomor Semester *</label><input class="f-input" type="number" id="new-sem-num" placeholder="cth: 1" min="1" max="14"/></div>
-          <div class="form-group"><label class="f-label">Label (opsional)</label><input class="f-input" id="new-sem-label" placeholder="cth: Semester Ganjil"/></div>
-        </div>
-        <div class="form-actions"><button class="btn-primary" onclick="addSemester()">Tambah Semester</button></div>
-        <div class="success-toast" id="sem-toast">✓ Semester berhasil ditambahkan!</div>
-
-        <div class="divider"></div>
-        <div class="section-title">+ Tambah Mata Kuliah</div>
-        <div class="form-row">
-          <div class="form-group"><label class="f-label">Semester *</label><select class="f-select" id="new-matkul-sem"></select></div>
-          <div class="form-group"><label class="f-label">Nama Mata Kuliah *</label><input class="f-input" id="new-matkul-name" placeholder="cth: Akuntansi Perpajakan"/></div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label class="f-label">Ikon (emoji)</label>
-            <div class="icon-input-row">
-              <div class="icon-preview" id="new-matkul-icon-preview">📚</div>
-              <input class="f-input" id="new-matkul-icon" placeholder="📚" maxlength="4" oninput="syncIconPreview('new-matkul-icon','new-matkul-icon-preview')"/>
-              <div class="emoji-picker-wrap">
-                <button type="button" class="emoji-pick-btn" onclick="toggleEmojiPicker('ep-new-matkul')">🙂 Pilih</button>
-                <div class="emoji-panel" id="ep-new-matkul"></div>
-              </div>
-            </div>
-          </div>
-          <div class="form-group"><label class="f-label">Deskripsi</label><input class="f-input" id="new-matkul-desc" placeholder="cth: Mata kuliah inti wajib"/></div>
-        </div>
-        <div class="form-actions"><button class="btn-primary" onclick="addMatkul()">Tambah Mata Kuliah</button></div>
-        <div class="success-toast" id="matkul-toast">✓ Mata kuliah berhasil ditambahkan!</div>
-        <div id="matkul-list-admin" style="margin-top:24px;"></div>
-      </div>
-
-      <!-- PANEL: MATERI -->
-      <div class="admin-panel" id="panel-materi">
-        <div class="admin-panel-title">Upload Materi</div>
-        <div class="admin-panel-desc">Upload file PDF atau tulis materi teks untuk mata kuliah tertentu.</div>
-        <div class="form-row">
-          <div class="form-group"><label class="f-label">Semester *</label><select class="f-select" id="materi-sem-sel" onchange="updateMateriMatkulSel()"></select></div>
-          <div class="form-group"><label class="f-label">Mata Kuliah *</label><select class="f-select" id="materi-matkul-sel"></select></div>
-        </div>
-        <div class="form-group"><label class="f-label">Judul Materi *</label><input class="f-input" id="materi-title" placeholder="cth: Bab 1 - Pengantar Perpajakan"/></div>
-        <div class="form-group"><label class="f-label">Konten Materi (teks)</label><textarea class="f-textarea" id="materi-content" style="min-height:120px;" placeholder="Tulis ringkasan materi di sini..."></textarea></div>
-        <div class="form-group">
-          <label class="f-label">Upload File PDF (opsional)</label>
-          <label class="btn-primary" style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;padding:10px 20px;">
-            ⬆ Pilih File PDF
-            <input type="file" accept=".pdf" style="display:none" id="materi-pdf-input" onchange="handleMateriPDF(this)"/>
-          </label>
-          <span id="materi-pdf-name" style="font-size:12px;color:var(--text2);margin-left:12px;"></span>
-        </div>
-        <div class="form-actions"><button class="btn-primary" onclick="saveMateri()">Simpan Materi</button></div>
-        <div class="success-toast" id="materi-toast">✓ Materi berhasil disimpan!</div>
-        <div class="login-err" id="materi-err" style="margin-top:10px;"></div>
-        <div class="divider"></div>
-        <div class="section-title">Daftar Materi</div>
-        <div id="materi-admin-list-wrap"></div>
-      </div>
-
-      <!-- PANEL: QUESTIONS -->
-      <div class="admin-panel" id="panel-questions">
-        <div class="admin-panel-title">Soal Latihan</div>
-        <div class="admin-panel-desc">Tambah atau hapus soal per semester dan mata kuliah.</div>
-        <div class="form-row">
-          <div class="form-group"><label class="f-label">Semester *</label><select class="f-select" id="q-sem-sel" onchange="updateQMatkulSel()"></select></div>
-          <div class="form-group"><label class="f-label">Mata Kuliah *</label><select class="f-select" id="q-matkul-sel" onchange="renderQList()"></select></div>
-        </div>
-        <div id="q-list-container"><div style="color:var(--muted);font-size:13px;padding:20px 0;">Pilih semester &amp; mata kuliah untuk melihat soal.</div></div>
-        <div class="divider"></div>
-        <div class="section-title">📄 Import dari PDF</div>
-        <div class="info-box" style="border-color:var(--accent);">
-          <strong>Format PDF:</strong><br><br>
-          <span style="font-family:var(--mono);font-size:11px;">
-            Soal: Apa nama ibukota?<br>A. Jakarta &nbsp; B. Bandung &nbsp; C. Surabaya &nbsp; D. Medan<br>Kunci: A<br>Penjelasan: Jakarta adalah ibukota.<br><br>
-            Esai: Jelaskan fungsi pajak!<br>Kata Kunci: anggaran, regulerend, alokasi<br>Bobot: 5
-          </span>
-        </div>
-        <div class="form-actions" style="margin-bottom:24px;">
-          <label class="btn-primary" style="display:inline-flex;align-items:center;gap:7px;cursor:pointer;">
-            ⬆ Upload File PDF
-            <input type="file" accept=".pdf" style="display:none" id="pdf-upload" onchange="processPDF(this)"/>
-          </label>
-        </div>
-        <div class="success-toast" id="pdf-toast">✓ Soal dari PDF berhasil ditambahkan!</div>
-        <div class="login-err" id="pdf-err" style="margin-top:10px;"></div>
-        <div class="divider"></div>
-        <div class="collapsible-header" id="manual-toggle" onclick="toggleManualForm()">
-          <span class="ch-title">✏️ Tambah Soal Manual</span>
-          <span class="ch-arrow">▼</span>
-        </div>
-        <div class="collapsible-body" id="manual-form-body">
-          <div class="form-group" style="margin-top:4px;">
-            <label class="f-label">Jenis Soal *</label>
-            <select class="f-select" id="new-q-type" onchange="toggleQType()"><option value="mcq">Pilihan Ganda</option><option value="essay">Esai (Keyword Matching)</option></select>
-          </div>
-          <div class="form-group"><label class="f-label">Teks Pertanyaan *</label><textarea class="f-textarea" id="new-q-text" placeholder="Tulis pertanyaan di sini..."></textarea></div>
-          <div id="area-mcq">
-            <div class="form-group">
-              <label class="f-label">Pilihan Jawaban *</label>
-              <div class="opts-grid">
-                <div class="opt-field"><div class="opt-badge">A</div><input class="f-input" id="opt0" placeholder="Pilihan A"/></div>
-                <div class="opt-field"><div class="opt-badge">B</div><input class="f-input" id="opt1" placeholder="Pilihan B"/></div>
-                <div class="opt-field"><div class="opt-badge">C</div><input class="f-input" id="opt2" placeholder="Pilihan C"/></div>
-                <div class="opt-field"><div class="opt-badge">D</div><input class="f-input" id="opt3" placeholder="Pilihan D"/></div>
-              </div>
-            </div>
-            <div class="form-group"><label class="f-label">Jawaban Benar *</label><select class="f-select" id="new-q-ans"><option value="0">A</option><option value="1">B</option><option value="2">C</option><option value="3">D</option></select></div>
-          </div>
-          <div id="area-essay" style="display:none;background:var(--green-bg);padding:14px;border-radius:8px;border:1px solid rgba(45,212,160,.3);">
-            <div class="form-group"><label class="f-label">Kata Kunci (pisahkan koma) *</label><input class="f-input" id="new-q-keywords" placeholder="cth: anggaran, budgetair, regulerend"/></div>
-            <div class="form-group"><label class="f-label">Poin Maksimal (Bobot) *</label><input class="f-input" type="number" id="new-q-maxscore" value="5" min="1"/></div>
-          </div>
-          <div class="form-row" style="margin-top:14px;">
-            <div class="form-group"><label class="f-label">Tag / Label (opsional)</label><input class="f-input" id="new-q-tag" placeholder="cth: UTS, UAS, Bab 1"/></div>
-          </div>
-          <div class="form-group"><label class="f-label">Penjelasan Jawaban (opsional)</label><textarea class="f-textarea" id="new-q-exp" placeholder="Tulis penjelasan singkat..."></textarea></div>
-          <div class="form-actions">
-            <button class="btn-primary" onclick="addQuestion()">Simpan Soal</button>
-            <button class="btn-secondary" onclick="clearQForm()">Reset</button>
-          </div>
-          <div class="success-toast" id="q-toast">✓ Soal berhasil ditambahkan!</div>
-        </div>
-      </div>
-
-      <!-- PANEL: SETTINGS -->
-      <div class="admin-panel" id="panel-settings">
-        <div class="admin-panel-title">Pengaturan</div>
-        <div class="admin-panel-desc">Keamanan admin dan backup data.</div>
-        <div class="section-title">Ganti Password Admin</div>
-        <div class="pw-form">
-          <div class="form-group"><label class="f-label">Password Lama</label><input class="f-input" type="password" id="pw-old"/></div>
-          <div class="form-group"><label class="f-label">Password Baru</label><input class="f-input" type="password" id="pw-new"/></div>
-          <div class="form-group"><label class="f-label">Konfirmasi Password Baru</label><input class="f-input" type="password" id="pw-new2"/></div>
-          <div class="form-actions"><button class="btn-primary" onclick="changePw()">Ganti Password</button></div>
-          <div class="success-toast" id="pw-toast">✓ Password berhasil diubah!</div>
-          <div class="login-err" id="pw-err" style="margin-top:10px;"></div>
-        </div>
-        <div class="divider"></div>
-        <div class="section-title">Export / Import Data</div>
-        <div class="info-box"><strong>Export</strong> untuk backup semua data. <strong>Import</strong> untuk memuat dari backup.</div>
-        <div class="form-actions">
-          <button class="btn-primary" onclick="exportData()">⬇ Export JSON</button>
-          <label class="btn-secondary" style="display:flex;align-items:center;gap:7px;cursor:pointer;padding:10px 20px;font-size:13px;font-weight:500;border:1px solid var(--border);border-radius:8px;color:var(--text2);">
-            ⬆ Import JSON
-            <input type="file" accept=".json" style="display:none" onchange="importData(this)"/>
-          </label>
-        </div>
-        <div class="divider"></div>
-        <div class="section-title" style="color:var(--red);">Zona Berbahaya</div>
-        <div class="info-box" style="border-color:rgba(242,104,104,.25);background:var(--red-bg);">Hapus semua data akan menghapus <strong style="color:var(--red);">semua data</strong> secara permanen.</div>
-        <button class="btn-danger" onclick="clearAllData()">🗑 Hapus Semua Data</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- MODAL: EDIT SOAL -->
-<div class="modal-overlay" id="modal-edit-q">
-  <div class="modal">
-    <button class="modal-close" onclick="closeModal('modal-edit-q')">✕</button>
-    <div class="modal-title">Edit Soal</div>
-    <div class="modal-sub">Ubah teks, pilihan, jawaban benar, atau kata kunci.</div>
-    <input type="hidden" id="edit-q-id"/>
-    <input type="hidden" id="edit-q-matkulid"/>
-    <input type="hidden" id="edit-q-type"/>
-    <div class="form-group"><label class="f-label">Pertanyaan</label><textarea class="f-textarea" id="edit-q-text"></textarea></div>
-    <div id="edit-area-mcq">
-      <div class="opts-grid" style="margin-bottom:12px">
-        <div class="opt-field"><div class="opt-badge">A</div><input class="f-input" id="eq-opt0"/></div>
-        <div class="opt-field"><div class="opt-badge">B</div><input class="f-input" id="eq-opt1"/></div>
-        <div class="opt-field"><div class="opt-badge">C</div><input class="f-input" id="eq-opt2"/></div>
-        <div class="opt-field"><div class="opt-badge">D</div><input class="f-input" id="eq-opt3"/></div>
-      </div>
-      <div class="form-group"><label class="f-label">Jawaban Benar</label><select class="f-select" id="eq-ans"><option value="0">A</option><option value="1">B</option><option value="2">C</option><option value="3">D</option></select></div>
-    </div>
-    <div id="edit-area-essay" style="display:none;background:var(--green-bg);padding:14px;border-radius:8px;border:1px solid rgba(45,212,160,.3);margin-bottom:14px;">
-      <div class="form-group"><label class="f-label">Kata Kunci (pisahkan koma)</label><input class="f-input" id="eq-keywords"/></div>
-      <div class="form-group" style="margin-bottom:0;"><label class="f-label">Poin Maksimal</label><input class="f-input" type="number" id="eq-maxscore" min="1"/></div>
-    </div>
-    <div class="form-group"><label class="f-label">Tag</label><input class="f-input" id="eq-tag"/></div>
-    <div class="form-group"><label class="f-label">Penjelasan</label><textarea class="f-textarea" id="eq-exp"></textarea></div>
-    <div class="form-actions"><button class="btn-primary" onclick="saveEditQ()">Simpan</button><button class="btn-secondary" onclick="closeModal('modal-edit-q')">Batal</button></div>
-  </div>
-</div>
-
-<!-- MODAL: EDIT MATKUL — NEW -->
-<div class="modal-overlay" id="modal-edit-matkul">
-  <div class="modal">
-    <button class="modal-close" onclick="closeModal('modal-edit-matkul')">✕</button>
-    <div class="modal-title">Edit Mata Kuliah</div>
-    <div class="modal-sub">Ubah nama, ikon, atau deskripsi mata kuliah.</div>
-    <input type="hidden" id="edit-matkul-id"/>
-    <div class="form-group"><label class="f-label">Nama Mata Kuliah *</label><input class="f-input" id="edit-matkul-name" placeholder="Nama mata kuliah"/></div>
-    <div class="form-group">
-      <label class="f-label">Ikon (emoji)</label>
-      <div class="icon-input-row">
-        <div class="icon-preview" id="edit-matkul-icon-preview">📚</div>
-        <input class="f-input" id="edit-matkul-icon" placeholder="📚" maxlength="4" oninput="syncIconPreview('edit-matkul-icon','edit-matkul-icon-preview')"/>
-        <div class="emoji-picker-wrap">
-          <button type="button" class="emoji-pick-btn" onclick="toggleEmojiPicker('ep-edit-matkul')">🙂 Pilih</button>
-          <div class="emoji-panel" id="ep-edit-matkul"></div>
-        </div>
-      </div>
-    </div>
-    <div class="form-group"><label class="f-label">Deskripsi</label><input class="f-input" id="edit-matkul-desc" placeholder="Deskripsi singkat"/></div>
-    <div class="form-actions"><button class="btn-primary" onclick="saveEditMatkul()">Simpan</button><button class="btn-secondary" onclick="closeModal('modal-edit-matkul')">Batal</button></div>
-    <div class="success-toast" id="edit-matkul-toast">✓ Mata kuliah berhasil diperbarui!</div>
-  </div>
-</div>
 
 <script>
 // ════════════════════════════════
@@ -924,16 +610,16 @@ const db = firebase.database();
 // ════════════════════════════════
 // STORAGE KEYS & STATE
 // ════════════════════════════════
-const LS_PW='akp_admin_pw';
-
 let currentMatkulId=null;
 let currentSemId=null;
 let userAnswers=[];
 let currentQ=0;
-let pendingMateriPDF=null;
 let currentQuestionsFiltered=[];
 let currentTagFilter=null;
 let quizTabFilter='all';
+let _timerSettings={enabled:false,mode:'per_question',value:60};
+let quizTimerInterval=null;
+let quizTimeLeft=0;
 
 // In-memory cache (synced with Firebase)
 let _semesters = [];
@@ -956,61 +642,7 @@ const getQuestions=()=>_questions;
 const setQuestions=d=>{_questions=d;db.ref('questions').set(d);};
 const getMateri=()=>_materi;
 const setMateri=d=>{_materi=d;db.ref('materi').set(d);};
-const getPw=()=>localStorage.getItem(LS_PW)||'admin123';
 const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
-
-// ════════════════════════════════
-// EMOJI PICKER
-// ════════════════════════════════
-const EMOJIS=[
-  '📚','📖','📝','📊','📈','📉','🧮','💰','🏛','🧾',
-  '📋','📌','🔖','💡','🎓','📓','📔','📒','📕','📗',
-  '📘','📙','🗂','📁','📂','✏️','✒️','🔍','💼','⚖️',
-  '💹','🌐','🏢','🧠','💻','📱','🔬','🎯','🏆','🌟',
-  '⭐','🔢','📐','📏','🖊','🖋','📃','📄','🗃','🗄'
-];
-
-function buildEmojiPanels(){
-  const panels=document.querySelectorAll('.emoji-panel');
-  panels.forEach(panel=>{
-    const id=panel.id;
-    // Determine which input this panel targets
-    const targetInput=id==='ep-new-matkul'?'new-matkul-icon':
-                      id==='ep-edit-matkul'?'edit-matkul-icon':'';
-    const previewId=id==='ep-new-matkul'?'new-matkul-icon-preview':
-                    id==='ep-edit-matkul'?'edit-matkul-icon-preview':'';
-    panel.innerHTML=EMOJIS.map(e=>`<div class="emoji-opt" onclick="setEmoji('${targetInput}','${previewId}','${e}','${id}')" title="${e}">${e}</div>`).join('');
-  });
-}
-
-function toggleEmojiPicker(panelId){
-  const panel=document.getElementById(panelId);
-  const isOpen=panel.classList.contains('open');
-  document.querySelectorAll('.emoji-panel.open').forEach(p=>p.classList.remove('open'));
-  if(!isOpen) panel.classList.add('open');
-}
-
-function setEmoji(inputId,previewId,emoji,panelId){
-  if(inputId){
-    const inp=document.getElementById(inputId);
-    if(inp) inp.value=emoji;
-  }
-  if(previewId){
-    const prev=document.getElementById(previewId);
-    if(prev) prev.textContent=emoji;
-  }
-  const panel=document.getElementById(panelId);
-  if(panel) panel.classList.remove('open');
-}
-
-function syncIconPreview(inputId,previewId){
-  const v=document.getElementById(inputId).value;
-  document.getElementById(previewId).textContent=v||'📚';
-}
-
-document.addEventListener('click',function(e){
-  if(!e.target.closest('.emoji-picker-wrap')) document.querySelectorAll('.emoji-panel.open').forEach(p=>p.classList.remove('open'));
-});
 
 // ════════════════════════════════
 // PAGE ROUTING
@@ -1021,7 +653,6 @@ function showPage(id){
   window.scrollTo(0,0);
 }
 function goHome(){ updateHomeStats(); showPage('page-home'); }
-function goAdminLogin(){ showPage('page-admin-login'); document.getElementById('admin-pw-input').value=''; document.getElementById('login-err').style.display='none'; }
 
 function updateHomeStats(){
   const sems=getSemesters(),matkuls=getMatkuls(),qs=getQuestions(),mat=getMateri();
@@ -1240,6 +871,7 @@ function startQuizCore(matkulId){
   showQ(0);
   updateProgress();
   updateQuizTabs();
+  startQuizTimer(qs.length);
 }
 
 function buildQuiz(qs,matkul){
@@ -1407,10 +1039,11 @@ function updateProgress(){
 function toggleSidebar(){document.getElementById('quiz-sidebar').classList.toggle('open');document.getElementById('sidebar-overlay').classList.toggle('open');}
 function closeSidebar(){document.getElementById('quiz-sidebar').classList.remove('open');document.getElementById('sidebar-overlay').classList.remove('open');}
 
-function backFromQuiz(){ openLatsoalOptions(currentMatkulId); }
+function backFromQuiz(){ stopQuizTimer(); openLatsoalOptions(currentMatkulId); }
 function backFromResult(){ openLatsoalOptions(currentMatkulId); }
 
 function submitQuiz(){
+  stopQuizTimer();
   const qs=currentQuestionsFiltered;
   const done=userAnswers.filter(a=>a!==null&&a!=='').length;
   const rem=qs.length-done;
@@ -1442,6 +1075,8 @@ function submitQuiz(){
   document.getElementById('res-title').textContent=t[0];
   document.getElementById('res-desc').textContent=t[1];
   buildEval(qs);
+  // Track user activity
+  trackUserQuiz(pct, qs.length);
   showPage('page-result');
 }
 
@@ -1544,416 +1179,74 @@ function parseTextToQuestions(text,matkulId){
 }
 
 // ════════════════════════════════
-// ADMIN AUTH
+// UTILS
 // ════════════════════════════════
-function doLogin(){
-  if(document.getElementById('admin-pw-input').value===getPw()){
-    populateAdminSelects();renderSemTable();renderMatkulList();
-    showPage('page-admin');showPanel('semesters');
-  } else {
-    document.getElementById('login-err').style.display='block';
-    document.getElementById('admin-pw-input').value='';
-    document.getElementById('admin-pw-input').focus();
-  }
-}
-function doLogout(){goHome();}
-
-// ════════════════════════════════
-// ADMIN PANELS
-// ════════════════════════════════
-function showPanel(name){
-  document.querySelectorAll('.admin-panel').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.admin-nav-item').forEach(el=>el.classList.remove('active'));
-  document.getElementById(`panel-${name}`).classList.add('active');
-  document.querySelector(`[data-panel="${name}"]`).classList.add('active');
-  populateAdminSelects();
-  if(name==='semesters'){renderSemTable();renderMatkulList();}
-  if(name==='materi'){updateMateriMatkulSel();renderMateriAdminList();}
-  if(name==='questions'){updateQMatkulSel();renderQList();}
-}
-
-function populateAdminSelects(){
-  const sems=getSemesters(),matkuls=getMatkuls();
-  const nms=document.getElementById('new-matkul-sem');
-  if(nms) nms.innerHTML=sems.map(s=>`<option value="${s.id}">Semester ${s.num} — ${s.label||''}</option>`).join('')||'<option value="">— Belum ada semester —</option>';
-  const mss=document.getElementById('materi-sem-sel');
-  if(mss){mss.innerHTML=sems.map(s=>`<option value="${s.id}">Semester ${s.num}</option>`).join('')||'<option value="">— —</option>';updateMateriMatkulSel();}
-  const qss=document.getElementById('q-sem-sel');
-  if(qss){qss.innerHTML=sems.map(s=>`<option value="${s.id}">Semester ${s.num}</option>`).join('')||'<option value="">— —</option>';updateQMatkulSel();}
-}
-
-// SEMESTERS
-function addSemester(){
-  const num=parseInt(document.getElementById('new-sem-num').value);
-  const label=document.getElementById('new-sem-label').value.trim();
-  if(!num||num<1){alert('Nomor semester wajib diisi.');return;}
-  const sems=getSemesters();
-  if(sems.find(s=>s.num===num)){alert('Semester '+num+' sudah ada.');return;}
-  sems.push({id:uid(),num,label});sems.sort((a,b)=>a.num-b.num);setSemesters(sems);
-  document.getElementById('new-sem-num').value='';document.getElementById('new-sem-label').value='';
-  renderSemTable();populateAdminSelects();showToast('sem-toast');
-}
-
-function renderSemTable(){
-  const sems=getSemesters(),matkuls=getMatkuls(),qs=getQuestions(),mat=getMateri();
-  const tbody=document.getElementById('sem-tbody');
-  if(sems.length===0){tbody.innerHTML='<tr><td colspan="5" style="color:var(--muted);text-align:center;padding:20px;">Belum ada semester.</td></tr>';return;}
-  tbody.innerHTML=sems.map(s=>{
-    const mks=matkuls.filter(m=>m.semId===s.id);
-    let totalSoal=0,totalMat=0;
-    mks.forEach(m=>{totalSoal+=(qs[m.id]||[]).length;totalMat+=(mat[m.id]||[]).length;});
-    return `<tr>
-      <td><strong>Semester ${s.num}</strong><br><span style="font-size:11px;color:var(--text2)">${escHtml(s.label||'')}</span></td>
-      <td>${mks.length}</td><td>${totalSoal}</td><td>${totalMat}</td>
-      <td><button class="btn-danger" onclick="deleteSemester('${s.id}')">Hapus</button></td>
-    </tr>`;
-  }).join('');
-}
-
-function deleteSemester(id){
-  if(!confirm('Hapus semester ini beserta semua mata kuliah, soal, dan materinya?')) return;
-  const mks=getMatkuls().filter(m=>m.semId===id);
-  const qsData=getQuestions(),matData=getMateri();
-  mks.forEach(m=>{delete qsData[m.id];delete matData[m.id];});
-  setQuestions(qsData);setMateri(matData);
-  setSemesters(getSemesters().filter(s=>s.id!==id));
-  setMatkuls(getMatkuls().filter(m=>m.semId!==id));
-  renderSemTable();renderMatkulList();populateAdminSelects();
-}
-
-// MATKUL
-function addMatkul(){
-  const semId=document.getElementById('new-matkul-sem').value;
-  const name=document.getElementById('new-matkul-name').value.trim();
-  const icon=document.getElementById('new-matkul-icon').value.trim()||'📚';
-  const desc=document.getElementById('new-matkul-desc').value.trim();
-  if(!semId){alert('Pilih semester.');return;}
-  if(!name){alert('Nama mata kuliah wajib diisi.');return;}
-  const matkuls=getMatkuls();
-  matkuls.push({id:uid(),semId,name,icon,desc});
-  setMatkuls(matkuls);
-  document.getElementById('new-matkul-name').value='';
-  document.getElementById('new-matkul-icon').value='';
-  document.getElementById('new-matkul-icon-preview').textContent='📚';
-  document.getElementById('new-matkul-desc').value='';
-  renderMatkulList();populateAdminSelects();showToast('matkul-toast');
-}
-
-function renderMatkulList(){
-  const sems=getSemesters(),matkuls=getMatkuls(),qs=getQuestions(),mat=getMateri();
-  const wrap=document.getElementById('matkul-list-admin');
-  if(matkuls.length===0){wrap.innerHTML='';return;}
-  let html='<div class="section-title">Daftar Mata Kuliah</div>';
-  sems.forEach(s=>{
-    const mks=matkuls.filter(m=>m.semId===s.id);
-    if(mks.length===0) return;
-    html+=`<div style="margin-bottom:16px;"><div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;">Semester ${s.num}</div>`;
-    mks.forEach(m=>{
-      html+=`<div class="q-list-item">
-        <div class="matkul-icon" style="width:36px;height:36px;min-width:36px;font-size:18px;">${m.icon||'📚'}</div>
-        <div class="q-list-body">
-          <div class="q-list-text" style="font-weight:600;">${escHtml(m.name)}</div>
-          <div style="font-size:11px;color:var(--text2);margin-top:2px;">${(qs[m.id]||[]).length} soal · ${(mat[m.id]||[]).length} materi${m.desc?' · '+escHtml(m.desc):''}</div>
-        </div>
-        <div class="q-list-actions">
-          <button class="btn-edit" onclick="openEditMatkul('${m.id}')">✏ Edit</button>
-          <button class="btn-danger" onclick="deleteMatkul('${m.id}')">Hapus</button>
-        </div>
-      </div>`;
-    });
-    html+='</div>';
-  });
-  wrap.innerHTML=html;
-}
-
-function deleteMatkul(id){
-  if(!confirm('Hapus mata kuliah ini beserta semua soal dan materinya?')) return;
-  const qsData=getQuestions();delete qsData[id];setQuestions(qsData);
-  const matData=getMateri();delete matData[id];setMateri(matData);
-  setMatkuls(getMatkuls().filter(m=>m.id!==id));
-  renderMatkulList();populateAdminSelects();
-}
-
-// ── EDIT MATKUL (NEW) ──
-function openEditMatkul(matkulId){
-  const m=getMatkuls().find(x=>x.id===matkulId);
-  if(!m) return;
-  document.getElementById('edit-matkul-id').value=matkulId;
-  document.getElementById('edit-matkul-name').value=m.name;
-  document.getElementById('edit-matkul-icon').value=m.icon||'📚';
-  document.getElementById('edit-matkul-icon-preview').textContent=m.icon||'📚';
-  document.getElementById('edit-matkul-desc').value=m.desc||'';
-  openModal('modal-edit-matkul');
-}
-
-function saveEditMatkul(){
-  const id=document.getElementById('edit-matkul-id').value;
-  const name=document.getElementById('edit-matkul-name').value.trim();
-  if(!name){alert('Nama mata kuliah wajib diisi.');return;}
-  const icon=document.getElementById('edit-matkul-icon').value.trim()||'📚';
-  const desc=document.getElementById('edit-matkul-desc').value.trim();
-  const matkuls=getMatkuls();
-  const idx=matkuls.findIndex(m=>m.id===id);
-  if(idx>-1){matkuls[idx]={...matkuls[idx],name,icon,desc};setMatkuls(matkuls);}
-  showToast('edit-matkul-toast');
-  setTimeout(()=>{closeModal('modal-edit-matkul');renderMatkulList();populateAdminSelects();},1200);
-}
-
-// ════════════════════════════════
-// MATERI ADMIN
-// ════════════════════════════════
-function updateMateriMatkulSel(){
-  const semId=document.getElementById('materi-sem-sel').value;
-  const mks=getMatkuls().filter(m=>m.semId===semId);
-  const sel=document.getElementById('materi-matkul-sel');
-  sel.innerHTML=mks.map(m=>`<option value="${m.id}">${escHtml(m.name)}</option>`).join('')||'<option value="">— Belum ada matkul —</option>';
-  renderMateriAdminList();
-}
-
-function handleMateriPDF(input){
-  const file=input.files[0];if(!file) return;
-  const reader=new FileReader();
-  reader.onload=e=>{pendingMateriPDF={name:file.name,dataUrl:e.target.result};document.getElementById('materi-pdf-name').textContent=file.name;};
-  reader.readAsDataURL(file);
-}
-
-function saveMateri(){
-  const semId=document.getElementById('materi-sem-sel').value;
-  const matkulId=document.getElementById('materi-matkul-sel').value;
-  const title=document.getElementById('materi-title').value.trim();
-  const content=document.getElementById('materi-content').value.trim();
-  const errBox=document.getElementById('materi-err');errBox.style.display='none';
-  if(!semId||!matkulId){errBox.textContent='Pilih semester & mata kuliah.';errBox.style.display='block';return;}
-  if(!title){errBox.textContent='Judul materi wajib diisi.';errBox.style.display='block';return;}
-  if(!content&&!pendingMateriPDF){errBox.textContent='Isi konten teks atau upload PDF.';errBox.style.display='block';return;}
-  const matData=getMateri();if(!matData[matkulId]) matData[matkulId]=[];
-  const newMat={id:uid(),title,content};
-  if(pendingMateriPDF){newMat.fileName=pendingMateriPDF.name;newMat.fileData=pendingMateriPDF.dataUrl;}
-  matData[matkulId].push(newMat);setMateri(matData);
-  document.getElementById('materi-title').value='';document.getElementById('materi-content').value='';
-  document.getElementById('materi-pdf-name').textContent='';document.getElementById('materi-pdf-input').value='';
-  pendingMateriPDF=null;renderMateriAdminList();showToast('materi-toast');
-}
-
-function renderMateriAdminList(){
-  const matkulId=document.getElementById('materi-matkul-sel').value;
-  const mats=matkulId?(getMateri()[matkulId]||[]):[];
-  const wrap=document.getElementById('materi-admin-list-wrap');
-  if(!matkulId){wrap.innerHTML='';return;}
-  if(mats.length===0){wrap.innerHTML='<div style="color:var(--muted);font-size:13px;padding:12px 0;">Belum ada materi untuk mata kuliah ini.</div>';return;}
-  wrap.innerHTML='<div class="section-title" style="margin-top:8px;">Materi yang tersimpan</div>'+
-  mats.map(m=>`<div class="q-list-item">
-    <div class="q-list-num">${m.fileName?'📄':'📝'}</div>
-    <div class="q-list-body">
-      <div class="q-list-text" style="font-weight:600;">${escHtml(m.title)}</div>
-      <div style="font-size:11px;color:var(--text2);">${m.fileName?'PDF: '+escHtml(m.fileName):'Teks'}${m.content?' · '+m.content.slice(0,40)+'...':''}</div>
-    </div>
-    <div class="q-list-actions"><button class="btn-danger" onclick="deleteMateri('${m.id}','${matkulId}')">✕</button></div>
-  </div>`).join('');
-}
-
-function deleteMateri(matId,matkulId){
-  if(!confirm('Hapus materi ini?')) return;
-  const matData=getMateri();matData[matkulId]=(matData[matkulId]||[]).filter(m=>m.id!==matId);setMateri(matData);renderMateriAdminList();
-}
-
-// ════════════════════════════════
-// QUESTIONS ADMIN
-// ════════════════════════════════
-function updateQMatkulSel(){
-  const semId=document.getElementById('q-sem-sel').value;
-  const mks=getMatkuls().filter(m=>m.semId===semId);
-  const sel=document.getElementById('q-matkul-sel');
-  sel.innerHTML=mks.map(m=>`<option value="${m.id}">${escHtml(m.name)}</option>`).join('')||'<option value="">— Belum ada matkul —</option>';
-  renderQList();
-}
-
-function renderQList(){
-  const matkulId=document.getElementById('q-matkul-sel').value;
-  const qs=(matkulId&&getQuestions()[matkulId])||[];
-  const container=document.getElementById('q-list-container');
-  if(!matkulId){container.innerHTML='<div style="color:var(--muted);font-size:13px;padding:20px 0;">Pilih semester & mata kuliah.</div>';return;}
-  if(qs.length===0){container.innerHTML='<div style="color:var(--muted);font-size:13px;padding:20px 0;">Belum ada soal. Tambahkan via PDF atau form manual di bawah.</div>';return;}
-  const pg=qs.filter(q=>q.type!=='essay').length,es=qs.filter(q=>q.type==='essay').length;
-  container.innerHTML=`<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap;">
-    <span style="font-size:11px;font-weight:700;font-family:var(--mono);color:var(--muted);text-transform:uppercase;letter-spacing:.08em;">${qs.length} soal</span>
-    ${pg>0?`<span class="q-type-chip chip-pg">📝 ${pg} Pilgan</span>`:''}
-    ${es>0?`<span class="q-type-chip chip-essay">✍ ${es} Esai</span>`:''}
-  </div>`+
-  qs.map((q,i)=>{
-    const isEssay=q.type==='essay';
-    const chip=isEssay?`<span class="q-type-chip chip-essay">Esai</span>`:`<span class="q-type-chip chip-pg">PG</span>`;
-    return `<div class="q-list-item">
-      <div class="q-list-num">${i+1}</div>
-      <div class="q-list-body">${chip}<div class="q-list-text">${escHtml(q.q)}</div></div>
-      <div class="q-list-actions">
-        <button class="btn-edit" onclick="openEditQ('${matkulId}','${q.id}')">Edit</button>
-        <button class="btn-danger" onclick="deleteQ('${matkulId}','${q.id}')">✕</button>
-      </div>
-    </div>`;
-  }).join('');
-}
-
-function toggleQType(){
-  const t=document.getElementById('new-q-type').value;
-  document.getElementById('area-mcq').style.display=t==='mcq'?'block':'none';
-  document.getElementById('area-essay').style.display=t==='essay'?'block':'none';
-}
-function toggleManualForm(){
-  const h=document.getElementById('manual-toggle'),b=document.getElementById('manual-form-body');
-  const open=b.classList.contains('open');
-  h.classList.toggle('open',!open);b.classList.toggle('open',!open);
-}
-
-function addQuestion(){
-  const matkulId=document.getElementById('q-matkul-sel').value;
-  if(!matkulId){alert('Pilih semester & mata kuliah terlebih dahulu.');return;}
-  const qType=document.getElementById('new-q-type').value;
-  const qText=document.getElementById('new-q-text').value.trim();
-  const tag=document.getElementById('new-q-tag').value.trim();
-  const exp=document.getElementById('new-q-exp').value.trim();
-  if(!qText){alert('Pertanyaan wajib diisi.');return;}
-  let newQ={id:uid(),type:qType,q:qText,tag,exp};
-  if(qType==='mcq'){
-    const opts=[0,1,2,3].map(i=>document.getElementById(`opt${i}`).value.trim());
-    if(opts.some(o=>!o)){alert('Semua pilihan ganda wajib diisi.');return;}
-    newQ.opts=opts;newQ.ans=parseInt(document.getElementById('new-q-ans').value);
-  } else {
-    const kw=document.getElementById('new-q-keywords').value;
-    if(!kw){alert('Kata kunci esai wajib diisi.');return;}
-    newQ.keywords=kw.split(',').map(k=>k.trim().toLowerCase()).filter(k=>k);
-    newQ.maxScore=parseInt(document.getElementById('new-q-maxscore').value)||5;
-  }
-  const qsData=getQuestions();if(!qsData[matkulId]) qsData[matkulId]=[];
-  qsData[matkulId].push(newQ);setQuestions(qsData);clearQForm();renderQList();showToast('q-toast');
-}
-
-function clearQForm(){
-  document.getElementById('new-q-text').value='';
-  [0,1,2,3].forEach(i=>document.getElementById(`opt${i}`).value='');
-  document.getElementById('new-q-ans').value='0';
-  document.getElementById('new-q-keywords').value='';
-  document.getElementById('new-q-maxscore').value='5';
-  document.getElementById('new-q-tag').value='';
-  document.getElementById('new-q-exp').value='';
-}
-
-function deleteQ(matkulId,qId){
-  if(!confirm('Hapus soal ini?')) return;
-  const qsData=getQuestions();qsData[matkulId]=(qsData[matkulId]||[]).filter(q=>q.id!==qId);setQuestions(qsData);renderQList();
-}
-
-function openEditQ(matkulId,qId){
-  const q=(getQuestions()[matkulId]||[]).find(x=>x.id===qId);
-  if(!q) return;
-  document.getElementById('edit-q-id').value=qId;
-  document.getElementById('edit-q-matkulid').value=matkulId;
-  document.getElementById('edit-q-type').value=q.type||'mcq';
-  document.getElementById('edit-q-text').value=q.q;
-  if(q.type==='essay'){
-    document.getElementById('edit-area-mcq').style.display='none';
-    document.getElementById('edit-area-essay').style.display='block';
-    document.getElementById('eq-keywords').value=(q.keywords||[]).join(', ');
-    document.getElementById('eq-maxscore').value=q.maxScore||5;
-  } else {
-    document.getElementById('edit-area-mcq').style.display='block';
-    document.getElementById('edit-area-essay').style.display='none';
-    (q.opts||[]).forEach((o,i)=>{document.getElementById(`eq-opt${i}`).value=o;});
-    document.getElementById('eq-ans').value=q.ans;
-  }
-  document.getElementById('eq-tag').value=q.tag||'';
-  document.getElementById('eq-exp').value=q.exp||'';
-  openModal('modal-edit-q');
-}
-
-function saveEditQ(){
-  const qId=document.getElementById('edit-q-id').value;
-  const matkulId=document.getElementById('edit-q-matkulid').value;
-  const qType=document.getElementById('edit-q-type').value;
-  const qText=document.getElementById('edit-q-text').value.trim();
-  if(!qText){alert('Pertanyaan wajib diisi.');return;}
-  const qsData=getQuestions();
-  const idx=(qsData[matkulId]||[]).findIndex(q=>q.id===qId);
-  if(idx>-1){
-    let upd={...qsData[matkulId][idx],type:qType,q:qText,tag:document.getElementById('eq-tag').value.trim(),exp:document.getElementById('eq-exp').value.trim()};
-    if(qType==='essay'){
-      const kw=document.getElementById('eq-keywords').value;
-      if(!kw){alert('Kata kunci esai wajib diisi.');return;}
-      upd.keywords=kw.split(',').map(k=>k.trim().toLowerCase()).filter(k=>k);
-      upd.maxScore=parseInt(document.getElementById('eq-maxscore').value)||5;
-    } else {
-      const opts=[0,1,2,3].map(i=>document.getElementById(`eq-opt${i}`).value.trim());
-      if(opts.some(o=>!o)){alert('Semua pilihan wajib diisi.');return;}
-      upd.opts=opts;upd.ans=parseInt(document.getElementById('eq-ans').value);
-    }
-    qsData[matkulId][idx]=upd;setQuestions(qsData);
-  }
-  closeModal('modal-edit-q');renderQList();
-}
-
-// ════════════════════════════════
-// SETTINGS
-// ════════════════════════════════
-function changePw(){
-  const old=document.getElementById('pw-old').value;
-  const nw=document.getElementById('pw-new').value;
-  const nw2=document.getElementById('pw-new2').value;
-  const err=document.getElementById('pw-err');err.style.display='none';
-  if(old!==getPw()){err.textContent='Password lama salah.';err.style.display='block';return;}
-  if(nw.length<6){err.textContent='Password baru minimal 6 karakter.';err.style.display='block';return;}
-  if(nw!==nw2){err.textContent='Konfirmasi password tidak sama.';err.style.display='block';return;}
-  localStorage.setItem(LS_PW,nw);
-  ['pw-old','pw-new','pw-new2'].forEach(id=>document.getElementById(id).value='');
-  showToast('pw-toast');
-}
-
-function exportData(){
-  const data={semesters:getSemesters(),matkuls:getMatkuls(),questions:getQuestions(),materi:getMateri()};
-  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
-  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='latsol-akp-backup-'+new Date().toISOString().slice(0,10)+'.json';a.click();
-}
-
-function importData(input){
-  const file=input.files[0];if(!file) return;
-  const reader=new FileReader();
-  reader.onload=e=>{
-    try{
-      const data=JSON.parse(e.target.result);
-      if(!confirm('Import akan mengganti semua data. Lanjutkan?')) return;
-      if(data.semesters) setSemesters(data.semesters);
-      if(data.matkuls) setMatkuls(data.matkuls);
-      if(data.questions) setQuestions(data.questions);
-      if(data.materi) setMateri(data.materi);
-      renderSemTable();renderMatkulList();populateAdminSelects();alert('Import berhasil!');
-    }catch{alert('Gagal membaca file.');}
-  };
-  reader.readAsText(file);input.value='';
-}
-
-function clearAllData(){
-  if(!confirm('Hapus semua data secara permanen?')) return;
-  if(!confirm('Konfirmasi sekali lagi?')) return;
-  setSemesters([]);setMatkuls([]);setQuestions({});setMateri({});
-  renderSemTable();renderMatkulList();populateAdminSelects();alert('Semua data berhasil dihapus.');
-}
-
-// ════════════════════════════════
-// MODAL & UTILS
-// ════════════════════════════════
-function openModal(id){document.getElementById(id).classList.add('open');}
-function closeModal(id){document.getElementById(id).classList.remove('open');}
-document.querySelectorAll('.modal-overlay').forEach(ov=>{
-  ov.addEventListener('click',e=>{if(e.target===ov)ov.classList.remove('open');});
-});
 function escHtml(str=''){return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
-function showToast(id){const el=document.getElementById(id);el.style.display='block';setTimeout(()=>el.style.display='none',3000);}
+function showToast(id){const el=document.getElementById(id);if(el){el.style.display='block';setTimeout(()=>el.style.display='none',3000);}}
+
+// ════════════════════════════════
+// QUIZ TIMER
+// ════════════════════════════════
+function startQuizTimer(totalQuestions){
+  stopQuizTimer();
+  const timer=_timerSettings;
+  const timerEl=document.getElementById('hdr-prog-txt');
+  if(!timer.enabled){return;}
+  if(timer.mode==='per_question'){
+    quizTimeLeft=timer.value;
+    quizTimerInterval=setInterval(()=>{
+      quizTimeLeft--;
+      if(quizTimeLeft<=0){
+        // Auto move to next question
+        if(currentQ<currentQuestionsFiltered.length-1){nextQ();quizTimeLeft=timer.value;}
+        else{submitQuiz();}
+      }
+    },1000);
+  } else {
+    quizTimeLeft=timer.value*60;
+    quizTimerInterval=setInterval(()=>{
+      quizTimeLeft--;
+      const mins=Math.floor(quizTimeLeft/60);
+      const secs=quizTimeLeft%60;
+      timerEl.textContent=`⏱ ${mins}:${secs<10?'0':''}${secs}`;
+      if(quizTimeLeft<=0){submitQuiz();}
+    },1000);
+  }
+}
+
+function stopQuizTimer(){
+  if(quizTimerInterval){clearInterval(quizTimerInterval);quizTimerInterval=null;}
+}
+
+// ════════════════════════════════
+// USER TRACKING
+// ════════════════════════════════
+function getUserId(){
+  let id=localStorage.getItem('akp_user_id');
+  if(!id){id=uid()+uid();localStorage.setItem('akp_user_id',id);}
+  return id;
+}
+
+function trackUserQuiz(score, totalQuestions){
+  try{
+    const userId=getUserId();
+    const matkul=getMatkuls().find(m=>m.id===currentMatkulId);
+    const quizData={
+      score,
+      totalQuestions,
+      matkulName:matkul?matkul.name:'Unknown',
+      tag:currentTagFilter||'Semua',
+      timestamp:Date.now()
+    };
+    db.ref(`users/${userId}/quizzes`).push(quizData);
+    db.ref(`users/${userId}/lastActive`).set(Date.now());
+  }catch(e){console.error('Track error:',e);}
+}
 
 // ════════════════════════════════
 // INIT
 // ════════════════════════════════
 async function initApp(){
-  buildEmojiPanels();
-
   // Load data from Firebase
   try {
     const snapshot = await db.ref('/').once('value');
@@ -1963,6 +1256,7 @@ async function initApp(){
       _matkuls = data.matkuls || [];
       _questions = data.questions || {};
       _materi = data.materi || {};
+      _timerSettings = data.timerSettings || {enabled:false,mode:'per_question',value:60};
     }
   } catch(e) {
     console.error('Firebase load error:', e);
