@@ -1046,7 +1046,13 @@ function trackPageView(pageName){
     const sessionId=getSessionId();
     const record={timestamp:Date.now(),page:pageName,sessionId:sessionId,userAgent:navigator.userAgent};
     db.ref('analytics/pageviews').push(record);
-    db.ref('analytics/sessions/'+sessionId).set({lastSeen:Date.now(),userAgent:navigator.userAgent});
+    db.ref('analytics/sessions/'+sessionId).once('value').then(function(snap){
+      if(snap.exists()){
+        db.ref('analytics/sessions/'+sessionId).update({lastSeen:Date.now(),userAgent:navigator.userAgent});
+      } else {
+        db.ref('analytics/sessions/'+sessionId).set({firstSeen:Date.now(),lastSeen:Date.now(),userAgent:navigator.userAgent});
+      }
+    });
     db.ref('analytics/totalViews').transaction(function(current){return(current||0)+1;});
   }catch(e){console.error('Analytics error:',e);}
 }
@@ -1057,15 +1063,21 @@ function getDeviceInfo(ua){
   return 'Desktop';
 }
 function renderAnalytics(){
-  db.ref('analytics').once('value').then(snap=>{
-    const data=snap.val()||{};
-    const sessions=data.sessions||{};
-    const pageviews=data.pageviews||{};
-    const totalViews=data.totalViews||0;
+  Promise.all([
+    db.ref('analytics/pageviews').orderByChild('timestamp').limitToLast(100).once('value'),
+    db.ref('analytics/sessions').once('value'),
+    db.ref('analytics/totalViews').once('value')
+  ]).then(function(results){
+    const pageviewsSnap=results[0];
+    const sessionsSnap=results[1];
+    const totalViewsSnap=results[2];
+    const sessions=sessionsSnap.val()||{};
+    const pageviews=pageviewsSnap.val()||{};
+    const totalViews=totalViewsSnap.val()||0;
     const uniqueSessions=Object.keys(sessions).length;
     document.getElementById('stat-unique-sessions').textContent=uniqueSessions;
     document.getElementById('stat-total-views').textContent=totalViews;
-    // Find most popular page
+    // Find most popular page from recent 100 pageviews
     const pageCounts={};
     const pvArray=[];
     Object.values(pageviews).forEach(pv=>{
@@ -1277,6 +1289,7 @@ function renderPDFInline(dataUrl,containerId){
     for(let i=0;i<raw.length;i++) uint8[i]=raw.charCodeAt(i);
     pdfjsLib.getDocument({data:uint8}).promise.then(function(pdf){
       const totalPages=pdf.numPages;
+      const INITIAL_PAGES=3;
       let html='<div class="pdf-viewer-container">';
       html+='<div style="text-align:center;margin-bottom:16px;font-size:13px;color:var(--text2);font-family:var(--mono);">Halaman 1 dari '+totalPages+'</div>';
       for(let i=1;i<=totalPages;i++){
@@ -1284,19 +1297,42 @@ function renderPDFInline(dataUrl,containerId){
       }
       html+='</div>';
       container.innerHTML=html;
-      for(let i=1;i<=totalPages;i++){
-        (function(pageNum){
-          pdf.getPage(pageNum).then(function(page){
-            const scale=1.5;
-            const viewport=page.getViewport({scale:scale});
-            const canvas=document.getElementById(containerId+'-canvas-'+pageNum);
-            if(!canvas) return;
-            const ctx=canvas.getContext('2d');
-            canvas.height=viewport.height;
-            canvas.width=viewport.width;
-            page.render({canvasContext:ctx,viewport:viewport});
+      // Render a single page
+      function renderPage(pageNum){
+        pdf.getPage(pageNum).then(function(page){
+          const scale=1.5;
+          const viewport=page.getViewport({scale:scale});
+          const canvas=document.getElementById(containerId+'-canvas-'+pageNum);
+          if(!canvas||canvas.dataset.rendered) return;
+          canvas.dataset.rendered='true';
+          const ctx=canvas.getContext('2d');
+          canvas.height=viewport.height;
+          canvas.width=viewport.width;
+          page.render({canvasContext:ctx,viewport:viewport});
+        });
+      }
+      // Render first N pages immediately
+      for(let i=1;i<=Math.min(INITIAL_PAGES,totalPages);i++){
+        renderPage(i);
+      }
+      // Use IntersectionObserver to lazy-render remaining pages
+      if(totalPages>INITIAL_PAGES){
+        var observer=new IntersectionObserver(function(entries){
+          entries.forEach(function(entry){
+            if(entry.isIntersecting){
+              var pageWrap=entry.target;
+              var pageNum=parseInt(pageWrap.id.split('-page-')[1]);
+              if(pageNum&&!document.getElementById(containerId+'-canvas-'+pageNum).dataset.rendered){
+                renderPage(pageNum);
+              }
+              observer.unobserve(pageWrap);
+            }
           });
-        })(i);
+        },{rootMargin:'200px'});
+        for(var i=INITIAL_PAGES+1;i<=totalPages;i++){
+          var pageWrap=document.getElementById(containerId+'-page-'+i);
+          if(pageWrap) observer.observe(pageWrap);
+        }
       }
     }).catch(function(err){
       container.innerHTML='<div class="pdf-viewer-container"><div class="pdf-loading" style="color:var(--red);">Gagal memuat PDF: '+escHtml(err.message)+'</div></div>';
@@ -1701,6 +1737,12 @@ async function processPDF(input){
   const file=input.files[0];if(!file) return;
   const errBox=document.getElementById('pdf-err');errBox.style.display='none';
   const importMode=document.querySelector('input[name="pdf-import-mode"]:checked').value;
+  if(importMode==='replace'){
+    const qsData=getQuestions();
+    if(qsData[matkulId]&&qsData[matkulId].length>0){
+      if(!confirm('Mode GANTI dipilih. Semua '+qsData[matkulId].length+' soal yang ada akan dihapus dan diganti dengan soal dari PDF. Lanjutkan?')){input.value='';return;}
+    }
+  }
   try{
     const ab=await file.arrayBuffer();
     const pdf=await pdfjsLib.getDocument({data:ab}).promise;
