@@ -7,6 +7,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 <style>
 :root{
   --bg:#060611;--bg2:#0d0d1f;--surface:#12122a;--card:#17173a;--card2:#1e1e45;
@@ -904,9 +906,25 @@ a{text-decoration:none;color:inherit;}
 
 <script>
 // ════════════════════════════════
+// FIREBASE CONFIG & INIT
+// ════════════════════════════════
+const firebaseConfig = {
+  apiKey: "AIzaSyCaIFCsZAxHuuMrc-N7Uysaq270q-eP4Ac",
+  authDomain: "latihansoalakp.firebaseapp.com",
+  databaseURL: "https://latihansoalakp-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "latihansoalakp",
+  storageBucket: "latihansoalakp.firebasestorage.app",
+  messagingSenderId: "546555757194",
+  appId: "1:546555757194:web:37eac3d3fa7c586cf4a373",
+  measurementId: "G-DBVM4DFDJ5"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+
+// ════════════════════════════════
 // STORAGE KEYS & STATE
 // ════════════════════════════════
-const LS_SEM='akp_semesters',LS_MATKUL='akp_matkul',LS_QS='akp_questions',LS_MATERI='akp_materi',LS_PW='akp_admin_pw';
+const LS_PW='akp_admin_pw';
 
 let currentMatkulId=null;
 let currentSemId=null;
@@ -917,21 +935,27 @@ let currentQuestionsFiltered=[];
 let currentTagFilter=null;
 let quizTabFilter='all';
 
+// In-memory cache (synced with Firebase)
+let _semesters = [];
+let _matkuls = [];
+let _questions = {};
+let _materi = {};
+
 if(typeof pdfjsLib!=='undefined'){
   pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
 }
 
 // ════════════════════════════════
-// DATA LAYER
+// DATA LAYER (Firebase Realtime Database)
 // ════════════════════════════════
-const getSemesters=()=>JSON.parse(localStorage.getItem(LS_SEM)||'[]');
-const setSemesters=d=>localStorage.setItem(LS_SEM,JSON.stringify(d));
-const getMatkuls=()=>JSON.parse(localStorage.getItem(LS_MATKUL)||'[]');
-const setMatkuls=d=>localStorage.setItem(LS_MATKUL,JSON.stringify(d));
-const getQuestions=()=>JSON.parse(localStorage.getItem(LS_QS)||'{}');
-const setQuestions=d=>localStorage.setItem(LS_QS,JSON.stringify(d));
-const getMateri=()=>JSON.parse(localStorage.getItem(LS_MATERI)||'{}');
-const setMateri=d=>localStorage.setItem(LS_MATERI,JSON.stringify(d));
+const getSemesters=()=>_semesters;
+const setSemesters=d=>{_semesters=d;db.ref('semesters').set(d);};
+const getMatkuls=()=>_matkuls;
+const setMatkuls=d=>{_matkuls=d;db.ref('matkuls').set(d);};
+const getQuestions=()=>_questions;
+const setQuestions=d=>{_questions=d;db.ref('questions').set(d);};
+const getMateri=()=>_materi;
+const setMateri=d=>{_materi=d;db.ref('materi').set(d);};
 const getPw=()=>localStorage.getItem(LS_PW)||'admin123';
 const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
 
@@ -1927,9 +1951,25 @@ function showToast(id){const el=document.getElementById(id);el.style.display='bl
 // ════════════════════════════════
 // INIT
 // ════════════════════════════════
-function initApp(){
+async function initApp(){
   buildEmojiPanels();
-  if(getSemesters().length===0){
+
+  // Load data from Firebase
+  try {
+    const snapshot = await db.ref('/').once('value');
+    const data = snapshot.val();
+    if(data){
+      _semesters = data.semesters || [];
+      _matkuls = data.matkuls || [];
+      _questions = data.questions || {};
+      _materi = data.materi || {};
+    }
+  } catch(e) {
+    console.error('Firebase load error:', e);
+  }
+
+  // Seed default data if empty
+  if(_semesters.length===0){
     const s1=uid(),s2=uid(),s3=uid();
     const m1=uid(),m2=uid(),m3=uid(),m4=uid();
     setSemesters([{id:s1,num:1,label:'Semester Ganjil'},{id:s2,num:2,label:'Semester Genap'},{id:s3,num:3,label:'Semester Ganjil'}]);
@@ -1941,6 +1981,12 @@ function initApp(){
     ]);
   }
   updateHomeStats();
+
+  // Listen for realtime updates
+  db.ref('semesters').on('value', snap => { _semesters = snap.val() || []; updateHomeStats(); });
+  db.ref('matkuls').on('value', snap => { _matkuls = snap.val() || []; });
+  db.ref('questions').on('value', snap => { _questions = snap.val() || {}; });
+  db.ref('materi').on('value', snap => { _materi = snap.val() || {}; });
 }
 
 initApp();
