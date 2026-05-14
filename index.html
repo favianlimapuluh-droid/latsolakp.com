@@ -446,7 +446,6 @@ a{text-decoration:none;color:inherit;}
     <div class="nav-links">
       <button class="nav-link" onclick="goMateriSelector()">📖 Materi</button>
       <button class="nav-link" onclick="goLatsoalSelector()">✏️ Latihan Soal</button>
-      <button class="nav-admin-btn" onclick="goAdminLogin()">⚙ Admin</button>
     </div>
   </nav>
   <section class="home-hero">
@@ -738,6 +737,15 @@ a{text-decoration:none;color:inherit;}
         <div class="form-group"><label class="f-label">Judul Materi *</label><input class="f-input" id="materi-title" placeholder="cth: Bab 1 - Pengantar Perpajakan"/></div>
         <div class="form-group"><label class="f-label">Konten Materi (teks)</label><textarea class="f-textarea" id="materi-content" style="min-height:120px;" placeholder="Tulis ringkasan materi di sini..."></textarea></div>
         <div class="form-group">
+          <label class="f-label">Upload Gambar (opsional, bisa banyak)</label>
+          <label class="btn-primary" style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;padding:10px 20px;background:var(--green);">
+            🖼 Pilih Gambar
+            <input type="file" accept="image/*" multiple style="display:none" id="materi-img-input" onchange="handleMateriImages(this)"/>
+          </label>
+          <span id="materi-img-name" style="font-size:12px;color:var(--text2);margin-left:12px;"></span>
+          <div id="materi-img-preview" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;"></div>
+        </div>
+        <div class="form-group">
           <label class="f-label">Upload File PDF (opsional)</label>
           <label class="btn-primary" style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;padding:10px 20px;">
             ⬆ Pilih File PDF
@@ -790,6 +798,15 @@ a{text-decoration:none;color:inherit;}
             <select class="f-select" id="new-q-type" onchange="toggleQType()"><option value="mcq">Pilihan Ganda</option><option value="essay">Esai (Keyword Matching)</option></select>
           </div>
           <div class="form-group"><label class="f-label">Teks Pertanyaan *</label><textarea class="f-textarea" id="new-q-text" placeholder="Tulis pertanyaan di sini..."></textarea></div>
+          <div class="form-group">
+            <label class="f-label">Gambar Soal (opsional)</label>
+            <label class="btn-primary" style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;padding:8px 16px;font-size:12px;background:var(--green);">
+              🖼 Pilih Gambar
+              <input type="file" accept="image/*" style="display:none" id="new-q-img-input" onchange="handleQImage(this)"/>
+            </label>
+            <span id="new-q-img-name" style="font-size:12px;color:var(--text2);margin-left:8px;"></span>
+            <div id="new-q-img-preview" style="margin-top:8px;"></div>
+          </div>
           <div id="area-mcq">
             <div class="form-group">
               <label class="f-label">Pilihan Jawaban *</label>
@@ -924,7 +941,7 @@ const db = firebase.database();
 // ════════════════════════════════
 // STORAGE KEYS & STATE
 // ════════════════════════════════
-const LS_PW='akp_admin_pw';
+let _adminPw = 'admin123'; // will be loaded from Firebase
 
 let currentMatkulId=null;
 let currentSemId=null;
@@ -956,7 +973,7 @@ const getQuestions=()=>_questions;
 const setQuestions=d=>{_questions=d;db.ref('questions').set(d);};
 const getMateri=()=>_materi;
 const setMateri=d=>{_materi=d;db.ref('materi').set(d);};
-const getPw=()=>localStorage.getItem(LS_PW)||'admin123';
+const getPw=()=>_adminPw;
 const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
 
 // ════════════════════════════════
@@ -1022,6 +1039,14 @@ function showPage(id){
 }
 function goHome(){ updateHomeStats(); showPage('page-home'); }
 function goAdminLogin(){ showPage('page-admin-login'); document.getElementById('admin-pw-input').value=''; document.getElementById('login-err').style.display='none'; }
+
+// Check URL hash for secret admin access
+function checkAdminRoute(){
+  if(window.location.hash==='#admin'||window.location.hash==='#admin-login'){
+    goAdminLogin();
+  }
+}
+window.addEventListener('hashchange', checkAdminRoute);
 
 function updateHomeStats(){
   const sems=getSemesters(),matkuls=getMatkuls(),qs=getQuestions(),mat=getMateri();
@@ -1097,6 +1122,7 @@ function openMateriViewer(matkulId){
           ${m.fileData?`<button class="mfi-btn" style="margin-left:auto;" onclick="downloadMateriPDF('${m.id}','${matkulId}')">⬇ Download PDF</button>`:''}
         </div>
         ${m.content?`<div class="materi-content-box">${escHtml(m.content)}</div>`:''}
+        ${(m.images&&m.images.length>0)?`<div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:14px;">${m.images.map(img=>`<img src="${img}" style="max-width:100%;border-radius:12px;border:1px solid var(--border);cursor:pointer;" onclick="window.open(this.src)"/>`).join('')}</div>`:''}
       </div>`).join('');
   }
   showPage('page-materi-viewer');
@@ -1264,7 +1290,7 @@ function buildQuiz(qs,matkul){
       :`<div class="options">`+(q.opts||[]).map((o,j)=>`<div class="opt" id="opt-${i}-${j}" onclick="selectAns(${i},${j})"><div class="opt-l">${letters[j]}</div><div class="opt-t">${escHtml(o)}</div></div>`).join('')+`</div>`;
     return `<div class="q-screen" id="q-${i}">
       <div class="q-meta"><span class="q-idx">Soal ${i+1} dari ${qs.length}</span>${tagHtml}${typeBadge}</div>
-      <div class="q-card${isEssay?' essay-card':''}"><div class="q-text">${escHtml(q.q)}</div>${inputArea}</div>
+      <div class="q-card${isEssay?' essay-card':''}"><div class="q-text">${escHtml(q.q)}</div>${q.image?`<div style="margin-bottom:16px;"><img src="${q.image}" style="max-width:100%;max-height:300px;border-radius:10px;border:1px solid var(--border);"/></div>`:'' }${inputArea}</div>
       <div class="q-nav">
         <button class="btn-nav" onclick="prevQ()" ${i===0?'disabled':''}>← Sebelumnya</button>
         ${i<qs.length-1?`<button class="btn-nav" onclick="nextQ()">Selanjutnya →</button>`:`<button class="btn-nav" onclick="submitQuiz()" style="border-color:var(--green);color:var(--green)">Kumpulkan ✓</button>`}
@@ -1544,6 +1570,39 @@ function parseTextToQuestions(text,matkulId){
 }
 
 // ════════════════════════════════
+// IMAGE HANDLING
+// ════════════════════════════════
+let pendingMateriImages = [];
+let pendingQImage = null;
+
+function handleMateriImages(input){
+  const files=input.files;if(!files.length) return;
+  pendingMateriImages=[];
+  const preview=document.getElementById('materi-img-preview');
+  preview.innerHTML='';
+  document.getElementById('materi-img-name').textContent=files.length+' gambar dipilih';
+  Array.from(files).forEach(file=>{
+    const reader=new FileReader();
+    reader.onload=e=>{
+      pendingMateriImages.push({name:file.name,dataUrl:e.target.result});
+      preview.innerHTML+=`<img src="${e.target.result}" style="width:80px;height:80px;object-fit:cover;border-radius:8px;border:1px solid var(--border);"/>`;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+function handleQImage(input){
+  const file=input.files[0];if(!file) return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    pendingQImage={name:file.name,dataUrl:e.target.result};
+    document.getElementById('new-q-img-name').textContent=file.name;
+    document.getElementById('new-q-img-preview').innerHTML=`<img src="${e.target.result}" style="max-width:200px;max-height:120px;border-radius:8px;border:1px solid var(--border);"/>`;
+  };
+  reader.readAsDataURL(file);
+}
+
+// ════════════════════════════════
 // ADMIN AUTH
 // ════════════════════════════════
 function doLogin(){
@@ -1725,14 +1784,17 @@ function saveMateri(){
   const errBox=document.getElementById('materi-err');errBox.style.display='none';
   if(!semId||!matkulId){errBox.textContent='Pilih semester & mata kuliah.';errBox.style.display='block';return;}
   if(!title){errBox.textContent='Judul materi wajib diisi.';errBox.style.display='block';return;}
-  if(!content&&!pendingMateriPDF){errBox.textContent='Isi konten teks atau upload PDF.';errBox.style.display='block';return;}
+  if(!content&&!pendingMateriPDF&&pendingMateriImages.length===0){errBox.textContent='Isi konten teks, upload gambar, atau upload PDF.';errBox.style.display='block';return;}
   const matData=getMateri();if(!matData[matkulId]) matData[matkulId]=[];
   const newMat={id:uid(),title,content};
   if(pendingMateriPDF){newMat.fileName=pendingMateriPDF.name;newMat.fileData=pendingMateriPDF.dataUrl;}
+  if(pendingMateriImages.length>0){newMat.images=pendingMateriImages.map(img=>img.dataUrl);}
   matData[matkulId].push(newMat);setMateri(matData);
   document.getElementById('materi-title').value='';document.getElementById('materi-content').value='';
   document.getElementById('materi-pdf-name').textContent='';document.getElementById('materi-pdf-input').value='';
-  pendingMateriPDF=null;renderMateriAdminList();showToast('materi-toast');
+  document.getElementById('materi-img-name').textContent='';document.getElementById('materi-img-input').value='';
+  document.getElementById('materi-img-preview').innerHTML='';
+  pendingMateriPDF=null;pendingMateriImages=[];renderMateriAdminList();showToast('materi-toast');
 }
 
 function renderMateriAdminList(){
@@ -1814,6 +1876,7 @@ function addQuestion(){
   const exp=document.getElementById('new-q-exp').value.trim();
   if(!qText){alert('Pertanyaan wajib diisi.');return;}
   let newQ={id:uid(),type:qType,q:qText,tag,exp};
+  if(pendingQImage){newQ.image=pendingQImage.dataUrl;}
   if(qType==='mcq'){
     const opts=[0,1,2,3].map(i=>document.getElementById(`opt${i}`).value.trim());
     if(opts.some(o=>!o)){alert('Semua pilihan ganda wajib diisi.');return;}
@@ -1836,6 +1899,10 @@ function clearQForm(){
   document.getElementById('new-q-maxscore').value='5';
   document.getElementById('new-q-tag').value='';
   document.getElementById('new-q-exp').value='';
+  document.getElementById('new-q-img-input').value='';
+  document.getElementById('new-q-img-name').textContent='';
+  document.getElementById('new-q-img-preview').innerHTML='';
+  pendingQImage=null;
 }
 
 function deleteQ(matkulId,qId){
@@ -1902,7 +1969,7 @@ function changePw(){
   if(old!==getPw()){err.textContent='Password lama salah.';err.style.display='block';return;}
   if(nw.length<6){err.textContent='Password baru minimal 6 karakter.';err.style.display='block';return;}
   if(nw!==nw2){err.textContent='Konfirmasi password tidak sama.';err.style.display='block';return;}
-  localStorage.setItem(LS_PW,nw);
+  _adminPw=nw;db.ref('adminPw').set(nw);
   ['pw-old','pw-new','pw-new2'].forEach(id=>document.getElementById(id).value='');
   showToast('pw-toast');
 }
@@ -1963,6 +2030,7 @@ async function initApp(){
       _matkuls = data.matkuls || [];
       _questions = data.questions || {};
       _materi = data.materi || {};
+      if(data.adminPw) _adminPw = data.adminPw;
     }
   } catch(e) {
     console.error('Firebase load error:', e);
@@ -1981,6 +2049,9 @@ async function initApp(){
     ]);
   }
   updateHomeStats();
+
+  // Check if admin route is requested via URL hash
+  checkAdminRoute();
 
   // Listen for realtime updates
   db.ref('semesters').on('value', snap => { _semesters = snap.val() || []; updateHomeStats(); });
