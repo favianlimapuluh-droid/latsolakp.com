@@ -777,9 +777,16 @@ a{text-decoration:none;color:inherit;}
         <div class="info-box" style="border-color:var(--accent);">
           <strong>Format PDF:</strong><br><br>
           <span style="font-family:var(--mono);font-size:11px;">
-            Soal: Apa nama ibukota?<br>A. Jakarta &nbsp; B. Bandung &nbsp; C. Surabaya &nbsp; D. Medan<br>Kunci: A<br>Penjelasan: Jakarta adalah ibukota.<br><br>
-            Esai: Jelaskan fungsi pajak!<br>Kata Kunci: anggaran, regulerend, alokasi<br>Bobot: 5
+            Topik: Pajak Penghasilan (opsional)<br>Bab: Bab 1 (opsional)<br>Soal: Apa nama ibukota?<br>A. Jakarta &nbsp; B. Bandung &nbsp; C. Surabaya &nbsp; D. Medan<br>Kunci: A<br>Penjelasan: Jakarta adalah ibukota.<br><br>
+            Topik: Pajak Pertambahan Nilai (opsional)<br>Bab: Bab 2 (opsional)<br>Esai: Jelaskan fungsi pajak!<br>Kata Kunci: anggaran, regulerend, alokasi<br>Bobot: 5
           </span>
+        </div>
+        <div class="form-group" style="margin-bottom:14px;">
+          <label class="f-label">Mode Import</label>
+          <div style="display:flex;gap:16px;align-items:center;margin-top:4px;">
+            <label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="radio" name="pdf-import-mode" value="append" checked/> Tambahkan ke soal yang ada</label>
+            <label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="radio" name="pdf-import-mode" value="replace"/> Ganti semua soal (hapus yang lama)</label>
+          </div>
         </div>
         <div class="form-actions" style="margin-bottom:24px;">
           <label class="btn-primary" style="display:inline-flex;align-items:center;gap:7px;cursor:pointer;">
@@ -824,6 +831,10 @@ a{text-decoration:none;color:inherit;}
           <div id="area-essay" style="display:none;background:var(--green-bg);padding:14px;border-radius:8px;border:1px solid rgba(45,212,160,.3);">
             <div class="form-group"><label class="f-label">Kata Kunci (pisahkan koma) *</label><input class="f-input" id="new-q-keywords" placeholder="cth: anggaran, budgetair, regulerend"/></div>
             <div class="form-group"><label class="f-label">Poin Maksimal (Bobot) *</label><input class="f-input" type="number" id="new-q-maxscore" value="5" min="1"/></div>
+          </div>
+          <div class="form-row" style="margin-top:14px;">
+            <div class="form-group"><label class="f-label">Topik (opsional)</label><input class="f-input" id="new-q-topik" placeholder="cth: Pajak Penghasilan"/></div>
+            <div class="form-group"><label class="f-label">Bab (opsional)</label><input class="f-input" id="new-q-bab" placeholder="cth: Bab 1"/></div>
           </div>
           <div class="form-row" style="margin-top:14px;">
             <div class="form-group"><label class="f-label">Tag / Label (opsional)</label><input class="f-input" id="new-q-tag" placeholder="cth: UTS, UAS, Bab 1"/></div>
@@ -891,6 +902,10 @@ a{text-decoration:none;color:inherit;}
     <div id="edit-area-essay" style="display:none;background:var(--green-bg);padding:14px;border-radius:8px;border:1px solid rgba(45,212,160,.3);margin-bottom:14px;">
       <div class="form-group"><label class="f-label">Kata Kunci (pisahkan koma)</label><input class="f-input" id="eq-keywords"/></div>
       <div class="form-group" style="margin-bottom:0;"><label class="f-label">Poin Maksimal</label><input class="f-input" type="number" id="eq-maxscore" min="1"/></div>
+    </div>
+    <div class="form-row" style="margin-bottom:12px;">
+      <div class="form-group"><label class="f-label">Topik</label><input class="f-input" id="eq-topik" placeholder="cth: Pajak Penghasilan"/></div>
+      <div class="form-group"><label class="f-label">Bab</label><input class="f-input" id="eq-bab" placeholder="cth: Bab 1"/></div>
     </div>
     <div class="form-group"><label class="f-label">Tag</label><input class="f-input" id="eq-tag"/></div>
     <div class="form-group"><label class="f-label">Penjelasan</label><textarea class="f-textarea" id="eq-exp"></textarea></div>
@@ -1530,6 +1545,7 @@ async function processPDF(input){
   if(!semId||!matkulId){alert('Pilih semester & mata kuliah terlebih dahulu!');input.value='';return;}
   const file=input.files[0];if(!file) return;
   const errBox=document.getElementById('pdf-err');errBox.style.display='none';
+  const importMode=document.querySelector('input[name="pdf-import-mode"]:checked').value;
   try{
     const ab=await file.arrayBuffer();
     const pdf=await pdfjsLib.getDocument({data:ab}).promise;
@@ -1539,32 +1555,33 @@ async function processPDF(input){
       const tc=await page.getTextContent();
       txt+=tc.items.map(it=>it.str).join(' ')+' ';
     }
-    parseTextToQuestions(txt,matkulId);
+    parseTextToQuestions(txt,matkulId,importMode);
   }catch(e){console.error(e);errBox.textContent='Gagal membaca PDF.';errBox.style.display='block';}
   input.value='';
 }
 
-function parseTextToQuestions(text,matkulId){
+function parseTextToQuestions(text,matkulId,importMode){
   const clean=text.replace(/\s+/g,' ');
   let count=0;
   const qsData=getQuestions();
+  if(importMode==='replace'){qsData[matkulId]=[];}
   if(!qsData[matkulId]) qsData[matkulId]=[];
-  const rMCQ=/Soal:\s*(.*?)\s*A\.\s*(.*?)\s*B\.\s*(.*?)\s*C\.\s*(.*?)\s*D\.\s*(.*?)\s*Kunci:\s*([A-D])(?:\s*Penjelasan:\s*(.*?))?(?=\s*Soal:|\s*Esai:|$)/gi;
+  const rMCQ=/(?:Topik:\s*(.*?)\s*)?(?:Bab:\s*(.*?)\s*)?Soal:\s*(.*?)\s*A\.\s*(.*?)\s*B\.\s*(.*?)\s*C\.\s*(.*?)\s*D\.\s*(.*?)\s*Kunci:\s*([A-D])(?:\s*Penjelasan:\s*(.*?))?(?=\s*(?:Topik:|Bab:|Soal:|Esai:)|$)/gi;
   let m;
   while((m=rMCQ.exec(clean))!==null){
-    const ai={'A':0,'B':1,'C':2,'D':3}[m[6].toUpperCase()]??0;
-    qsData[matkulId].push({id:uid(),type:'mcq',q:m[1].trim(),opts:[m[2].trim(),m[3].trim(),m[4].trim(),m[5].trim()],ans:ai,tag:'Import PDF',exp:m[7]?m[7].trim():''});
+    const ai={'A':0,'B':1,'C':2,'D':3}[m[8].toUpperCase()]??0;
+    qsData[matkulId].push({id:uid(),type:'mcq',q:m[3].trim(),opts:[m[4].trim(),m[5].trim(),m[6].trim(),m[7].trim()],ans:ai,tag:'Import PDF',exp:m[9]?m[9].trim():'',topik:m[1]?m[1].trim():'',bab:m[2]?m[2].trim():''});
     count++;
   }
-  const rEsai=/Esai:\s*(.*?)\s*Kata Kunci:\s*(.*?)\s*Bobot:\s*(\d+)(?:\s*Penjelasan:\s*(.*?))?(?=\s*Soal:|\s*Esai:|$)/gi;
+  const rEsai=/(?:Topik:\s*(.*?)\s*)?(?:Bab:\s*(.*?)\s*)?Esai:\s*(.*?)\s*Kata Kunci:\s*(.*?)\s*Bobot:\s*(\d+)(?:\s*Penjelasan:\s*(.*?))?(?=\s*(?:Topik:|Bab:|Soal:|Esai:)|$)/gi;
   while((m=rEsai.exec(clean))!==null){
-    qsData[matkulId].push({id:uid(),type:'essay',q:m[1].trim(),keywords:m[2].trim().split(',').map(k=>k.trim().toLowerCase()).filter(k=>k),maxScore:parseInt(m[3])||5,tag:'Import PDF',exp:m[4]?m[4].trim():''});
+    qsData[matkulId].push({id:uid(),type:'essay',q:m[3].trim(),keywords:m[4].trim().split(',').map(k=>k.trim().toLowerCase()).filter(k=>k),maxScore:parseInt(m[5])||5,tag:'Import PDF',exp:m[6]?m[6].trim():'',topik:m[1]?m[1].trim():'',bab:m[2]?m[2].trim():''});
     count++;
   }
   if(count>0){
     setQuestions(qsData);renderQList();
     const t=document.getElementById('pdf-toast');
-    t.textContent=`✓ ${count} soal dari PDF berhasil ditambahkan!`;t.style.display='block';setTimeout(()=>t.style.display='none',4000);
+    t.textContent=`✓ ${count} soal dari PDF berhasil ${importMode==='replace'?'diimport (mengganti soal lama)':'ditambahkan'}!`;t.style.display='block';setTimeout(()=>t.style.display='none',4000);
   } else {
     const e=document.getElementById('pdf-err');
     e.innerHTML='Gagal menemukan soal. Pastikan format <b>Soal:</b> atau <b>Esai:</b> sudah benar.';e.style.display='block';
@@ -1847,9 +1864,11 @@ function renderQList(){
   qs.map((q,i)=>{
     const isEssay=q.type==='essay';
     const chip=isEssay?`<span class="q-type-chip chip-essay">Esai</span>`:`<span class="q-type-chip chip-pg">PG</span>`;
+    const topikChip=q.topik?`<span class="q-type-chip" style="background:rgba(99,102,241,.12);color:#6366f1;font-size:10px;">📌 ${escHtml(q.topik)}</span>`:'';
+    const babChip=q.bab?`<span class="q-type-chip" style="background:rgba(245,158,11,.12);color:#f59e0b;font-size:10px;">📖 ${escHtml(q.bab)}</span>`:'';
     return `<div class="q-list-item">
       <div class="q-list-num">${i+1}</div>
-      <div class="q-list-body">${chip}<div class="q-list-text">${escHtml(q.q)}</div></div>
+      <div class="q-list-body">${chip}${topikChip}${babChip}<div class="q-list-text">${escHtml(q.q)}</div></div>
       <div class="q-list-actions">
         <button class="btn-edit" onclick="openEditQ('${matkulId}','${q.id}')">Edit</button>
         <button class="btn-danger" onclick="deleteQ('${matkulId}','${q.id}')">✕</button>
@@ -1876,8 +1895,10 @@ function addQuestion(){
   const qText=document.getElementById('new-q-text').value.trim();
   const tag=document.getElementById('new-q-tag').value.trim();
   const exp=document.getElementById('new-q-exp').value.trim();
+  const topik=document.getElementById('new-q-topik').value.trim();
+  const bab=document.getElementById('new-q-bab').value.trim();
   if(!qText){alert('Pertanyaan wajib diisi.');return;}
-  let newQ={id:uid(),type:qType,q:qText,tag,exp};
+  let newQ={id:uid(),type:qType,q:qText,tag,exp,topik,bab};
   if(pendingQImage){newQ.image=pendingQImage.dataUrl;}
   if(qType==='mcq'){
     const opts=[0,1,2,3].map(i=>document.getElementById(`opt${i}`).value.trim());
@@ -1900,6 +1921,8 @@ function clearQForm(){
   document.getElementById('new-q-keywords').value='';
   document.getElementById('new-q-maxscore').value='5';
   document.getElementById('new-q-tag').value='';
+  document.getElementById('new-q-topik').value='';
+  document.getElementById('new-q-bab').value='';
   document.getElementById('new-q-exp').value='';
   document.getElementById('new-q-img-input').value='';
   document.getElementById('new-q-img-name').textContent='';
@@ -1932,6 +1955,8 @@ function openEditQ(matkulId,qId){
   }
   document.getElementById('eq-tag').value=q.tag||'';
   document.getElementById('eq-exp').value=q.exp||'';
+  document.getElementById('eq-topik').value=q.topik||'';
+  document.getElementById('eq-bab').value=q.bab||'';
   openModal('modal-edit-q');
 }
 
@@ -1944,7 +1969,7 @@ function saveEditQ(){
   const qsData=getQuestions();
   const idx=(qsData[matkulId]||[]).findIndex(q=>q.id===qId);
   if(idx>-1){
-    let upd={...qsData[matkulId][idx],type:qType,q:qText,tag:document.getElementById('eq-tag').value.trim(),exp:document.getElementById('eq-exp').value.trim()};
+    let upd={...qsData[matkulId][idx],type:qType,q:qText,tag:document.getElementById('eq-tag').value.trim(),exp:document.getElementById('eq-exp').value.trim(),topik:document.getElementById('eq-topik').value.trim(),bab:document.getElementById('eq-bab').value.trim()};
     if(qType==='essay'){
       const kw=document.getElementById('eq-keywords').value;
       if(!kw){alert('Kata kunci esai wajib diisi.');return;}
