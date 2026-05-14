@@ -809,6 +809,16 @@ a{text-decoration:none;color:inherit;}
             <label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="radio" name="pdf-import-mode" value="replace"/> Ganti semua soal (hapus yang lama)</label>
           </div>
         </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="f-label">Topik (untuk semua soal dari PDF)</label>
+            <input class="f-input" type="text" id="pdf-import-topik" placeholder="cth: Pajak Penghasilan"/>
+          </div>
+          <div class="form-group">
+            <label class="f-label">Bab (untuk semua soal dari PDF)</label>
+            <input class="f-input" type="text" id="pdf-import-bab" placeholder="cth: Bab 1"/>
+          </div>
+        </div>
         <div class="form-actions" style="margin-bottom:24px;">
           <label class="btn-primary" style="display:inline-flex;align-items:center;gap:7px;cursor:pointer;">
             ⬆ Upload File PDF
@@ -1760,6 +1770,8 @@ async function processPDF(input){
 function parseTextToQuestions(text,matkulId,importMode){
   const clean=text.replace(/\s+/g,' ');
   let count=0;
+  const fallbackTopik=(document.getElementById('pdf-import-topik').value||'').trim();
+  const fallbackBab=(document.getElementById('pdf-import-bab').value||'').trim();
   const qsData=getQuestions();
   if(importMode==='replace'){qsData[matkulId]=[];}
   if(!qsData[matkulId]) qsData[matkulId]=[];
@@ -1767,12 +1779,16 @@ function parseTextToQuestions(text,matkulId,importMode){
   let m;
   while((m=rMCQ.exec(clean))!==null){
     const ai={'A':0,'B':1,'C':2,'D':3}[m[8].toUpperCase()]??0;
-    qsData[matkulId].push({id:uid(),type:'mcq',q:m[3].trim(),opts:[m[4].trim(),m[5].trim(),m[6].trim(),m[7].trim()],ans:ai,tag:'Import PDF',exp:m[9]?m[9].trim():'',topik:m[1]?m[1].trim():'',bab:m[2]?m[2].trim():''});
+    const topik=(m[1]&&m[1].trim())?m[1].trim():fallbackTopik;
+    const bab=(m[2]&&m[2].trim())?m[2].trim():fallbackBab;
+    qsData[matkulId].push({id:uid(),type:'mcq',q:m[3].trim(),opts:[m[4].trim(),m[5].trim(),m[6].trim(),m[7].trim()],ans:ai,tag:'Import PDF',exp:m[9]?m[9].trim():'',topik:topik,bab:bab});
     count++;
   }
   const rEsai=/(?:Topik:\s*(.*?)\s*)?(?:Bab:\s*(.*?)\s*)?Esai:\s*(.*?)\s*Kata Kunci:\s*(.*?)\s*Bobot:\s*(\d+)(?:\s*Penjelasan:\s*(.*?))?(?=\s*(?:Topik:|Bab:|Soal:|Esai:)|$)/gi;
   while((m=rEsai.exec(clean))!==null){
-    qsData[matkulId].push({id:uid(),type:'essay',q:m[3].trim(),keywords:m[4].trim().split(',').map(k=>k.trim().toLowerCase()).filter(k=>k),maxScore:parseInt(m[5])||5,tag:'Import PDF',exp:m[6]?m[6].trim():'',topik:m[1]?m[1].trim():'',bab:m[2]?m[2].trim():''});
+    const topik=(m[1]&&m[1].trim())?m[1].trim():fallbackTopik;
+    const bab=(m[2]&&m[2].trim())?m[2].trim():fallbackBab;
+    qsData[matkulId].push({id:uid(),type:'essay',q:m[3].trim(),keywords:m[4].trim().split(',').map(k=>k.trim().toLowerCase()).filter(k=>k),maxScore:parseInt(m[5])||5,tag:'Import PDF',exp:m[6]?m[6].trim():'',topik:topik,bab:bab});
     count++;
   }
   if(count>0){
