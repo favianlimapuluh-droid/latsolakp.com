@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Admin Panel — Latsol AKP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+
+<!-- LOGIN PAGE -->
+<div id="page-login" class="page active">
+  <div class="login-wrap">
+    <div class="login-card">
+      <div class="login-icon">🔐</div>
+      <div class="login-title">Admin Panel</div>
+      <div class="login-sub">Masuk untuk mengelola platform Latsol AKP</div>
+      <div class="field-group">
+        <label class="f-label">Password</label>
+        <input class="f-input" type="password" id="admin-pw-input" placeholder="Masukkan password admin" onkeydown="if(event.key==='Enter')doLogin()"/>
+      </div>
+      <button class="btn-primary full" onclick="doLogin()">Masuk</button>
+      <div class="login-err" id="login-err">Password salah. Coba lagi.</div>
+      <a href="../index.html" class="btn-back-home">← Kembali ke Website</a>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN DASHBOARD -->
+<div id="page-admin" class="page">
+  <header class="admin-header">
+    <div class="admin-logo">ADMIN</div>
+    <div class="admin-title">Latsol AKP — Dashboard</div>
+    <a href="../index.html" class="btn-admin-home">⌂ Website</a>
+    <button class="btn-admin-logout" onclick="doLogout()">Keluar</button>
+  </header>
+  <div class="admin-body">
+    <nav class="admin-nav" id="admin-nav">
+      <div class="admin-nav-sect">Dashboard</div>
+      <div class="admin-nav-item active" onclick="showPanel('overview')" data-panel="overview">📊 Overview</div>
+      <div class="admin-nav-sect">Kelola</div>
+      <div class="admin-nav-item" onclick="showPanel('semesters')" data-panel="semesters">🗂 Semester & Matkul</div>
+      <div class="admin-nav-item" onclick="showPanel('materi')" data-panel="materi">📖 Upload Materi</div>
+      <div class="admin-nav-item" onclick="showPanel('questions')" data-panel="questions">✏️ Soal Latihan</div>
+      <div class="admin-nav-sect">Monitoring</div>
+      <div class="admin-nav-item" onclick="showPanel('users')" data-panel="users">👥 Pengguna</div>
+      <div class="admin-nav-item" onclick="showPanel('timer')" data-panel="timer">⏱ Pengaturan Waktu</div>
+      <div class="admin-nav-sect">Pengaturan</div>
+      <div class="admin-nav-item" onclick="showPanel('settings')" data-panel="settings">⚙ Pengaturan</div>
+    </nav>
+    <div class="admin-content">
+
+      <!-- PANEL: OVERVIEW -->
+      <div class="admin-panel active" id="panel-overview">
+        <div class="admin-panel-title">Dashboard Overview</div>
+        <div class="admin-panel-desc">Ringkasan data platform Latsol AKP.</div>
+        <div class="overview-grid">
+          <div class="ov-card ov-sem"><div class="ov-icon">🗂</div><div class="ov-data"><div class="ov-num" id="ov-sem">0</div><div class="ov-label">Semester</div></div></div>
+          <div class="ov-card ov-matkul"><div class="ov-icon">📚</div><div class="ov-data"><div class="ov-num" id="ov-matkul">0</div><div class="ov-label">Mata Kuliah</div></div></div>
+          <div class="ov-card ov-soal"><div class="ov-icon">✏️</div><div class="ov-data"><div class="ov-num" id="ov-soal">0</div><div class="ov-label">Total Soal</div></div></div>
+          <div class="ov-card ov-materi"><div class="ov-icon">📖</div><div class="ov-data"><div class="ov-num" id="ov-materi">0</div><div class="ov-label">Total Materi</div></div></div>
+          <div class="ov-card ov-users"><div class="ov-icon">👥</div><div class="ov-data"><div class="ov-num" id="ov-users">0</div><div class="ov-label">Pengguna Aktif</div></div></div>
+          <div class="ov-card ov-timer"><div class="ov-icon">⏱</div><div class="ov-data"><div class="ov-num" id="ov-timer">—</div><div class="ov-label">Mode Timer</div></div></div>
+        </div>
+        <div class="divider"></div>
+        <div class="section-title">Aktivitas Terkini</div>
+        <div id="recent-activity"><div class="empty-msg">Belum ada aktivitas tercatat.</div></div>
+      </div>
+
+      <!-- PANEL: SEMESTERS -->
+      <div class="admin-panel" id="panel-semesters">
+        <div class="admin-panel-title">Semester & Mata Kuliah</div>
+        <div class="admin-panel-desc">Kelola daftar semester dan mata kuliah yang tersedia.</div>
+        <div class="section-title">Daftar Semester</div>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Semester</th><th>Matkul</th><th>Soal</th><th>Materi</th><th>Aksi</th></tr></thead>
+            <tbody id="sem-tbody"></tbody>
+          </table>
+        </div>
+        <div class="section-title">+ Tambah Semester</div>
+        <div class="form-row">
+          <div class="form-group"><label class="f-label">Nomor Semester *</label><input class="f-input" type="number" id="new-sem-num" placeholder="cth: 1" min="1" max="14"/></div>
+          <div class="form-group"><label class="f-label">Label (opsional)</label><input class="f-input" id="new-sem-label" placeholder="cth: Semester Ganjil"/></div>
+        </div>
+        <div class="form-actions"><button class="btn-primary" onclick="addSemester()">Tambah Semester</button></div>
+        <div class="success-toast" id="sem-toast">Semester berhasil ditambahkan!</div>
+
+        <div class="divider"></div>
+        <div class="section-title">+ Tambah Mata Kuliah</div>
+        <div class="form-row">
+          <div class="form-group"><label class="f-label">Semester *</label><select class="f-select" id="new-matkul-sem"></select></div>
+          <div class="form-group"><label class="f-label">Nama Mata Kuliah *</label><input class="f-input" id="new-matkul-name" placeholder="cth: Akuntansi Perpajakan"/></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="f-label">Ikon (emoji)</label>
+            <div class="icon-input-row">
+              <div class="icon-preview" id="new-matkul-icon-preview">📚</div>
+              <input class="f-input" id="new-matkul-icon" placeholder="📚" maxlength="4" oninput="syncIconPreview('new-matkul-icon','new-matkul-icon-preview')"/>
+              <div class="emoji-picker-wrap">
+                <button type="button" class="emoji-pick-btn" onclick="toggleEmojiPicker('ep-new-matkul')">🙂 Pilih</button>
+                <div class="emoji-panel" id="ep-new-matkul"></div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group"><label class="f-label">Deskripsi</label><input class="f-input" id="new-matkul-desc" placeholder="cth: Mata kuliah inti wajib"/></div>
+        </div>
+        <div class="form-actions"><button class="btn-primary" onclick="addMatkul()">Tambah Mata Kuliah</button></div>
+        <div class="success-toast" id="matkul-toast">Mata kuliah berhasil ditambahkan!</div>
+        <div id="matkul-list-admin" style="margin-top:24px;"></div>
+      </div>
+
+      <!-- PANEL: MATERI -->
+      <div class="admin-panel" id="panel-materi">
+        <div class="admin-panel-title">Upload Materi</div>
+        <div class="admin-panel-desc">Upload file PDF atau tulis materi teks untuk mata kuliah tertentu.</div>
+        <div class="form-row">
+          <div class="form-group"><label class="f-label">Semester *</label><select class="f-select" id="materi-sem-sel" onchange="updateMateriMatkulSel()"></select></div>
+          <div class="form-group"><label class="f-label">Mata Kuliah *</label><select class="f-select" id="materi-matkul-sel"></select></div>
+        </div>
+        <div class="form-group"><label class="f-label">Judul Materi *</label><input class="f-input" id="materi-title" placeholder="cth: Bab 1 - Pengantar Perpajakan"/></div>
+        <div class="form-group"><label class="f-label">Konten Materi (teks)</label><textarea class="f-textarea" id="materi-content" placeholder="Tulis ringkasan materi di sini..."></textarea></div>
+        <div class="form-group">
+          <label class="f-label">Upload File PDF (opsional)</label>
+          <label class="btn-primary" style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;padding:10px 20px;">
+            Upload PDF
+            <input type="file" accept=".pdf" style="display:none" id="materi-pdf-input" onchange="handleMateriPDF(this)"/>
+          </label>
+          <span id="materi-pdf-name" style="font-size:12px;color:var(--text2);margin-left:12px;"></span>
+        </div>
+        <div class="form-actions"><button class="btn-primary" onclick="saveMateri()">Simpan Materi</button></div>
+        <div class="success-toast" id="materi-toast">Materi berhasil disimpan!</div>
+        <div class="err-msg" id="materi-err"></div>
+        <div class="divider"></div>
+        <div class="section-title">Daftar Materi</div>
+        <div id="materi-admin-list-wrap"></div>
+      </div>
+
+      <!-- PANEL: QUESTIONS -->
+      <div class="admin-panel" id="panel-questions">
+        <div class="admin-panel-title">Soal Latihan</div>
+        <div class="admin-panel-desc">Tambah atau hapus soal per semester dan mata kuliah.</div>
+        <div class="form-row">
+          <div class="form-group"><label class="f-label">Semester *</label><select class="f-select" id="q-sem-sel" onchange="updateQMatkulSel()"></select></div>
+          <div class="form-group"><label class="f-label">Mata Kuliah *</label><select class="f-select" id="q-matkul-sel" onchange="renderQList()"></select></div>
+        </div>
+        <div id="q-list-container"><div class="empty-msg">Pilih semester & mata kuliah untuk melihat soal.</div></div>
+        <div class="divider"></div>
+        <div class="section-title">Import dari PDF</div>
+        <div class="info-box">
+          <strong>Format PDF:</strong><br><br>
+          <code>Soal: Apa nama ibukota?<br>A. Jakarta &nbsp; B. Bandung &nbsp; C. Surabaya &nbsp; D. Medan<br>Kunci: A<br>Penjelasan: Jakarta adalah ibukota.<br><br>Esai: Jelaskan fungsi pajak!<br>Kata Kunci: anggaran, regulerend, alokasi<br>Bobot: 5</code>
+        </div>
+        <div class="form-actions" style="margin-bottom:24px;">
+          <label class="btn-primary" style="display:inline-flex;align-items:center;gap:7px;cursor:pointer;">
+            Upload File PDF
+            <input type="file" accept=".pdf" style="display:none" id="pdf-upload" onchange="processPDF(this)"/>
+          </label>
+        </div>
+        <div class="success-toast" id="pdf-toast">Soal dari PDF berhasil ditambahkan!</div>
+        <div class="err-msg" id="pdf-err"></div>
+        <div class="divider"></div>
+        <div class="collapsible-header" id="manual-toggle" onclick="toggleManualForm()">
+          <span class="ch-title">Tambah Soal Manual</span>
+          <span class="ch-arrow">&#9660;</span>
+        </div>
+        <div class="collapsible-body" id="manual-form-body">
+          <div class="form-group" style="margin-top:4px;">
+            <label class="f-label">Jenis Soal *</label>
+            <select class="f-select" id="new-q-type" onchange="toggleQType()"><option value="mcq">Pilihan Ganda</option><option value="essay">Esai (Keyword Matching)</option></select>
+          </div>
+          <div class="form-group"><label class="f-label">Teks Pertanyaan *</label><textarea class="f-textarea" id="new-q-text" placeholder="Tulis pertanyaan di sini..."></textarea></div>
+          <div id="area-mcq">
+            <div class="form-group">
+              <label class="f-label">Pilihan Jawaban *</label>
+              <div class="opts-grid">
+                <div class="opt-field"><div class="opt-badge">A</div><input class="f-input" id="opt0" placeholder="Pilihan A"/></div>
+                <div class="opt-field"><div class="opt-badge">B</div><input class="f-input" id="opt1" placeholder="Pilihan B"/></div>
+                <div class="opt-field"><div class="opt-badge">C</div><input class="f-input" id="opt2" placeholder="Pilihan C"/></div>
+                <div class="opt-field"><div class="opt-badge">D</div><input class="f-input" id="opt3" placeholder="Pilihan D"/></div>
+              </div>
+            </div>
+            <div class="form-group"><label class="f-label">Jawaban Benar *</label><select class="f-select" id="new-q-ans"><option value="0">A</option><option value="1">B</option><option value="2">C</option><option value="3">D</option></select></div>
+          </div>
+          <div id="area-essay" style="display:none;">
+            <div class="form-group"><label class="f-label">Kata Kunci (pisahkan koma) *</label><input class="f-input" id="new-q-keywords" placeholder="cth: anggaran, budgetair, regulerend"/></div>
+            <div class="form-group"><label class="f-label">Poin Maksimal (Bobot) *</label><input class="f-input" type="number" id="new-q-maxscore" value="5" min="1"/></div>
+          </div>
+          <div class="form-row" style="margin-top:14px;">
+            <div class="form-group"><label class="f-label">Tag / Label (opsional)</label><input class="f-input" id="new-q-tag" placeholder="cth: UTS, UAS, Bab 1"/></div>
+          </div>
+          <div class="form-group"><label class="f-label">Penjelasan Jawaban (opsional)</label><textarea class="f-textarea" id="new-q-exp" placeholder="Tulis penjelasan singkat..."></textarea></div>
+          <div class="form-actions">
+            <button class="btn-primary" onclick="addQuestion()">Simpan Soal</button>
+            <button class="btn-secondary" onclick="clearQForm()">Reset</button>
+          </div>
+          <div class="success-toast" id="q-toast">Soal berhasil ditambahkan!</div>
+        </div>
+      </div>
+
+      <!-- PANEL: USERS -->
+      <div class="admin-panel" id="panel-users">
+        <div class="admin-panel-title">Pengguna Aktif</div>
+        <div class="admin-panel-desc">Lihat user yang menggunakan website dan riwayat aktivitas mereka.</div>
+        <div class="info-box">Data pengguna dicatat secara otomatis saat mereka mengerjakan latihan soal. Tracking dilakukan berdasarkan browser fingerprint (anonim).</div>
+        <div class="form-actions" style="margin-bottom:16px;">
+          <button class="btn-primary" onclick="refreshUsers()">Refresh Data</button>
+          <button class="btn-secondary" onclick="clearUserData()">Hapus Semua Data User</button>
+        </div>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>User ID</th><th>Terakhir Aktif</th><th>Quiz Dikerjakan</th><th>Rata-rata Skor</th><th>Detail</th></tr></thead>
+            <tbody id="users-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- PANEL: TIMER -->
+      <div class="admin-panel" id="panel-timer">
+        <div class="admin-panel-title">Pengaturan Waktu Soal</div>
+        <div class="admin-panel-desc">Atur apakah pengerjaan soal dibatasi waktu atau tidak.</div>
+        <div class="timer-settings">
+          <div class="timer-mode-card">
+            <div class="timer-toggle-wrap">
+              <label class="toggle-label">
+                <input type="checkbox" id="timer-enabled" onchange="toggleTimerMode()"/>
+                <span class="toggle-slider"></span>
+              </label>
+              <div class="timer-mode-info">
+                <div class="timer-mode-title" id="timer-mode-text">Timer: Nonaktif</div>
+                <div class="timer-mode-desc">Aktifkan untuk membatasi waktu pengerjaan soal oleh user.</div>
+              </div>
+            </div>
+          </div>
+          <div id="timer-config" style="display:none;">
+            <div class="divider"></div>
+            <div class="section-title">Konfigurasi Waktu</div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="f-label">Mode Timer</label>
+                <select class="f-select" id="timer-mode-select" onchange="updateTimerPreview()">
+                  <option value="per_question">Per Soal (detik per soal)</option>
+                  <option value="total">Total (menit untuk seluruh quiz)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="f-label" id="timer-value-label">Waktu per Soal (detik)</label>
+                <input class="f-input" type="number" id="timer-value" value="60" min="10" placeholder="60"/>
+              </div>
+            </div>
+            <div class="info-box" id="timer-preview">
+              Dengan pengaturan ini, setiap soal memiliki <strong>60 detik</strong> untuk dijawab.
+            </div>
+            <div class="form-actions">
+              <button class="btn-primary" onclick="saveTimerSettings()">Simpan Pengaturan Timer</button>
+            </div>
+            <div class="success-toast" id="timer-toast">Pengaturan timer berhasil disimpan!</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANEL: SETTINGS -->
+      <div class="admin-panel" id="panel-settings">
+        <div class="admin-panel-title">Pengaturan</div>
+        <div class="admin-panel-desc">Keamanan admin dan backup data.</div>
+        <div class="section-title">Ganti Password Admin</div>
+        <div class="pw-form">
+          <div class="form-group"><label class="f-label">Password Lama</label><input class="f-input" type="password" id="pw-old"/></div>
+          <div class="form-group"><label class="f-label">Password Baru</label><input class="f-input" type="password" id="pw-new"/></div>
+          <div class="form-group"><label class="f-label">Konfirmasi Password Baru</label><input class="f-input" type="password" id="pw-new2"/></div>
+          <div class="form-actions"><button class="btn-primary" onclick="changePw()">Ganti Password</button></div>
+          <div class="success-toast" id="pw-toast">Password berhasil diubah!</div>
+          <div class="err-msg" id="pw-err"></div>
+        </div>
+        <div class="divider"></div>
+        <div class="section-title">Export / Import Data</div>
+        <div class="info-box"><strong>Export</strong> untuk backup semua data. <strong>Import</strong> untuk memuat dari backup.</div>
+        <div class="form-actions">
+          <button class="btn-primary" onclick="exportData()">Export JSON</button>
+          <label class="btn-secondary" style="display:flex;align-items:center;gap:7px;cursor:pointer;">
+            Import JSON
+            <input type="file" accept=".json" style="display:none" onchange="importData(this)"/>
+          </label>
+        </div>
+        <div class="divider"></div>
+        <div class="section-title danger-title">Zona Berbahaya</div>
+        <div class="info-box danger-box">Hapus semua data akan menghapus <strong>semua data</strong> secara permanen dari Firebase.</div>
+        <button class="btn-danger" onclick="clearAllData()">Hapus Semua Data</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: EDIT SOAL -->
+<div class="modal-overlay" id="modal-edit-q">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('modal-edit-q')">&#10005;</button>
+    <div class="modal-title">Edit Soal</div>
+    <div class="modal-sub">Ubah teks, pilihan, jawaban benar, atau kata kunci.</div>
+    <input type="hidden" id="edit-q-id"/>
+    <input type="hidden" id="edit-q-matkulid"/>
+    <input type="hidden" id="edit-q-type"/>
+    <div class="form-group"><label class="f-label">Pertanyaan</label><textarea class="f-textarea" id="edit-q-text"></textarea></div>
+    <div id="edit-area-mcq">
+      <div class="opts-grid" style="margin-bottom:12px">
+        <div class="opt-field"><div class="opt-badge">A</div><input class="f-input" id="eq-opt0"/></div>
+        <div class="opt-field"><div class="opt-badge">B</div><input class="f-input" id="eq-opt1"/></div>
+        <div class="opt-field"><div class="opt-badge">C</div><input class="f-input" id="eq-opt2"/></div>
+        <div class="opt-field"><div class="opt-badge">D</div><input class="f-input" id="eq-opt3"/></div>
+      </div>
+      <div class="form-group"><label class="f-label">Jawaban Benar</label><select class="f-select" id="eq-ans"><option value="0">A</option><option value="1">B</option><option value="2">C</option><option value="3">D</option></select></div>
+    </div>
+    <div id="edit-area-essay" style="display:none;">
+      <div class="form-group"><label class="f-label">Kata Kunci (pisahkan koma)</label><input class="f-input" id="eq-keywords"/></div>
+      <div class="form-group"><label class="f-label">Poin Maksimal</label><input class="f-input" type="number" id="eq-maxscore" min="1"/></div>
+    </div>
+    <div class="form-group"><label class="f-label">Tag</label><input class="f-input" id="eq-tag"/></div>
+    <div class="form-group"><label class="f-label">Penjelasan</label><textarea class="f-textarea" id="eq-exp"></textarea></div>
+    <div class="form-actions"><button class="btn-primary" onclick="saveEditQ()">Simpan</button><button class="btn-secondary" onclick="closeModal('modal-edit-q')">Batal</button></div>
+  </div>
+</div>
+
+<!-- MODAL: EDIT MATKUL -->
+<div class="modal-overlay" id="modal-edit-matkul">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('modal-edit-matkul')">&#10005;</button>
+    <div class="modal-title">Edit Mata Kuliah</div>
+    <div class="modal-sub">Ubah nama, ikon, atau deskripsi mata kuliah.</div>
+    <input type="hidden" id="edit-matkul-id"/>
+    <div class="form-group"><label class="f-label">Nama Mata Kuliah *</label><input class="f-input" id="edit-matkul-name" placeholder="Nama mata kuliah"/></div>
+    <div class="form-group">
+      <label class="f-label">Ikon (emoji)</label>
+      <div class="icon-input-row">
+        <div class="icon-preview" id="edit-matkul-icon-preview">📚</div>
+        <input class="f-input" id="edit-matkul-icon" placeholder="📚" maxlength="4" oninput="syncIconPreview('edit-matkul-icon','edit-matkul-icon-preview')"/>
+        <div class="emoji-picker-wrap">
+          <button type="button" class="emoji-pick-btn" onclick="toggleEmojiPicker('ep-edit-matkul')">🙂 Pilih</button>
+          <div class="emoji-panel" id="ep-edit-matkul"></div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group"><label class="f-label">Deskripsi</label><input class="f-input" id="edit-matkul-desc" placeholder="Deskripsi singkat"/></div>
+    <div class="form-actions"><button class="btn-primary" onclick="saveEditMatkul()">Simpan</button><button class="btn-secondary" onclick="closeModal('modal-edit-matkul')">Batal</button></div>
+    <div class="success-toast" id="edit-matkul-toast">Mata kuliah berhasil diperbarui!</div>
+  </div>
+</div>
+
+<!-- MODAL: USER DETAIL -->
+<div class="modal-overlay" id="modal-user-detail">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('modal-user-detail')">&#10005;</button>
+    <div class="modal-title">Detail Pengguna</div>
+    <div class="modal-sub" id="user-detail-sub">Riwayat aktivitas pengguna.</div>
+    <div id="user-detail-content"></div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
