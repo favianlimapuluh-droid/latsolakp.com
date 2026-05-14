@@ -1001,8 +1001,30 @@ a{text-decoration:none;color:inherit;}
   </div>
 </div>
 
-<!-- MODAL: EDIT MATKUL — NEW -->
+<!-- MODAL: EDIT MATKUL -->
 <div class="modal-overlay" id="modal-edit-matkul">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('modal-edit-matkul')">✕</button>
+    <div class="modal-title">Edit Mata Kuliah</div>
+    <div class="modal-sub">Ubah nama, ikon, atau deskripsi mata kuliah.</div>
+    <input type="hidden" id="edit-matkul-id"/>
+    <div class="form-group"><label class="f-label">Nama Mata Kuliah *</label><input class="f-input" id="edit-matkul-name" placeholder="Nama mata kuliah"/></div>
+    <div class="form-group">
+      <label class="f-label">Ikon (emoji)</label>
+      <div class="icon-input-row">
+        <div class="icon-preview" id="edit-matkul-icon-preview">📚</div>
+        <input class="f-input" id="edit-matkul-icon" placeholder="📚" maxlength="4" oninput="syncIconPreview('edit-matkul-icon','edit-matkul-icon-preview')"/>
+        <div class="emoji-picker-wrap">
+          <button type="button" class="emoji-pick-btn" onclick="toggleEmojiPicker('ep-edit-matkul')">🙂 Pilih</button>
+          <div class="emoji-panel" id="ep-edit-matkul"></div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group"><label class="f-label">Deskripsi</label><input class="f-input" id="edit-matkul-desc" placeholder="Deskripsi singkat"/></div>
+    <div class="form-actions"><button class="btn-primary" onclick="saveEditMatkul()">Simpan</button><button class="btn-secondary" onclick="closeModal('modal-edit-matkul')">Batal</button></div>
+    <div class="success-toast" id="edit-matkul-toast">✓ Mata kuliah berhasil diperbarui!</div>
+  </div>
+</div>
 
 <!-- MODAL: EDIT KATEGORI -->
 <div class="modal-overlay" id="modal-edit-kategori">
@@ -1042,28 +1064,6 @@ a{text-decoration:none;color:inherit;}
     <div style="margin-top:14px;">
       <button class="btn-secondary" style="width:100%;text-align:center;" onclick="closeModal('modal-delete-kategori')">Batal</button>
     </div>
-  </div>
-</div>
-  <div class="modal">
-    <button class="modal-close" onclick="closeModal('modal-edit-matkul')">✕</button>
-    <div class="modal-title">Edit Mata Kuliah</div>
-    <div class="modal-sub">Ubah nama, ikon, atau deskripsi mata kuliah.</div>
-    <input type="hidden" id="edit-matkul-id"/>
-    <div class="form-group"><label class="f-label">Nama Mata Kuliah *</label><input class="f-input" id="edit-matkul-name" placeholder="Nama mata kuliah"/></div>
-    <div class="form-group">
-      <label class="f-label">Ikon (emoji)</label>
-      <div class="icon-input-row">
-        <div class="icon-preview" id="edit-matkul-icon-preview">📚</div>
-        <input class="f-input" id="edit-matkul-icon" placeholder="📚" maxlength="4" oninput="syncIconPreview('edit-matkul-icon','edit-matkul-icon-preview')"/>
-        <div class="emoji-picker-wrap">
-          <button type="button" class="emoji-pick-btn" onclick="toggleEmojiPicker('ep-edit-matkul')">🙂 Pilih</button>
-          <div class="emoji-panel" id="ep-edit-matkul"></div>
-        </div>
-      </div>
-    </div>
-    <div class="form-group"><label class="f-label">Deskripsi</label><input class="f-input" id="edit-matkul-desc" placeholder="Deskripsi singkat"/></div>
-    <div class="form-actions"><button class="btn-primary" onclick="saveEditMatkul()">Simpan</button><button class="btn-secondary" onclick="closeModal('modal-edit-matkul')">Batal</button></div>
-    <div class="success-toast" id="edit-matkul-toast">✓ Mata kuliah berhasil diperbarui!</div>
   </div>
 </div>
 
