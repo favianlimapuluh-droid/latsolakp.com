@@ -787,10 +787,47 @@ a{text-decoration:none;color:inherit;}
       <!-- PANEL: QUESTIONS -->
       <div class="admin-panel" id="panel-questions">
         <div class="admin-panel-title">Soal Latihan</div>
-        <div class="admin-panel-desc">Tambah atau hapus soal per semester dan mata kuliah.</div>
+        <div class="admin-panel-desc">Tambah atau hapus soal per semester, mata kuliah, dan kategori.</div>
         <div class="form-row">
           <div class="form-group"><label class="f-label">Semester *</label><select class="f-select" id="q-sem-sel" onchange="updateQMatkulSel()"></select></div>
-          <div class="form-group"><label class="f-label">Mata Kuliah *</label><select class="f-select" id="q-matkul-sel" onchange="renderQList()"></select></div>
+          <div class="form-group"><label class="f-label">Mata Kuliah *</label><select class="f-select" id="q-matkul-sel" onchange="onMatkulChanged()"></select></div>
+        </div>
+
+        <!-- KATEGORI MANAGEMENT -->
+        <div id="kategori-section" style="margin-top:20px;">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap;">
+            <div class="section-title" style="margin-bottom:0;">📂 Kategori Soal</div>
+            <button class="btn-primary" style="font-size:12px;padding:7px 14px;" onclick="openAddKategori()">+ Tambah Kategori</button>
+          </div>
+          <div class="info-box" style="border-color:rgba(56,189,248,.3);background:var(--blue-bg);">
+            <strong style="color:var(--blue);">💡 Kategori</strong> memungkinkan kamu menyimpan beberapa set soal terpisah (misal: UTS 2024, UAS 2024, Latihan Bab 1). User bisa memilih kategori mana yang ingin dikerjakan.
+          </div>
+          <div id="kategori-list" style="margin-bottom:20px;"></div>
+          <!-- Add Kategori Form (hidden by default) -->
+          <div id="add-kategori-form" style="display:none;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;margin-bottom:20px;">
+            <div style="font-size:14px;font-weight:700;margin-bottom:12px;">Tambah Kategori Baru</div>
+            <div class="form-row">
+              <div class="form-group"><label class="f-label">Nama Kategori *</label><input class="f-input" id="new-kategori-name" placeholder="cth: UTS 2024, UAS 2024, Latihan Bab 1"/></div>
+              <div class="form-group"><label class="f-label">Deskripsi (opsional)</label><input class="f-input" id="new-kategori-desc" placeholder="cth: Soal UTS semester genap 2024"/></div>
+            </div>
+            <div class="form-actions">
+              <button class="btn-primary" onclick="addKategori()">Simpan Kategori</button>
+              <button class="btn-secondary" onclick="closeAddKategori()">Batal</button>
+            </div>
+            <div class="success-toast" id="kategori-toast">✓ Kategori berhasil ditambahkan!</div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- SOAL PER KATEGORI -->
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap;">
+          <div class="section-title" style="margin-bottom:0;">📋 Daftar Soal</div>
+          <div class="form-group" style="margin-bottom:0;">
+            <select class="f-select" id="q-kategori-filter" onchange="renderQList()" style="min-width:180px;padding:7px 12px;font-size:12px;">
+              <option value="__all__">— Semua Kategori —</option>
+            </select>
+          </div>
         </div>
         <div id="q-list-container"><div style="color:var(--muted);font-size:13px;padding:20px 0;">Pilih semester &amp; mata kuliah untuk melihat soal.</div></div>
         <div class="divider"></div>
@@ -803,11 +840,11 @@ a{text-decoration:none;color:inherit;}
           </span>
         </div>
         <div class="form-group" style="margin-bottom:14px;">
-          <label class="f-label">Mode Import</label>
-          <div style="display:flex;gap:16px;align-items:center;margin-top:4px;">
-            <label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="radio" name="pdf-import-mode" value="append" checked/> Tambahkan ke soal yang ada</label>
-            <label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="radio" name="pdf-import-mode" value="replace"/> Ganti semua soal (hapus yang lama)</label>
-          </div>
+          <label class="f-label">Kategori Tujuan *</label>
+          <select class="f-select" id="pdf-import-kategori" style="max-width:400px;">
+            <option value="">— Pilih Kategori —</option>
+          </select>
+          <div style="font-size:11px;color:var(--text2);margin-top:4px;">Soal dari PDF akan masuk ke kategori yang dipilih. Buat kategori baru di atas jika belum ada.</div>
         </div>
         <div class="form-row">
           <div class="form-group">
@@ -868,6 +905,7 @@ a{text-decoration:none;color:inherit;}
             <div class="form-group"><label class="f-label">Bab (opsional)</label><input class="f-input" id="new-q-bab" placeholder="cth: Bab 1"/></div>
           </div>
           <div class="form-row" style="margin-top:14px;">
+            <div class="form-group"><label class="f-label">Kategori *</label><select class="f-select" id="new-q-kategori"></select></div>
             <div class="form-group"><label class="f-label">Tag / Label (opsional)</label><input class="f-input" id="new-q-tag" placeholder="cth: UTS, UAS, Bab 1"/></div>
           </div>
           <div class="form-group"><label class="f-label">Penjelasan Jawaban (opsional)</label><textarea class="f-textarea" id="new-q-exp" placeholder="Tulis penjelasan singkat..."></textarea></div>
@@ -956,6 +994,7 @@ a{text-decoration:none;color:inherit;}
       <div class="form-group"><label class="f-label">Topik</label><input class="f-input" id="eq-topik" placeholder="cth: Pajak Penghasilan"/></div>
       <div class="form-group"><label class="f-label">Bab</label><input class="f-input" id="eq-bab" placeholder="cth: Bab 1"/></div>
     </div>
+    <div class="form-group"><label class="f-label">Kategori</label><select class="f-select" id="eq-kategori"></select></div>
     <div class="form-group"><label class="f-label">Tag</label><input class="f-input" id="eq-tag"/></div>
     <div class="form-group"><label class="f-label">Penjelasan</label><textarea class="f-textarea" id="eq-exp"></textarea></div>
     <div class="form-actions"><button class="btn-primary" onclick="saveEditQ()">Simpan</button><button class="btn-secondary" onclick="closeModal('modal-edit-q')">Batal</button></div>
@@ -964,6 +1003,19 @@ a{text-decoration:none;color:inherit;}
 
 <!-- MODAL: EDIT MATKUL — NEW -->
 <div class="modal-overlay" id="modal-edit-matkul">
+
+<!-- MODAL: EDIT KATEGORI -->
+<div class="modal-overlay" id="modal-edit-kategori">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('modal-edit-kategori')">✕</button>
+    <div class="modal-title">Edit Kategori</div>
+    <div class="modal-sub">Ubah nama atau deskripsi kategori soal.</div>
+    <input type="hidden" id="edit-kategori-id"/>
+    <div class="form-group"><label class="f-label">Nama Kategori *</label><input class="f-input" id="edit-kategori-name"/></div>
+    <div class="form-group"><label class="f-label">Deskripsi</label><input class="f-input" id="edit-kategori-desc"/></div>
+    <div class="form-actions"><button class="btn-primary" onclick="saveEditKategori()">Simpan</button><button class="btn-secondary" onclick="closeModal('modal-edit-kategori')">Batal</button></div>
+  </div>
+</div>
   <div class="modal">
     <button class="modal-close" onclick="closeModal('modal-edit-matkul')">✕</button>
     <div class="modal-title">Edit Mata Kuliah</div>
@@ -1023,6 +1075,7 @@ let _semesters = [];
 let _matkuls = [];
 let _questions = {};
 let _materi = {};
+let _categories = {}; // { matkulId: [{id, name, desc, createdAt}] }
 
 if(typeof pdfjsLib!=='undefined'){
   pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
@@ -1039,6 +1092,8 @@ const getQuestions=()=>_questions;
 const setQuestions=d=>{_questions=d;db.ref('questions').set(d);};
 const getMateri=()=>_materi;
 const setMateri=d=>{_materi=d;db.ref('materi').set(d);};
+const getCategories=()=>_categories;
+const setCategories=d=>{_categories=d;db.ref('categories').set(d);};
 const getPw=()=>_adminPw;
 const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
 
@@ -1410,6 +1465,7 @@ function openLatsoalOptions(matkulId){
   currentMatkulId=matkulId;
   const matkul=getMatkuls().find(m=>m.id===matkulId);
   const allQs=getQuestions()[matkulId]||[];
+  const cats=getCategories()[matkulId]||[];
 
   document.getElementById('latsoal-opt-breadcrumb').innerHTML=`Latihan Soal — <strong>${escHtml(matkul?matkul.name:'')}</strong>`;
   document.getElementById('latsoal-opt-matkul-title').textContent=matkul?matkul.name:'Pilih Set Soal';
@@ -1436,26 +1492,83 @@ function openLatsoalOptions(matkulId){
     </div>
   </div>`;
 
-  // Unique tags
-  const tags=[...new Set(allQs.map(q=>q.tag).filter(t=>t&&t.trim()))];
-  tags.forEach(tag=>{
-    const tagQs=allQs.filter(q=>q.tag===tag);
-    const tPg=tagQs.filter(q=>q.type!=='essay').length;
-    const tEs=tagQs.filter(q=>q.type==='essay').length;
-    html+=`<div class="opt-card opt-tag" onclick="startQuizFiltered('${matkulId}','${escHtml(tag).replace(/'/g,'\\x27')}')">
-      <div class="opt-card-icon">🗂</div>
-      <div class="opt-card-label">Set Soal</div>
-      <div class="opt-card-title">${escHtml(tag)}</div>
+  // Show categories as cards
+  cats.forEach(cat=>{
+    const catQs=allQs.filter(q=>q.category===cat.id);
+    if(catQs.length===0) return; // Skip empty categories
+    const cPg=catQs.filter(q=>q.type!=='essay').length;
+    const cEs=catQs.filter(q=>q.type==='essay').length;
+    html+=`<div class="opt-card opt-tag" onclick="startQuizByCategory('${matkulId}','${cat.id}')">
+      <div class="opt-card-icon">📂</div>
+      <div class="opt-card-label">Kategori</div>
+      <div class="opt-card-title">${escHtml(cat.name)}</div>
       <div class="opt-card-meta">
-        <span style="color:var(--text2);font-size:12px;">${tagQs.length} soal</span>
-        ${tPg>0?`<span class="opt-badge-pg">📝 ${tPg}</span>`:''}
-        ${tEs>0?`<span class="opt-badge-es">✍ ${tEs}</span>`:''}
+        <span style="color:var(--text2);font-size:12px;">${catQs.length} soal</span>
+        ${cPg>0?`<span class="opt-badge-pg">📝 ${cPg}</span>`:''}
+        ${cEs>0?`<span class="opt-badge-es">✍ ${cEs}</span>`:''}
       </div>
+      ${cat.desc?`<div style="font-size:11px;color:var(--text2);margin-top:6px;">${escHtml(cat.desc)}</div>`:''}
     </div>`;
   });
 
+  // Also show uncategorized questions if any
+  const uncatQs=allQs.filter(q=>!q.category||!cats.find(c=>c.id===q.category));
+  if(uncatQs.length>0&&cats.length>0){
+    const uPg=uncatQs.filter(q=>q.type!=='essay').length;
+    const uEs=uncatQs.filter(q=>q.type==='essay').length;
+    html+=`<div class="opt-card opt-tag" onclick="startQuizByCategory('${matkulId}','__uncategorized__')">
+      <div class="opt-card-icon">📄</div>
+      <div class="opt-card-label">Lainnya</div>
+      <div class="opt-card-title">Tanpa Kategori</div>
+      <div class="opt-card-meta">
+        <span style="color:var(--text2);font-size:12px;">${uncatQs.length} soal</span>
+        ${uPg>0?`<span class="opt-badge-pg">📝 ${uPg}</span>`:''}
+        ${uEs>0?`<span class="opt-badge-es">✍ ${uEs}</span>`:''}
+      </div>
+    </div>`;
+  }
+
+  // Also still show tag-based grouping if there are tags
+  const tags=[...new Set(allQs.map(q=>q.tag).filter(t=>t&&t.trim()))];
+  if(tags.length>1||( tags.length===1&&cats.length===0)){
+    tags.forEach(tag=>{
+      // Skip if tag name matches a category name (already shown above)
+      if(cats.find(c=>c.name===tag)) return;
+      const tagQs=allQs.filter(q=>q.tag===tag);
+      const tPg=tagQs.filter(q=>q.type!=='essay').length;
+      const tEs=tagQs.filter(q=>q.type==='essay').length;
+      html+=`<div class="opt-card opt-tag" onclick="startQuizFiltered('${matkulId}','${escHtml(tag).replace(/'/g,'\\x27')}')">
+        <div class="opt-card-icon">🏷</div>
+        <div class="opt-card-label">Tag</div>
+        <div class="opt-card-title">${escHtml(tag)}</div>
+        <div class="opt-card-meta">
+          <span style="color:var(--text2);font-size:12px;">${tagQs.length} soal</span>
+          ${tPg>0?`<span class="opt-badge-pg">📝 ${tPg}</span>`:''}
+          ${tEs>0?`<span class="opt-badge-es">✍ ${tEs}</span>`:''}
+        </div>
+      </div>`;
+    });
+  }
+
   grid.innerHTML=html;
   showPage('page-latsoal-options');
+}
+
+function startQuizByCategory(matkulId,categoryId){
+  const allQs=getQuestions()[matkulId]||[];
+  const cats=getCategories()[matkulId]||[];
+  let filtered;
+  if(categoryId==='__uncategorized__'){
+    filtered=allQs.filter(q=>!q.category||!cats.find(c=>c.id===q.category));
+    currentTagFilter='Tanpa Kategori';
+  } else {
+    filtered=allQs.filter(q=>q.category===categoryId);
+    const cat=cats.find(c=>c.id===categoryId);
+    currentTagFilter=cat?cat.name:'';
+  }
+  if(filtered.length===0){alert('Tidak ada soal untuk kategori ini.');return;}
+  currentQuestionsFiltered=[...filtered];
+  startQuizCore(matkulId);
 }
 
 function startQuizFiltered(matkulId,tagFilter){
@@ -1744,15 +1857,10 @@ async function processPDF(input){
   const semId=document.getElementById('q-sem-sel').value;
   const matkulId=document.getElementById('q-matkul-sel').value;
   if(!semId||!matkulId){alert('Pilih semester & mata kuliah terlebih dahulu!');input.value='';return;}
+  const kategoriId=document.getElementById('pdf-import-kategori').value;
+  if(!kategoriId){alert('Pilih kategori tujuan terlebih dahulu! Buat kategori baru jika belum ada.');input.value='';return;}
   const file=input.files[0];if(!file) return;
   const errBox=document.getElementById('pdf-err');errBox.style.display='none';
-  const importMode=document.querySelector('input[name="pdf-import-mode"]:checked').value;
-  if(importMode==='replace'){
-    const qsData=getQuestions();
-    if(qsData[matkulId]&&qsData[matkulId].length>0){
-      if(!confirm('Mode GANTI dipilih. Semua '+qsData[matkulId].length+' soal yang ada akan dihapus dan diganti dengan soal dari PDF. Lanjutkan?')){input.value='';return;}
-    }
-  }
   try{
     const ab=await file.arrayBuffer();
     const pdf=await pdfjsLib.getDocument({data:ab}).promise;
@@ -1762,39 +1870,42 @@ async function processPDF(input){
       const tc=await page.getTextContent();
       txt+=tc.items.map(it=>it.str).join(' ')+' ';
     }
-    parseTextToQuestions(txt,matkulId,importMode);
+    parseTextToQuestions(txt,matkulId,kategoriId);
   }catch(e){console.error(e);errBox.textContent='Gagal membaca PDF.';errBox.style.display='block';}
   input.value='';
 }
 
-function parseTextToQuestions(text,matkulId,importMode){
+function parseTextToQuestions(text,matkulId,kategoriId){
   const clean=text.replace(/\s+/g,' ');
   let count=0;
   const fallbackTopik=(document.getElementById('pdf-import-topik').value||'').trim();
   const fallbackBab=(document.getElementById('pdf-import-bab').value||'').trim();
   const qsData=getQuestions();
-  if(importMode==='replace'){qsData[matkulId]=[];}
   if(!qsData[matkulId]) qsData[matkulId]=[];
+  // Get category name for tag display
+  const cats=(getCategories()[matkulId]||[]);
+  const catObj=cats.find(c=>c.id===kategoriId);
+  const catName=catObj?catObj.name:'';
   const rMCQ=/(?:Topik:\s*(.*?)\s*)?(?:Bab:\s*(.*?)\s*)?Soal:\s*(.*?)\s*A\.\s*(.*?)\s*B\.\s*(.*?)\s*C\.\s*(.*?)\s*D\.\s*(.*?)\s*Kunci:\s*([A-D])(?:\s*Penjelasan:\s*(.*?))?(?=\s*(?:Topik:|Bab:|Soal:|Esai:)|$)/gi;
   let m;
   while((m=rMCQ.exec(clean))!==null){
     const ai={'A':0,'B':1,'C':2,'D':3}[m[8].toUpperCase()]??0;
     const topik=(m[1]&&m[1].trim())?m[1].trim():fallbackTopik;
     const bab=(m[2]&&m[2].trim())?m[2].trim():fallbackBab;
-    qsData[matkulId].push({id:uid(),type:'mcq',q:m[3].trim(),opts:[m[4].trim(),m[5].trim(),m[6].trim(),m[7].trim()],ans:ai,tag:'Import PDF',exp:m[9]?m[9].trim():'',topik:topik,bab:bab});
+    qsData[matkulId].push({id:uid(),type:'mcq',q:m[3].trim(),opts:[m[4].trim(),m[5].trim(),m[6].trim(),m[7].trim()],ans:ai,tag:catName,exp:m[9]?m[9].trim():'',topik:topik,bab:bab,category:kategoriId});
     count++;
   }
   const rEsai=/(?:Topik:\s*(.*?)\s*)?(?:Bab:\s*(.*?)\s*)?Esai:\s*(.*?)\s*Kata Kunci:\s*(.*?)\s*Bobot:\s*(\d+)(?:\s*Penjelasan:\s*(.*?))?(?=\s*(?:Topik:|Bab:|Soal:|Esai:)|$)/gi;
   while((m=rEsai.exec(clean))!==null){
     const topik=(m[1]&&m[1].trim())?m[1].trim():fallbackTopik;
     const bab=(m[2]&&m[2].trim())?m[2].trim():fallbackBab;
-    qsData[matkulId].push({id:uid(),type:'essay',q:m[3].trim(),keywords:m[4].trim().split(',').map(k=>k.trim().toLowerCase()).filter(k=>k),maxScore:parseInt(m[5])||5,tag:'Import PDF',exp:m[6]?m[6].trim():'',topik:topik,bab:bab});
+    qsData[matkulId].push({id:uid(),type:'essay',q:m[3].trim(),keywords:m[4].trim().split(',').map(k=>k.trim().toLowerCase()).filter(k=>k),maxScore:parseInt(m[5])||5,tag:catName,exp:m[6]?m[6].trim():'',topik:topik,bab:bab,category:kategoriId});
     count++;
   }
   if(count>0){
     setQuestions(qsData);renderQList();
     const t=document.getElementById('pdf-toast');
-    t.textContent=`✓ ${count} soal dari PDF berhasil ${importMode==='replace'?'diimport (mengganti soal lama)':'ditambahkan'}!`;t.style.display='block';setTimeout(()=>t.style.display='none',4000);
+    t.textContent=`✓ ${count} soal dari PDF berhasil ditambahkan ke kategori "${catName}"!`;t.style.display='block';setTimeout(()=>t.style.display='none',4000);
   } else {
     const e=document.getElementById('pdf-err');
     e.innerHTML='Gagal menemukan soal. Pastikan format <b>Soal:</b> atau <b>Esai:</b> sudah benar.';e.style.display='block';
@@ -1860,7 +1971,7 @@ function showPanel(name){
   populateAdminSelects();
   if(name==='semesters'){renderSemTable();renderMatkulList();}
   if(name==='materi'){updateMateriMatkulSel();renderMateriAdminList();}
-  if(name==='questions'){updateQMatkulSel();renderQList();}
+  if(name==='questions'){updateQMatkulSel();onMatkulChanged();}
   if(name==='analytics'){renderAnalytics();}
 }
 
@@ -1905,9 +2016,9 @@ function renderSemTable(){
 function deleteSemester(id){
   if(!confirm('Hapus semester ini beserta semua mata kuliah, soal, dan materinya?')) return;
   const mks=getMatkuls().filter(m=>m.semId===id);
-  const qsData=getQuestions(),matData=getMateri();
-  mks.forEach(m=>{delete qsData[m.id];delete matData[m.id];});
-  setQuestions(qsData);setMateri(matData);
+  const qsData=getQuestions(),matData=getMateri(),catsData=getCategories();
+  mks.forEach(m=>{delete qsData[m.id];delete matData[m.id];delete catsData[m.id];});
+  setQuestions(qsData);setMateri(matData);setCategories(catsData);
   setSemesters(getSemesters().filter(s=>s.id!==id));
   setMatkuls(getMatkuls().filter(m=>m.semId!==id));
   renderSemTable();renderMatkulList();populateAdminSelects();
@@ -1962,6 +2073,7 @@ function deleteMatkul(id){
   if(!confirm('Hapus mata kuliah ini beserta semua soal dan materinya?')) return;
   const qsData=getQuestions();delete qsData[id];setQuestions(qsData);
   const matData=getMateri();delete matData[id];setMateri(matData);
+  const catsData=getCategories();delete catsData[id];setCategories(catsData);
   setMatkuls(getMatkuls().filter(m=>m.id!==id));
   renderMatkulList();populateAdminSelects();
 }
@@ -2060,18 +2172,156 @@ function updateQMatkulSel(){
   const mks=getMatkuls().filter(m=>m.semId===semId);
   const sel=document.getElementById('q-matkul-sel');
   sel.innerHTML=mks.map(m=>`<option value="${m.id}">${escHtml(m.name)}</option>`).join('')||'<option value="">— Belum ada matkul —</option>';
+  onMatkulChanged();
+}
+
+function onMatkulChanged(){
+  renderKategoriList();
+  updateKategoriSelects();
+  renderQList();
+}
+
+// ════════════════════════════════
+// KATEGORI MANAGEMENT
+// ════════════════════════════════
+function openAddKategori(){
+  document.getElementById('add-kategori-form').style.display='block';
+  document.getElementById('new-kategori-name').focus();
+}
+function closeAddKategori(){
+  document.getElementById('add-kategori-form').style.display='none';
+  document.getElementById('new-kategori-name').value='';
+  document.getElementById('new-kategori-desc').value='';
+}
+
+function addKategori(){
+  const matkulId=document.getElementById('q-matkul-sel').value;
+  if(!matkulId){alert('Pilih semester & mata kuliah terlebih dahulu.');return;}
+  const name=document.getElementById('new-kategori-name').value.trim();
+  if(!name){alert('Nama kategori wajib diisi.');return;}
+  const desc=document.getElementById('new-kategori-desc').value.trim();
+  const catsData=getCategories();
+  if(!catsData[matkulId]) catsData[matkulId]=[];
+  catsData[matkulId].push({id:uid(),name,desc,createdAt:Date.now()});
+  setCategories(catsData);
+  closeAddKategori();
+  renderKategoriList();
+  updateKategoriSelects();
+  showToast('kategori-toast');
+}
+
+function renderKategoriList(){
+  const matkulId=document.getElementById('q-matkul-sel').value;
+  const cats=(matkulId&&getCategories()[matkulId])||[];
+  const qs=(matkulId&&getQuestions()[matkulId])||[];
+  const wrap=document.getElementById('kategori-list');
+  if(!matkulId||cats.length===0){
+    wrap.innerHTML=cats.length===0&&matkulId?'<div style="color:var(--muted);font-size:13px;padding:8px 0;">Belum ada kategori. Buat kategori baru untuk mulai mengorganisir soal.</div>':'';
+    return;
+  }
+  wrap.innerHTML=cats.map(c=>{
+    const qCount=qs.filter(q=>q.category===c.id).length;
+    const pgCount=qs.filter(q=>q.category===c.id&&q.type!=='essay').length;
+    const esCount=qs.filter(q=>q.category===c.id&&q.type==='essay').length;
+    return `<div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;margin-bottom:8px;display:flex;align-items:center;gap:12px;">
+      <div style="font-size:24px;">📂</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:14px;font-weight:700;">${escHtml(c.name)}</div>
+        <div style="font-size:11px;color:var(--text2);margin-top:2px;">${c.desc?escHtml(c.desc)+' · ':''}${qCount} soal${pgCount?' · '+pgCount+' PG':''}${esCount?' · '+esCount+' Esai':''}</div>
+      </div>
+      <div style="display:flex;gap:6px;">
+        <button class="btn-edit" onclick="openEditKategori('${matkulId}','${c.id}')">✏ Edit</button>
+        <button class="btn-danger" onclick="deleteKategori('${matkulId}','${c.id}')">Hapus</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function updateKategoriSelects(){
+  const matkulId=document.getElementById('q-matkul-sel').value;
+  const cats=(matkulId&&getCategories()[matkulId])||[];
+  // PDF import kategori select
+  const pdfSel=document.getElementById('pdf-import-kategori');
+  if(pdfSel) pdfSel.innerHTML='<option value="">— Pilih Kategori —</option>'+cats.map(c=>`<option value="${c.id}">${escHtml(c.name)}</option>`).join('');
+  // Manual add kategori select
+  const manSel=document.getElementById('new-q-kategori');
+  if(manSel) manSel.innerHTML='<option value="">— Pilih Kategori —</option>'+cats.map(c=>`<option value="${c.id}">${escHtml(c.name)}</option>`).join('');
+  // Filter select
+  const filterSel=document.getElementById('q-kategori-filter');
+  if(filterSel){
+    const currentVal=filterSel.value;
+    filterSel.innerHTML='<option value="__all__">— Semua Kategori —</option>'+cats.map(c=>`<option value="${c.id}">${escHtml(c.name)}</option>`).join('')+'<option value="__none__">— Tanpa Kategori —</option>';
+    filterSel.value=currentVal;
+    if(!filterSel.value) filterSel.value='__all__';
+  }
+}
+
+function openEditKategori(matkulId,catId){
+  const cats=getCategories()[matkulId]||[];
+  const c=cats.find(x=>x.id===catId);
+  if(!c) return;
+  document.getElementById('edit-kategori-id').value=catId;
+  document.getElementById('edit-kategori-name').value=c.name;
+  document.getElementById('edit-kategori-desc').value=c.desc||'';
+  openModal('modal-edit-kategori');
+}
+
+function saveEditKategori(){
+  const catId=document.getElementById('edit-kategori-id').value;
+  const name=document.getElementById('edit-kategori-name').value.trim();
+  if(!name){alert('Nama kategori wajib diisi.');return;}
+  const desc=document.getElementById('edit-kategori-desc').value.trim();
+  const matkulId=document.getElementById('q-matkul-sel').value;
+  const catsData=getCategories();
+  const cats=catsData[matkulId]||[];
+  const idx=cats.findIndex(c=>c.id===catId);
+  if(idx>-1){
+    cats[idx]={...cats[idx],name,desc};
+    catsData[matkulId]=cats;
+    setCategories(catsData);
+  }
+  closeModal('modal-edit-kategori');
+  renderKategoriList();
+  updateKategoriSelects();
+  renderQList();
+}
+
+function deleteKategori(matkulId,catId){
+  const cats=getCategories()[matkulId]||[];
+  const cat=cats.find(c=>c.id===catId);
+  const qs=(getQuestions()[matkulId]||[]).filter(q=>q.category===catId);
+  const msg=qs.length>0
+    ?`Hapus kategori "${cat.name}"? Ada ${qs.length} soal di kategori ini. Soal-soal tersebut akan menjadi "Tanpa Kategori" (tidak dihapus).`
+    :`Hapus kategori "${cat.name}"?`;
+  if(!confirm(msg)) return;
+  const catsData=getCategories();
+  catsData[matkulId]=(catsData[matkulId]||[]).filter(c=>c.id!==catId);
+  setCategories(catsData);
+  // Remove category reference from questions but keep the questions
+  if(qs.length>0){
+    const qsData=getQuestions();
+    qsData[matkulId]=(qsData[matkulId]||[]).map(q=>q.category===catId?{...q,category:''}:q);
+    setQuestions(qsData);
+  }
+  renderKategoriList();
+  updateKategoriSelects();
   renderQList();
 }
 
 function renderQList(){
   const matkulId=document.getElementById('q-matkul-sel').value;
-  const qs=(matkulId&&getQuestions()[matkulId])||[];
+  const allQs=(matkulId&&getQuestions()[matkulId])||[];
+  const filterKat=document.getElementById('q-kategori-filter').value;
+  const qs=filterKat==='__all__'?allQs:allQs.filter(q=>(q.category||'')===(filterKat==='__none__'?'':filterKat));
   const container=document.getElementById('q-list-container');
   if(!matkulId){container.innerHTML='<div style="color:var(--muted);font-size:13px;padding:20px 0;">Pilih semester & mata kuliah.</div>';return;}
-  if(qs.length===0){container.innerHTML='<div style="color:var(--muted);font-size:13px;padding:20px 0;">Belum ada soal. Tambahkan via PDF atau form manual di bawah.</div>';return;}
+  if(allQs.length===0){container.innerHTML='<div style="color:var(--muted);font-size:13px;padding:20px 0;">Belum ada soal. Tambahkan via PDF atau form manual di bawah.</div>';return;}
+  if(qs.length===0){container.innerHTML='<div style="color:var(--muted);font-size:13px;padding:20px 0;">Tidak ada soal di kategori ini.</div>';return;}
+  const cats=getCategories()[matkulId]||[];
+  const getCatName=catId=>{const c=cats.find(x=>x.id===catId);return c?c.name:'Tanpa Kategori';};
   const pg=qs.filter(q=>q.type!=='essay').length,es=qs.filter(q=>q.type==='essay').length;
   container.innerHTML=`<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap;">
-    <span style="font-size:11px;font-weight:700;font-family:var(--mono);color:var(--muted);text-transform:uppercase;letter-spacing:.08em;">${qs.length} soal</span>
+    <span style="font-size:11px;font-weight:700;font-family:var(--mono);color:var(--muted);text-transform:uppercase;letter-spacing:.08em;">${qs.length} soal${filterKat!=='__all__'?' (difilter)':''}</span>
     ${pg>0?`<span class="q-type-chip chip-pg">📝 ${pg} Pilgan</span>`:''}
     ${es>0?`<span class="q-type-chip chip-essay">✍ ${es} Esai</span>`:''}
   </div>`+
@@ -2080,9 +2330,11 @@ function renderQList(){
     const chip=isEssay?`<span class="q-type-chip chip-essay">Esai</span>`:`<span class="q-type-chip chip-pg">PG</span>`;
     const topikChip=q.topik?`<span class="q-type-chip" style="background:rgba(99,102,241,.12);color:#6366f1;font-size:10px;">📌 ${escHtml(q.topik)}</span>`:'';
     const babChip=q.bab?`<span class="q-type-chip" style="background:rgba(245,158,11,.12);color:#f59e0b;font-size:10px;">📖 ${escHtml(q.bab)}</span>`:'';
+    const catChip=q.category?`<span class="q-type-chip" style="background:var(--blue-bg);color:var(--blue);font-size:10px;">📂 ${escHtml(getCatName(q.category))}</span>`:'';
+    const globalIdx=allQs.indexOf(q);
     return `<div class="q-list-item">
-      <div class="q-list-num">${i+1}</div>
-      <div class="q-list-body">${chip}${topikChip}${babChip}<div class="q-list-text">${escHtml(q.q)}</div></div>
+      <div class="q-list-num">${globalIdx+1}</div>
+      <div class="q-list-body">${chip}${catChip}${topikChip}${babChip}<div class="q-list-text">${escHtml(q.q)}</div></div>
       <div class="q-list-actions">
         <button class="btn-edit" onclick="openEditQ('${matkulId}','${q.id}')">Edit</button>
         <button class="btn-danger" onclick="deleteQ('${matkulId}','${q.id}')">✕</button>
@@ -2105,6 +2357,8 @@ function toggleManualForm(){
 function addQuestion(){
   const matkulId=document.getElementById('q-matkul-sel').value;
   if(!matkulId){alert('Pilih semester & mata kuliah terlebih dahulu.');return;}
+  const kategoriId=document.getElementById('new-q-kategori').value;
+  if(!kategoriId){alert('Pilih kategori untuk soal ini.');return;}
   const qType=document.getElementById('new-q-type').value;
   const qText=document.getElementById('new-q-text').value.trim();
   const tag=document.getElementById('new-q-tag').value.trim();
@@ -2112,7 +2366,11 @@ function addQuestion(){
   const topik=document.getElementById('new-q-topik').value.trim();
   const bab=document.getElementById('new-q-bab').value.trim();
   if(!qText){alert('Pertanyaan wajib diisi.');return;}
-  let newQ={id:uid(),type:qType,q:qText,tag,exp,topik,bab};
+  // Get category name for tag
+  const cats=(getCategories()[matkulId]||[]);
+  const catObj=cats.find(c=>c.id===kategoriId);
+  const catName=catObj?catObj.name:'';
+  let newQ={id:uid(),type:qType,q:qText,tag:tag||catName,exp,topik,bab,category:kategoriId};
   if(pendingQImage){newQ.image=pendingQImage.dataUrl;}
   if(qType==='mcq'){
     const opts=[0,1,2,3].map(i=>document.getElementById(`opt${i}`).value.trim());
@@ -2167,6 +2425,10 @@ function openEditQ(matkulId,qId){
     (q.opts||[]).forEach((o,i)=>{document.getElementById(`eq-opt${i}`).value=o;});
     document.getElementById('eq-ans').value=q.ans;
   }
+  // Populate category select
+  const cats=getCategories()[matkulId]||[];
+  const eqKat=document.getElementById('eq-kategori');
+  eqKat.innerHTML='<option value="">— Tanpa Kategori —</option>'+cats.map(c=>`<option value="${c.id}"${c.id===q.category?' selected':''}>${escHtml(c.name)}</option>`).join('');
   document.getElementById('eq-tag').value=q.tag||'';
   document.getElementById('eq-exp').value=q.exp||'';
   document.getElementById('eq-topik').value=q.topik||'';
@@ -2183,7 +2445,8 @@ function saveEditQ(){
   const qsData=getQuestions();
   const idx=(qsData[matkulId]||[]).findIndex(q=>q.id===qId);
   if(idx>-1){
-    let upd={...qsData[matkulId][idx],type:qType,q:qText,tag:document.getElementById('eq-tag').value.trim(),exp:document.getElementById('eq-exp').value.trim(),topik:document.getElementById('eq-topik').value.trim(),bab:document.getElementById('eq-bab').value.trim()};
+    const kategoriId=document.getElementById('eq-kategori').value||qsData[matkulId][idx].category||'';
+    let upd={...qsData[matkulId][idx],type:qType,q:qText,tag:document.getElementById('eq-tag').value.trim(),exp:document.getElementById('eq-exp').value.trim(),topik:document.getElementById('eq-topik').value.trim(),bab:document.getElementById('eq-bab').value.trim(),category:kategoriId};
     if(qType==='essay'){
       const kw=document.getElementById('eq-keywords').value;
       if(!kw){alert('Kata kunci esai wajib diisi.');return;}
@@ -2216,7 +2479,7 @@ function changePw(){
 }
 
 function exportData(){
-  const data={semesters:getSemesters(),matkuls:getMatkuls(),questions:getQuestions(),materi:getMateri()};
+  const data={semesters:getSemesters(),matkuls:getMatkuls(),questions:getQuestions(),materi:getMateri(),categories:getCategories()};
   const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
   const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='latsol-akp-backup-'+new Date().toISOString().slice(0,10)+'.json';a.click();
 }
@@ -2232,6 +2495,7 @@ function importData(input){
       if(data.matkuls) setMatkuls(data.matkuls);
       if(data.questions) setQuestions(data.questions);
       if(data.materi) setMateri(data.materi);
+      if(data.categories) setCategories(data.categories);
       renderSemTable();renderMatkulList();populateAdminSelects();alert('Import berhasil!');
     }catch{alert('Gagal membaca file.');}
   };
@@ -2241,7 +2505,7 @@ function importData(input){
 function clearAllData(){
   if(!confirm('Hapus semua data secara permanen?')) return;
   if(!confirm('Konfirmasi sekali lagi?')) return;
-  setSemesters([]);setMatkuls([]);setQuestions({});setMateri({});
+  setSemesters([]);setMatkuls([]);setQuestions({});setMateri({});setCategories({});
   renderSemTable();renderMatkulList();populateAdminSelects();alert('Semua data berhasil dihapus.');
 }
 
@@ -2271,6 +2535,7 @@ async function initApp(){
       _matkuls = data.matkuls || [];
       _questions = data.questions || {};
       _materi = data.materi || {};
+      _categories = data.categories || {};
       if(data.adminPw) _adminPw = data.adminPw;
     }
   } catch(e) {
@@ -2299,6 +2564,7 @@ async function initApp(){
   db.ref('matkuls').on('value', snap => { _matkuls = snap.val() || []; });
   db.ref('questions').on('value', snap => { _questions = snap.val() || {}; });
   db.ref('materi').on('value', snap => { _materi = snap.val() || {}; });
+  db.ref('categories').on('value', snap => { _categories = snap.val() || {}; });
 }
 
 initApp();
