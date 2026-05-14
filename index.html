@@ -436,6 +436,26 @@ a{text-decoration:none;color:inherit;}
 .modal-sub{font-size:13px;color:var(--text2);margin-bottom:22px;}
 .modal-close{position:absolute;top:18px;right:18px;width:30px;height:30px;border-radius:7px;background:var(--surface);border:1px solid var(--border);color:var(--text2);font-size:16px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .16s;}
 .modal-close:hover{border-color:var(--border2);color:var(--text);}
+
+/* ANALYTICS PANEL */
+.analytics-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px;margin-bottom:28px;}
+.analytics-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;text-align:center;}
+.analytics-card-num{font-size:28px;font-weight:800;font-family:var(--mono);background:linear-gradient(135deg,var(--accent3),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:4px;}
+.analytics-card-label{font-size:12px;color:var(--text2);font-weight:500;}
+.analytics-table{width:100%;border-collapse:collapse;font-size:13px;}
+.analytics-table th{text-align:left;padding:10px 14px;font-size:11px;font-weight:700;font-family:var(--mono);color:var(--muted);text-transform:uppercase;letter-spacing:.08em;border-bottom:1px solid var(--border);}
+.analytics-table td{padding:10px 14px;border-bottom:1px solid var(--border);vertical-align:middle;color:var(--text2);}
+.analytics-table tr:last-child td{border-bottom:none;}
+.analytics-table tr:hover td{background:var(--surface);}
+
+/* PDF VIEWER */
+.pdf-viewer-container{max-height:80vh;overflow-y:auto;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;margin-top:14px;}
+.pdf-page-wrap{margin-bottom:20px;text-align:center;}
+.pdf-page-wrap canvas{max-width:100%;border-radius:8px;border:1px solid var(--border);box-shadow:0 4px 16px rgba(0,0,0,.4);}
+.pdf-page-num{font-size:11px;font-family:var(--mono);color:var(--muted);margin-top:8px;text-align:center;}
+.pdf-loading{text-align:center;padding:30px;color:var(--text2);font-size:14px;}
+.pdf-btn-read{padding:7px 14px;background:var(--green-bg);border:1px solid rgba(45,212,160,.4);border-radius:8px;color:var(--green);font-size:12px;font-weight:600;cursor:pointer;transition:all .16s;}
+.pdf-btn-read:hover{background:rgba(45,212,160,.2);border-color:rgba(45,212,160,.6);}
 </style>
 </head>
 <body>
@@ -679,6 +699,7 @@ a{text-decoration:none;color:inherit;}
       <div class="admin-nav-item active" onclick="showPanel('semesters')" data-panel="semesters">🗂 Semester &amp; Matkul</div>
       <div class="admin-nav-item" onclick="showPanel('materi')" data-panel="materi">📖 Upload Materi</div>
       <div class="admin-nav-item" onclick="showPanel('questions')" data-panel="questions">✏️ Soal Latihan</div>
+      <div class="admin-nav-item" onclick="showPanel('analytics')" data-panel="analytics">📊 Statistik Pengunjung</div>
       <div class="admin-nav-sect">Pengaturan</div>
       <div class="admin-nav-item" onclick="showPanel('settings')" data-panel="settings">⚙ Pengaturan</div>
     </nav>
@@ -848,6 +869,24 @@ a{text-decoration:none;color:inherit;}
         </div>
       </div>
 
+      <!-- PANEL: ANALYTICS -->
+      <div class="admin-panel" id="panel-analytics">
+        <div class="admin-panel-title">Statistik Pengunjung</div>
+        <div class="admin-panel-desc">Lihat data kunjungan dan aktivitas pengguna.</div>
+        <div class="analytics-cards" id="analytics-cards">
+          <div class="analytics-card"><div class="analytics-card-num" id="stat-unique-sessions">0</div><div class="analytics-card-label">Total Pengunjung</div></div>
+          <div class="analytics-card"><div class="analytics-card-num" id="stat-total-views">0</div><div class="analytics-card-label">Total Halaman Dilihat</div></div>
+          <div class="analytics-card"><div class="analytics-card-num" id="stat-popular-page">-</div><div class="analytics-card-label">Halaman Terpopuler</div></div>
+        </div>
+        <div class="section-title">Aktivitas Terbaru</div>
+        <div class="table-wrap">
+          <table class="analytics-table">
+            <thead><tr><th>Waktu</th><th>Halaman</th><th>Perangkat</th></tr></thead>
+            <tbody id="analytics-tbody"><tr><td colspan="3" style="text-align:center;color:var(--muted);padding:20px;">Memuat data...</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+
       <!-- PANEL: SETTINGS -->
       <div class="admin-panel" id="panel-settings">
         <div class="admin-panel-title">Pengaturan</div>
@@ -994,6 +1033,67 @@ const getPw=()=>_adminPw;
 const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
 
 // ════════════════════════════════
+// ANALYTICS / VISITOR TRACKING
+// ════════════════════════════════
+const PAGE_NAMES={'page-home':'Beranda','page-materi-sem':'Materi','page-materi-matkul':'Materi','page-materi-viewer':'Materi','page-latsoal-sem':'Latihan Soal','page-latsoal-matkul':'Latihan Soal','page-latsoal-options':'Latihan Soal','page-quiz':'Quiz','page-result':'Hasil Quiz','page-admin-login':'Admin','page-admin':'Admin'};
+function getSessionId(){
+  let sid=sessionStorage.getItem('_analytics_sid');
+  if(!sid){sid=uid();sessionStorage.setItem('_analytics_sid',sid);}
+  return sid;
+}
+function trackPageView(pageName){
+  try{
+    const sessionId=getSessionId();
+    const record={timestamp:Date.now(),page:pageName,sessionId:sessionId,userAgent:navigator.userAgent};
+    db.ref('analytics/pageviews').push(record);
+    db.ref('analytics/sessions/'+sessionId).set({lastSeen:Date.now(),userAgent:navigator.userAgent});
+    db.ref('analytics/totalViews').transaction(function(current){return(current||0)+1;});
+  }catch(e){console.error('Analytics error:',e);}
+}
+function getDeviceInfo(ua){
+  if(!ua) return 'Unknown';
+  if(/Mobile|Android|iPhone|iPad/i.test(ua)) return 'Mobile';
+  if(/Tablet/i.test(ua)) return 'Tablet';
+  return 'Desktop';
+}
+function renderAnalytics(){
+  db.ref('analytics').once('value').then(snap=>{
+    const data=snap.val()||{};
+    const sessions=data.sessions||{};
+    const pageviews=data.pageviews||{};
+    const totalViews=data.totalViews||0;
+    const uniqueSessions=Object.keys(sessions).length;
+    document.getElementById('stat-unique-sessions').textContent=uniqueSessions;
+    document.getElementById('stat-total-views').textContent=totalViews;
+    // Find most popular page
+    const pageCounts={};
+    const pvArray=[];
+    Object.values(pageviews).forEach(pv=>{
+      pageCounts[pv.page]=(pageCounts[pv.page]||0)+1;
+      pvArray.push(pv);
+    });
+    let popularPage='-';
+    let maxCount=0;
+    Object.entries(pageCounts).forEach(([page,count])=>{if(count>maxCount){maxCount=count;popularPage=page;}});
+    document.getElementById('stat-popular-page').textContent=popularPage;
+    // Render recent activity (last 50)
+    pvArray.sort((a,b)=>b.timestamp-a.timestamp);
+    const recent=pvArray.slice(0,50);
+    const tbody=document.getElementById('analytics-tbody');
+    if(recent.length===0){
+      tbody.innerHTML='<tr><td colspan="3" style="text-align:center;color:var(--muted);padding:20px;">Belum ada data kunjungan.</td></tr>';
+    } else {
+      tbody.innerHTML=recent.map(pv=>{
+        const d=new Date(pv.timestamp);
+        const timeStr=d.toLocaleDateString('id-ID',{day:'2-digit',month:'short',year:'numeric'})+' '+d.toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'});
+        const device=getDeviceInfo(pv.userAgent);
+        return `<tr><td>${timeStr}</td><td>${escHtml(pv.page)}</td><td>${device}</td></tr>`;
+      }).join('');
+    }
+  }).catch(e=>{console.error('Analytics load error:',e);});
+}
+
+// ════════════════════════════════
 // EMOJI PICKER
 // ════════════════════════════════
 const EMOJIS=[
@@ -1053,6 +1153,8 @@ function showPage(id){
   document.querySelectorAll('.page').forEach(p=>{p.classList.remove('active');p.style.display='';});
   document.getElementById(id).classList.add('active');
   window.scrollTo(0,0);
+  const pageName=PAGE_NAMES[id]||id;
+  trackPageView(pageName);
 }
 function goHome(){ updateHomeStats(); showPage('page-home'); }
 function goAdminLogin(){ showPage('page-admin-login'); document.getElementById('admin-pw-input').value=''; document.getElementById('login-err').style.display='none'; }
@@ -1136,10 +1238,14 @@ function openMateriViewer(matkulId){
         <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
           <span style="font-size:24px;">${m.fileName?'📄':'📝'}</span>
           <div><div style="font-size:16px;font-weight:700;">${escHtml(m.title)}</div>${m.fileName?`<div style="font-size:12px;color:var(--text2);">File: ${escHtml(m.fileName)}</div>`:''}</div>
-          ${m.fileData?`<button class="mfi-btn" style="margin-left:auto;" onclick="downloadMateriPDF('${m.id}','${matkulId}')">⬇ Download PDF</button>`:''}
+          <div style="margin-left:auto;display:flex;gap:8px;">
+            ${m.fileData?`<button class="pdf-btn-read" onclick="togglePDFInline('${m.id}','${matkulId}')">📖 Baca PDF</button>`:''}
+            ${m.fileData?`<button class="mfi-btn" onclick="downloadMateriPDF('${m.id}','${matkulId}')">⬇ Download PDF</button>`:''}
+          </div>
         </div>
         ${m.content?`<div class="materi-content-box">${escHtml(m.content)}</div>`:''}
         ${(m.images&&m.images.length>0)?`<div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:14px;">${m.images.map(img=>`<img src="${img}" style="max-width:100%;border-radius:12px;border:1px solid var(--border);cursor:pointer;" onclick="window.open(this.src)"/>`).join('')}</div>`:''}
+        <div id="pdf-container-${m.id}"></div>
       </div>`).join('');
   }
   showPage('page-materi-viewer');
@@ -1149,6 +1255,55 @@ function downloadMateriPDF(materiId,matkulId){
   const mat=(getMateri()[matkulId]||[]).find(m=>m.id===materiId);
   if(!mat||!mat.fileData) return;
   const a=document.createElement('a'); a.href=mat.fileData; a.download=mat.fileName||'materi.pdf'; a.click();
+}
+
+function togglePDFInline(materiId,matkulId){
+  const container=document.getElementById('pdf-container-'+materiId);
+  if(!container) return;
+  if(container.innerHTML){container.innerHTML='';return;}
+  const mat=(getMateri()[matkulId]||[]).find(m=>m.id===materiId);
+  if(!mat||!mat.fileData) return;
+  renderPDFInline(mat.fileData,'pdf-container-'+materiId);
+}
+
+function renderPDFInline(dataUrl,containerId){
+  const container=document.getElementById(containerId);
+  if(!container) return;
+  container.innerHTML='<div class="pdf-viewer-container"><div class="pdf-loading">⏳ Memuat PDF...</div></div>';
+  try{
+    const base64=dataUrl.split(',')[1]||dataUrl;
+    const raw=atob(base64);
+    const uint8=new Uint8Array(raw.length);
+    for(let i=0;i<raw.length;i++) uint8[i]=raw.charCodeAt(i);
+    pdfjsLib.getDocument({data:uint8}).promise.then(function(pdf){
+      const totalPages=pdf.numPages;
+      let html='<div class="pdf-viewer-container">';
+      html+='<div style="text-align:center;margin-bottom:16px;font-size:13px;color:var(--text2);font-family:var(--mono);">Halaman 1 dari '+totalPages+'</div>';
+      for(let i=1;i<=totalPages;i++){
+        html+='<div class="pdf-page-wrap" id="'+containerId+'-page-'+i+'"><canvas id="'+containerId+'-canvas-'+i+'"></canvas><div class="pdf-page-num">Halaman '+i+' dari '+totalPages+'</div></div>';
+      }
+      html+='</div>';
+      container.innerHTML=html;
+      for(let i=1;i<=totalPages;i++){
+        (function(pageNum){
+          pdf.getPage(pageNum).then(function(page){
+            const scale=1.5;
+            const viewport=page.getViewport({scale:scale});
+            const canvas=document.getElementById(containerId+'-canvas-'+pageNum);
+            if(!canvas) return;
+            const ctx=canvas.getContext('2d');
+            canvas.height=viewport.height;
+            canvas.width=viewport.width;
+            page.render({canvasContext:ctx,viewport:viewport});
+          });
+        })(i);
+      }
+    }).catch(function(err){
+      container.innerHTML='<div class="pdf-viewer-container"><div class="pdf-loading" style="color:var(--red);">Gagal memuat PDF: '+escHtml(err.message)+'</div></div>';
+    });
+  }catch(e){
+    container.innerHTML='<div class="pdf-viewer-container"><div class="pdf-loading" style="color:var(--red);">Error: '+escHtml(e.message)+'</div></div>';
+  }
 }
 
 function backFromViewer(){ openMateriSem(currentSemId); }
@@ -1648,6 +1803,7 @@ function showPanel(name){
   if(name==='semesters'){renderSemTable();renderMatkulList();}
   if(name==='materi'){updateMateriMatkulSel();renderMateriAdminList();}
   if(name==='questions'){updateQMatkulSel();renderQList();}
+  if(name==='analytics'){renderAnalytics();}
 }
 
 function populateAdminSelects(){
